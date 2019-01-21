@@ -1,0 +1,16 @@
+\documentclass{article}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{mathtools}
+\usepackage{multirow}
+\title{Modelo de decrecimientos multiples}
+\author{Nanieska Echenique Pena}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+
+
+
+\end{document}

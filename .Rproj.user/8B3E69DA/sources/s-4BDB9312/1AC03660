@@ -1,0 +1,30 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548102548336.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1AC03660",
+    "lastKnownWriteTime" : 1548087198,
+    "last_content_update" : 1548102548336,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "B8ED7FE9",
+        "caption" : "result_FTSE",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=result_FTSE&cache_key=B8ED7FE9",
+        "displayedObservations" : 50,
+        "environment" : "",
+        "object" : "result_FTSE",
+        "preview" : 0,
+        "source_window_id" : "w99k6rk8vg82l",
+        "totalObservations" : 50,
+        "variables" : 6
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,30 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548107275752.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B0C95BDD",
+    "lastKnownWriteTime" : 85899345958,
+    "last_content_update" : 1548107275752,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "80C18153",
+        "caption" : "result_IBEX_2",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=result_IBEX_2&cache_key=80C18153",
+        "displayedObservations" : 45,
+        "environment" : "",
+        "object" : "result_IBEX_2",
+        "preview" : 0,
+        "source_window_id" : "w99k6rk8vg82l",
+        "totalObservations" : 45,
+        "variables" : 6
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
