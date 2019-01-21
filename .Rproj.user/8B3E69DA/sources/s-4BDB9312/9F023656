@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1548087357260.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "0|11|12|0|\n13|11|294|0|\n15|67|56|0|\n58|40|89|0|\n91|77|193|0|\n195|63|243|0|\n245|57|293|0|\n295|14|351|0|\n352|27|370|0|\n371|16|395|0|\n396|22|488|0|\n489|22|494|0|\n495|12|501|0|\n502|14|520|0|\n521|23|556|0|\n557|11|565|0|\n566|17|590|0|\n",
+    "hash" : "3461356688",
+    "id" : "9F023656",
+    "lastKnownWriteTime" : 1548108450,
+    "last_content_update" : 1548108450332,
+    "path" : "~/Desktop/Rodrigo/Tesis/trading-ML/scripts/tesis_V3.R",
+    "project_path" : "scripts/tesis_V3.R",
+    "properties" : {
+        "cursorPosition" : "564,24",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

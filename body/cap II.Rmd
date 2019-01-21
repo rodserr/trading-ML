@@ -1,0 +1,32 @@
+---
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+header-includes:
+  - \usepackage[spanish]{babel}
+---
+
+# Capítulo II. Marco Teórico \label{sec:cap II}
+
+## Antecedentes
+- Trading de Cryptomonedas basado en Aprendizaje Automatico
+- Modelos predictivos para el mercado FOREX
+- Diseño e implementación de un sistema automatizado para operar en el mercado de divisas usando reglas de asociación
+
+## Bases Teóricas
+- CAPM vs Active Portafolio Manager
+- Arbitrage Pricing Theory
+- Efficient market Hipotesis
+- Introducción al aprendizaje automático
+- Aprendizaje Supervisado y No Supervisado
+- Métodos de Aprendizaje Supervisado Basado en GLM
+- Analisis de Componentes Principales como método de reducción de de variables
+- Regresión Logística
+- Curva ROC
+- Función de Perdida
+
+
+## Bases Legales
+
+
