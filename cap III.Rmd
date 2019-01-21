@@ -1,0 +1,65 @@
+---
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+header-includes:
+  - \usepackage[spanish]{babel}
+---
+
+# Capítulo III Marco Metódico \label{sec:cap III}
+
+## Análisis Exploratorio de los datos
+
+### Datos OHLC y Fuente de los datos
+
+La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma agrega en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo, en el caso de la presente investigación, de un día. 
+
+Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos
+
+<!-- Hablar sobre Investing.com como fuente de datos -->
+
+### Series a utilizar
+
+### Indicadores Técnicos como variables predictoras
+
+Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
+
+<!-- Definir las 3 categorías -->
+
+No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
+
+Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
+
+## Entrenamiento del Modelo
+
+### Variable dependiente
+
+Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano. Este enfoque reduce la toma de decisión en una variable tal que:
+
+$$
+P_{X}(x) = 
+\begin{array}{ll} 
+\ \ \ \ p \ ; \qquad x = c
+\\
+\ 1-p \ ; \qquad x = -d
+\end{array}
+$$
+
+Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin que antes hubiese retrocedido un porcentaje fijo. Ahora bien es de notar que dichos períodos tienen una particularidad, en la mayoría de los casos, los períodos identificados como 'buy' están agrupados tal como se observa en el gráfico.
+
+<!-- grafico de la serie donde se identifique los buys originales -->
+
+Esta característica puede afectar al modelo impidiendo que identifique correctamente los momentos en donde la dínamica del mercado recogida por las variables señalen una posible entrada. Por esto se opto por identificar los 'verdaderos' momento de compra aquellos períodos en donde se materialze el incremento de porcentaje pero este precedido de un período distinto, es decir, donde no se haya alcanzado el porcentaje de incremento. Se puede observar en la gráfica como aparecen menos puntos señalados como ocurrencia pero se mantienen los momentos identificados como tal.
+
+<!-- grafico de la serie con los TRUE BUY -->
+
+### División de los datos en Entrenamiento, Prueba y Validación
+
+### Reducción de la dimensión con Análisis de Componentes Principales
+
+### Validación Cruzada en Series de Tiempo
+
+### Selección de parametrós con mayor valor de predicción positiva
+
+## Prueba de modelos óptimos en los datos de validación
