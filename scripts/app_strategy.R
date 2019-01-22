@@ -14,27 +14,10 @@ library(PerformanceAnalytics)
 
 #------FUNCTIONS-----------
 
-result_FTSE %>% filter(ppv > 0.75) %>% apply(2, mean)
+test$predict <- ifelse(test_pred$buy >= .5, 'buy', 'stay')
 
-final_model <- PCRegression(IBEX, 0.02, 0.06, 10, uniqueBUYs = FALSE, model = TRUE)
-
-validation <- validationSet(IBEX, 0.02, 0.06, 10, uniqueBUYs = FALSE)
-
-test <- testSet(IBEX, 0.025, 0.05, 15, uniqueBUYs = FALSE)
-
-val_pred <- predict(final_model, newdata = validation[,-1], type = 'prob')
-
-factor(ifelse(val_pred[, 'buy'] >= .65, 'buy', 'stay')) %>% 
-  confusionMatrix(reference = validation$class_2)
-
-factor(ifelse(predict(final_model, newdata = test[,-1], type = 'prob')[, 'buy'] >= .6, 
-              'buy', 'stay')) %>% 
-  confusionMatrix(reference = test$class_2)
-
-validation$predict <- ifelse(val_pred$buy >= .65, 'buy', 'stay')
-
-longStrat <- function(back_data, cap_inic = 100000, comission = 0, sl = 0.06,
-                      tp = 0.02, sli_pag = 0, horizon = 10){
+longStrat <- function(back_data, cap_inic = 100000, comission = 0, sl = 0.02,
+                      tp = 0.02, sli_pag = 0, horizon = 20){
   
   last_balance <- 0
   balance <- rep(0, nrow(back_data))
@@ -168,7 +151,7 @@ longStrat <- function(back_data, cap_inic = 100000, comission = 0, sl = 0.06,
 source('scripts/summStrat.R')
 #------QUICK TRYs-----------
 
-long_all <- validation %>% longStrat() 
+long_all <- test %>% longStrat() 
 long_result <- summStrat(long_all, .position = 'long')
 long_tranc <- long_result[[2]]
 
@@ -177,139 +160,3 @@ long_result[[5]]
 .plot_curve <- gridExtra::arrangeGrob(long_result[[5]] + labs(title = '4hr - ema 13 - 3 atr', x = NULL),
                                long_result[[4]], heights = c(5,2))
 grid::grid.draw(.plot_curve)
-
-#-----WalkForward-----
-
-# Create list with walk-windows
-source('functions/backRollWin.R')
-source('functions/summStratinSample.R')
-# source('functions/summStrat_WF.R')
-
-temp <- '1 hour'
-.back_data <- transPeriod(raw_data, by = temp) %>% 
-  backRollWin(.sample_periods = 3, .out_sample_periods = 1)
-
-sample_wind <- .back_data[seq(1,22,2)]
-
-osample_wind <- .back_data[seq(2,22,2)]
-
-# 1st LOOP: Choose best fits in every sample periods
-
-params_ema <- c(10, 13, 16, 19, 22, 26, 29, 32)
-params_atr <- c(1, 2, 3)
-
-aux_best_fit <- data.frame()
-best_fit <- data.frame()
-sample_result <- data.frame()
-
-system.time(
-  for (j in 1:length(sample_wind)){
-    for (i in params_ema) for (at in params_atr){
-      
-      # Auxiliar to iterate the parameters variations
-      .aux_samplefit <- sample_wind[[j]] %>% 
-        indicators(.ema = i) %>% 
-        longStrat(.atr_coef = at) %>% 
-        summStratinSample()
-      
-      # fits Results of month j
-      aux_best_fit %<>% rbind(cbind(param_ema = i, 
-                                    param_atr = at,
-                                    .aux_samplefit[[1]]
-      )
-      )
-    }
-    
-    # Best fit in month j
-    opti <- aux_best_fit %>% 
-      filter(max_drawdown < 0.30) %>%   
-      filter(risk_return > quantile(risk_return, probs = 0.95)) %>%  # Keep best 5% risk_return  
-      slice(which.max(return_accum))    # Best Fit = max(return_accum)
-    
-    # Save parameters
-    best_fit %<>% rbind(opti[, 1:2])
-    
-    # Save results of In-Sample's
-    sample_result %<>% rbind(opti[, -c(1, 2)])
-    
-    # best_fit %<>% rbind(cbind(aux_best_fit$param_ema[which.max(aux_best_fit$risk_return)],
-    #                           aux_best_fit$param_atr[which.max(aux_best_fit$risk_return)]))
-    
-    # Clean storage of result to month j+1
-    aux_best_fit <- data.frame()
-    
-  })
-
-beepr::beep()
-best_fit %<>% setNames(c('ema', 'atr'))
-
-
-# 2nd LOOP: Apply strategy with best fit in corresponding out-sample periods
-osample_result <- data.frame()
-osample_tranc <- data.frame()
-capital <- 50000
-
-system.time(
-  for (j in 1:length(osample_wind)){
-    
-    parameters <- best_fit %>% slice(j)
-    
-    # Get number of periods necesary to create indicators in corresponding out-sample
-    .sample_history <- sample_wind[[j]] %>% tail(max(parameters))
-    
-    # Run strategy in out-sample j
-    aux_osamplefit <- rbind(.sample_history, osample_wind[[j]])  %>% 
-      indicators(.ema = parameters$ema) %>% 
-      longStrat(.ci = capital, 
-                .atr_coef = parameters$atr) %>% 
-      summStratinSample()
-    
-    # Storage Transactions & general results
-    osample_tranc %<>% rbind(aux_osamplefit[[2]])
-    osample_result %<>% rbind(aux_osamplefit[[1]])
-    
-    # Update capital according to last closed trancs, to start every month with real-time capital
-    capital <- osample_tranc$cap %>% last()
-  })
-
-# # Get final results
-# resume_strategy <- osample_tranc %>% summStrat_WF(temp_in_mins = (4*60),
-#                                                   from = raw_data$timestamp[1], 
-#                                                   to = raw_data$timestamp[nrow(raw_data)])
-
-params <- apply(best_fit, 1, paste, collapse = '-')
-
-summ_sample <- cbind(sample_result, 
-                     temp = rep(temp, nrow(sample_result)),
-                     strategy = 'impulso',
-                     sample = 'in',
-                     window = seq(1, nrow(sample_result), 1),
-                     params)
-
-summ_osample <- cbind(osample_result, 
-                      temp = rep(temp, nrow(osample_result)),
-                      strategy = 'impulso',
-                      sample = 'out',
-                      window = seq(1, nrow(sample_result), 1),
-                      params)
-
-trades_2 <- cbind(osample_tranc, 
-                  temp = rep(temp, nrow(osample_tranc)),
-                  strategy = 'impulso')
-
-summ_2 <- rbind(summ_sample, summ_osample) %>% arrange(window, sample)
-
-trades_total <- rbind(trades_1, trades_2)
-
-summ_total <- rbind(summ_1, summ_2)
-
-# Export Results to Dashboard
-
-summ_total %>% 
-  write_csv('/home/leonardo/Desktop/Rodrigo/Dashboard Backtesting/results/impulso/summary_V3.csv')
-
-trades_total %>% 
-  write_csv('/home/leonardo/Desktop/Rodrigo/Dashboard Backtesting/results/impulso/trades_V3.csv')
-
-
-

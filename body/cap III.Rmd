@@ -46,20 +46,24 @@ P_{X}(x) =
 \end{array}
 $$
 
-Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin que antes hubiese retrocedido un porcentaje fijo. Ahora bien es de notar que dichos períodos tienen una particularidad, en la mayoría de los casos, los períodos identificados como 'buy' están agrupados tal como se observa en el gráfico.
+Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin antes haber retrocedido un porcentaje fijo. 
 
-<!-- grafico de la serie donde se identifique los buys originales -->
+Se añade una columna con 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
 
-Esta característica puede afectar al modelo impidiendo que identifique correctamente los momentos en donde la dínamica del mercado recogida por las variables señalen una posible entrada. Por esto se opto por identificar los 'verdaderos' momento de compra aquellos períodos en donde se materialze el incremento de porcentaje pero este precedido de un período distinto, es decir, donde no se haya alcanzado el porcentaje de incremento. Se puede observar en la gráfica como aparecen menos puntos señalados como ocurrencia pero se mantienen los momentos identificados como tal.
+### División de los datos en Entrenamiento, Validación y Prueba
 
-<!-- grafico de la serie con los TRUE BUY -->
-
-### División de los datos en Entrenamiento, Prueba y Validación
+Los datos son divididos en tres grupos: entrenamiento que representa 60% del total de los datos, validación y prueba, cada uno representando 20%. Los datos de entrenamiento son los que se utilizarán para enseñar al modelo a estimar la variable dependiente. Los datos de validación se utilizarán para definir la mejor combinación de parámetros (tp, sl y horizonte). Finalmente en los datos de prueba se aplica el modelo para obtener resultados simulando la estrategia.
 
 ### Reducción de la dimensión con Análisis de Componentes Principales
 
 ### Validación Cruzada en Series de Tiempo
 
 ### Selección de parametrós con mayor valor de predicción positiva
+
+<!-- Hablar sobre matriz de confusion -->
+
+En principio se desconoce cuales debieran ser los parámetros (tp, sl y horizonte) con los que opere la estrategia, para su estimación, se aplica el modelo en la data de validación y se obtiene para cada combinación de parametros definidos previamente, el valor de predicción positivo. Dado que la estrategia solo opera en largo, es de interés obtener el mayor porcentaje de acierto de los casos verdaderos positivos.
+
+<!-- Grafica de seleccion de parametros e interpretar -->
 
 ## Prueba de modelos óptimos en los datos de validación

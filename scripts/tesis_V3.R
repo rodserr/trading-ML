@@ -10,9 +10,16 @@ library(pls) # PCR
 library(leaps) # Best subset selection
 library(glmnet) # Ridge & Lasso regression
 library(ROCR) # ROC curve
+library(zoo)
+library(purrr)
+library(QuantTools)
+library(plotly)
+library(readr)
+library(PerformanceAnalytics)
 
 # Functions----
 
+# Get dependent variable 
 predict_tp <- function(data = data, tp = 0.015, sl = 0.02, h = 10){
   
   class <- c()
@@ -56,6 +63,7 @@ predict_tp <- function(data = data, tp = 0.015, sl = 0.02, h = 10){
   return(data)
 }
 
+# Get best CutOff according w/ ppv
 getROC <- function(predict, testsample){
   
   result <- list()
@@ -89,6 +97,32 @@ getROC <- function(predict, testsample){
   return(coff)
 }
 
+# Get Value of ppv and CutOff
+ppvValue <- function(predict, testsample){
+  result <- list()
+  for(cutoff in seq(0, 1, 0.05)){
+    
+    .cm <- factor(ifelse(predict[, 'buy'] >= cutoff, 'buy', 'stay')) %>% 
+      confusionMatrix(reference = testsample$class_2)
+    
+    .byClass <- .cm$byClass %>% data.frame() %>% t()
+    .cases <- .cm$table['buy','buy']
+    
+    .aux <- cbind(CutOff = cutoff, .byClass, cases = .cases) 
+    
+    result %<>% rlist::list.append(.aux)
+    
+  }
+  result_1 <- map_dfr(result, as.data.frame)
+  
+  df <- result_1 %>% 
+    select(c('CutOff', 'Pos Pred Value', 'cases', 'Sensitivity', 'Specificity', 'Precision', 'Recall')) %>% 
+    setNames(c('cutoff', 'ppv',  'cases', 'sensitivity', 'specificity', 'precision', 'recall'))
+  
+  return(df)
+}
+
+# Run all process
 PCRegression <- function(serie, tp, sl, h, uniqueBUYs = TRUE, model = FALSE){
   
   # Create class
@@ -131,9 +165,9 @@ PCRegression <- function(serie, tp, sl, h, uniqueBUYs = TRUE, model = FALSE){
   # Split Data
   train <- data %>% filter(year(timestamp) %in% seq(2009, 2014, 1))
   
-  test <- data %>% filter(year(timestamp) %in% c(2015, 2016))
+  validation <- data %>% filter(year(timestamp) %in% c(2015, 2016))
   
-  validation <- data %>% filter(year(timestamp) %in% c(2017, 2018))
+  test <- data %>% filter(year(timestamp) %in% c(2017, 2018))
   
   # Create Folds
   
@@ -236,9 +270,9 @@ validationSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
   # Split Data
   train <- data %>% filter(year(timestamp) %in% seq(2009, 2014, 1))
   
-  test <- data %>% filter(year(timestamp) %in% c(2015, 2016))
+  validation <- data %>% filter(year(timestamp) %in% c(2015, 2016))
   
-  validation <- data %>% filter(year(timestamp) %in% c(2017, 2018))
+  test <- data %>% filter(year(timestamp) %in% c(2017, 2018))
   
   return(validation)
 }
@@ -286,9 +320,9 @@ testSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
   # Split Data
   train <- data %>% filter(year(timestamp) %in% seq(2009, 2014, 1))
   
-  test <- data %>% filter(year(timestamp) %in% c(2015, 2016))
+  validation <- data %>% filter(year(timestamp) %in% c(2015, 2016))
   
-  validation <- data %>% filter(year(timestamp) %in% c(2017, 2018))
+  test <- data %>% filter(year(timestamp) %in% c(2017, 2018))
   
   return(test)
 }
@@ -352,12 +386,12 @@ NASDAQ <- read_csv('data/NASDAQ.csv',
 
 # Create dependent variable----
 
-data <- IBEX %>% predict_tp(tp = 0.025, sl = 0.05, h = 15) %>%
+data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
   mutate(aux = ifelse(class == lag(class), 1, 0),
          class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
   select(-one_of('aux', 'class'))
 
-data <- IBEX %>% predict_tp(tp = 0.025, sl = 0.05, h = 15) %>%
+data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
 
@@ -564,7 +598,7 @@ factor(ifelse(PCA_pred[, 'buy'] >= .65, 'buy', 'stay')) %>%
      print.thres.cex = .8,
      legacy.axes = TRUE)
 
-# Grid parameters----
+# Grid parameters: best ppv----
 
 result_aux <- list()
 for(sl in c(0.02, 0.03, 0.04, 0.05, 0.06)) 
@@ -577,14 +611,99 @@ for(sl in c(0.02, 0.03, 0.04, 0.05, 0.06))
         as.data.frame() %>% 
         setNames(c('tp', 'sl', 'h'))
       
-      ppv <- PCRegression(IBEX, tp, sl, h, uniqueBUYs = FALSE)
+      ppv <- PCRegression(BOVESPA, tp, sl, h, uniqueBUYs = FALSE)
       if(sum(ppv$CutOff) == 0){next}
       ppv %<>% cbind(parameters)
       result_aux %<>% rlist::list.append(ppv)
       
+      
+      
     }
 
-result_IBEX_2 <- map_dfr(result_aux, as.data.frame)
+result_BOVESPA <- map_dfr(result_aux, as.data.frame)
+
+result_BOVESPA %>% filter(ppv > 0.75) %>% apply(2, mean)
+
+final_model <- PCRegression(BOVESPA, 0.02, 0.06, 10, uniqueBUYs = FALSE, model = TRUE)
+
+# Result in Validation
+
+validation <- validationSet(BOVESPA, 0.02, 0.06, 10, uniqueBUYs = FALSE)
+factor(ifelse(predict(final_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= .80, 
+              'buy', 'stay')) %>% 
+  confusionMatrix(reference = validation$class_2)
+
+# Result in Test
+test <- testSet(BOVESPA, 0.02, 0.06, 10, uniqueBUYs = FALSE)
+
+test_pred <- predict(final_model, newdata = test[,-1], type = 'prob')
+
+factor(ifelse(test_pred[, 'buy'] >= .60, 'buy', 'stay')) %>% 
+  confusionMatrix(reference = test$class_2)
+
+
+prueba <- ppvValue(test_pred, test)
+
+# Grid parameters: best ppv----
+seq(0.02, 0.06, 0.01)
+result_aux <- list()
+for(tp in c(0.02, 0.04, 0.06)) 
+  for(sl in c(0.02, 0.04, 0.06))
+    for(h in c(20)){
+      
+      model <- PCRegression(NIKKEI, tp, sl, h, uniqueBUYs = FALSE, model = TRUE)
+      
+      val_sample <- validationSet(NIKKEI, tp, sl, h, uniqueBUYs = FALSE)
+      
+      val_pred <- predict(model, newdata = val_sample[,-1], type = 'prob')
+      
+      df <- ppvValue(val_pred, val_sample)
+      
+      par <- paste(tp, sl, h, sep = '-')
+      
+      df %<>% cbind(parameters = par)
+      
+      result_aux %<>% rlist::list.append(df)
+      
+    }
+
+result <- map_dfr(result_aux, as.data.frame)
+
+grid_plot <- list(result %>% ggplot(aes(x = cutoff, y = ppv, color = parameters)) +
+                    geom_line(),
+                  
+                  result %>% ggplot(aes(x = 1-specificity, y = sensitivity, color = parameters)) +
+                      geom_line(),
+                  
+                  result %>% ggplot(aes(x = cutoff, y = cases, color = parameters)) +
+                    geom_line(),
+
+                  result %>% ggplot(aes(x = recall, y = precision, color = parameters)) +
+                    geom_line()
+                  )
+
+do.call('grid.arrange', grid_plot)
+
+result_val <- result
+
+result %>% filter(ppv > 0.75) %>% apply(2, mean)
+
+final_model <- PCRegression(NIKKEI, 0.02, 0.02, 20, uniqueBUYs = FALSE, model = TRUE)
+
+# Result in Validation
+
+validation <- validationSet(NASDAQ, 0.02, 0.02, 20, uniqueBUYs = FALSE)
+factor(ifelse(predict(final_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= .50, 
+              'buy', 'stay')) %>% 
+  confusionMatrix(reference = validation$class_2)
+
+# Result in Test
+test <- testSet(NIKKEI, 0.02, 0.02, 20, uniqueBUYs = FALSE)
+
+test_pred <- predict(final_model, newdata = test[,-1], type = 'prob')
+
+factor(ifelse(test_pred[, 'buy'] >= .5, 'buy', 'stay')) %>% 
+  confusionMatrix(reference = test$class_2)
 
 
 
