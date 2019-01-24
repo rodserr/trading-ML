@@ -10,4 +10,81 @@ Your branch is up to date with 'origin/master'.
 [?1h=* [32mmaster[m[m
 [K[?1l>]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git [K[K[K[Kgit b ranch
 [?1h=* [32mmaster[m[m
-[K[?1l>]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ 
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[K [00m$ git branch
+[?1h=* [32mmaster[m[m
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML [00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/87B5CDE6[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/B83E15AF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/INDEX[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/14D6AF63-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/159DA2D6-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/199A3FEA-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/1AC03660[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/1AC03660-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/1EC13CB5-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/1FDE423D-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/262F4550-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/38679DB8-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/3B8A60B7-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/3E65BD36-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/40045B7F-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/47E489CC-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/56F0C9E9-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/67B370B6-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/6B35286B-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/71E92766[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/71E92766-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/74E4ED8C-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/770E24A2-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/7E1F020E-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/8BD99F72-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/8FC20AED-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/92BA0134-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/9F023656[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/9F023656-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/A2A1382-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3C8F9BA-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3CE6AEC-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3E58773-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/B0C95BDD[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/B0C95BDD-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/CD9D4292[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/CD9D4292-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/CE4F2D32-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/CEFFBDD6-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/D1347EA7-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/D3B5AADB-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/E730FB15-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/EE0B902D-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/F02ECFA2-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/FC6EDCE-contents[m
+	[31mdeleted:    .Rproj.user/8B3E69DA/sources/s-4BDB9312/lock_file[m
+	[31mmodified:   .Rproj.user/shared/notebooks/paths[m
+	[31mmodified:   body/cap III.Rmd[m
+	[31mdeleted:    data/Bovespa.csv[m
+	[31mdeleted:    data/FTSE 100.csv[m
+	[31mdeleted:    data/IBEX 35.csv[m
+	[31mdeleted:    data/Nikkei 225.csv[m
+	[31mdeleted:    data/S&P 500.csv[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31mdata/BOVESPA.csv[m
+	[31mdata/FTSE_100.csv[m
+	[31mdata/IBEX_35.csv[m
+	[31mdata/NIKKEI_225.csv[m
+	[31mdata/S&P_500.csv[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML [00m$ git add .

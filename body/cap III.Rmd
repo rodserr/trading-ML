@@ -21,6 +21,43 @@ Este tipo de dato provee la información necesaria para cubrir las exigencia del
 
 ### Series a utilizar
 
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período (26/10/2008 - 18/01/2019). Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector en concreto. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y S&P500.
+
+```{r}
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(gridExtra)
+
+serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
+list_serie <- list()
+for(s in serie){
+  .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
+    read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
+    select(-one_of(c('Vol.', '% var.'))) %>% 
+    mutate(Fecha = dmy(Fecha)) %>% 
+    setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
+    arrange(timestamp)
+  
+  list_serie %<>% rlist::list.append(.aux_serie) 
+}
+
+plot_serie <- list()
+for(i in 1:5){
+  .aux_plot <- list_serie[[i]] %>% 
+    ggplot(aes(x = timestamp, y = close)) + 
+    geom_line() + 
+    labs(x = 'Fecha', y = 'Precio de Cierre', title = serie[i]) + 
+    theme_minimal() +
+    scale_y_continuous(labels = scales::number)
+  
+  plot_serie %<>% rlist::list.append(.aux_plot)
+}
+
+do.call('grid.arrange', plot_serie)
+```
+
+
 ### Indicadores Técnicos como variables predictoras
 
 Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
@@ -58,11 +95,11 @@ Los datos son divididos en tres grupos: entrenamiento que representa 60% del tot
 
 ### Validación Cruzada en Series de Tiempo
 
-### Selección de parametrós con mayor valor de predicción positiva
+### Selección de parámetros con mayor valor de predicción positiva
 
 <!-- Hablar sobre matriz de confusion -->
 
-En principio se desconoce cuales debieran ser los parámetros (tp, sl y horizonte) con los que opere la estrategia, para su estimación, se aplica el modelo en la data de validación y se obtiene para cada combinación de parametros definidos previamente, el valor de predicción positivo. Dado que la estrategia solo opera en largo, es de interés obtener el mayor porcentaje de acierto de los casos verdaderos positivos.
+En principio se desconoce cuales debieran ser los parámetros (tp, sl y horizonte) con los que opere la estrategia, para su estimación, se aplica el modelo entrenado en los primeren la data de validación y se obtiene para cada combinación de parametros definidos previamente, el valor de predicción positivo. Dado que la estrategia solo opera en largo, es de interés obtener el mayor porcentaje de acierto de los casos verdaderos positivos.
 
 <!-- Grafica de seleccion de parametros e interpretar -->
 
