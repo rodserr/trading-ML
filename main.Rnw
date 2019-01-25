@@ -1,0 +1,82 @@
+\documentclass[a4paper,12pt]{Latex/Classes/PhDthesisPSnPDF}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{graphicx}
+
+% \usepackage[spanish]{babel}
+\input{body/preamble/preamble.Rnw}
+\include{Latex/Macros/MacroFile1} 
+\newtheorem{teorema}{Teorema}
+\newtheorem{definicion}{Definición}
+% \showboxdepth=5
+% \showboxbreadth=5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   DATOS                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos}
+\author{Valeria Desiree Revolledo Gonzales} 
+\facultad{Facultad de Ciencias Económicas y Sociales\\
+Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
+\escudofacultad{images/faces} % Aquí ponen la ruta y nombre del escudo de su facultad, actualmente, la carpeta Latex/Classes/Escudos cuenta con los siguientes escudos:
+% "fi_azul" Facultad de ingenieria en color azul
+% "fi_negro" Facultad de ingenieria en color negro
+% "fc_azul" Facultad de ciencias en color azul
+% "fc_negro" Facultad de ciencias en color negro
+% Se agradecen sus aportaciones de escudos a jebus.velazquez@gmail.com
+
+\degree{Licenciado en Ciencias Actuariales}        % Carrera
+\director{Prof. Jonattan Ramos \& Prof. Eloy Eligon}               % Director de tesis
+\degreedate{noviembre 2018}                           % Año de la fecha del examen
+\lugar{Caracas}                        % Lugar
+
+%\portadafalse                              % Portada en NEGRO, descomentar y comentar la línea siguiente si se quiere utilizar
+\portadatrue                                % Portada en COLOR
+
+
+
+%% Opciones del posgrado (descomentar si las necesitan)
+	%\posgradotrue                                                    
+	%\programa{programa de maestría y doctorado en ingeniería}
+	%\campo{Ingeniería Eléctrica - Control}
+	%% En caso de que haya comité tutor
+	%\comitetrue
+	%\ctutoruno{Dr. Emmet L. Brown}
+	%\ctutordos{Dr. El Doctor}
+%% Datos del jurado                             
+	%\presidente{Dr. 1}
+	%\secretario{Dr. 2}
+	%\vocal{Dr. 3}
+	%\supuno{Dr. 4}
+	%\supdos{Dr. 5}
+	%\institucion{el Instituto de Ingeniería, UNAM}
+
+\keywords{tesis,autor,tutor,etc}            % Palablas clave para los metadatos del PDF
+\subject{tema_1,tema_2}                     % Tema para metadatos del PDF  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                   PORTADA                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle									% Se redefinió este comando en el archivo de la clase para generar automáticamente la portada a partir de los datos
+
+\newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1} 
+
+\SweaveInput{body/reconocimiento/reconocimiento.Rnw}
+\SweaveInput{body/agradecimientos/agradecimientos.Rnw}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+
+\SweaveInput{body/introduccion/introduccion.Rnw}
+\SweaveInput{body/chapter1/chapter1.Rnw}
+\SweaveInput{body/chapter2/chapter2.Rnw}
+\SweaveInput{body/chapter3/chapter3.Rnw}
+\SweaveInput{body/chapter4/chapter4.Rnw}
+\SweaveInput{body/conclusion/conclusion.Rnw}
+\SweaveInput{body/bibliografia/bibliografia.Rnw}
+
+\end{document}

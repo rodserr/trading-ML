@@ -1,0 +1,11 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter*{Lista de Referencias}
+\addcontentsline{toc}{chapter}{Lista de Referencias}
+
+\begin{itemize}
+
+\item Alexander, N. Y Zafer, D. (2016). \textit{Gestión del riesgo con el uso de commodities energéticos utilizando Valor en riesgo y Teoría del Valor Extremo}. Suecia, Universidad de Lund.
+
+\end{itemize}

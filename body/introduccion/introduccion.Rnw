@@ -1,0 +1,8 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{Introduccion}
+
+Las economías de países latinoamericanos son reconocidas históricamente por depender en gran magnitud del comercio de sus materias primas, lo cual hace que el comercio con dichos commodities resulte de gran impacto para el gasto fiscal y para la balanza de pagos, esto deja como consecuencia, la necesidad de los actores económicos de estudiar el riesgo a profundidad para poder evitar resultados que reduzcan sus retornos positivos.\\ 
+

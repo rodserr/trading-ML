@@ -1,0 +1,22 @@
+\usepackage[onehalfspacing]{setspace}
+\usepackage[round]{natbib}
+\usepackage{caption}
+\bibliographystyle{apalike-es}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\usepackage{sectsty,float}
+\chapterfont{\centering}
+\usepackage[a4paper, left=3.5cm, right=3cm, top=4cm, bottom=3cm]{geometry}
+\usepackage{graphicx}
+\sectionfont{} 
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\chapterfont{\fontsize{14}{17}\selectfont\centering}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\subsectionfont{\fontsize{12}{15}\selectfont}
+\subsubsectionfont{\fontsize{12}{15}\selectfont}
+\usepackage{fancyhdr}
+\addto\captionsspanish{\renewcommand{\chaptername}{CAPÍTULO}}  
+\addto\captionsspanish{\renewcommand{\contentsname}{ÍNDICE GENERAL}} 
+\addto\captionsspanish{\renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}} 
+\addto\captionsspanish{\renewcommand{\listtablename}{ÍNDICE DE CUADROS}}

@@ -151,8 +151,8 @@ longStrat <- function(back_data, cap_inic = 100000, comission = 0, sl = 0.02,
 source('scripts/summStrat.R')
 #------QUICK TRYs-----------
 
-long_all <- test %>% longStrat() 
-long_result <- summStrat(long_all, .position = 'long')
+long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h) 
+long_result <- summStrat(long_all)
 long_tranc <- long_result[[2]]
 
 long_result[[5]]

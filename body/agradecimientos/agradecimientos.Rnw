@@ -1,0 +1,13 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+\newpage
+\chapter*{Agradecimientos}
+
+Agradecimientos
+
+
+
+
+  \begin{flushright}
+  \textbf{Gracias}
+  \end{flushright}

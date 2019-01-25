@@ -1,0 +1,27 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter{El Problema}
+
+\section{Justificación}
+
+El mercado de commodities ha ido evolucionando paralelamente al de otros mercados financieros y actualmente es un mercado globalizado, como el que podemos encontrarnos en los mercados de divisas, de renta variable o de renta fija. Este desarrollo ha permitido la entrada de muchos participantes en el mercado y la implementación de diversos productos e instrumentos de inversión.\\
+
+\section{Planteamiento del Problema}
+
+
+\section{Objetivo General}
+
+Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendizaje automático en diferentes instrumentos financieros
+
+\section{Objetivos Específicos}
+
+\begin{itemize}
+\item Definir los indicadores técnicos a utilizar como variables predictoras
+\item Utilizar Análisis de Componentes Principales como técnica de reducción de la dimensión de variables predictoras
+\item Aplicar modelo de Regresión Logística con las componentes arrojadas por el ACP
+\item Definir la mejor combinación de parametros (Take Profit, Stop Loss y Horizonte) para cada instrumento de inversión según la probabilidad positiva arrojada por el modelo
+\item Aplicar el modelo en la data de Validación y analizar resultados
+\item Aplicar Montecarlo a la variable ganancia
+\end{itemize}
+

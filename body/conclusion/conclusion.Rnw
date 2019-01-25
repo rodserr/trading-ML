@@ -1,0 +1,8 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter*{Conclusiones y Recomendaciones}
+\addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
+
+El estudio presentado se centró en confirmar alternativas eficaces para el cálculo del VaR en mercados de materias primas. Los hechos estilizados de las series de tiempo financieras fueron considerados a los largo del trabajo. Y frente a estos planteamientos, se desarrolló una investigación que permitiera detectar una aproximación con el método GARCH-EVT-COPULAS que tuviese la capacidad de estimar el riesgo del mercado de commodities.\\
+

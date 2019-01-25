@@ -1,4 +1,4 @@
-summStrat <- function(back_data, .position = 'long'){
+summStrat <- function(back_data){
   
 #Info from all data (necesary for some indicators)----
   temp <- difftime(back_data$timestamp[2], back_data$timestamp[1], units = 'mins') %>% as.numeric()
@@ -11,30 +11,17 @@ summStrat <- function(back_data, .position = 'long'){
   long_in_day <- seq.POSIXt(as.POSIXct(back_data$timestamp[1]),
                             as.POSIXct(back_data$timestamp[nrow(back_data)]), 
                             by = 'day') %>% length()
-  
-#Choose long or short to keep transactions----
-  if(.position == 'long'){
+
     transactions <- back_data %>% 
       filter(sell == 1) %>% 
-      select(buy_date, sell_date, buy_price, sell_price, comision, quantity, cap, salida) %>% 
+      select(buy_date, sell_date, buy_price, sell_price, comision, quantity, cap, salida, class, predict) %>% 
       mutate(quantity_buy = quantity/sell_price,
              prof_loss = sell_price - buy_price,
              profits_ind = round(prof_loss*quantity_buy - comision, digits = 4),
              return_trade = round(profits_ind/(quantity_buy*buy_price), digits = 4),
-             risk_perc = round(profits_ind/(cap-profits_ind), digits = 4) )
+             risk_perc = round(profits_ind/(cap-profits_ind), digits = 4),
+             precision = ifelse(class == predict, 1, 0))
     
-  } else if(.position == 'short'){
-    transactions <- back_data %>% 
-      filter(buy == 1) %>% 
-      select(sell_date, buy_date, sell_price, buy_price, comision, quantity, cap, salida) %>% 
-      mutate(quantity_sell = quantity/buy_price,
-             prof_loss = sell_price - buy_price,
-             profits_ind = round(prof_loss*quantity_sell - comision, digits = 4),
-             return_trade = round(profits_ind/(quantity_sell*sell_price), digits = 4),
-             risk_perc = round(profits_ind/(cap-profits_ind), digits = 4))
-    
-  }
-  
 #Basic Indicators----
   cap_init <- transactions$cap[1] - transactions$profits_ind[1]
   total_net_profit <- sum(transactions$profits_ind)
@@ -68,6 +55,8 @@ summStrat <- function(back_data, .position = 'long'){
 
   trading_months <- long_in_month
   percent_time_in_market <- abs( as.numeric(sum( difftime(transactions$sell_date, transactions$buy_date, units = 'mins') ) ) ) / longevity
+  
+  perc_predict <- sum(transactions$precision)/total_nro_trades
 
 
 #Maximum Drawdown & other indicators----
@@ -110,7 +99,8 @@ summStrat <- function(back_data, .position = 'long'){
 
 
 #Make resume data frame----
-  resume <- data.frame(total_net_profit, return_accum, annual_return, total_nro_trades, percent_profitable,
+  resume <- data.frame(total_net_profit, return_accum, annual_return, total_nro_trades, perc_predict,
+                       percent_profitable,
                        percent_loss, avg_profits, avg_loss, perc_stra_exit, perc_stoploss_exit,
                        profit_factor, max_drawdown, mae_min, mae_mean, mae_max, risk_return, sharpe_ratio,
                        calmar_ratio, mean_duration_trans, trans_over_24h, largest_win_trade, largest_loss_trade,

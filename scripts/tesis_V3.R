@@ -227,6 +227,112 @@ PCRegression <- function(serie, tp, sl, h, uniqueBUYs = TRUE, model = FALSE){
   
 }
 
+WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
+  
+  # Create class
+  if(uniqueBUYs){
+    
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(aux = ifelse(class == lag(class), 1, 0),
+             class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% 
+      select(-one_of('aux', 'class'))
+  } else {
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(class_2 = factor(class)) %>% 
+      select(-one_of('class'))
+  }
+  
+  # Create Indicators
+  .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
+    as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
+  
+  .macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
+    setNames(c('macd', 'macd_signal'))
+  
+  data %<>% cbind(.adx[,-3], .macd) %>% 
+    mutate(lag_1 = close / lag(close) - 1,
+           # lag_2 = close / lag(close, 2) - 1,
+           lag_3 = close / lag(close, 3) - 1,
+           # lag_4 = close / lag(close, 4) - 1,
+           lag_5 = close / lag(close, 5) - 1,
+           rsi = RSI(close, n = 14),
+           ema_50 = SMA(close, n = 50),
+           ema_13 = EMA(close, n = 13),
+           # macd_hist = macd - macd_signal,
+           bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
+           bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
+           atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2],
+           sar = SAR(data[,c('high', 'low')])[,1]
+    ) %>% 
+    na.omit()
+  
+  list_cm <- list()
+  list_pred <- list()
+  for(y in c(2013, 2014, 2015, 2016, 2017, 2018)){
+    
+  # Split Data
+  train <- data %>% filter(year(timestamp) %in% seq(2009, y-1, 1))
+  
+  validation <- data %>% filter(year(timestamp) == y )
+  
+  # Create Folds
+  
+  # Sample's
+  n <- floor(nrow(train)*0.25) %>% as.integer()
+  
+  .fold_S1 <- seq(1, n, 1) %>% as.integer()
+  .fold_S2 <- seq(1, 2*n, 1) %>% as.integer()
+  .fold_S3 <- seq(1, 3*n, 1) %>% as.integer()
+  
+  # Held-Out's
+  .fold_OS1 <- seq(n+1, 2*n, 1) %>% as.integer()
+  .fold_OS2 <- seq((2*n)+1, n*3, 1) %>% as.integer()
+  .fold_OS3 <- seq((3*n)+1, n*4, 1) %>% as.integer()
+  
+  # Create list
+  sampleFolds <- list(.fold_S1, .fold_S2, .fold_S3)
+  
+  OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3)
+  
+  # PCA Model
+  
+  .PCA_cntrl <- trainControl(index = sampleFolds,
+                             indexOut = OsampleFolds,
+                             classProbs = TRUE,
+                             savePredictions = TRUE,
+                             summaryFunction = twoClassSummary,
+                             preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
+  )
+  
+  PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din
+                     - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50
+                     - atr - sar - ema_13,
+                     data = train[,-1],
+                     method = "glm",
+                     family = 'binomial',
+                     metric = 'ROC',
+                     preProcess = c('pca'),
+                     trControl = .PCA_cntrl
+  )
+  
+  # Prediction
+  PCA_pred <- predict(PCA_model, newdata = validation[,-1], type = 'prob')
+  
+  prediction <- ifelse(predict(PCA_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= cut, 
+                'buy', 'stay') %>% factor()
+  
+  aux_cm <- confusionMatrix(prediction, reference = validation$class_2)
+  
+  list_cm %<>% rlist::list.append(aux_cm)
+  
+  list_pred %<>% rlist::list.append(prediction) 
+  }
+  
+  list_model <- list(list_cm, list_pred) 
+  
+  return(list_model)
+}
+
 validationSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
   # Create class
   if(uniqueBUYs){
@@ -327,56 +433,49 @@ testSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
   return(test)
 }
 
+createGrid <- function(stock, validation = TRUE){
+  result_aux <- list()
+  for(tp in c(0.02, 0.04, 0.06)) 
+    for(sl in c(0.02, 0.04, 0.06))
+      for(h in c(20)){
+        
+        model <- PCRegression(stock, tp, sl, h, uniqueBUYs = FALSE, model = TRUE)
+        if(validation){
+          outsample <- validationSet(stock, tp, sl, h, uniqueBUYs = FALSE)
+        }else{
+          outsample <- testSet(stock, tp, sl, h, uniqueBUYs = FALSE)
+        }
+       
+        val_pred <- predict(model, newdata = outsample[,-1], type = 'prob')
+        
+        .df <- ppvValue(val_pred, outsample)
+        
+        par <- paste(tp, sl, h, sep = '-')
+        
+        .df %<>% cbind(parameters = par)
+        
+        result_aux %<>% rlist::list.append(.df)
+         
+      }
+  result <- map_dfr(result_aux, as.data.frame)
+  
+  return(result)
+}
+
 # Inspect data----
 # Read
-EUR_USD <- read_csv('data/EUR_USD.csv', 
-                     locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of('% var.')) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-NIKKEI <- read_csv('data/Nikkei 225.csv', 
-                     locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-WTI <- read_csv('data/WTI.csv', 
-                   locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-FTSE <- read_csv('data/FTSE 100.csv', 
-                   locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-IBEX <- read_csv('data/IBEX 35.csv', 
-                   locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-BOVESPA <- read_csv('data/Bovespa.csv', 
-                   locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
-
-NASDAQ <- read_csv('data/NASDAQ.csv', 
-                   locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-  select(-one_of(c('Vol.', '% var.'))) %>% 
-  mutate(Fecha = dmy(Fecha)) %>% 
-  setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
-  arrange(timestamp)
+serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
+list_serie <- list()
+for(s in serie){
+  .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
+    read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
+    select(-one_of(c('Vol.', '% var.'))) %>% 
+    mutate(Fecha = dmy(Fecha)) %>% 
+    setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>% 
+    arrange(timestamp)
+  
+  list_serie %<>% rlist::list.append(.aux_serie) 
+}
 
 # Search NA's
 # which(is.na(FTSE))
@@ -391,9 +490,11 @@ data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
          class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
   select(-one_of('aux', 'class'))
 
-data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
+data <- stock %>% predict_tp(tp = 0.03, sl = 0.03, h = 20) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
+
+which(data$class_2 == 'buy') %>% length()
 
 # which(data$class_2 == 'buy') %>% length()
 
@@ -645,31 +746,15 @@ factor(ifelse(test_pred[, 'buy'] >= .60, 'buy', 'stay')) %>%
 prueba <- ppvValue(test_pred, test)
 
 # Grid parameters: best ppv----
-seq(0.02, 0.06, 0.01)
-result_aux <- list()
-for(tp in c(0.02, 0.04, 0.06)) 
-  for(sl in c(0.02, 0.04, 0.06))
-    for(h in c(20)){
-      
-      model <- PCRegression(NIKKEI, tp, sl, h, uniqueBUYs = FALSE, model = TRUE)
-      
-      val_sample <- validationSet(NIKKEI, tp, sl, h, uniqueBUYs = FALSE)
-      
-      val_pred <- predict(model, newdata = val_sample[,-1], type = 'prob')
-      
-      df <- ppvValue(val_pred, val_sample)
-      
-      par <- paste(tp, sl, h, sep = '-')
-      
-      df %<>% cbind(parameters = par)
-      
-      result_aux %<>% rlist::list.append(df)
-      
-    }
 
-result <- map_dfr(result_aux, as.data.frame)
+stock <- list_serie[[4]]
 
-grid_plot <- list(result %>% ggplot(aes(x = cutoff, y = ppv, color = parameters)) +
+result <- createGrid(stock, validation = TRUE)
+
+result_T <- createGrid(stock, validation = FALSE)
+
+# Plot
+.grid_plot <- list(result %>% ggplot(aes(x = cutoff, y = ppv, color = parameters)) +
                     geom_line(),
                   
                   result %>% ggplot(aes(x = 1-specificity, y = sensitivity, color = parameters)) +
@@ -682,28 +767,66 @@ grid_plot <- list(result %>% ggplot(aes(x = cutoff, y = ppv, color = parameters)
                     geom_line()
                   )
 
-do.call('grid.arrange', grid_plot)
+.grid_plot_T <- list(result_T %>% ggplot(aes(x = cutoff, y = ppv, color = parameters)) +
+                     geom_line(),
+                   
+                     result_T %>% ggplot(aes(x = 1-specificity, y = sensitivity, color = parameters)) +
+                     geom_line(),
+                   
+                     result_T %>% ggplot(aes(x = cutoff, y = cases, color = parameters)) +
+                     geom_line(),
+                   
+                     result_T %>% ggplot(aes(x = recall, y = precision, color = parameters)) +
+                     geom_line()
+)
+
+do.call('grid.arrange', .grid_plot)
+
+do.call('grid.arrange', .grid_plot_T)
 
 result_val <- result
 
-result %>% filter(ppv > 0.75) %>% apply(2, mean)
+# result %>% filter(ppv > 0.75) %>% apply(2, mean)
 
-final_model <- PCRegression(NIKKEI, 0.02, 0.02, 20, uniqueBUYs = FALSE, model = TRUE)
+.tp <- 0.02
+.sl <- 0.02
+.h <- 20
+.cut <- 0.5
+stock <- list_serie[[5]]
+
+final_model <- PCRegression(stock, .tp, .sl, .h, uniqueBUYs = FALSE, model = TRUE)
 
 # Result in Validation
 
-validation <- validationSet(NASDAQ, 0.02, 0.02, 20, uniqueBUYs = FALSE)
-factor(ifelse(predict(final_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= .50, 
+validation <- validationSet(stock, .tp, .sl, .h, uniqueBUYs = FALSE)
+factor(ifelse(predict(final_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= .cut, 
               'buy', 'stay')) %>% 
   confusionMatrix(reference = validation$class_2)
 
+
 # Result in Test
-test <- testSet(NIKKEI, 0.02, 0.02, 20, uniqueBUYs = FALSE)
+test <- testSet(stock, .tp, .sl, .h, uniqueBUYs = FALSE)
 
 test_pred <- predict(final_model, newdata = test[,-1], type = 'prob')
 
-factor(ifelse(test_pred[, 'buy'] >= .5, 'buy', 'stay')) %>% 
+factor(ifelse(test_pred[, 'buy'] >= .cut, 'buy', 'stay')) %>% 
   confusionMatrix(reference = test$class_2)
 
+# WalkForward
+.tp <- 0.02
+.sl <- 0.02
+.h <- 20
+.cut <- 0.5
+stock <- list_serie[[2]]
 
+cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+
+prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
+
+data <- list_serie[[2]] %>% 
+  predict_tp(.tp, .sl, .h) %>% 
+  filter(year(timestamp) %in% seq(2013, 2018, 1)) %>% 
+  head(1503)
+
+data %<>% cbind(prediction)
 

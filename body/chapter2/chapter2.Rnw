@@ -1,0 +1,29 @@
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter{Marco Teórico}
+
+\section{Antecedentes}
+
+\subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
+
+\subsection{Modelos predictivos para el mercado FOREX}
+
+\subsection{Diseño e implementación de un sistema automatizado para operar en el mercado de divisas usando reglas de asociación}
+
+\section{Bases Teóricas}
+
+\subsection{CAPM vs Active Portafolio Manager}
+\subsection{Arbitrage Pricing Theory}
+\subsection{Efficient market Hipotesis}
+\subsection{Introducción al aprendizaje automático}
+\subsection{Aprendizaje Supervisado y No Supervisado}
+\subsection{Métodos de Aprendizaje Supervisado Basado en GLM}
+\subsection{Analisis de Componentes Principales como método de reducción de de variables}
+\subsection{Regresión Logística}
+\subsection{Curva ROC}
+\subsection{Función de Perdida}
+
+\section{Bases Legales}
+
+
