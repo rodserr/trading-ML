@@ -84,13 +84,13 @@ $$
 
 Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin antes haber retrocedido un porcentaje fijo. 
 
-Se añade una columna con 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
 
-\subsection{Backtesting tipo WalkForward}
+\subsection{WalkForward Backtesting}
 
-En principio se utilizó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo dado el dinamísmo de los mercados bursátiles. 
+Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamísmo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
 
-Se opto por el metodo de backtesting Walkforward, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia directamente en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento (es decir, la data de entrenamiento pasa a ser de 5 años) y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamismo del mercado permitiendole al modelo y por ende a la estrategia, utilizar el período mas reciente con respecto al cual será utilizada.
+Para contrarestar esta situación se opto por el método de $backtesting Walkforward$, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamísmo del mercado permitiendole al modelo -y por ende a la estrategia- utilizar el período mas reciente con respecto al cual será implementado. En la presente figura se ilustra la metodología implementada.
 
 \begin{figure}[ht]
 \begin{center}
@@ -99,7 +99,7 @@ Se opto por el metodo de backtesting Walkforward, el cual consiste en entrenar e
 \caption{Metodología WalkForward}
 \end{figure}
 
-Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros optimos. Previamente se utilizaba la data de validación para optimizarlos. Ahora bien en la metodología de Walkforward se utilizan los mismo dado la limitación en tiempo para programar una función que contemple todos las posibles configuraciones y elija la óptima. Sin embargo a opinión del investigador este enfoque también estaría limitado a un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones optimas den los mejores resultados no asegura que se replique en el siguiente año.
+Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
 
 % Los datos son divididos en tres grupos: entrenamiento que representa 60\% del total de los datos, validación y prueba, cada uno representando 20\%. Los datos de entrenamiento son los que se utilizarán para enseñar al modelo a estimar la variable dependiente. Los datos de validación se utilizarán para definir la mejor combinación de parámetros (tp, sl y horizonte). Finalmente en los datos de prueba se aplica el modelo para obtener resultados simulando la estrategia.
 % 
@@ -108,6 +108,10 @@ Otra de las caracteristicas de la metodología que se modificó fue la elección
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
 \subsection{Validación Cruzada en Series de Tiempo}
+
+La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación y enel resto de los datos es ajustado el modelo. De cada grupo se obtienen resultados en nuestro caso el área bajo la cruva ROC (AUROC) y estos son promediados. Este metódo es utilizado dentro del modelo en cada uno de los períodos de entrenamiento.
+
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 \subsection{Evaluación del desempeño del modelo}
 
@@ -124,6 +128,6 @@ La estrategia solo toma la señal cuando el modelo predice un incremento en el p
 
 $$ Precisión = \frac{VP}{VP + FN} $$
 
-En principio se desconoce cuales debieran ser los parámetros (tp, sl y horizonte) con los que opere la estrategia. Para su estimación, se aplica el modelo entrenado en la data de validación y se obtiene la precisión del modelo para cada combinación de parámetros definidos previamente. 
+
 
 % <!-- Grafica de seleccion de parametros e interpretar -->

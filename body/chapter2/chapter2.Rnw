@@ -14,8 +14,18 @@
 \section{Bases Teóricas}
 
 \subsection{CAPM vs Active Portafolio Manager}
-\subsection{Arbitrage Pricing Theory}
+
+\subsection{CAPM vs Active Portafolio Manager}
+
+el retornoo de un stock enn t es igual a beta veces el retonro del mercado + alpha del stock, 
+el mercado moviendose afecta el stock, alpha es el residuo, 
+CAPM says que la esperanza de alpha es 0 
+
 \subsection{Efficient market Hipotesis}
+
+!According! to! Fama! (1965),! the!efficient!market states! that!
+new!information!will!by!reflected!in!prices!immediately
+
 \subsection{Introducción al aprendizaje automático}
 \subsection{Aprendizaje Supervisado y No Supervisado}
 \subsection{Métodos de Aprendizaje Supervisado Basado en GLM}
