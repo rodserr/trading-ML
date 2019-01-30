@@ -6,15 +6,17 @@
 
 \subsection{Datos OHLC y Fuente de los datos}
 
-La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma agrega en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo, en el caso de la presente investigación, de un día. 
+La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma, resume en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo. En el caso de la presente investigación, de un día. Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos. 
 
-Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos
+Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su prestigioso calendario económico y directorio de brokers.
 
-% Hablar sobre Investing.com como fuente de datos
+\subsection{Series de Índices}
 
-\subsection{Series a utilizar}
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
-El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector en concreto. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumeto en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+
+% hablar de cada indice
 
 <<echo=FALSE>>=
 library(tidyverse)
@@ -54,7 +56,7 @@ for(i in 1:5){
 <<echo=FALSE, results=tex, fig=TRUE>>=
 do.call('grid.arrange', plot_serie)
 @
-\caption{Precios de Cierre de los índices a utilizar en el período de estudio}
+\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
 \end{figure}
 
 \section{Entrenamiento del Modelo}
@@ -71,7 +73,7 @@ Lo que busca la investigación es utilizar la relación entre estos indicadores 
 
 \subsection{Variable dependiente}
 
-Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano. Este enfoque reduce la toma de decisión en una variable tal que:
+Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
 
 $$
 P_{X}(x) = 
@@ -82,9 +84,15 @@ P_{X}(x) =
 \end{array}
 $$
 
-Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin antes haber retrocedido un porcentaje fijo. 
+Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
 
 En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+
+\subsection{Validación Cruzada en Series de Tiempo}
+
+La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 \subsection{WalkForward Backtesting}
 
@@ -101,17 +109,14 @@ Para contrarestar esta situación se opto por el método de $backtesting Walkfor
 
 Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
 
-% Los datos son divididos en tres grupos: entrenamiento que representa 60\% del total de los datos, validación y prueba, cada uno representando 20\%. Los datos de entrenamiento son los que se utilizarán para enseñar al modelo a estimar la variable dependiente. Los datos de validación se utilizarán para definir la mejor combinación de parámetros (tp, sl y horizonte). Finalmente en los datos de prueba se aplica el modelo para obtener resultados simulando la estrategia.
-% 
-% En el estudio el 60\% de los datos de entrenamiento corresponden a los primeros 6 años (2009-2014) de muestra, la data de validación corresponde a los años (2015-2016) y la data de prueba los últimos dos años (2017-2018)
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. En caso de la estrategía actual toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto estaremos en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia, en caso de no ocurrir el target ni el stop loss-.Por lo que se decidió 20 como el número de períodos óptimos a utilizar.
+
+
+Por su lado el porcentaje de profit se decidió en base a los retornos
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
-\subsection{Validación Cruzada en Series de Tiempo}
 
-La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación y enel resto de los datos es ajustado el modelo. De cada grupo se obtienen resultados en nuestro caso el área bajo la cruva ROC (AUROC) y estos son promediados. Este metódo es utilizado dentro del modelo en cada uno de los períodos de entrenamiento.
-
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 \subsection{Evaluación del desempeño del modelo}
 
@@ -124,10 +129,7 @@ En los problemas de clasificación se utiliza la matríz de confusión para eval
 \caption{Matríz de Confusión}
 \end{figure}
 
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos. Esta característica condiciona al modelo a optimizar la prediccion de los verdaderos positivos, este indicador se conoce como $Precisión$.
+La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
 
 $$ Precisión = \frac{VP}{VP + FN} $$
 
-
-
-% <!-- Grafica de seleccion de parametros e interpretar -->

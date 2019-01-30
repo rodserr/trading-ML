@@ -221,4 +221,37 @@ Untracked files:
 	[31mmain.toc[m
 
 no changes added to commit (use "git add" and/or "git commit -a")
-]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git  add .
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git  add .Saved working directory and index state WIP on master: 7bc9bb9 Change from Rmarkdown to Rsweave
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git  pull
+Username for 'https://github.com': rodserr
+Password for 'https://rodserr@github.com': 
+Updating 7bc9bb9..df144e6
+Fast-forward
+ .Rproj.user/shared/notebooks/paths | 27 [31m---------------[m
+ body/chapter2/chapter2.Rnw         | 12 [32m++++++[m[31m-[m
+ body/chapter3/chapter3.Rnw         | 16 [32m+++++[m[31m----[m
+ 3 files changed, 21 insertions(+), 34 deletions(-)
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ [K]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/87B5CDE6[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/B83E15AF[m
+	[31mmodified:   .Rproj.user/shared/notebooks/paths[m
+	[31mmodified:   body/chapter2/chapter2.Rnw[m
+	[31mmodified:   body/chapter3/chapter3.Rnw[m
+	[31mmodified:   main.Rnw[m
+	[31mmodified:   scripts/summStrat.R[m
+	[31mmodified:   scripts/tesis_V3.R[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git branch
+[?1h=* [32mmaster[m[m
+[K[?1l>]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git ad..[K[K[Kd .[K[K[Kdd .

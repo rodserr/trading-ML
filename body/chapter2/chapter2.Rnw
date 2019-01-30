@@ -13,26 +13,35 @@
 
 \section{Bases Teóricas}
 
-\subsection{CAPM vs Active Portafolio Manager}
 
-\subsection{CAPM vs Active Portafolio Manager}
+\subsection{Hipótesis del Mercado Eficiente}
 
-el retornoo de un stock enn t es igual a beta veces el retonro del mercado + alpha del stock, 
-el mercado moviendose afecta el stock, alpha es el residuo, 
-CAPM says que la esperanza de alpha es 0 
+La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
 
-\subsection{Efficient market Hipotesis}
+Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competirdores intentarán ajustar sus posiciones lo más rapido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
 
-!According! to! Fama! (1965),! the!efficient!market states! that!
-new!information!will!by!reflected!in!prices!immediately
+$Eficiencia débil$, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. $Eficiencia media$, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. $Eficiencia fuerte$, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
+
+Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Algunas de las razones que exponen sus detractores son: 
+
+Los inversores ven la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo. Los precios del activo pueden ser afectados por el error humano y desiciones emocionales. Se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible.
+
+Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizado.
+
+\subsection{Reglas de asociación}
+
+
 
 \subsection{Introducción al aprendizaje automático}
+
+Aprendizaje automático refiere a un amplio abanico de herramientas para el entendimiento de los datos. Estas herramientas pueden ser clasificadas en supervisadas o No Supervisadas
+
 \subsection{Aprendizaje Supervisado y No Supervisado}
 \subsection{Métodos de Aprendizaje Supervisado Basado en GLM}
-\subsection{Analisis de Componentes Principales como método de reducción de de variables}
+\subsection{Análisis de Componentes Principales como método de reducción de variables}
 \subsection{Regresión Logística}
 \subsection{Curva ROC}
-\subsection{Función de Perdida}
+\subsection{Función de Pérdida}
 
 \section{Bases Legales}
 

@@ -14,13 +14,12 @@ summStrat <- function(back_data){
 
     transactions <- back_data %>% 
       filter(sell == 1) %>% 
-      select(buy_date, sell_date, buy_price, sell_price, comision, quantity, cap, salida, class, predict) %>% 
+      select(buy_date, sell_date, buy_price, sell_price, comision, quantity, cap, salida, buy_class) %>% 
       mutate(quantity_buy = quantity/sell_price,
              prof_loss = sell_price - buy_price,
              profits_ind = round(prof_loss*quantity_buy - comision, digits = 4),
              return_trade = round(profits_ind/(quantity_buy*buy_price), digits = 4),
-             risk_perc = round(profits_ind/(cap-profits_ind), digits = 4),
-             precision = ifelse(class == predict, 1, 0))
+             risk_perc = round(profits_ind/(cap-profits_ind), digits = 4))
     
 #Basic Indicators----
   cap_init <- transactions$cap[1] - transactions$profits_ind[1]
@@ -56,7 +55,7 @@ summStrat <- function(back_data){
   trading_months <- long_in_month
   percent_time_in_market <- abs( as.numeric(sum( difftime(transactions$sell_date, transactions$buy_date, units = 'mins') ) ) ) / longevity
   
-  perc_predict <- sum(transactions$precision)/total_nro_trades
+  perc_predict <- sum(transactions$buy_class == 'buy')/total_nro_trades
 
 
 #Maximum Drawdown & other indicators----

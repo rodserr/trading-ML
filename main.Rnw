@@ -13,8 +13,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos}
-\author{Valeria Desiree Revolledo Gonzales} 
+\title{Evaluación de la Eficacia de una estrategia de trading basada en Modelo Lineal Generalizado}
+\author{Rodrigo Alejandro Serrano Morales} 
 \facultad{Facultad de Ciencias Económicas y Sociales\\
 Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
 \escudofacultad{images/faces} % Aquí ponen la ruta y nombre del escudo de su facultad, actualmente, la carpeta Latex/Classes/Escudos cuenta con los siguientes escudos:
@@ -26,7 +26,7 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 
 \degree{Licenciado en Ciencias Actuariales}        % Carrera
 \director{Prof. Jonattan Ramos \& Prof. Eloy Eligon}               % Director de tesis
-\degreedate{noviembre 2018}                           % Año de la fecha del examen
+\degreedate{Marzo 2019}                           % Año de la fecha del examen
 \lugar{Caracas}                        % Lugar
 
 %\portadafalse                              % Portada en NEGRO, descomentar y comentar la línea siguiente si se quiere utilizar

@@ -333,6 +333,120 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   return(list_model)
 }
 
+WFRegression_prec <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
+  
+  # Create class
+  if(uniqueBUYs){
+    
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(aux = ifelse(class == lag(class), 1, 0),
+             class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% 
+      select(-one_of('aux', 'class'))
+  } else {
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(class_2 = factor(class)) %>% 
+      select(-one_of('class'))
+  }
+  
+  # Create Indicators
+  .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
+    as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
+  
+  .macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
+    setNames(c('macd', 'macd_signal'))
+  
+  data %<>% cbind(.adx[,-3], .macd) %>% 
+    mutate(lag_1 = close / lag(close) - 1,
+           # lag_2 = close / lag(close, 2) - 1,
+           lag_3 = close / lag(close, 3) - 1,
+           # lag_4 = close / lag(close, 4) - 1,
+           lag_5 = close / lag(close, 5) - 1,
+           rsi = RSI(close, n = 14),
+           ema_50 = SMA(close, n = 50),
+           ema_13 = EMA(close, n = 13),
+           # macd_hist = macd - macd_signal,
+           bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
+           bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
+           atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2],
+           sar = SAR(data[,c('high', 'low')])[,1]
+    ) %>% 
+    na.omit()
+  
+  list_cm <- list()
+  list_pred <- list()
+  for(y in c(2013, 2014, 2015, 2016, 2017, 2018)){
+    
+    # Split Data
+    train <- data %>% filter(year(timestamp) %in% seq(2009, y-1, 1))
+    
+    validation <- data %>% filter(year(timestamp) == y )
+    
+    # Create Folds
+    
+    # Sample's
+    n <- floor(nrow(train)*0.25) %>% as.integer()
+    
+    .fold_S1 <- seq(1, n, 1) %>% as.integer()
+    .fold_S2 <- seq(1, 2*n, 1) %>% as.integer()
+    .fold_S3 <- seq(1, 3*n, 1) %>% as.integer()
+    
+    # Held-Out's
+    .fold_OS1 <- seq(n+1, 2*n, 1) %>% as.integer()
+    .fold_OS2 <- seq((2*n)+1, n*3, 1) %>% as.integer()
+    .fold_OS3 <- seq((3*n)+1, n*4, 1) %>% as.integer()
+    
+    # Create list
+    sampleFolds <- list(.fold_S1, .fold_S2, .fold_S3)
+    
+    OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3)
+    
+    # PCA Model
+    
+    prec <- function(data, lev = NULL, model = NULL){
+      
+      .prec <- posPredValue(data$pred, data$obs, positive = 'buy')
+      names(.prec) <- 'precision'
+      .prec
+    }
+    
+    
+    .PCA_cntrl <- trainControl(index = sampleFolds,
+                               indexOut = OsampleFolds,
+                               classProbs = TRUE,
+                               savePredictions = TRUE,
+                               summaryFunction = prec,
+                               preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
+    )
+    
+    PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din
+                       - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50
+                       - atr - sar - ema_13,
+                       data = train[,-1],
+                       method = "glm",
+                       family = 'binomial',
+                       metric = 'precision',
+                       preProcess = c('pca'),
+                       trControl = .PCA_cntrl
+    )
+    
+    # Prediction
+    PCA_pred <- predict(PCA_model, newdata = validation[,-1], type = 'prob')
+    
+    prediction <- ifelse(predict(PCA_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= cut, 
+                         'buy', 'stay') %>% factor()
+    
+    aux_cm <- confusionMatrix(prediction, reference = validation$class_2)
+    
+    list_cm %<>% rlist::list.append(aux_cm)
+    
+    list_pred %<>% rlist::list.append(prediction) 
+  }
+  
+  list_model <- list(list_cm, list_pred) 
+  
+  return(list_model)
+}
+
 validationSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
   # Create class
   if(uniqueBUYs){
@@ -462,6 +576,142 @@ createGrid <- function(stock, validation = TRUE){
   return(result)
 }
 
+longStrat <- function(back_data, cap_inic = 10000, comission = 0, sl = 0.02,
+                      tp = 0.02, sli_pag = 0, horizon = 20){
+  
+  last_balance <- 0
+  balance <- rep(0, nrow(back_data))
+  last_cap <- cap_inic
+  cap <- rep(last_cap, nrow(back_data))
+  buy <- rep(0, nrow(back_data))
+  sell <- rep(0, nrow(back_data))
+  buy_date <- rep(NA, nrow(back_data))
+  buy_price <- rep(0, nrow(back_data))
+  sell_date <- rep(NA, nrow(back_data))
+  sell_price <- rep(0, nrow(back_data))
+  last_quantity <- 0
+  last_buy_price <- 0
+  last_sell_price <- 0
+  last_buy_date <- 0
+  quantity <-rep(0, nrow(back_data)) 
+  last_comision <- 0
+  comision <- rep(0, nrow(back_data)) 
+  salida <- rep(0, nrow(back_data))
+  stop_loss <- 0
+  take_profit <- 0
+  buy_class <- rep('', nrow(back_data))
+  aux_class <- ''
+
+  for(i in 1:nrow(back_data)) {
+
+          # Buy
+      if(back_data$predict[i] == 'buy' &
+         last_balance == 0 & last_cap >= last_quantity)
+      {
+        last_balance <- 1
+        last_buy_price <- back_data$close[i] * (1+sli_pag)
+        last_quantity <- 1000
+        
+        stop_loss <- last_buy_price*(1 - sl)
+        take_profit <- last_buy_price*(1 + tp)
+        
+        last_buy_date <- back_data$timestamp[i]
+        last_comision <- last_quantity * comission
+        last_cap <- last_cap - last_quantity
+        buy[i] <- 1
+        
+        quantity[i] <- last_quantity
+        comision[i] <- last_comision
+        aux_class <- back_data$class[i] %>% as.character()
+        
+      }
+      
+      #Sell by StopLoss
+      if(last_balance == 1 &
+         back_data$low[i] <= stop_loss &
+         back_data$timestamp[i] != last_buy_date) 
+      { 
+        last_balance <- 0
+        buy_date[i] <- last_buy_date
+        buy_price[i] <- last_buy_price
+        sell_date[i] <- back_data$timestamp[i]
+        sell_price[i] <- stop_loss
+        last_quantity <- last_quantity/last_buy_price*stop_loss
+        last_comision <- last_comision + (last_quantity * comission)
+        last_cap <- last_cap + last_quantity - last_comision
+        sell[i] <- 1
+        salida[i] <- "Stop Loss"
+        
+        quantity[i] <- last_quantity
+        comision[i] <- last_comision
+        buy_class[i] <- aux_class
+      }
+      
+      # Sell by takeProfit
+      if(last_balance == 1 &&
+         (back_data$high[i] >= take_profit &
+          back_data$timestamp[i] != last_buy_date))
+      { 
+        last_balance <- 0
+        buy_date[i] <- last_buy_date
+        buy_price[i] <- last_buy_price
+        sell_date[i] <- back_data$timestamp[i]
+        sell_price[i] <-  take_profit * (1 - sli_pag)
+        last_quantity <- last_quantity/last_buy_price*take_profit
+        last_comision <- last_comision + (last_quantity * comission)
+        last_cap <- last_cap + last_quantity - last_comision
+        sell[i] <- 1
+        salida[i] <- "Strategy"
+        
+        quantity[i] <- last_quantity
+        comision[i] <- last_comision
+        buy_class[i] <- aux_class
+      }
+      
+      # Sell by horizon
+      if(last_balance == 1 &&
+         (as.numeric(i - which(back_data$timestamp == last_buy_date)) > horizon &
+          back_data$timestamp[i] != last_buy_date))
+      { 
+        last_balance <- 0
+        buy_date[i] <- last_buy_date
+        buy_price[i] <- last_buy_price
+        sell_date[i] <- back_data$timestamp[i]
+        sell_price[i] <- back_data$close[i]* (1 - sli_pag)
+        last_quantity <- last_quantity/last_buy_price*back_data$close[i]
+        last_comision <- last_comision + (last_quantity * comission)
+        last_cap <- last_cap + last_quantity - last_comision
+        sell[i] <- 1
+        salida[i] <- "Limit Horizon"
+        
+        quantity[i] <- last_quantity
+        comision[i] <- last_comision
+        buy_class[i] <- aux_class
+      }
+      
+      balance[i] <- last_balance
+      cap[i] <- last_cap
+      
+    
+  }
+  
+  back_data$balance <- balance
+  back_data$quantity <- quantity
+  back_data$comision <- comision
+  back_data$cap <- cap
+  back_data$buy_date <- as_date(buy_date)
+  back_data$sell_date <- as_date(sell_date)
+  back_data$buy_price <- buy_price
+  back_data$sell_price <- sell_price
+  back_data$buy <- buy
+  back_data$sell <- sell
+  back_data$salida <- salida
+  back_data$buy_class <- buy_class
+  
+  return(back_data)
+}
+
+source('scripts/summStrat.R')
 # Inspect data----
 # Read
 serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
@@ -490,7 +740,7 @@ data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
          class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
   select(-one_of('aux', 'class'))
 
-data <- stock %>% predict_tp(tp = 0.03, sl = 0.03, h = 20) %>%
+data <- stock %>% predict_tp(tp = 0.02, sl = 0.02, h = 20) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
 
@@ -656,11 +906,18 @@ OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3, .fold_OS4)
 
 # PCR: ALL interactions----
 
+prec <- function(data, lev = NULL, model = NULL){
+  
+  .prec <- posPredValue(data$pred, data$obs, positive = 'buy')
+  names(.prec) <- 'precision'
+  .prec
+}
+
 .PCA_cntrl <- trainControl(index = sampleFolds,
                           indexOut = OsampleFolds,
                           classProbs = TRUE,
                           savePredictions = TRUE,
-                          summaryFunction = twoClassSummary,
+                          summaryFunction = twoClassSummary, #twoClassSummary,
                           preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
 )
 # - high - low - open
@@ -670,7 +927,7 @@ PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down 
                    data = train[,-1],
                    method = "glm",
                    family = 'binomial',
-                   metric = 'ROC',
+                   metric = 'ROC', # 'ROC',
                    preProcess = c('pca'), # c('center', 'scale'), 
                    trControl = .PCA_cntrl
 )
@@ -812,21 +1069,51 @@ test_pred <- predict(final_model, newdata = test[,-1], type = 'prob')
 factor(ifelse(test_pred[, 'buy'] >= .cut, 'buy', 'stay')) %>% 
   confusionMatrix(reference = test$class_2)
 
-# WalkForward
+
+
+
+
+# WalkForward----
+
 .tp <- 0.02
-.sl <- 0.02
+.sl <- 0.025
 .h <- 20
 .cut <- 0.5
-stock <- list_serie[[2]]
 
-cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+list_fr2 <- list()
+for(i in 1:5){
+  
+  stock <- list_serie[[i]]
+  
+  # cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+  cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+  
+  prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
+  
+  data <- stock %>% 
+    predict_tp(.tp, .sl, .h) %>% 
+    filter(year(timestamp) %in% seq(2013, 2019, 1)) %>% 
+    na.omit()
+  
+  data %<>% cbind(prediction)
+  
+  long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h) 
+  long_result <- summStrat(long_all)
+  
+  list_fr2 %<>% rlist::list.append(long_result)
+}
 
-prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
+# prueba <- long_result[[2]]
+prueba <- list_fr[[2]][[2]]
 
-data <- list_serie[[2]] %>% 
-  predict_tp(.tp, .sl, .h) %>% 
-  filter(year(timestamp) %in% seq(2013, 2018, 1)) %>% 
-  head(1503)
 
-data %<>% cbind(prediction)
-
+list_runtest <- list_fr %>% map(function(x){
+  
+  x[[2]] %>% 
+    select(c('sell_date', 'profits_ind')) %>% 
+    filter(profits_ind %in% c(.tp*1000, -.sl*1000)) %>% 
+    pull(profits_ind) %>%  
+    factor() %>% 
+    tseries::runs.test()
+})
+  
