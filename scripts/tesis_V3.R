@@ -16,6 +16,7 @@ library(QuantTools)
 library(plotly)
 library(readr)
 library(PerformanceAnalytics)
+library(factoextra)
 
 # Functions----
 
@@ -304,9 +305,9 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
                              preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
   )
   
-  PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din
-                     - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50
-                     - atr - sar - ema_13,
+  PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd 
+                     - adx - macd_signal - rsi - ema_50 - lag_1 - lag_3 - lag_5 
+                     - atr - sar - ema_13 - bb_down - bb_up - dip - din,
                      data = train[,-1],
                      method = "glm",
                      family = 'binomial',
@@ -333,20 +334,7 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   return(list_model)
 }
 
-WFRegression_prec <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
-  
-  # Create class
-  if(uniqueBUYs){
-    
-    data <- predict_tp(serie, tp, sl, h) %>% 
-      mutate(aux = ifelse(class == lag(class), 1, 0),
-             class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% 
-      select(-one_of('aux', 'class'))
-  } else {
-    data <- predict_tp(serie, tp, sl, h) %>% 
-      mutate(class_2 = factor(class)) %>% 
-      select(-one_of('class'))
-  }
+createIndicators <- function(data){
   
   # Create Indicators
   .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
@@ -372,79 +360,7 @@ WFRegression_prec <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
     ) %>% 
     na.omit()
   
-  list_cm <- list()
-  list_pred <- list()
-  for(y in c(2013, 2014, 2015, 2016, 2017, 2018)){
-    
-    # Split Data
-    train <- data %>% filter(year(timestamp) %in% seq(2009, y-1, 1))
-    
-    validation <- data %>% filter(year(timestamp) == y )
-    
-    # Create Folds
-    
-    # Sample's
-    n <- floor(nrow(train)*0.25) %>% as.integer()
-    
-    .fold_S1 <- seq(1, n, 1) %>% as.integer()
-    .fold_S2 <- seq(1, 2*n, 1) %>% as.integer()
-    .fold_S3 <- seq(1, 3*n, 1) %>% as.integer()
-    
-    # Held-Out's
-    .fold_OS1 <- seq(n+1, 2*n, 1) %>% as.integer()
-    .fold_OS2 <- seq((2*n)+1, n*3, 1) %>% as.integer()
-    .fold_OS3 <- seq((3*n)+1, n*4, 1) %>% as.integer()
-    
-    # Create list
-    sampleFolds <- list(.fold_S1, .fold_S2, .fold_S3)
-    
-    OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3)
-    
-    # PCA Model
-    
-    prec <- function(data, lev = NULL, model = NULL){
-      
-      .prec <- posPredValue(data$pred, data$obs, positive = 'buy')
-      names(.prec) <- 'precision'
-      .prec
-    }
-    
-    
-    .PCA_cntrl <- trainControl(index = sampleFolds,
-                               indexOut = OsampleFolds,
-                               classProbs = TRUE,
-                               savePredictions = TRUE,
-                               summaryFunction = prec,
-                               preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
-    )
-    
-    PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din
-                       - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50
-                       - atr - sar - ema_13,
-                       data = train[,-1],
-                       method = "glm",
-                       family = 'binomial',
-                       metric = 'precision',
-                       preProcess = c('pca'),
-                       trControl = .PCA_cntrl
-    )
-    
-    # Prediction
-    PCA_pred <- predict(PCA_model, newdata = validation[,-1], type = 'prob')
-    
-    prediction <- ifelse(predict(PCA_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= cut, 
-                         'buy', 'stay') %>% factor()
-    
-    aux_cm <- confusionMatrix(prediction, reference = validation$class_2)
-    
-    list_cm %<>% rlist::list.append(aux_cm)
-    
-    list_pred %<>% rlist::list.append(prediction) 
-  }
-  
-  list_model <- list(list_cm, list_pred) 
-  
-  return(list_model)
+  return(data)
 }
 
 validationSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
@@ -735,16 +651,17 @@ for(s in serie){
 
 # Create dependent variable----
 
-data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
-  mutate(aux = ifelse(class == lag(class), 1, 0),
-         class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
-  select(-one_of('aux', 'class'))
+# data <- WTI %>% predict_tp(tp = 0.02, sl = 0.06, h = 20) %>%
+#   mutate(aux = ifelse(class == lag(class), 1, 0),
+#          class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
+#   select(-one_of('aux', 'class'))
 
-data <- stock %>% predict_tp(tp = 0.02, sl = 0.02, h = 20) %>%
+.tp = 0.04
+.sl = 0.06
+
+data <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
-
-which(data$class_2 == 'buy') %>% length()
 
 # which(data$class_2 == 'buy') %>% length()
 
@@ -906,13 +823,6 @@ OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3, .fold_OS4)
 
 # PCR: ALL interactions----
 
-prec <- function(data, lev = NULL, model = NULL){
-  
-  .prec <- posPredValue(data$pred, data$obs, positive = 'buy')
-  names(.prec) <- 'precision'
-  .prec
-}
-
 .PCA_cntrl <- trainControl(index = sampleFolds,
                           indexOut = OsampleFolds,
                           classProbs = TRUE,
@@ -938,7 +848,7 @@ summary(PCA_model)
 PCA_model$preProcess$rotation
 PCA_model$resample
 
-print(all.vars(m))
+PCA_model$preProcess$std
 
 # Prediction
 PCA_pred <- predict(PCA_model, newdata = test[, -1], type = 'prob')
@@ -947,14 +857,47 @@ factor(ifelse(PCA_pred[, 'buy'] >= .65, 'buy', 'stay')) %>%
   confusionMatrix(reference = test$class_2)
 
 
-# ROC curve----
-  pROC::roc(test$class,
-      PCA_pred[,1],
-      levels = rev(levels(test$class))) %>% 
-  plot(print.thres = c(.5), type = "S",
-     print.thres.pattern = "%.3f (Spec = %.2f, Sens = %.2f)",
-     print.thres.cex = .8,
-     legacy.axes = TRUE)
+# PCA Analysis----
+
+data <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+  mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
+  select(-one_of('class')) %>% 
+  createIndicators() %>% 
+  filter(year(timestamp) %in% seq(2009, 2013, 1))
+
+mod <- glm(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din 
+           - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50 
+           - atr - sar - ema_13,  
+           data = data[,-1],
+           family = 'binomial',
+           x = TRUE)
+
+.aux_pca_matriz <- mod$x %>% data.frame() %>% select(-one_of('X.Intercept.')) 
+
+.aux_pca_centerscale <- .aux_pca_matriz %>% 
+  preProcess(method = c("center", "scale"))
+
+.aux_pca_mod <- predict(.aux_pca_centerscale, .aux_pca_matriz)
+
+pca <- prcomp(.aux_pca_mod, scale = FALSE)
+
+fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue')
+
+fviz_pca_var(pca, 
+             col.var = "contrib",
+             select.var = list(cos2 = .7),
+             # gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             # alpha.var = "contrib",
+             repel = TRUE
+)
+
+
+# Contributions of variables to PC1
+fviz_contrib(pca, choice = "var", axes = 1, top = 50)
+# Contributions of variables to PC2
+fviz_contrib(pca, choice = "var", axes = 5, top = 50)
+
+fviz_contrib(pca, choice = "var", axes = 1:6, top = 50)
 
 # Grid parameters: best ppv----
 
@@ -1080,13 +1023,16 @@ factor(ifelse(test_pred[, 'buy'] >= .cut, 'buy', 'stay')) %>%
 .h <- 20
 .cut <- 0.5
 
-list_fr2 <- list()
+list_cm <- list()
+list_fr <- list()
 for(i in 1:5){
   
   stock <- list_serie[[i]]
   
   # cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
   cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+  
+  list_cm %<>% rlist::list.append(cm[[1]])
   
   prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
   
@@ -1100,7 +1046,7 @@ for(i in 1:5){
   long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h) 
   long_result <- summStrat(long_all)
   
-  list_fr2 %<>% rlist::list.append(long_result)
+  list_fr %<>% rlist::list.append(long_result)
 }
 
 # prueba <- long_result[[2]]

@@ -13,29 +13,29 @@
 \contentsline {subsection}{\numberline {2.1.2}Modelos predictivos para el mercado FOREX}{9}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Dise\IeC {\~n}o e implementaci\IeC {\'o}n de un sistema automatizado para operar en el mercado de divisas usando reglas de asociaci\IeC {\'o}n}{9}{subsection.2.1.3}
 \contentsline {section}{\numberline {2.2}Bases Te\IeC {\'o}ricas}{9}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}CAPM vs Active Portafolio Manager}{9}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Arbitrage Pricing Theory}{9}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Efficient market Hipotesis}{9}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{9}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Aprendizaje Supervisado y No Supervisado}{9}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}M\IeC {\'e}todos de Aprendizaje Supervisado Basado en GLM}{9}{subsection.2.2.6}
-\contentsline {subsection}{\numberline {2.2.7}Analisis de Componentes Principales como m\IeC {\'e}todo de reducci\IeC {\'o}n de de variables}{9}{subsection.2.2.7}
-\contentsline {subsection}{\numberline {2.2.8}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{9}{subsection.2.2.8}
-\contentsline {subsection}{\numberline {2.2.9}Curva ROC}{9}{subsection.2.2.9}
-\contentsline {subsection}{\numberline {2.2.10}Funci\IeC {\'o}n de Perdida}{9}{subsection.2.2.10}
-\contentsline {section}{\numberline {2.3}Bases Legales}{9}{section.2.3}
-\contentsline {chapter}{\numberline {3}Marco Met\IeC {\'o}dico}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}An\IeC {\'a}lisis Exploratorio de los datos}{10}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Datos OHLC y Fuente de los datos}{10}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Series a utilizar}{10}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}Entrenamiento del Modelo}{11}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Indicadores T\IeC {\'e}cnicos como variables predictoras}{11}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Variable dependiente}{12}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Backtesting tipo WalkForward}{12}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Reducci\IeC {\'o}n de la dimensi\IeC {\'o}n con An\IeC {\'a}lisis de Componentes Principales}{13}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Validaci\IeC {\'o}n Cruzada en Series de Tiempo}{13}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Evaluaci\IeC {\'o}n del desempe\IeC {\~n}o del modelo}{13}{subsection.3.2.6}
-\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis de Resultados}{14}{chapter.4}
-\contentsline {section}{\numberline {4.1}Series de Rendimientos}{14}{section.4.1}
-\contentsline {chapter}{Conclusiones y Recomendaciones}{15}{chapter*.9}
-\contentsline {chapter}{Lista de Referencias}{16}{chapter*.10}
+\contentsline {subsection}{\numberline {2.2.1}Hip\IeC {\'o}tesis del Mercado Eficiente}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}An\IeC {\'a}lisis T\IeC {\'e}cnico}{10}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Reglas de asociaci\IeC {\'o}n}{10}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{10}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Aprendizaje Supervisado y No Supervisado}{10}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}M\IeC {\'e}todos de Aprendizaje Supervisado Basado en GLM}{10}{subsection.2.2.6}
+\contentsline {subsection}{\numberline {2.2.7}An\IeC {\'a}lisis de Componentes Principales como m\IeC {\'e}todo de reducci\IeC {\'o}n de variables}{10}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{10}{subsection.2.2.8}
+\contentsline {subsection}{\numberline {2.2.9}Curva ROC}{10}{subsection.2.2.9}
+\contentsline {subsection}{\numberline {2.2.10}Funci\IeC {\'o}n de P\IeC {\'e}rdida}{10}{subsection.2.2.10}
+\contentsline {section}{\numberline {2.3}Bases Legales}{10}{section.2.3}
+\contentsline {chapter}{\numberline {3}Marco Met\IeC {\'o}dico}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}An\IeC {\'a}lisis Exploratorio de los datos}{11}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Datos OHLC y Fuente de los datos}{11}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Series de \IeC {\'I}ndices}{11}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Entrenamiento del Modelo}{12}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Indicadores T\IeC {\'e}cnicos como variables predictoras}{12}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Variable dependiente}{13}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Validaci\IeC {\'o}n Cruzada en Series de Tiempo}{13}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}WalkForward Backtesting}{13}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Reducci\IeC {\'o}n de la dimensi\IeC {\'o}n con An\IeC {\'a}lisis de Componentes Principales}{14}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Evaluaci\IeC {\'o}n del desempe\IeC {\~n}o del modelo}{14}{subsection.3.2.6}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis de Resultados}{16}{chapter.4}
+\contentsline {section}{\numberline {4.1}Series de Rendimientos}{16}{section.4.1}
+\contentsline {chapter}{Conclusiones y Recomendaciones}{17}{chapter*.9}
+\contentsline {chapter}{Lista de Referencias}{18}{chapter*.10}

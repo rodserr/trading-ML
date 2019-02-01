@@ -112,7 +112,7 @@ Otra de las caracteristicas de la metodología que se modificó fue la elección
 La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. En caso de la estrategía actual toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto estaremos en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia, en caso de no ocurrir el target ni el stop loss-.Por lo que se decidió 20 como el número de períodos óptimos a utilizar.
 
 
-Por su lado el porcentaje de profit se decidió en base a los retornos
+Por su lado el porcentaje de profit se decidió en base a los retornos acumulados 
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 

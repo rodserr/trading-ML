@@ -13,8 +13,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos}
-\author{Valeria Desiree Revolledo Gonzales} 
+\title{Evaluación de la Eficacia de una estrategia de trading basada en Modelo Lineal Generalizado}
+\author{Rodrigo Alejandro Serrano Morales} 
 \facultad{Facultad de Ciencias Económicas y Sociales\\
 Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
 \escudofacultad{images/faces} % Aquí ponen la ruta y nombre del escudo de su facultad, actualmente, la carpeta Latex/Classes/Escudos cuenta con los siguientes escudos:
@@ -26,7 +26,7 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 
 \degree{Licenciado en Ciencias Actuariales}        % Carrera
 \director{Prof. Jonattan Ramos \& Prof. Eloy Eligon}               % Director de tesis
-\degreedate{noviembre 2018}                           % Año de la fecha del examen
+\degreedate{Marzo 2019}                           % Año de la fecha del examen
 \lugar{Caracas}                        % Lugar
 
 %\portadafalse                              % Portada en NEGRO, descomentar y comentar la línea siguiente si se quiere utilizar
@@ -139,16 +139,43 @@ Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendiz
 
 \section{Bases Teóricas}
 
-\subsection{CAPM vs Active Portafolio Manager}
-\subsection{Arbitrage Pricing Theory}
-\subsection{Efficient market Hipotesis}
+
+\subsection{Hipótesis del Mercado Eficiente}
+
+La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
+
+Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competirdores intentarán ajustar sus posiciones lo más rapido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
+
+$Eficiencia débil$, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. $Eficiencia media$, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. $Eficiencia fuerte$, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
+
+Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Algunas de las razones que exponen sus detractores son: 
+
+Los inversores ven la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo. Los precios del activo pueden ser afectados por el error humano y desiciones emocionales. Se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible.
+
+Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados.
+
+\subsection{Análisis Técnico}
+
+Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama $Análisis Fundamental$ y el segundo $Análisis Técnico$. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando programación Minería de texto.
+
+El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro buscando maximizar las ganancias.
+
+%habla del Dow
+
+\subsection{Reglas de asociación}
+
+
+
 \subsection{Introducción al aprendizaje automático}
+
+Aprendizaje automático refiere a un amplio abanico de herramientas para el entendimiento de los datos. Estas herramientas pueden ser clasificadas en supervisadas o No Supervisadas
+
 \subsection{Aprendizaje Supervisado y No Supervisado}
 \subsection{Métodos de Aprendizaje Supervisado Basado en GLM}
-\subsection{Analisis de Componentes Principales como método de reducción de de variables}
+\subsection{Análisis de Componentes Principales como método de reducción de variables}
 \subsection{Regresión Logística}
 \subsection{Curva ROC}
-\subsection{Función de Perdida}
+\subsection{Función de Pérdida}
 
 \section{Bases Legales}
 
@@ -161,22 +188,24 @@ Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendiz
 
 \subsection{Datos OHLC y Fuente de los datos}
 
-La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma agrega en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo, en el caso de la presente investigación, de un día. 
+La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma, resume en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo. En el caso de la presente investigación, de un día. Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos. 
 
-Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos
+Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su prestigioso calendario económico y directorio de brokers.
 
-% Hablar sobre Investing.com como fuente de datos
+\subsection{Series de Índices}
 
-\subsection{Series a utilizar}
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
-El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector en concreto. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumeto en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+
+% hablar de cada indice
 
 
 \begin{figure}[H]
 \setkeys{Gin}{width =0.8\textwidth}
 \centering
 \includegraphics{main-002}
-\caption{Precios de Cierre de los índices a utilizar en el período de estudio}
+\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
 \end{figure}
 
 \section{Entrenamiento del Modelo}
@@ -193,7 +222,7 @@ Lo que busca la investigación es utilizar la relación entre estos indicadores 
 
 \subsection{Variable dependiente}
 
-Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano. Este enfoque reduce la toma de decisión en una variable tal que:
+Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
 
 $$
 P_{X}(x) = 
@@ -204,15 +233,21 @@ P_{X}(x) =
 \end{array}
 $$
 
-Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente, es decir, que el precio alcanza un porcentaje de ganancia sin antes haber retrocedido un porcentaje fijo. 
+Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
 
-Se añade una columna con 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
 
-\subsection{Backtesting tipo WalkForward}
+\subsection{Validación Cruzada en Series de Tiempo}
 
-En principio se utilizó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo dado el dinamísmo de los mercados bursátiles. 
+La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
 
-Se opto por el metodo de backtesting Walkforward, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia directamente en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento (es decir, la data de entrenamiento pasa a ser de 5 años) y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamismo del mercado permitiendole al modelo y por ende a la estrategia, utilizar el período mas reciente con respecto al cual será utilizada.
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+
+\subsection{WalkForward Backtesting}
+
+Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamísmo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
+
+Para contrarestar esta situación se opto por el método de $backtesting Walkforward$, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamísmo del mercado permitiendole al modelo -y por ende a la estrategia- utilizar el período mas reciente con respecto al cual será implementado. En la presente figura se ilustra la metodología implementada.
 
 \begin{figure}[ht]
 \begin{center}
@@ -221,15 +256,16 @@ Se opto por el metodo de backtesting Walkforward, el cual consiste en entrenar e
 \caption{Metodología WalkForward}
 \end{figure}
 
-Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros optimos. Previamente se utilizaba la data de validación para optimizarlos. Ahora bien en la metodología de Walkforward se utilizan los mismo dado la limitación en tiempo para programar una función que contemple todos las posibles configuraciones y elija la óptima. Sin embargo a opinión del investigador este enfoque también estaría limitado a un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones optimas den los mejores resultados no asegura que se replique en el siguiente año.
+Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
 
-% Los datos son divididos en tres grupos: entrenamiento que representa 60\% del total de los datos, validación y prueba, cada uno representando 20\%. Los datos de entrenamiento son los que se utilizarán para enseñar al modelo a estimar la variable dependiente. Los datos de validación se utilizarán para definir la mejor combinación de parámetros (tp, sl y horizonte). Finalmente en los datos de prueba se aplica el modelo para obtener resultados simulando la estrategia.
-% 
-% En el estudio el 60\% de los datos de entrenamiento corresponden a los primeros 6 años (2009-2014) de muestra, la data de validación corresponde a los años (2015-2016) y la data de prueba los últimos dos años (2017-2018)
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. En caso de la estrategía actual toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto estaremos en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia, en caso de no ocurrir el target ni el stop loss-.Por lo que se decidió 20 como el número de períodos óptimos a utilizar.
+
+
+Por su lado el porcentaje de profit se decidió en base a los retornos
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
-\subsection{Validación Cruzada en Series de Tiempo}
+
 
 \subsection{Evaluación del desempeño del modelo}
 
@@ -242,24 +278,37 @@ En los problemas de clasificación se utiliza la matríz de confusión para eval
 \caption{Matríz de Confusión}
 \end{figure}
 
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos. Esta característica condiciona al modelo a optimizar la prediccion de los verdaderos positivos, este indicador se conoce como $Precisión$.
+La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
 
 $$ Precisión = \frac{VP}{VP + FN} $$
 
-En principio se desconoce cuales debieran ser los parámetros (tp, sl y horizonte) con los que opere la estrategia. Para su estimación, se aplica el modelo entrenado en la data de validación y se obtiene la precisión del modelo para cada combinación de parámetros definidos previamente. 
-
-% <!-- Grafica de seleccion de parametros e interpretar -->
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
 \chapter{Análisis de Resultados}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para el cálculo del VaR. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting realizadas a las estimaciones obtenidas y sus respectivos análisis.
+En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 
 \section{Series de Rendimientos}
 
 A partir de las series de precios correspondientes a los commodities Petróleo, Oro, Cacao, Harina de Soja y  Aluminio; comprendidas entre el periodo $(10/2010 - 10/2018)$ se calcularon las series de rendimientos logaritmicos para cada uno de los activos. Cabe destacar que se disponen de 1679 observaciones de rendimientos diarios para cada commodity.
 
+\begin{Schunk}
+\begin{Sinput}
+> list_serie[[1]] %>% head()
+\end{Sinput}
+\begin{Soutput}
+# A tibble: 6 x 5
+  timestamp  close  open  high   low
+  <date>     <dbl> <dbl> <dbl> <dbl>
+1 2008-10-27  849.  874.  894.  847.
+2 2008-10-28  941.  849.  941.  845.
+3 2008-10-29  930.  940.  970.  922.
+4 2008-10-30  954.  939.  963.  928.
+5 2008-10-31  969.  953.  984.  945.
+6 2008-11-03  966.  969.  976.  959.
+\end{Soutput}
+\end{Schunk}
 
 
 

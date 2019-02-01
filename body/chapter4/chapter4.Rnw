@@ -3,12 +3,15 @@
 
 \chapter{Análisis de Resultados}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para el cálculo del VaR. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting realizadas a las estimaciones obtenidas y sus respectivos análisis.
+En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 
 \section{Series de Rendimientos}
 
-A partir de las series de precios correspondientes a los commodities Petróleo, Oro, Cacao, Harina de Soja y  Aluminio; comprendidas entre el periodo $(10/2010 - 10/2018)$ se calcularon las series de rendimientos logaritmicos para cada uno de los activos. Cabe destacar que se disponen de 1679 observaciones de rendimientos diarios para cada commodity.
 
+
+<<>>=
+
+@
 
 
 
