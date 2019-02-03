@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 
 % \usepackage[spanish]{babel}
-\input{body/preamble/preamble.Rnw}
+% \input{body/preamble/preamble.Rnw}
 \include{Latex/Macros/MacroFile1} 
 \newtheorem{teorema}{Teorema}
 \newtheorem{definicion}{Definición}

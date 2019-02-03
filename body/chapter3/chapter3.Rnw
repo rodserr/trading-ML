@@ -23,6 +23,7 @@ library(tidyverse)
 library(magrittr)
 library(lubridate)
 library(gridExtra)
+source('scripts/functions.R')
 
 serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
 list_serie <- list()
@@ -65,11 +66,15 @@ do.call('grid.arrange', plot_serie)
 
 Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
 
-% <!-- Definir las 3 categorías -->
-
 No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
 
 Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
+
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador en el análisis de componentes principales. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará mas adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que verdaderamente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+
+Para enfrentar esta situación se decidió utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos indicador, y removiendo los indicadores por si solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que se paso de tener 19 predictores a 171.
+
+A continuación se presentan una serie de graficos para regflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores
 
 \subsection{Variable dependiente}
 
@@ -109,27 +114,76 @@ Para contrarestar esta situación se opto por el método de $backtesting Walkfor
 
 Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
 
-La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. En caso de la estrategía actual toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto estaremos en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia, en caso de no ocurrir el target ni el stop loss-.Por lo que se decidió 20 como el número de períodos óptimos a utilizar.
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
 
+<<echo=FALSE>>=
 
-Por su lado el porcentaje de profit se decidió en base a los retornos acumulados 
+# list_plotex_pred <- list()
+# 
+# for(i in c(10, 20, 30)){
+#   
+#   aux_plotex_pred <- predict_tp(data = list_serie[[1]], tp = 0.02, sl = 0.025, h = i) %>%
+#     mutate(class_2 = factor(class)) %>%
+#     select(-one_of('class')) %>%
+#     filter(year(timestamp) %in% seq(2009, 2010, 1)) %>% 
+#     mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
+#     ggplot(aes(x = timestamp, y = close)) +
+#     geom_line(colour = 'grey') +
+#     geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
+#     labs(title = paste('Horizonte de', i, 'períodos', sep = ' '), x = 'tiempo', y = 'precios de           cierre')
+# 
+#   list_plotex_pred %<>% rlist::list.append(aux_plotex_pred)
+#   
+# }
+
+list_plotex_pred <- list(
+  
+  predict_tp(data = list_serie[[1]], tp = 0.04, sl = 0.025, h = 10) %>%
+    mutate(class_2 = factor(class)) %>%
+    select(-one_of('class')) %>%
+    filter(year(timestamp) %in% seq(2008, 2010, 1)) %>% 
+    mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
+    ggplot(aes(x = timestamp, y = close)) +
+    geom_line(colour = 'grey') +
+    geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
+    labs(title = 'tp = 4%   h = 10', y = ' ', x = NULL),
+
+  predict_tp(data = list_serie[[1]], tp = 0.02, sl = 0.025, h = 20) %>%
+    mutate(class_2 = factor(class)) %>%
+    select(-one_of('class')) %>%
+    filter(year(timestamp) %in% seq(2008, 2010, 1)) %>% 
+    mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
+    ggplot(aes(x = timestamp, y = close)) +
+    geom_line(colour = 'grey') +
+    geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
+    labs(title = 'tp = 2%   h = 20', y = 'precios de cierre', x = NULL),
+  
+  predict_tp(data = list_serie[[1]], tp = 0.06, sl = 0.025, h = 30) %>%
+    mutate(class_2 = factor(class)) %>%
+    select(-one_of('class')) %>%
+    filter(year(timestamp) %in% seq(2008, 2010, 1)) %>% 
+    mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
+    ggplot(aes(x = timestamp, y = close)) +
+    geom_line(colour = 'grey') +
+    geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
+    labs(title = 'tp = 6%   h = 30', x = 'Tiempo', y = ' ')
+
+)
+
+@
+
+\begin{figure}[H]
+\setkeys{Gin}{width =0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+do.call('grid.arrange', list_plotex_pred)
+@
+\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S&P500, para diferentes valores de tp y h}
+\end{figure}
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
 
 
-\subsection{Evaluación del desempeño del modelo}
 
-En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=2.5in]{images/confusion_matrix}
-\end{center}
-\caption{Matríz de Confusión}
-\end{figure}
-
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
-
-$$ Precisión = \frac{VP}{VP + FN} $$
 

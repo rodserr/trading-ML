@@ -656,20 +656,22 @@ for(s in serie){
 #          class_2 = factor(ifelse(aux == 0 & class == 'buy', 'buy', 'stay'))) %>% #levels = c('stay', 'buy')))
 #   select(-one_of('aux', 'class'))
 
-.tp = 0.04
-.sl = 0.06
+.tp = 0.02
+.sl = 0.025
+.h = 30
 
-data <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+data <- list_serie[[3]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
 
 # which(data$class_2 == 'buy') %>% length()
 
-data %>%
+data %>% filter(year(timestamp) %in% seq(2009, 2010, 1)) %>% 
   mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
   ggplot(aes(x = timestamp, y = close)) +
   geom_line(colour = 'grey') +
-  geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.5)
+  geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.8) +
+  labs(x = NULL)
 
 # Create factors----
 

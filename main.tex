@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 
 % \usepackage[spanish]{babel}
-\input{body/preamble/preamble.Rnw}
+% \input{body/preamble/preamble.Rnw}
 \include{Latex/Macros/MacroFile1} 
 \newtheorem{teorema}{Teorema}
 \newtheorem{definicion}{Definición}
@@ -104,7 +104,6 @@ Las economías de países latinoamericanos son reconocidas históricamente por d
 
 \section{Justificación}
 
-El mercado de commodities ha ido evolucionando paralelamente al de otros mercados financieros y actualmente es un mercado globalizado, como el que podemos encontrarnos en los mercados de divisas, de renta variable o de renta fija. Este desarrollo ha permitido la entrada de muchos participantes en el mercado y la implementación de diversos productos e instrumentos de inversión.\\
 
 \section{Planteamiento del Problema}
 
@@ -116,12 +115,11 @@ Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendiz
 \section{Objetivos Específicos}
 
 \begin{itemize}
-\item Definir los indicadores técnicos a utilizar como variables predictoras
+\item Definir los parámetros de la estrategia, así como los indicadores técnicos a utilizar como variables predictoras
 \item Utilizar Análisis de Componentes Principales como técnica de reducción de la dimensión de variables predictoras
-\item Aplicar modelo de Regresión Logística con las componentes arrojadas por el ACP
-\item Definir la mejor combinación de parametros (Take Profit, Stop Loss y Horizonte) para cada instrumento de inversión según la probabilidad positiva arrojada por el modelo
-\item Aplicar el modelo en la data de Validación y analizar resultados
-\item Aplicar Montecarlo a la variable ganancia
+\item Aplicar método de Regresión Logística con las componentes arrojadas por el ACP
+\item Desarrollar la metodología Walkforward para tomar en cuenta el dinamismo del mercado en la estrategia
+\item Evaluar la predicción del modelo como estrategia en los instrumentos seleccionados
 \end{itemize}
 
 % !TeX root = ./main.Rnw
@@ -148,34 +146,153 @@ Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran n
 
 $Eficiencia débil$, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. $Eficiencia media$, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. $Eficiencia fuerte$, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
 
-Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Algunas de las razones que exponen sus detractores son: 
+Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones cesgada de los individuos, formuladas por la manera en como estos responden ante nueva información. Algunas de las hipótesis que explican este razonamieto cesgado son: 
 
-Los inversores ven la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo. Los precios del activo pueden ser afectados por el error humano y desiciones emocionales. Se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible.
+Los inversores interpretan la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo, lo que sugiere que la reacción del inversor a la misma noticia será distinta. Day and Wangr (2002) argumentan que si los precios son continuamente influenciados por estas interpretaciones erróneas, los movimientos contrarios del precio pueden ser predecidos estudiando la data histórica. Sugieren también que mientras más extremo sea el movimiento incial, mayor será el ajuste de precio.
 
-Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados.
+Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos de colapso del mercado como en la caída del mercado búrsatil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra como estos comportamientos pueden resultar en ineficiencias del mercado.
+
+Aglunos académicos como Hong y Stein's (1999) categorizan a los inversores en $Informados$ y $No informados$. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
+
+Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competires, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados.
 
 \subsection{Análisis Técnico}
 
-Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama $Análisis Fundamental$ y el segundo $Análisis Técnico$. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando programación Minería de texto.
+Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama $Análisis Fundamental$ y el segundo $Análisis Técnico$. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
 
-El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro buscando maximizar las ganancias.
+El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro mediante el uso de gráficos. Según J.J.Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico: Los movimientos del mercado lo descuentan  todo, los precios se mueven por tendencias y la historia se repite.
 
-%habla del Dow
+Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es mas que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
 
-\subsection{Reglas de asociación}
-
-
+El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana, la cual según murphy se repite. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
 
 \subsection{Introducción al aprendizaje automático}
 
-Aprendizaje automático refiere a un amplio abanico de herramientas para el entendimiento de los datos. Estas herramientas pueden ser clasificadas en supervisadas o No Supervisadas
+Aprendizaje automático refiere a una rama de la Inteligencia Artificial, que busca crear algoritmos capaces de generalizar comportamientos y reconocer patrones a partir de un conjunto de datos. Supongamos que existe una variable respuesta $Y$ y distintos predictores $X_{1}, X_{2}, ..., X_{j}$. Se asume que existe una relación entre $Y$ y $X = X_{1}, X_{2}, ..., X_{j}$, la cual puede ser escrita de forma general como
 
-\subsection{Aprendizaje Supervisado y No Supervisado}
-\subsection{Métodos de Aprendizaje Supervisado Basado en GLM}
-\subsection{Análisis de Componentes Principales como método de reducción de variables}
+$$ Y = f(X) + \epsilon $$
+
+donde $f$ es una función desconocida de $X$ y $\epsilon$ es un término de error aleatorio, independiente de $X$ y de media 0. En esta formulación $f$ representa información sistemática que $X$ proporciona sobre $Y$.
+
+En escencia, el aprendizaje automático refiere a un conjunto de enfoques para estimar $f$
+
+\subsubsection{Métodos Paramétricos vs No Paramétricos}
+
+La mayoría de los metodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. Primero se asume que los datos toman una forma específica, una vez asumida la forma que debe tener la función $f$, el problema de la estimación se simplifica. al seleccionar el modelo se procede a ajustar el modelo en la data de entrenamiento. Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que el modelo escogido puede no ser apropiado a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
+
+Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, estos modelos buscan estimar $f$ acercandola lo mas posible a los datos observados. Esto les permite evadir el problema de ajustarse a alguna forma en específico. Sin embargo, al no reducir el problema a estimar unos parámetros sino uilizar los datos directamente, se necesita un gran numero de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además en general la iterpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización
+
+\subsubsection{Aprendizaje Supervisado vs No Supervisado}
+
+Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertivamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM, GAM, etc. 
+
+En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es buscar entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociasión. Los primeros intentan describir las agrupaciones subyacientes en los datos, como por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociasion buscan descrubrir patrones inehentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$.
+
+\subsubsection{Regresión vs Clasificasión}
+
+Las variables pueden ser divididas entre cuantitativas ó cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numericos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitavia se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
+
+\subsubsection{Compensasión entre sesgo y varianza}
+
+
 \subsection{Regresión Logística}
-\subsection{Curva ROC}
-\subsection{Función de Pérdida}
+
+Los modelos Lineales Generalizados asumen que exite una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
+
+$$ Y \approx \beta_{0} + \beta_{1}X_{1} + ... + \beta_{j}X_{j} $$
+
+En donde $X_{j}$ representa las variables predictoras y los coeficientes $\beta_{j}$ cuantifican la asociación entre la variable predictora $X_{j}$ y la variable respuesta $Y$. Por lo que se interpreta a $\beta_{j}$ como el efecto promedio que tiene en $Y$ un incremento de una unidad en $X_{j}$, bajo el supuesto de que todas las demás variables se mantienen constantes.
+
+En problemas de clasificación, la variable predictora asume valores categóricos, por lo que al utilizar este enfoque se pueden obtener probabilidades fuera del intervalo [0, 1], haciendo imposible su interpretación. Esto concluye en que se deba utilizar una función, tal que permita la generación de valores entre [0, 1], en el caso de la regresión logística esta función es:
+
+$$
+p(X) = \frac{e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}{1 + e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}
+$$
+
+Despejando se obtiene
+
+$$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
+
+El lado izquierdo de la ecuación puede tomar valores entre 0 e \infinity, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logarítmo en ambos miembros de la ecuación se obtiene la función logit
+
+$$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
+
+Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una linea recta, $\beta$ no corresponde a un cambio en $p(X)$ asosiado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
+
+\subsubsection{Máxima Verosimilitud}
+
+Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el metódo de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de prediccion para cada individuo, utilizando (formula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
+
+$$ l(\beta) = \prod_{i=1}^{j}{P(x_{i} / \beta)} $$
+  
+Por conveniencia se  trabaja con el logarítmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
+
+$$ l(\beta) = \sum_{i=1}^{N} \log{P(y_{i}/ x_{i}; \beta)} $$
+
+Al codificar las clases en 0 y 1, la función de verosimilitud para la regresión logarítmica puede ser escrita como
+
+$$ l(\beta) = \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i} - \log{1 + e^{\beta^{T}x_{i}}}) $$
+
+Para maximizar la función, se iguala la derivada a 0
+
+$$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i}; \beta)) = 0 $$
+
+Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
+
+\subsection{Análisis de Componentes Principales como método de reducción de variables}
+
+Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los metodos no lineales. Exiten técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
+
+Una clase de métodos es el enfoque de $Reducción de la Dimensión$, el cual involucra proyectar los p predictores en M-dimensiones o componentes, donde $M < p$. Esto se logra transformando los predictores en combinaciones lineales que recogan prate de la información, estas $M$ componentes o dimensiones son entonces utilizadas como nuevos predictores en el modelo de regresión. Esto es:
+
+$$ Z_{m} = \sum_{i = 1}^{p} \phi_{im}X_{i} $$
+
+Para cualquier constante $ \phi_{1m}, \phi_{2m}, ..., \phi_{pm}, m = 1, ..., M $. Se ajusta el modelo
+
+$$ y_{i} = \theta_{0} + \sum_{m = 1}^{M} \theta_{m}z_{im} + \epsilon_{i},  \qquad i = 1, ..., n $$
+
+En situaciones donde $p$ es relativamente grande con relación a n, seleccionar un valor de $M << p$ puede reducir considerablemente la varianzade los coeficientes. Es de notar que si $M = p$, ajustar el modelo con las combinanciones lineales de los coeficientes originales es equivalente a ajustar el modelo original.
+
+El Análisis de Componentes Principales (ACP) es una técnica que reduce la dimensión de una matríz de datos. La dirección del primer componente principal es aquella en la cual exista mayor variación entre las observaciones, es decir
+
+$$ Z_{1} = \phi_{11}X_{1} + \phi_{21}X_{2} + ... + \phi_{p1}X_{p} $$
+
+donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados $loadings$, en donde el subíndice representa el número de componente. Juntos, los $loadings$ forman el vector de loading de componente principar $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
+
+Dado una matriz de datos $X$ de $n x p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores, llamadas $scores$
+
+$$ z_{i1} = \phi_{11} x_{i1} + \phi_{21} x_{i2} + ... + \phi_{p1} x_{ip} $$
+
+que contiene la mayor varianza. El primer vector de loadings de componente principal resuelve el problema de optimización
+
+$$ \max_{\phi_{11}, ..., \phi_{p1}}
+\frac{1}{n} \sum_{i = 1}^{n} (\sum_{j=1}^{p} \phi_{j1} x_{ij})^2
+\qquad sujeto \ a  \sum_{j=1}^{p} \phi_{j1}^{2} = 1
+$$
+
+El problema de máximización en (formula de arriba) se soluciona mediante la descomposición de los eigenvalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
+
+$$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2 + ... + \phi_{p2}x_{ip}} $$
+
+donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlasionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
+
+El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinearidad entre las variables. 
+
+% \subsubsection{Colinealidad}
+\subsection{Matríz de Confusión}
+
+En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=2.5in]{images/confusion_matrix}
+\end{center}
+\caption{Matríz de Confusión}
+\end{figure}
+
+La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
+
+$$ Precisión = \frac{VP}{VP + FN} $$
 
 \section{Bases Legales}
 
@@ -214,11 +331,15 @@ En la presente investigación se utilizan los índices como reflejo del comporta
 
 Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
 
-% <!-- Definir las 3 categorías -->
-
 No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
 
 Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
+
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador en el análisis de componentes principales. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará mas adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que verdaderamente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+
+Para enfrentar esta situación se decidió utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos indicador, y removiendo los indicadores por si solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que se paso de tener 19 predictores a 171.
+
+A continuación se presentan una serie de graficos para regflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores
 
 \subsection{Variable dependiente}
 
@@ -258,29 +379,21 @@ Para contrarestar esta situación se opto por el método de $backtesting Walkfor
 
 Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
 
-La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. En caso de la estrategía actual toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto estaremos en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia, en caso de no ocurrir el target ni el stop loss-.Por lo que se decidió 20 como el número de períodos óptimos a utilizar.
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
 
 
-Por su lado el porcentaje de profit se decidió en base a los retornos
+\begin{figure}[H]
+\setkeys{Gin}{width =0.8\textwidth}
+\centering
+\includegraphics{main-004}
+\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S&P500, para diferentes valores de tp y h}
+\end{figure}
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
 
 
-\subsection{Evaluación del desempeño del modelo}
 
-En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=2.5in]{images/confusion_matrix}
-\end{center}
-\caption{Matríz de Confusión}
-\end{figure}
-
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
-
-$$ Precisión = \frac{VP}{VP + FN} $$
 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
@@ -291,23 +404,12 @@ En el presente capítulo se realiza la descripción de los resultados obtenidos 
 
 \section{Series de Rendimientos}
 
-A partir de las series de precios correspondientes a los commodities Petróleo, Oro, Cacao, Harina de Soja y  Aluminio; comprendidas entre el periodo $(10/2010 - 10/2018)$ se calcularon las series de rendimientos logaritmicos para cada uno de los activos. Cabe destacar que se disponen de 1679 observaciones de rendimientos diarios para cada commodity.
+
 
 \begin{Schunk}
 \begin{Sinput}
-> list_serie[[1]] %>% head()
+> 
 \end{Sinput}
-\begin{Soutput}
-# A tibble: 6 x 5
-  timestamp  close  open  high   low
-  <date>     <dbl> <dbl> <dbl> <dbl>
-1 2008-10-27  849.  874.  894.  847.
-2 2008-10-28  941.  849.  941.  845.
-3 2008-10-29  930.  940.  970.  922.
-4 2008-10-30  954.  939.  963.  928.
-5 2008-10-31  969.  953.  984.  945.
-6 2008-11-03  966.  969.  976.  959.
-\end{Soutput}
 \end{Schunk}
 
 
