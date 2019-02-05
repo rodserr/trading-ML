@@ -228,6 +228,35 @@ PCRegression <- function(serie, tp, sl, h, uniqueBUYs = TRUE, model = FALSE){
   
 }
 
+createIndicators <- function(data){
+  
+  # Create Indicators
+  .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
+    as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
+  
+  .macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
+    setNames(c('macd', 'macd_signal'))
+  
+  data %<>% cbind(adx = .adx[,-c(1,2,3)], .macd) %>% 
+    mutate(lag_1 = close / lag(close) - 1,
+           # lag_2 = close / lag(close, 2) - 1,
+           lag_3 = close / lag(close, 3) - 1,
+           # lag_4 = close / lag(close, 4) - 1,
+           lag_5 = close / lag(close, 5) - 1,
+           rsi = RSI(close, n = 14),
+           # ema_50 = SMA(close, n = 50),
+           # ema_13 = EMA(close, n = 13),
+           # macd_hist = macd - macd_signal,
+           # bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
+           bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
+           atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2]
+           # sar = SAR(data[,c('high', 'low')])[,1]
+    ) %>% 
+    na.omit()
+  
+  return(data)
+}
+
 WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   
   # Create class
@@ -244,31 +273,11 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   }
   
   # Create Indicators
-  .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
-    as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
-  
-  .macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
-    setNames(c('macd', 'macd_signal'))
-  
-  data %<>% cbind(.adx[,-3], .macd) %>% 
-    mutate(lag_1 = close / lag(close) - 1,
-           # lag_2 = close / lag(close, 2) - 1,
-           lag_3 = close / lag(close, 3) - 1,
-           # lag_4 = close / lag(close, 4) - 1,
-           lag_5 = close / lag(close, 5) - 1,
-           rsi = RSI(close, n = 14),
-           ema_50 = SMA(close, n = 50),
-           ema_13 = EMA(close, n = 13),
-           # macd_hist = macd - macd_signal,
-           bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
-           bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
-           atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2],
-           sar = SAR(data[,c('high', 'low')])[,1]
-    ) %>% 
-    na.omit()
+ data %<>% createIndicators()
   
   list_cm <- list()
   list_pred <- list()
+  list_model <- list()
   for(y in c(2013, 2014, 2015, 2016, 2017, 2018)){
     
   # Split Data
@@ -305,10 +314,10 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
                              preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
   )
   
-  PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd 
-                     - adx - macd_signal - rsi - ema_50 - lag_1 - lag_3 - lag_5 
-                     - atr - sar - ema_13 - bb_down - bb_up - dip - din,
-                     data = train[,-1],
+  PCA_model <- train(class_2 ~ (.)^2 - close #- high - low - open 
+                     - adx - macd - macd_signal - rsi - lag_1 - lag_5 - lag_3 
+                     - atr - bb_up, # - dip - din - sar - ema_50  - ema_13 - bb_down,
+                     data = train[,-c(1,3,4,5)],
                      method = "glm",
                      family = 'binomial',
                      metric = 'ROC',
@@ -317,9 +326,9 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   )
   
   # Prediction
-  PCA_pred <- predict(PCA_model, newdata = validation[,-1], type = 'prob')
+  PCA_pred <- predict(PCA_model, newdata = validation[,-c(1,3,4,5)], type = 'prob')
   
-  prediction <- ifelse(predict(PCA_model, newdata = validation[,-1], type = 'prob')[, 'buy'] >= cut, 
+  prediction <- ifelse(predict(PCA_model, newdata = validation[,-c(1,3,4,5)], type = 'prob')[, 'buy'] >= cut, 
                 'buy', 'stay') %>% factor()
   
   aux_cm <- confusionMatrix(prediction, reference = validation$class_2)
@@ -327,40 +336,32 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
   list_cm %<>% rlist::list.append(aux_cm)
   
   list_pred %<>% rlist::list.append(prediction) 
+  
+  list_model %<>% rlist::list.append(PCA_model) 
   }
   
-  list_model <- list(list_cm, list_pred) 
+  list_final <- list(list_cm, list_pred, list_model) 
   
-  return(list_model)
+  return(list_final)
 }
 
-createIndicators <- function(data){
+getPredictors <- function(data){
   
-  # Create Indicators
-  .adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
-    as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
+  df <- glm(class_2 ~ (.)^2 - close - macd - bb_up # - dip - din 
+                     - adx - macd_signal - rsi # - ema_50 - bb_down - sar - ema_13
+                     - atr - lag_1 - lag_3 - lag_5,  
+                     data = data[,-c(1,3,4,5)],
+                     family = 'binomial',
+                     x = TRUE)
   
-  .macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
-    setNames(c('macd', 'macd_signal'))
+  var_matriz <- df$x %>% data.frame() %>% 
+    select(-one_of('X.Intercept.')) 
   
-  data %<>% cbind(.adx[,-3], .macd) %>% 
-    mutate(lag_1 = close / lag(close) - 1,
-           # lag_2 = close / lag(close, 2) - 1,
-           lag_3 = close / lag(close, 3) - 1,
-           # lag_4 = close / lag(close, 4) - 1,
-           lag_5 = close / lag(close, 5) - 1,
-           rsi = RSI(close, n = 14),
-           ema_50 = SMA(close, n = 50),
-           ema_13 = EMA(close, n = 13),
-           # macd_hist = macd - macd_signal,
-           bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
-           bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
-           atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2],
-           sar = SAR(data[,c('high', 'low')])[,1]
-    ) %>% 
-    na.omit()
+  var_center_scale <- var_matriz %>% preProcess(method = c("center", "scale"))
   
-  return(data)
+  var_pred <- predict(var_center_scale, var_matriz)
+  
+  return(var_pred)
 }
 
 validationSet <- function(serie, tp, sl, h, uniqueBUYs = TRUE){
@@ -658,95 +659,73 @@ for(s in serie){
 
 .tp = 0.02
 .sl = 0.025
-.h = 30
+.h = 20
 
-data <- list_serie[[3]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+data <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class'))
 
 # which(data$class_2 == 'buy') %>% length()
 
-data %>% filter(year(timestamp) %in% seq(2009, 2010, 1)) %>% 
-  mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
-  ggplot(aes(x = timestamp, y = close)) +
-  geom_line(colour = 'grey') +
-  geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.8) +
-  labs(x = NULL)
+# data %>% filter(year(timestamp) %in% seq(2009, 2010, 1)) %>% 
+#   mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
+#   ggplot(aes(x = timestamp, y = close)) +
+#   geom_line(colour = 'grey') +
+#   geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.8) +
+#   labs(x = NULL)
 
 # Create factors----
 
-.adx <- ADX(data[,c('high', 'low', 'close')], n = 14, maType = 'EMA') %>%
-  as.data.frame() %>% setNames(c('dip', 'din', 'dx', 'adx'))
-
-.macd = MACD(data$close, maType = 'EMA') %>% as.data.frame() %>% 
-  setNames(c('macd', 'macd_signal'))
-
-data %<>% cbind(.adx[,-3], .macd) %>% 
-  mutate(lag_1 = close / lag(close) - 1,
-         # lag_2 = close / lag(close, 2) - 1,
-         lag_3 = close / lag(close, 3) - 1,
-         # lag_4 = close / lag(close, 4) - 1,
-         lag_5 = close / lag(close, 5) - 1,
-         rsi = RSI(close, n = 14),
-         ema_50 = SMA(close, n = 50),
-         ema_13 = EMA(close, n = 13),
-         # macd_hist = macd - macd_signal,
-         bb_down = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,1],
-         bb_up = BBands(data[,c('high', 'low', 'close')], n = 14, sd = 2.5)[,3],
-         atr = ATR(data[,c('high', 'low', 'close')], n = 14)[,2],
-         sar = SAR(data[,c('high', 'low')])[,1]
-  ) %>% 
-  na.omit()
+data %<>% createIndicators()
 
 # Description Analysis----
 
-# data %<>%
-#   select(-one_of(
-#                 'close', 'high', 'low', 'open', 'ema_13', 'lag_2', 'lag_4', 'macd'))
+data <- mod$x %>% data.frame() %>% select(-one_of('X.Intercept.')) %>% 
+  cbind(class_2 = data_2$class_2)
 
 # Correlation plot
-.plot_corr <- data %>%
-  select(-one_of('timestamp', 'class')) %>%  
+.plot_corr <- data_2 %>%
+  select(-one_of('timestamp', 'class_2', 'open', 'high', 'low')) %>%  
   # ,'close', 'high', 'low', 'open', 'ema_13', 'lag_2', 'lag_4', 'macd')) %>%
   na.omit() %>%
   cor() %>%
-  corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust')
+  corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust', title = '1')
 
 # Box-plot's
 .plot_OHLC <- data %>% 
-  select(c('class', 'close', 'open', 'high', 'low', 'ma', 'ema', 'sar')) %>% 
+  select(c('class_2', 'close', 'open', 'high', 'low')) %>% 
   reshape2::melt() %>%
-  ggplot(aes(x = variable, y = value, fill = class)) +
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
   geom_boxplot()
 
 .plot_lags <- data %>% 
-  select(c('class', 'lag_1', 'lag_2', 'lag_3', 'lag_4', 'lag_5')) %>% 
+  select(c('class_2', 'lag_1', 'lag_3', 'lag_5')) %>% 
   reshape2::melt() %>%
-  ggplot(aes(x = variable, y = value, fill = class)) +
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
   geom_boxplot()
 
 .plot_adx_rsi <- data %>% 
-  select(c('class', 'din', 'dip', 'adx', 'rsi')) %>% 
+  select(c('class_2', 'adx', 'rsi')) %>% 
   reshape2::melt() %>%
-  ggplot(aes(x = variable, y = value, fill = class)) +
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
   geom_boxplot()
 
 .plot_macd <- data %>% 
-  select(c('class', 'macd', 'macd_signal', 'macd_hist')) %>% 
+  select(c('class_2', 'macd', 'macd_signal')) %>% 
   reshape2::melt() %>%
-  ggplot(aes(x = variable, y = value, fill = class)) +
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
   geom_boxplot()
 
 .plot_atr <- data %>% 
-  select(c('class', 'atr')) %>% 
+  select(c('class_2', 'atr')) %>% 
   reshape2::melt() %>%
-  ggplot(aes(x = variable, y = value, fill = class)) +
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
   geom_boxplot()
 
 .plot_boxplot <- list(.plot_OHLC, .plot_lags, .plot_adx_rsi, .plot_macd, .plot_atr)
 
 # Histogram
-.ind <- names(data)[-c(1, 6)]
+.ind <- names(data)[-46]#[-c(1, 6)]
 .plot_hist <- list()
 for(i in .ind){
   .histo_plot <- data %>% 
@@ -763,9 +742,9 @@ for(i in .ind){
 .plot_dens <- list()
 for(i in .ind){
   .dens_plot <- data %>% 
-    select(c('class', i)) %>% 
+    select(c('class_2', i)) %>% 
     reshape2::melt() %>%
-    ggplot(aes(x = value, color = class)) +
+    ggplot(aes(x = value, color = class_2)) +
     geom_density() +
     labs(x = i)
   
@@ -798,30 +777,41 @@ do.call('grid.arrange', descr_plots[[4]])
 
 
 # Split data----
-train <- data %>% filter(year(timestamp) %in% seq(2009, 2014, 1))
+train <- data %>% filter(year(timestamp) %in% seq(2009, 2012, 1))
 
-test <- data %>% filter(year(timestamp) %in% c(2015, 2016))
+# validation <- data %>% filter(year(timestamp) %in% c(2013, 2018))
 
-validation <- data %>% filter(year(timestamp) %in% c(2017, 2018))
+test <- data %>% filter(year(timestamp) %in% c(2013, 2013))
 
 # Create Folds---- 
 
 # Sample's
-.fold_S1 <- which(year(train$timestamp) %in% c(2009, 2010))
-.fold_S2 <- which(year(train$timestamp) %in% c(2010, 2011))
-.fold_S3 <- which(year(train$timestamp) %in% c(2011, 2012))
-.fold_S4 <- which(year(train$timestamp) %in% c(2012, 2013))
+# .fold_S1 <- which(year(train$timestamp) %in% c(2009, 2010))
+# .fold_S2 <- which(year(train$timestamp) %in% c(2010, 2011))
+# .fold_S3 <- which(year(train$timestamp) %in% c(2011, 2012))
+# .fold_S4 <- which(year(train$timestamp) %in% c(2012, 2013))
 
 # Held-Out's
-.fold_OS1 <- which(year(train$timestamp) == 2011)
-.fold_OS2 <- which(year(train$timestamp) == 2012)
-.fold_OS3 <- which(year(train$timestamp) == 2013)
-.fold_OS4 <- which(year(train$timestamp) == 2014)
+# .fold_OS1 <- which(year(train$timestamp) == 2011)
+# .fold_OS2 <- which(year(train$timestamp) == 2012)
+# .fold_OS3 <- which(year(train$timestamp) == 2013)
+# .fold_OS4 <- which(year(train$timestamp) == 2014)
+
+n <- floor(nrow(train)*0.25) %>% as.integer()
+
+.fold_S1 <- seq(1, n, 1) %>% as.integer()
+.fold_S2 <- seq(1, 2*n, 1) %>% as.integer()
+.fold_S3 <- seq(1, 3*n, 1) %>% as.integer()
+
+# Held-Out's
+.fold_OS1 <- seq(n+1, 2*n, 1) %>% as.integer()
+.fold_OS2 <- seq((2*n)+1, n*3, 1) %>% as.integer()
+.fold_OS3 <- seq((3*n)+1, n*4, 1) %>% as.integer()
 
 # Create list
-sampleFolds <- list(.fold_S1, .fold_S2, .fold_S3, .fold_S4)
+sampleFolds <- list(.fold_S1, .fold_S2, .fold_S3)
 
-OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3, .fold_OS4)
+OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3)
 
 # PCR: ALL interactions----
 
@@ -833,10 +823,10 @@ OsampleFolds <- list(.fold_OS1, .fold_OS2, .fold_OS3, .fold_OS4)
                           preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
 )
 # - high - low - open
-PCA_model <- train(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din 
-                   - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50 
-                   - atr - sar - ema_13,  
-                   data = train[,-1],
+PCA_model <- train(class_2 ~ (.)^2 - close - macd - bb_up # - bb_down - dip - din  high - low - open 
+                   - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi # - ema_50 - sar - ema_13
+                   - atr,  
+                   data = train[,-c(1,3,4,5)],
                    method = "glm",
                    family = 'binomial',
                    metric = 'ROC', # 'ROC',
@@ -853,46 +843,50 @@ PCA_model$resample
 PCA_model$preProcess$std
 
 # Prediction
-PCA_pred <- predict(PCA_model, newdata = test[, -1], type = 'prob')
+PCA_pred <- predict(PCA_model, newdata = test[,-c(1,3,4,5)], type = 'prob')
 
-factor(ifelse(PCA_pred[, 'buy'] >= .65, 'buy', 'stay')) %>% 
+factor(ifelse(PCA_pred[, 'buy'] >= .5, 'buy', 'stay')) %>% 
   confusionMatrix(reference = test$class_2)
 
 
 # PCA Analysis----
 
+prueba <- WFRegression(list_serie[[1]], .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+
+prueba[[3]][[1]] %>% summary()
+
 data <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class')) %>% 
   createIndicators() %>% 
-  filter(year(timestamp) %in% seq(2009, 2013, 1))
+  filter(year(timestamp) %in% seq(2009, 2012, 1))
 
-mod <- glm(class_2 ~ (.)^2 - close - high - low - open - macd - bb_down - bb_up - dip - din 
-           - adx - macd_signal - lag_1 - lag_3 - lag_5 - rsi - ema_50 
-           - atr - sar - ema_13,  
-           data = data[,-1],
-           family = 'binomial',
-           x = TRUE)
+predictors <- data %>% getPredictors()
 
-.aux_pca_matriz <- mod$x %>% data.frame() %>% select(-one_of('X.Intercept.')) 
+pca <- prcomp(predictors, scale = FALSE)
 
-.aux_pca_centerscale <- .aux_pca_matriz %>% 
-  preProcess(method = c("center", "scale"))
+pca_var <- get_pca_var(pca)
+corrplot::corrplot(pca_var$cos2[,1:7], is.corr=FALSE)
 
-.aux_pca_mod <- predict(.aux_pca_centerscale, .aux_pca_matriz)
+get_eigenvalue(pca)
 
-pca <- prcomp(.aux_pca_mod, scale = FALSE)
-
+fviz_eig(pca, addlabels = TRUE, choice = 'variance')
 fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue')
 
 fviz_pca_var(pca, 
              col.var = "contrib",
-             select.var = list(cos2 = .7),
+             # select.var = list(cos2 = .7),
              # gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-             # alpha.var = "contrib",
+             alpha.var = "contrib",
              repel = TRUE
 )
 
+fviz_pca_ind(pca,
+             geom = 'point',
+             col.ind = 'contrib', #data$class_2
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07")
+             # repel = TRUE # Avoid text overlapping (slow if many points)
+             )
 
 # Contributions of variables to PC1
 fviz_contrib(pca, choice = "var", axes = 1, top = 50)
@@ -1027,7 +1021,8 @@ factor(ifelse(test_pred[, 'buy'] >= .cut, 'buy', 'stay')) %>%
 
 list_cm <- list()
 list_fr <- list()
-for(i in 1:5){
+list_m <- list()
+for(i in 1:length(serie)){
   
   stock <- list_serie[[i]]
   
@@ -1035,6 +1030,8 @@ for(i in 1:5){
   cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
   
   list_cm %<>% rlist::list.append(cm[[1]])
+  
+  list_m %<>% rlist::list.append(cm[[3]])
   
   prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
   
@@ -1050,6 +1047,8 @@ for(i in 1:5){
   
   list_fr %<>% rlist::list.append(long_result)
 }
+
+list_m[[1]][[1]]$preProcess$rotation %>% nrow()
 
 # prueba <- long_result[[2]]
 prueba <- list_fr[[2]][[2]]

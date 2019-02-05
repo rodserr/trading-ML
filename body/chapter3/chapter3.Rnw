@@ -23,6 +23,11 @@ library(tidyverse)
 library(magrittr)
 library(lubridate)
 library(gridExtra)
+library(TTR)
+library(caret)
+library(factoextra)
+library(purrr)
+library(PerformanceAnalytics)
 source('scripts/functions.R')
 
 serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
@@ -62,20 +67,6 @@ do.call('grid.arrange', plot_serie)
 
 \section{Entrenamiento del Modelo}
 
-\subsection{Indicadores Técnicos como variables predictoras}
-
-Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
-
-No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
-
-Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
-
-Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador en el análisis de componentes principales. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará mas adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que verdaderamente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
-
-Para enfrentar esta situación se decidió utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos indicador, y removiendo los indicadores por si solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que se paso de tener 19 predictores a 171.
-
-A continuación se presentan una serie de graficos para regflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores
-
 \subsection{Variable dependiente}
 
 Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
@@ -92,6 +83,72 @@ $$
 Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
 
 En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+
+\subsection{Indicadores Técnicos como variables predictoras}
+
+Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
+
+No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
+
+Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
+
+A continuación se presentan los indicadores utilizados:
+
+\begin{itemize}
+\item Retornos con respecto al precio de Cierre.
+\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs(Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
+\end{itemize}
+
+Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el numero de variables dejando solo las más representativas de cada indicador.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_serie[[1]] %>% createIndicators(full = TRUE) %>% 
+    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    select(-one_of('timestamp')) %>%  
+    na.omit() %>%
+    cor() %>% 
+    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust', tl.col = 'black',
+                   col.pos = 'r', cl.pos = 'r', number.cex = 0.65, number.digits = 1)
+
+@
+\caption{Correlación entre indicadores originales calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger.
+
+En la figura -- se muestra las correlaciones de las variables definitivas
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_serie[[1]] %>% createIndicators(full = FALSE) %>% 
+    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    select(-one_of('timestamp', 'open', 'high', 'low')) %>%  
+    na.omit() %>%
+    cor() %>% 
+    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust',
+                     cl.pos = 'r', tl.col = 'black')
+@
+\caption{Correlación entre indicadores definitivos calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+
+Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
+
+A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores.
+
+
+
+
 
 \subsection{Validación Cruzada en Series de Tiempo}
 
@@ -117,24 +174,6 @@ Otra de las caracteristicas de la metodología que se modificó fue la elección
 La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
 
 <<echo=FALSE>>=
-
-# list_plotex_pred <- list()
-# 
-# for(i in c(10, 20, 30)){
-#   
-#   aux_plotex_pred <- predict_tp(data = list_serie[[1]], tp = 0.02, sl = 0.025, h = i) %>%
-#     mutate(class_2 = factor(class)) %>%
-#     select(-one_of('class')) %>%
-#     filter(year(timestamp) %in% seq(2009, 2010, 1)) %>% 
-#     mutate(buy_close = if_else(class_2 == 'buy', close, NA_real_)) %>%
-#     ggplot(aes(x = timestamp, y = close)) +
-#     geom_line(colour = 'grey') +
-#     geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
-#     labs(title = paste('Horizonte de', i, 'períodos', sep = ' '), x = 'tiempo', y = 'precios de           cierre')
-# 
-#   list_plotex_pred %<>% rlist::list.append(aux_plotex_pred)
-#   
-# }
 
 list_plotex_pred <- list(
   
@@ -173,7 +212,7 @@ list_plotex_pred <- list(
 @
 
 \begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
+\setkeys{Gin}{width = 0.8\textwidth}
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 do.call('grid.arrange', list_plotex_pred)
@@ -183,7 +222,77 @@ do.call('grid.arrange', list_plotex_pred)
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
+La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el numero de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
 
+El modelo utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
 
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S&P500, en esta sección se referira a esta como 'matriz de datos'.
 
+<<echo=FALSE>>=
 
+.tp = 0.02
+.sl = 0.025
+.h = 20
+
+predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+  mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
+  select(-one_of('class')) %>% 
+  createIndicators() %>% 
+  filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+  getPredictors()
+
+pca <- predictors_var %>% prcomp(scale = FALSE)
+
+@
+
+Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
+
+En la figura -- se observa los eigenvalores de la matríz de datos. Los eigenvalores pueden ser utilizados para establecer el número de componentes a utilizar. Sin embargo dado la automatización del modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalo por su sumatoria, en este caso 45 (el número de variables originales)
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_pca_eigen <- list(
+  fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue'),
+  fviz_eig(pca, addlabels = TRUE, choice = 'variance')
+
+)
+
+@
+\caption{d}
+\end{figure}
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+fviz_pca_var(pca, 
+             col.var = "contrib",
+             # select.var = list(cos2 = .7),
+             alpha.var = "contrib",
+             repel = TRUE
+)
+@
+\caption{d}
+\end{figure}
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_contrib_pca <- list(
+  # Contributions of variables to PC1
+  fviz_contrib(pca, choice = "var", axes = 1, top = 20),
+  # Contributions of variables to PC2
+  fviz_contrib(pca, choice = "var", axes = 2, top = 20),
+
+  fviz_contrib(pca, choice = "var", axes = 1:5, top = 20)
+)
+
+do.call('grid.arrange', list_contrib_pca)
+@
+\caption{d}
+\end{figure}

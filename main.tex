@@ -327,20 +327,6 @@ En la presente investigación se utilizan los índices como reflejo del comporta
 
 \section{Entrenamiento del Modelo}
 
-\subsection{Indicadores Técnicos como variables predictoras}
-
-Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo que se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
-
-No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
-
-Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
-
-Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador en el análisis de componentes principales. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará mas adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que verdaderamente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
-
-Para enfrentar esta situación se decidió utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos indicador, y removiendo los indicadores por si solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que se paso de tener 19 predictores a 171.
-
-A continuación se presentan una serie de graficos para regflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores
-
 \subsection{Variable dependiente}
 
 Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
@@ -357,6 +343,55 @@ $$
 Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
 
 En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+
+\subsection{Indicadores Técnicos como variables predictoras}
+
+Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
+
+No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
+
+Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
+
+A continuación se presentan los indicadores utilizados:
+
+\begin{itemize}
+\item Retornos con respecto al precio de Cierre.
+\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs(Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
+\end{itemize}
+
+Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el numero de variables dejando solo las más representativas de cada indicador.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+\includegraphics{main-003}
+\caption{Correlación entre indicadores originales calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger.
+
+En la figura -- se muestra las correlaciones de las variables definitivas
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+\includegraphics{main-004}
+\caption{Correlación entre indicadores definitivos calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+
+Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
+
+A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores.
+
+
+
+
 
 \subsection{Validación Cruzada en Series de Tiempo}
 
@@ -383,18 +418,38 @@ La selección de los parámetros debería ser un estudio previo de la serie fina
 
 
 \begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
+\setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-004}
+\includegraphics{main-006}
 \caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S&P500, para diferentes valores de tp y h}
 \end{figure}
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
+Como se señalo anteriormente, el modelo utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Se decidió entonces utilizar el ACP como método de reducción de las variables.
 
 
 
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+\includegraphics{main-008}
+\caption{d}
+\end{figure}
 
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+\includegraphics{main-009}
+\caption{d}
+\end{figure}
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+\includegraphics{main-010}
+\caption{d}
+\end{figure}
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
