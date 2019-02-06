@@ -870,14 +870,16 @@ corrplot::corrplot(pca_var$cos2[,1:7], is.corr=FALSE)
 
 get_eigenvalue(pca)
 
-fviz_eig(pca, addlabels = TRUE, choice = 'variance')
+fviz_eig(pca, addlabels = TRUE, choice = 'variance', main = '')
 fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue')
+
+fviz_cos2(pca, choice = "var", axes = 1:2, top = 20)
 
 fviz_pca_var(pca, 
              col.var = "contrib",
-             # select.var = list(cos2 = .7),
+             select.var = list(cos2 = .2),
              # gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-             alpha.var = "contrib",
+             # alpha.var = "contrib",
              repel = TRUE
 )
 
@@ -889,11 +891,11 @@ fviz_pca_ind(pca,
              )
 
 # Contributions of variables to PC1
-fviz_contrib(pca, choice = "var", axes = 1, top = 50)
+fviz_contrib(pca, choice = "var", axes = 1, top = 30)
 # Contributions of variables to PC2
-fviz_contrib(pca, choice = "var", axes = 5, top = 50)
+fviz_contrib(pca, choice = "var", axes = 2, top = 30)
 
-fviz_contrib(pca, choice = "var", axes = 1:6, top = 50)
+fviz_contrib(pca, choice = "var", axes = 1:2, top = 30)
 
 # Grid parameters: best ppv----
 
@@ -1048,11 +1050,7 @@ for(i in 1:length(serie)){
   list_fr %<>% rlist::list.append(long_result)
 }
 
-list_m[[1]][[1]]$preProcess$rotation %>% nrow()
-
-# prueba <- long_result[[2]]
-prueba <- list_fr[[2]][[2]]
-
+list_m[[1]][[1]] %>% summary()
 
 list_runtest <- list_fr %>% map(function(x){
   

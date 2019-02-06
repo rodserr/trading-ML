@@ -9,10 +9,91 @@ En el presente capítulo se realiza la descripción de los resultados obtenidos 
 
 
 
-<<>>=
+<<echo=FALSE>>=
+source('scripts/summStrat.R')
 
+.tp <- 0.02
+.sl <- 0.025
+.h <- 20
+.cut <- 0.5
+
+list_cm <- list()
+list_fr <- list()
+list_model <- list()
+for(i in 1:length(serie)){
+  
+  stock <- list_serie[[i]]
+  
+  # cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+  cm <- WFRegression(stock, .tp, .sl, .h, cut = .cut, uniqueBUYs = FALSE)
+  
+  list_cm %<>% rlist::list.append(cm[[1]])
+  
+  list_model %<>% rlist::list.append(cm[[3]])
+  
+  prediction <- map_dfr(cm[[2]], as.data.frame) %>% setNames('predict')
+  
+  data <- stock %>% 
+    predict_tp(.tp, .sl, .h) %>% 
+    filter(year(timestamp) %in% seq(2013, 2019, 1)) %>% 
+    na.omit()
+  
+  data %<>% cbind(prediction)
+  
+  long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h) 
+  long_result <- summStrat(long_all)
+  
+  list_fr %<>% rlist::list.append(long_result)
+}
 @
 
 
 
+
+\begin{center}
+\captionof{table}[Resultados]{\textbf{Resultados}}
+\begin{minipage}{.45\textwidth}
+<<echo=FALSE, results=tex>>=
+library(xtable)
+xtable(summary(list_model[[1]][[1]]))
+@
+\captionof*{table}{Fuente: Cálculos propios}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{.45\textwidth}
+\begin{center}
+<<echo=FALSE, results=tex>>=
+xtable(summary(list_model[[1]][[2]]))
+@
+\captionof*{table}{Fuente: Cálculods propios}
+\end{center}
+\end{minipage}
+
+% \begin{center}
+% \captionof{table}[Resultados]{\textbf{Resultados}}
+% <<echo=FALSE, results=tex>>=
+% library(xtable)
+% a <- xtable(summary(list_model[[1]][[1]]))
+% a
+% @
+% \captionof*{table}{Fuente: Cálculos propios}
+% \end{center}
+
+% \begin{center}
+% \captionof{table}[Resultados del contraste Ljung-Box]{\textbf{Resultados del contraste Ljung-Box}}
+% <<echo=FALSE, results=tex>>=
+% lj_petroleo <- Box.test(return_petroleo^2, lag = 10, type = 'Ljung-Box')
+% lj_harinasoja <- Box.test(return_harinasoja^2, lag = 10, type = 'Ljung-Box')
+% lj_oro <- Box.test(return_oro^2, lag = 10, type = 'Ljung-Box')
+% lj_aluminio <- Box.test(return_aluminio^2, lag = 10, type = 'Ljung-Box')
+% lj_cacao <- Box.test(return_cacao^2, lag = 10, type = 'Ljung-Box')
+% boxtable<-data.frame(c(lj_petroleo$statistic,lj_petroleo$p.value),c(lj_harinasoja$statistic,lj_harinasoja$p.value),
+% c(lj_oro$statistic,lj_oro$p.value),c(lj_aluminio$statistic,lj_aluminio$p.value),c(lj_cacao$statistic,lj_cacao$p.value))
+% rownames(boxtable)<-c("Estadístico de Contraste","P-value")
+% colnames(boxtable)<-c("Petróleo","Harina de Soja","Oro","Aluminio","Cacao")
+% xtable(boxtable,digits=4)
+% @
+% \captionof*{table}{Fuente: Cálculos propios}
+% \end{center}
 

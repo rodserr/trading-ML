@@ -97,7 +97,7 @@ A continuación se presentan los indicadores utilizados:
 \begin{itemize}
 \item Retornos con respecto al precio de Cierre.
 \item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
-\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs(Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
 \item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
 \item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
 \item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
@@ -224,9 +224,9 @@ do.call('grid.arrange', list_plotex_pred)
 
 La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el numero de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
 
-El modelo utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S&P500, en esta sección se referira a esta como 'matriz de datos'.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S&P500, en esta sección se referira a ésta como 'matriz de datos'.
 
 <<echo=FALSE>>=
 
@@ -247,23 +247,71 @@ pca <- predictors_var %>% prcomp(scale = FALSE)
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
 
-En la figura -- se observa los eigenvalores de la matríz de datos. Los eigenvalores pueden ser utilizados para establecer el número de componentes a utilizar. Sin embargo dado la automatización del modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
 
-La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalo por su sumatoria, en este caso 45 (el número de variables originales)
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
+
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 list_pca_eigen <- list(
-  fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue'),
-  fviz_eig(pca, addlabels = TRUE, choice = 'variance')
+  fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue', 
+           main = ''),
+  fviz_eig(pca, addlabels = TRUE, choice = 'variance', 
+           main = '')
 
 )
 
+do.call('grid.arrange', list_pca_eigen)
 @
-\caption{d}
+\caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
+
+La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_contrib_pca <- list(
+  # Contributions of variables to PC1
+  fviz_contrib(pca, choice = "var", axes = 1, top = 30),
+  # Contributions of variables to PC2
+  fviz_contrib(pca, choice = "var", axes = 2, top = 30),
+
+  fviz_contrib(pca, choice = "var", axes = 1:2, top = 30)
+)
+
+do.call('grid.arrange', list_contrib_pca)
+@
+\caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
+\end{figure}
+
+La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
+
+La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+  fviz_cos2(pca, choice = "var", axes = 1:2, top = 20)
+@
+\caption{Calidad de representación medida por $Cos^2$ de cada variable en PC1 y PC2}
+\end{figure}
+
+El gráfico de correlación ó Factor map muestra la relación entre las variables. Las claves para su interpretación son:
+
+\begin{itemize}
+\item Las variables positivamente correlacionadas se encuentran agrupadas
+\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos, es decir en lados contrarios.
+\item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
+\end{itemize}
+
+En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras mas oscuro menor es su contribución a los componentes.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -272,27 +320,10 @@ list_pca_eigen <- list(
 fviz_pca_var(pca, 
              col.var = "contrib",
              # select.var = list(cos2 = .7),
-             alpha.var = "contrib",
+             # alpha.var = "contrib",
              repel = TRUE
 )
 @
-\caption{d}
+\caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-list_contrib_pca <- list(
-  # Contributions of variables to PC1
-  fviz_contrib(pca, choice = "var", axes = 1, top = 20),
-  # Contributions of variables to PC2
-  fviz_contrib(pca, choice = "var", axes = 2, top = 20),
-
-  fviz_contrib(pca, choice = "var", axes = 1:5, top = 20)
-)
-
-do.call('grid.arrange', list_contrib_pca)
-@
-\caption{d}
-\end{figure}

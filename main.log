@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6930) (preloaded format=pdflatex 2019.1.18)  4 FEB 2019 19:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.6970) (preloaded format=pdflatex 2019.2.6)  6 FEB 2019 18:44
 entering extended mode
 **./main.tex
 (main.tex
@@ -510,12 +510,32 @@ Package: amsthm 2017/10/31 v2.20.4
 \thm@headsep=\skip68
 \dth@everypar=\toks35
 )
+(/home/leonardo/.miktex/texmfs/install/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen150
+\lightrulewidth=\dimen151
+\cmidrulewidth=\dimen152
+\belowrulesep=\dimen153
+\belowbottomsep=\dimen154
+\aboverulesep=\dimen155
+\abovetopsep=\dimen156
+\cmidrulesep=\dimen157
+\cmidrulekern=\dimen158
+\defaultaddspace=\dimen159
+\@cmidla=\count141
+\@cmidlb=\count142
+\@aboverulesep=\dimen160
+\@belowrulesep=\dimen161
+\@thisruleclass=\count143
+\@lastruleclass=\count144
+\@thisrulewidth=\dimen162
+)
 \@input{Latex/Macros/MacroFile1.aux}
 \openout2 = `Latex/Macros/MacroFile1.aux'.
 
 (Latex/Macros/MacroFile1.tex)
-\c@teorema=\count141
-\c@definicion=\count142
+\c@teorema=\count145
+\c@definicion=\count146
  (/usr/share/R/share/texmf/tex/latex/Sweave.sty
 Package: Sweave 
 
@@ -524,11 +544,11 @@ Package: fancyvrb 2008/02/07
 
 Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
 <2008/02/07> (tvz)
-\FV@CodeLineNo=\count143
+\FV@CodeLineNo=\count147
 \FV@InFile=\read1
 \FV@TabBox=\box61
-\c@FancyVerbLine=\count144
-\FV@StepNumber=\count145
+\c@FancyVerbLine=\count148
+\FV@StepNumber=\count149
 \FV@OutFile=\write3
 )
 (/home/leonardo/.miktex/texmfs/install/tex/latex/base/textcomp.sty
@@ -715,48 +735,48 @@ LaTeX Info: Redefining \% on input line 21.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 60.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 60.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
+LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 62.
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 60.
-\c@lstlisting=\count146
+LaTeX Font Info:    ... okay on input line 62.
+\c@lstlisting=\count150
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: subfigure package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \. on input line 60.
-LaTeX Info: Redefining \% on input line 60.
+LaTeX Info: Redefining \. on input line 62.
+LaTeX Info: Redefining \% on input line 62.
 
 (/home/leonardo/.miktex/texmfs/install/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count147
-\scratchdimen=\dimen150
+\scratchcounter=\count151
+\scratchdimen=\dimen163
 \scratchbox=\box62
-\nofMPsegments=\count148
-\nofMParguments=\count149
+\nofMPsegments=\count152
+\nofMParguments=\count153
 \everyMPshowfont=\toks36
-\MPscratchCnt=\count150
-\MPscratchDim=\dimen151
-\MPnumerator=\count151
-\makeMPintoPDFobject=\count152
+\MPscratchCnt=\count154
+\MPscratchDim=\dimen164
+\MPnumerator=\count155
+\makeMPintoPDFobject=\count156
 \everyMPtoPDFconversion=\toks37
 ) (/home/leonardo/.miktex/texmfs/install/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -771,7 +791,7 @@ Package grfext Info: Graphics extension search list:
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 \AtBeginShipoutBox=\box63
-Package hyperref Info: Link coloring ON on input line 60.
+Package hyperref Info: Link coloring ON on input line 62.
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -779,47 +799,47 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/home/leonardo/.miktex/texmfs/install/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count153
+\c@section@level=\count157
 )
-LaTeX Info: Redefining \ref on input line 60.
-LaTeX Info: Redefining \pageref on input line 60.
-LaTeX Info: Redefining \nameref on input line 60.
+LaTeX Info: Redefining \ref on input line 62.
+LaTeX Info: Redefining \pageref on input line 62.
+LaTeX Info: Redefining \nameref on input line 62.
  (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
  (main-concordance.tex)
-<Latex/Classes/Escudos/ucvlogo.jpg, id=155, 676.02562pt x 668.4975pt>
+<Latex/Classes/Escudos/ucvlogo.jpg, id=66, 676.02562pt x 668.4975pt>
 File: Latex/Classes/Escudos/ucvlogo.jpg Graphic file (type jpg)
 <use Latex/Classes/Escudos/ucvlogo.jpg>
 Package pdftex.def Info: Latex/Classes/Escudos/ucvlogo.jpg  used on input line 
-63.
+65.
 (pdftex.def)             Requested size: 68.27701pt x 85.35725pt.
-<images/faces.png, id=156, 346.29375pt x 200.75pt>
+<images/faces.png, id=67, 346.29375pt x 200.75pt>
 File: images/faces.png Graphic file (type png)
 <use images/faces.png>
-Package pdftex.def Info: images/faces.png  used on input line 63.
+Package pdftex.def Info: images/faces.png  used on input line 65.
 (pdftex.def)             Requested size: 68.28526pt x 73.9792pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 63.
+LaTeX Font Info:    Try loading font information for U+msa on input line 65.
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 63.
+LaTeX Font Info:    Try loading font information for U+msb on input line 65.
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 63.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 65.
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/jknappen/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-Overfull \vbox (266.69472pt too high) detected at line 63
+Overfull \vbox (266.69472pt too high) detected at line 65
  []
 
 
-Overfull \vbox (214.85153pt too high) detected at line 63
+Overfull \vbox (214.85153pt too high) detected at line 65
  []
 
 [1
@@ -831,24 +851,96 @@ Overfull \vbox (214.85153pt too high) detected at line 63
 {/home/leonardo/.miktex/texmfs/data/pdftex/config/pdftex.map} <./Latex/Classes/
 Escudos/ucvlogo.jpg> <./images/faces.png>] [1] [2
 
-] (main.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
- [3
-
-])
+] (main.toc)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
-LaTeX Info: Redefining \. on input line 88.
-LaTeX Info: Redefining \% on input line 88.
- [4] (main.lof
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
+ [3
+
+] (main.lof)
+\tf@lof=\write6
+\openout6 = `main.lof'.
+
+
+[4
+
+] (main.lot)
+\tf@lot=\write7
+\openout7 = `main.lot'.
+
+ [5
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
+
+ []
+
+[6
+
+]
+Cap\'{\i }tulo 1.
+<main-002.pdf, id=108, 433.62pt x 433.62pt>
+File: main-002.pdf Graphic file (type pdf)
+<use main-002.pdf>
+Package pdftex.def Info: main-002.pdf  used on input line 128.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+[7
+
+]
+LaTeX Info: Redefining \. on input line 151.
+LaTeX Info: Redefining \% on input line 151.
+ [8 <./main-002.pdf>]
+Overfull \hbox (8.54459pt too wide) in paragraph at lines 153--154
+\T1/aer/m/n/10 sobre el precio del activo, se pueden resumir en tres categorías
+: tendencia, momentum y volatilidad. 
+ []
+
+<main-003.pdf, id=129, 433.62pt x 433.62pt>
+File: main-003.pdf Graphic file (type pdf)
+<use main-003.pdf>
+Package pdftex.def Info: main-003.pdf  used on input line 175.
+(pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
 ! Misplaced alignment tab character &.
 <argument> ...es calculados con los precios del S&
-                                                  P500 en el primer per\IeC ...
-l.7 ...31/12/2012)\relax }}{18}{figure.caption.13}
+                                                  P500 en el primer perÃ­odo...
+l.176 ...e entrenamiento(01/01/2009 - 31/12/2012)}
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+<argument> ...es calculados con los precios del S&
+                                                  P500 en el primer perÃ­odo...
+l.176 ...e entrenamiento(01/01/2009 - 31/12/2012)}
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+LaTeX Info: Redefining \. on input line 178.
+LaTeX Info: Redefining \% on input line 178.
+[9]
+Overfull \hbox (10.13925pt too wide) in paragraph at lines 179--180
+[]\T1/aer/m/n/10 Como se puede observar existe alta correlación entre las disti
+ntas variables del precio (Apertura,
+ []
+
+<main-004.pdf, id=134, 433.62pt x 433.62pt>
+File: main-004.pdf Graphic file (type pdf)
+<use main-004.pdf>
+Package pdftex.def Info: main-004.pdf  used on input line 186.
+(pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
+! Misplaced alignment tab character &.
+<argument> ...os calculados con los precios del S&
+                                                  P500 en el primer perÃ­odo...
+l.187 ...e entrenamiento(01/01/2009 - 31/12/2012)}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -859,8 +951,42 @@ might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
 <argument> ...os calculados con los precios del S&
-                                                  P500 en el primer per\IeC ...
-l.8 ...31/12/2012)\relax }}{19}{figure.caption.14}
+                                                  P500 en el primer perÃ­odo...
+l.187 ...e entrenamiento(01/01/2009 - 31/12/2012)}
+                                                  
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+LaTeX Info: Redefining \. on input line 189.
+LaTeX Info: Redefining \% on input line 189.
+[10 <./main-003.pdf>]
+LaTeX Info: Redefining \. on input line 206.
+LaTeX Info: Redefining \% on input line 206.
+ [11 <./main-004.pdf>]
+<images/walkforward_plot.jpg, id=157, 963.6pt x 722.7pt>
+File: images/walkforward_plot.jpg Graphic file (type jpg)
+<use images/walkforward_plot.jpg>
+Package pdftex.def Info: images/walkforward_plot.jpg  used on input line 214.
+(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
+
+Overfull \hbox (3.66653pt too wide) in paragraph at lines 219--220
+\T1/aer/m/n/10 óptimos. Previamente se utilizaba la data de validación para bus
+car la combinación de parámetros
+ []
+
+<main-006.pdf, id=158, 433.62pt x 433.62pt>
+File: main-006.pdf Graphic file (type pdf)
+<use main-006.pdf>
+Package pdftex.def Info: main-006.pdf  used on input line 227.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+! Misplaced alignment tab character &.
+<argument> ...008 - 31/12/2010) para el Ã­ndice S&
+                                                  P500, para diferentes valo...
+l.228 ...&P500, para diferentes valores de tp y h}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -870,9 +996,9 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-<argument> ...2/2010) para el \IeC {\'\i }ndice S&
+<argument> ...008 - 31/12/2010) para el Ã­ndice S&
                                                   P500, para diferentes valo...
-l.10 ... de tp y h\relax }}{21}{figure.caption.16}
+l.228 ...&P500, para diferentes valores de tp y h}
                                                   
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -881,185 +1007,283 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-)
-\tf@lof=\write6
-\openout6 = `main.lof'.
-
- [5
-
-] (main.lot
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
-\tf@lot=\write7
-\openout7 = `main.lot'.
-
- [6
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 98--99
-
+LaTeX Info: Redefining \. on input line 230.
+LaTeX Info: Redefining \% on input line 230.
+[12 <./images/walkforward_plot.jpg>]
+Overfull \hbox (25.83858pt too wide) in paragraph at lines 231--231
+|[]\T1/aer/bx/n/12 Reducción de la dimensión con Análisis de Componentes Princi
+pales| 
  []
 
-[7
+! Misplaced alignment tab character &.
+l.237 ...ento (2009-2012) utilizando el Ã­ndice S&
+                                                  P500, en esta secciÃ³n se ...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
 
-]
-Cap\'{\i }tulo 1.
-[8
 
-]
+Overfull \hbox (9.11697pt too wide) in paragraph at lines 240--241
+[]\T1/aer/m/n/10 Los eigenvalores miden la cantidad de variación retenida por c
+ada componente. Los eigenvalores
+ []
+
+LaTeX Info: Redefining \. on input line 241.
+LaTeX Info: Redefining \% on input line 241.
+[13 <./main-006.pdf>]
+Overfull \hbox (2.95015pt too wide) in paragraph at lines 244--245
+[]\T1/aer/m/n/10 La proporción de variación explicada por cada eigenvalor viene
+ dada de dividir cada eigenvalor
+ []
+
+<main-008.pdf, id=175, 433.62pt x 433.62pt>
+File: main-008.pdf Graphic file (type pdf)
+<use main-008.pdf>
+Package pdftex.def Info: main-008.pdf  used on input line 251.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+<main-009.pdf, id=176, 433.62pt x 433.62pt>
+File: main-009.pdf Graphic file (type pdf)
+<use main-009.pdf>
+Package pdftex.def Info: main-009.pdf  used on input line 260.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+LaTeX Info: Redefining \. on input line 262.
+LaTeX Info: Redefining \% on input line 262.
+[14 <./main-008.pdf>]
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 264.
+
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 264.
+
+(/usr/share/R/share/texmf/tex/latex/ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 264.
+
+
+LaTeX Warning: Command \textdegree invalid in math mode on input line 264.
+
+Missing character: There is no ° in font cmr7!
+<main-010.pdf, id=187, 433.62pt x 433.62pt>
+File: main-010.pdf Graphic file (type pdf)
+<use main-010.pdf>
+Package pdftex.def Info: main-010.pdf  used on input line 271.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+LaTeX Info: Redefining \. on input line 274.
+LaTeX Info: Redefining \% on input line 274.
+[15 <./main-009.pdf>]
+<main-011.pdf, id=199, 433.62pt x 433.62pt>
+File: main-011.pdf Graphic file (type pdf)
+<use main-011.pdf>
+Package pdftex.def Info: main-011.pdf  used on input line 288.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+LaTeX Info: Redefining \. on input line 291.
+LaTeX Info: Redefining \% on input line 291.
+ [16 <./main-010.pdf>]
+LaTeX Info: Redefining \. on input line 295.
+LaTeX Info: Redefining \% on input line 295.
+ [17 <./main-011.pdf>]
 Cap\'{\i }tulo 2.
 
-LaTeX Warning: Command \' invalid in math mode on input line 147.
-
-Missing character: There is no é in font cmr10!
-[9
-
-]
-
-LaTeX Warning: Command \' invalid in math mode on input line 161.
-
-Missing character: There is no á in font cmr10!
-
-LaTeX Warning: Command \' invalid in math mode on input line 161.
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 308.
+See the caption package documentation for explanation.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 161.
+! LaTeX Error: Not in outer par mode.
 
-Missing character: There is no á in font cmr10!
-Missing character: There is no é in font cmr10!
-
-Overfull \hbox (3.3261pt too wide) in paragraph at lines 167--168
-[]\T1/aer/m/n/10 El análista técnico acepta la premisa de que los mercados tien
-en tendencias. Buscar tendencias
- []
-
-LaTeX Info: Redefining \. on input line 172.
-LaTeX Info: Redefining \% on input line 172.
-[10]
-Overfull \hbox (10.38643pt too wide) in paragraph at lines 193--194
-\T1/aer/m/n/10 categóricas-. Las cuantitativas toman valores numericos mientras
- que las cualitativas son categorías
- []
-
-LaTeX Info: Redefining \. on input line 194.
-LaTeX Info: Redefining \% on input line 194.
-[11]
-Overfull \hbox (0.3681pt too wide) in paragraph at lines 204--205
-[]\T1/aer/m/n/10 En donde $\OML/cmm/m/it/10 X[]$ \T1/aer/m/n/10 representa las 
-variables predictoras y los coeficientes $\OML/cmm/m/it/10 []$ \T1/aer/m/n/10 
-cuantifican la asociación
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.312 \begin{table}[ht]
+                       
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 ! Undefined control sequence.
-l.216 ...n puede tomar valores entre 0 e \infinity
-                                                  , lo cual indicarÃ­a muy b...
+\@float@Hx ...ltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.312 \begin{table}[ht]
+                       
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+! Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.312 \begin{table}[ht]
+                       
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
 
-LaTeX Warning: Command \' invalid in math mode on input line 224.
 
-Missing character: There is no á in font cmr10!
-
-Overfull \hbox (3.62222pt too wide) in paragraph at lines 224--225
-\T1/aer/m/n/10 Para esto se utiliza el metódo de $\OML/cmm/m/it/10 MximaVerosim
-ilitud$\T1/aer/m/n/10 , el cual consiste en estimar los coeficientes
- []
-
-LaTeX Info: Redefining \. on input line 226.
-LaTeX Info: Redefining \% on input line 226.
-[12]
-Overfull \hbox (1.22838pt too wide) in paragraph at lines 240--241
-[]\T1/aer/m/n/10 Para resolver la ecuación (n arriba) se utiliza un algoritmo d
-e optimización llamado $\OML/cmm/m/it/10 Newton \OMS/cmsy/m/n/10  
+Overfull \hbox (71.6774pt too wide) in paragraph at lines 314--328
+ [][] 
  []
 
 
-Overfull \hbox (3.02655pt too wide) in paragraph at lines 242--242
-|[]\T1/aer/bx/n/12 Análisis de Componentes Principales como método de reducción
+! LaTeX Error: \begin{minipage} on input line 309 ended by \end{center}.
 
- []
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 246.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 246.
-
-Missing character: There is no ó in font cmr10!
-Missing character: There is no ó in font cmr10!
-
-Overfull \hbox (11.4024pt too wide) in paragraph at lines 246--247
-\T1/aer/m/n/10 los predictores en combinaciones lineales que recogan prate de l
-a información, estas $\OML/cmm/m/it/10 M$ \T1/aer/m/n/10 componentes
- []
-
-LaTeX Info: Redefining \. on input line 257.
-LaTeX Info: Redefining \% on input line 257.
-[13]
-<images/confusion_matrix.png, id=293, 324.21124pt x 156.585pt>
-File: images/confusion_matrix.png Graphic file (type png)
-<use images/confusion_matrix.png>
-Package pdftex.def Info: images/confusion_matrix.png  used on input line 288.
-(pdftex.def)             Requested size: 180.67499pt x 87.2617pt.
-
-
-LaTeX Warning: Command \' invalid in math mode on input line 293.
-
-Missing character: There is no ó in font cmr10!
-LaTeX Info: Redefining \. on input line 294.
-LaTeX Info: Redefining \% on input line 294.
-[14 <./images/confusion_matrix.png>]
-
-LaTeX Warning: Command \' invalid in math mode on input line 295.
-
-Missing character: There is no ó in font cmr10!
-LaTeX Info: Redefining \. on input line 303.
-LaTeX Info: Redefining \% on input line 303.
-[15]
-Cap\'{\i }tulo 3.
-<main-002.pdf, id=304, 433.62pt x 433.62pt>
-File: main-002.pdf Graphic file (type pdf)
-<use main-002.pdf>
-Package pdftex.def Info: main-002.pdf  used on input line 324.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-[16
-
-]
-LaTeX Info: Redefining \. on input line 347.
-LaTeX Info: Redefining \% on input line 347.
- [17 <./main-002.pdf>]
-Overfull \hbox (8.54459pt too wide) in paragraph at lines 349--350
-\T1/aer/m/n/10 sobre el precio del activo, se pueden resumir en tres categorías
-: tendencia, momentum y volatilidad. 
- []
-
-
-Overfull \hbox (36.23903pt too wide) in paragraph at lines 360--361
-[]\T1/aer/m/n/10 MACD (Moving Average Converge/Divergence) el cual es una difer
-encia de dos EMAs(Exponential
- []
-
-
-Overfull \hbox (3.90678pt too wide) in paragraph at lines 360--361
-\T1/aer/m/n/10 Moving Average) de 12 y 26 períodos. Este es un indicador de ten
-dencia que se complementa
- []
-
-<main-003.pdf, id=318, 433.62pt x 433.62pt>
-File: main-003.pdf Graphic file (type pdf)
-<use main-003.pdf>
-Package pdftex.def Info: main-003.pdf  used on input line 371.
-(pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
-! Misplaced alignment tab character &.
-<argument> ...es calculados con los precios del S&
-                                                  P500 en el primer perÃ­odo...
-l.372 ...e entrenamiento(01/01/2009 - 31/12/2012)}
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
                                                   
+l.329 \end{center}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.330 \end{minipage}
+                    
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \endgroup.
+\endminipage ...pagefalse \color@endgroup \egroup 
+                                                  \expandafter \@iiiparbox \...
+l.330 \end{minipage}
+                    
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Undefined control sequence.
+\endminipage ...\expandafter \@iiiparbox \@mpargs 
+                                                  {\unvbox \@tempboxa }
+l.330 \end{minipage}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \let 
+l.338 \begin
+            {tabular}{rrrrr}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \let 
+l.338 \begin
+            {tabular}{rrrrr}
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+! Missing \endcsname inserted.
+<to be read again> 
+                   \@@par 
+l.338 \begin
+            {tabular}{rrrrr}
+The control sequence marked <to be read again> should
+not appear between \csname and \endcsname.
+
+
+! LaTeX Error: Environment \@@par  undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.338 \begin
+            {tabular}{rrrrr}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra }, or forgotten \endgroup.
+\@begin@tempboxa ...begingroup #2\color@endgroup }
+                                                  \def \width {\wd \@tempbox...
+l.338 \begin
+            {tabular}{rrrrr}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+Runaway argument?
+{\@checkend {minipage}\expandafter \endgroup \if@endpe \@doendpe \fi \ETC.
+! Paragraph ended before \setlength was complete.
+<to be read again> 
+                   \par 
+l.338 \begin
+            {tabular}{rrrrr}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+
+! LaTeX Error: Not in outer par mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.338 \begin
+            {tabular}{rrrrr}
+You've lost some text.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+\@float@Hx ...ltovf \fi \global \setbox \@currbox 
+                                                  \color@vbox \normalcolor \...
+l.338 \begin
+            {tabular}{rrrrr}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing number, treated as zero.
+<to be read again> 
+                   \vbox 
+l.338 \begin
+            {tabular}{rrrrr}
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
+
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.339   \hline
+              
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Misplaced alignment tab character &.
+<recently read> &
+                 
+l.340  &
+         Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1068,35 +1292,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-<argument> ...es calculados con los precios del S&
-                                                  P500 en el primer perÃ­odo...
-l.372 ...e entrenamiento(01/01/2009 - 31/12/2012)}
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-LaTeX Info: Redefining \. on input line 374.
-LaTeX Info: Redefining \% on input line 374.
-[18]
-Overfull \hbox (10.13925pt too wide) in paragraph at lines 375--376
-[]\T1/aer/m/n/10 Como se puede observar existe alta correlación entre las disti
-ntas variables del precio (Apertura,
- []
-
-<main-004.pdf, id=324, 433.62pt x 433.62pt>
-File: main-004.pdf Graphic file (type pdf)
-<use main-004.pdf>
-Package pdftex.def Info: main-004.pdf  used on input line 382.
-(pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
-! Misplaced alignment tab character &.
-<argument> ...os calculados con los precios del S&
-                                                  P500 en el primer perÃ­odo...
-l.383 ...e entrenamiento(01/01/2009 - 31/12/2012)}
-                                                  
+l.340  & Estimate &
+                    Std. Error & z value & Pr($>$$|$z$|$) \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1105,44 +1302,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-<argument> ...os calculados con los precios del S&
-                                                  P500 en el primer perÃ­odo...
-l.383 ...e entrenamiento(01/01/2009 - 31/12/2012)}
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-LaTeX Info: Redefining \. on input line 385.
-LaTeX Info: Redefining \% on input line 385.
-[19 <./main-003.pdf>]
-LaTeX Info: Redefining \. on input line 402.
-LaTeX Info: Redefining \% on input line 402.
- [20 <./main-004.pdf>]
-<images/walkforward_plot.jpg, id=345, 963.6pt x 722.7pt>
-File: images/walkforward_plot.jpg Graphic file (type jpg)
-<use images/walkforward_plot.jpg>
-Package pdftex.def Info: images/walkforward_plot.jpg  used on input line 410.
-(pdftex.def)             Requested size: 180.67499pt x 135.5059pt.
-
-Overfull \hbox (3.66653pt too wide) in paragraph at lines 415--416
-\T1/aer/m/n/10 óptimos. Previamente se utilizaba la data de validación para bus
-car la combinación de parámetros
- []
-
-<main-006.pdf, id=346, 433.62pt x 433.62pt>
-File: main-006.pdf Graphic file (type pdf)
-<use main-006.pdf>
-Package pdftex.def Info: main-006.pdf  used on input line 423.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-! Misplaced alignment tab character &.
-<argument> ...008 - 31/12/2010) para el Ã­ndice S&
-                                                  P500, para diferentes valo...
-l.424 ...&P500, para diferentes valores de tp y h}
-                                                  
+l.340  & Estimate & Std. Error &
+                                 z value & Pr($>$$|$z$|$) \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1151,10 +1312,8 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 ! Misplaced alignment tab character &.
-<argument> ...008 - 31/12/2010) para el Ã­ndice S&
-                                                  P500, para diferentes valo...
-l.424 ...&P500, para diferentes valores de tp y h}
-                                                  
+l.340  & Estimate & Std. Error & z value &
+                                           Pr($>$$|$z$|$) \\
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
 simple: Just type `I\&' now. But if some right brace
@@ -1162,106 +1321,510 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-LaTeX Info: Redefining \. on input line 426.
-LaTeX Info: Redefining \% on input line 426.
-[21 <./images/walkforward_plot.jpg>]
-Overfull \hbox (25.83858pt too wide) in paragraph at lines 427--427
-|[]\T1/aer/bx/n/12 Reducción de la dimensión con Análisis de Componentes Princi
-pales| 
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.341   \hline
+              
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Misplaced alignment tab character &.
+l.342 (Intercept) &
+                    -0.4093 & 0.0580 & -7.06 & 0.0000 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.342 (Intercept) & -0.4093 &
+                              0.0580 & -7.06 & 0.0000 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.342 (Intercept) & -0.4093 & 0.0580 &
+                                       -7.06 & 0.0000 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.342 (Intercept) & -0.4093 & 0.0580 & -7.06 &
+                                               0.0000 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.343   PC1 &
+              0.0222 & 0.0165 & 1.35 & 0.1785 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.343   PC1 & 0.0222 &
+                       0.0165 & 1.35 & 0.1785 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.343   PC1 & 0.0222 & 0.0165 &
+                                1.35 & 0.1785 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.343   PC1 & 0.0222 & 0.0165 & 1.35 &
+                                       0.1785 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.344   PC2 &
+              -0.0072 & 0.0182 & -0.40 & 0.6925 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.344   PC2 & -0.0072 &
+                        0.0182 & -0.40 & 0.6925 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.344   PC2 & -0.0072 & 0.0182 &
+                                 -0.40 & 0.6925 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.344   PC2 & -0.0072 & 0.0182 & -0.40 &
+                                         0.6925 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.345   PC3 &
+              0.0169 & 0.0290 & 0.58 & 0.5596 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.345   PC3 & 0.0169 &
+                       0.0290 & 0.58 & 0.5596 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.345   PC3 & 0.0169 & 0.0290 &
+                                0.58 & 0.5596 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.345   PC3 & 0.0169 & 0.0290 & 0.58 &
+                                       0.5596 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.346   PC4 &
+              0.0537 & 0.0307 & 1.75 & 0.0800 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.346   PC4 & 0.0537 &
+                       0.0307 & 1.75 & 0.0800 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.346   PC4 & 0.0537 & 0.0307 &
+                                1.75 & 0.0800 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.346   PC4 & 0.0537 & 0.0307 & 1.75 &
+                                       0.0800 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.347   PC5 &
+              0.0237 & 0.0336 & 0.71 & 0.4797 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.347   PC5 & 0.0237 &
+                       0.0336 & 0.71 & 0.4797 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.347   PC5 & 0.0237 & 0.0336 &
+                                0.71 & 0.4797 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.347   PC5 & 0.0237 & 0.0336 & 0.71 &
+                                       0.4797 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.348   PC6 &
+              0.0393 & 0.0365 & 1.08 & 0.2817 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.348   PC6 & 0.0393 &
+                       0.0365 & 1.08 & 0.2817 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.348   PC6 & 0.0393 & 0.0365 &
+                                1.08 & 0.2817 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.348   PC6 & 0.0393 & 0.0365 & 1.08 &
+                                       0.2817 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.349   PC7 &
+              -0.1222 & 0.0414 & -2.95 & 0.0032 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.349   PC7 & -0.1222 &
+                        0.0414 & -2.95 & 0.0032 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.349   PC7 & -0.1222 & 0.0414 &
+                                 -2.95 & 0.0032 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.349   PC7 & -0.1222 & 0.0414 & -2.95 &
+                                         0.0032 \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.350    \hline
+               
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Misplaced \crcr.
+\endtabular ->\crcr 
+                    \egroup \egroup $\egroup 
+l.351 \end{tabular}
+                   
+I can't figure out why you would want to use a tab mark
+or \cr or \span just now. If something like a right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Extra }, or forgotten \endgroup.
+\endtabular ->\crcr \egroup \egroup 
+                                    $\egroup 
+l.351 \end{tabular}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+<recently read> \egroup 
+                        
+l.351 \end{tabular}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: \begin{table} on input line 338 ended by \end{tabular}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.351 \end{tabular}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.351 \end{tabular}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \endgroup.
+\@endfloatbox ...pagefalse \outer@nobreak \egroup 
+                                                  \color@endbox 
+l.352 \end{table}
+                 \captionof*{table}{Fuente: CÃ¡lculods propios}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+\color@endbox ->\color@endgroup \egroup 
+                                        
+l.352 \end{table}
+                 \captionof*{table}{Fuente: CÃ¡lculods propios}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: \begin{minipage} on input line 338 ended by \end{table}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.352 \end{table}
+                 \captionof*{table}{Fuente: CÃ¡lculods propios}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (49.65445pt too wide) in paragraph at lines 352--352
+[]|\T1/aer/m/n/9 Fuente:
  []
 
 
-Overfull \hbox (9.2706pt too wide) in paragraph at lines 429--430
-[]\T1/aer/m/n/10 Como se señalo anteriormente, el modelo utiliza las interaccio
-nes entre las variables predictoras,
+Overfull \hbox (59.30214pt too wide) in paragraph at lines 352--352
+\T1/aer/m/n/9 Cálculods
  []
 
-<main-008.pdf, id=351, 433.62pt x 433.62pt>
-File: main-008.pdf Graphic file (type pdf)
-<use main-008.pdf>
-Package pdftex.def Info: main-008.pdf  used on input line 436.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 439.
-LaTeX Info: Redefining \% on input line 439.
-[22 <./main-006.pdf>]
-<main-009.pdf, id=361, 433.62pt x 433.62pt>
-File: main-009.pdf Graphic file (type pdf)
-<use main-009.pdf>
-Package pdftex.def Info: main-009.pdf  used on input line 443.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 446.
-LaTeX Info: Redefining \% on input line 446.
- [23 <./main-008.pdf>]
-<main-010.pdf, id=371, 433.62pt x 433.62pt>
-File: main-010.pdf Graphic file (type pdf)
-<use main-010.pdf>
-Package pdftex.def Info: main-010.pdf  used on input line 450.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 455.
-LaTeX Info: Redefining \% on input line 455.
- [24 <./main-009.pdf>]
-LaTeX Info: Redefining \. on input line 456.
-LaTeX Info: Redefining \% on input line 456.
- [25 <./main-010.pdf>]
-Cap\'{\i }tulo 4.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 465.
 
-(/home/leonardo/.miktex/texmfs/install/tex/latex/ae/t1aett.fd
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [26
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 479--480
-
+Overfull \hbox (49.32132pt too wide) in paragraph at lines 352--352
+\T1/aer/m/n/9 propios| 
  []
 
-[27
 
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 493.
- [28
+! LaTeX Error: \begin{minipage} on input line 338 ended by \end{center}.
 
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 493.
- (main.aux
-LaTeX Info: Redefining \. on input line 21.
-LaTeX Info: Redefining \% on input line 21.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.353 \end{center}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.353 \end{center}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Undefined control sequence.
+\endminipage ...\expandafter \@iiiparbox \@mpargs 
+                                                  {\unvbox \@tempboxa }
+l.354 \end{minipage}
+                    
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 493.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 493.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: E5F1F345432BF690FA24D0E60FF8739A;2856.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 493.
- ) 
-Here is how much of TeX's memory you used:
- 11933 strings out of 494890
- 175436 string characters out of 3178485
- 270439 words of memory out of 3000000
- 15190 multiletter control sequences out of 15000+200000
- 46004 words of font info for 102 fonts, out of 3000000 for 9000
- 0 hyphenation exceptions out of 8191
- 43i,12n,45p,805b,656s stack positions out of 5000i,500n,10000p,200000b,50000s
-</home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx10.
-pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx1
-2.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmb
-x9.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cm
-csc10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm
-/cmex10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfont
-s/cm/cmmi5.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfon
-ts/cm/cmmi7.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/amsf
-onts/cm/cmr12.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/ams
-fonts/cm/cmr17.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/am
-sfonts/cm/cmr5.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/am
-sfonts/cm/cmr7.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/am
-sfonts/cm/cmr9.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/public/am
-sfonts/cm/cmsltt10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/pub
-lic/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (29 pages, 785597 bytes).
-PDF statistics:
- 520 PDF objects out of 1000 (max. 8388607)
- 81 named destinations out of 1000 (max. 500000)
- 384 words of extra memory for PDF output out of 10000 (max. 10000000)
+Runaway argument?
+\@checkend {minipage}\expandafter \endgroup \if@endpe \@doendpe \fi \if@ignore 
+\ETC.
+! File ended while scanning use of \@iiiparbox.
+<inserted text> 
+                \par 
+<*> ./main.tex
+              
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
 
+! Emergency stop.
+<*> ./main.tex
+              
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 11925 strings out of 494890
+ 175249 string characters out of 3178486
+ 269178 words of memory out of 3000000
+ 15220 multiletter control sequences out of 15000+200000
+ 45527 words of font info for 100 fonts, out of 3000000 for 9000
+ 0 hyphenation exceptions out of 8191
+ 43i,11n,45p,783b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

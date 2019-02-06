@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
 
 % \usepackage[spanish]{babel}
 % \input{body/preamble/preamble.Rnw}
@@ -97,206 +99,8 @@ Agradecimientos
 
 Las economías de países latinoamericanos son reconocidas históricamente por depender en gran magnitud del comercio de sus materias primas, lo cual hace que el comercio con dichos commodities resulte de gran impacto para el gasto fiscal y para la balanza de pagos, esto deja como consecuencia, la necesidad de los actores económicos de estudiar el riesgo a profundidad para poder evitar resultados que reduzcan sus retornos positivos.\\ 
 
-% !TeX root = ./main.Rnw
-%\SweaveUTF8
-
-\chapter{El Problema}
-
-\section{Justificación}
-
-
-\section{Planteamiento del Problema}
-
-
-\section{Objetivo General}
-
-Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendizaje automático en diferentes instrumentos financieros
-
-\section{Objetivos Específicos}
-
-\begin{itemize}
-\item Definir los parámetros de la estrategia, así como los indicadores técnicos a utilizar como variables predictoras
-\item Utilizar Análisis de Componentes Principales como técnica de reducción de la dimensión de variables predictoras
-\item Aplicar método de Regresión Logística con las componentes arrojadas por el ACP
-\item Desarrollar la metodología Walkforward para tomar en cuenta el dinamismo del mercado en la estrategia
-\item Evaluar la predicción del modelo como estrategia en los instrumentos seleccionados
-\end{itemize}
-
-% !TeX root = ./main.Rnw
-%\SweaveUTF8
-
-\chapter{Marco Teórico}
-
-\section{Antecedentes}
-
-\subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
-
-\subsection{Modelos predictivos para el mercado FOREX}
-
-\subsection{Diseño e implementación de un sistema automatizado para operar en el mercado de divisas usando reglas de asociación}
-
-\section{Bases Teóricas}
-
-
-\subsection{Hipótesis del Mercado Eficiente}
-
-La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
-
-Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competirdores intentarán ajustar sus posiciones lo más rapido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
-
-$Eficiencia débil$, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. $Eficiencia media$, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. $Eficiencia fuerte$, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
-
-Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones cesgada de los individuos, formuladas por la manera en como estos responden ante nueva información. Algunas de las hipótesis que explican este razonamieto cesgado son: 
-
-Los inversores interpretan la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo, lo que sugiere que la reacción del inversor a la misma noticia será distinta. Day and Wangr (2002) argumentan que si los precios son continuamente influenciados por estas interpretaciones erróneas, los movimientos contrarios del precio pueden ser predecidos estudiando la data histórica. Sugieren también que mientras más extremo sea el movimiento incial, mayor será el ajuste de precio.
-
-Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos de colapso del mercado como en la caída del mercado búrsatil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra como estos comportamientos pueden resultar en ineficiencias del mercado.
-
-Aglunos académicos como Hong y Stein's (1999) categorizan a los inversores en $Informados$ y $No informados$. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
-
-Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competires, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados.
-
-\subsection{Análisis Técnico}
-
-Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama $Análisis Fundamental$ y el segundo $Análisis Técnico$. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
-
-El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro mediante el uso de gráficos. Según J.J.Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico: Los movimientos del mercado lo descuentan  todo, los precios se mueven por tendencias y la historia se repite.
-
-Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es mas que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
-
-El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana, la cual según murphy se repite. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
-
-\subsection{Introducción al aprendizaje automático}
-
-Aprendizaje automático refiere a una rama de la Inteligencia Artificial, que busca crear algoritmos capaces de generalizar comportamientos y reconocer patrones a partir de un conjunto de datos. Supongamos que existe una variable respuesta $Y$ y distintos predictores $X_{1}, X_{2}, ..., X_{j}$. Se asume que existe una relación entre $Y$ y $X = X_{1}, X_{2}, ..., X_{j}$, la cual puede ser escrita de forma general como
-
-$$ Y = f(X) + \epsilon $$
-
-donde $f$ es una función desconocida de $X$ y $\epsilon$ es un término de error aleatorio, independiente de $X$ y de media 0. En esta formulación $f$ representa información sistemática que $X$ proporciona sobre $Y$.
-
-En escencia, el aprendizaje automático refiere a un conjunto de enfoques para estimar $f$
-
-\subsubsection{Métodos Paramétricos vs No Paramétricos}
-
-La mayoría de los metodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. Primero se asume que los datos toman una forma específica, una vez asumida la forma que debe tener la función $f$, el problema de la estimación se simplifica. al seleccionar el modelo se procede a ajustar el modelo en la data de entrenamiento. Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que el modelo escogido puede no ser apropiado a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
-
-Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, estos modelos buscan estimar $f$ acercandola lo mas posible a los datos observados. Esto les permite evadir el problema de ajustarse a alguna forma en específico. Sin embargo, al no reducir el problema a estimar unos parámetros sino uilizar los datos directamente, se necesita un gran numero de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además en general la iterpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización
-
-\subsubsection{Aprendizaje Supervisado vs No Supervisado}
-
-Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertivamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM, GAM, etc. 
-
-En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es buscar entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociasión. Los primeros intentan describir las agrupaciones subyacientes en los datos, como por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociasion buscan descrubrir patrones inehentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$.
-
-\subsubsection{Regresión vs Clasificasión}
-
-Las variables pueden ser divididas entre cuantitativas ó cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numericos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitavia se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
-
-\subsubsection{Compensasión entre sesgo y varianza}
-
-
-\subsection{Regresión Logística}
-
-Los modelos Lineales Generalizados asumen que exite una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
-
-$$ Y \approx \beta_{0} + \beta_{1}X_{1} + ... + \beta_{j}X_{j} $$
-
-En donde $X_{j}$ representa las variables predictoras y los coeficientes $\beta_{j}$ cuantifican la asociación entre la variable predictora $X_{j}$ y la variable respuesta $Y$. Por lo que se interpreta a $\beta_{j}$ como el efecto promedio que tiene en $Y$ un incremento de una unidad en $X_{j}$, bajo el supuesto de que todas las demás variables se mantienen constantes.
-
-En problemas de clasificación, la variable predictora asume valores categóricos, por lo que al utilizar este enfoque se pueden obtener probabilidades fuera del intervalo [0, 1], haciendo imposible su interpretación. Esto concluye en que se deba utilizar una función, tal que permita la generación de valores entre [0, 1], en el caso de la regresión logística esta función es:
-
-$$
-p(X) = \frac{e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}{1 + e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}
-$$
-
-Despejando se obtiene
-
-$$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
-
-El lado izquierdo de la ecuación puede tomar valores entre 0 e \infinity, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logarítmo en ambos miembros de la ecuación se obtiene la función logit
-
-$$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
-
-Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una linea recta, $\beta$ no corresponde a un cambio en $p(X)$ asosiado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
-
-\subsubsection{Máxima Verosimilitud}
-
-Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el metódo de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de prediccion para cada individuo, utilizando (formula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
-
-$$ l(\beta) = \prod_{i=1}^{j}{P(x_{i} / \beta)} $$
-  
-Por conveniencia se  trabaja con el logarítmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
-
-$$ l(\beta) = \sum_{i=1}^{N} \log{P(y_{i}/ x_{i}; \beta)} $$
-
-Al codificar las clases en 0 y 1, la función de verosimilitud para la regresión logarítmica puede ser escrita como
-
-$$ l(\beta) = \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i} - \log{1 + e^{\beta^{T}x_{i}}}) $$
-
-Para maximizar la función, se iguala la derivada a 0
-
-$$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i}; \beta)) = 0 $$
-
-Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
-
-\subsection{Análisis de Componentes Principales como método de reducción de variables}
-
-Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los metodos no lineales. Exiten técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
-
-Una clase de métodos es el enfoque de $Reducción de la Dimensión$, el cual involucra proyectar los p predictores en M-dimensiones o componentes, donde $M < p$. Esto se logra transformando los predictores en combinaciones lineales que recogan prate de la información, estas $M$ componentes o dimensiones son entonces utilizadas como nuevos predictores en el modelo de regresión. Esto es:
-
-$$ Z_{m} = \sum_{i = 1}^{p} \phi_{im}X_{i} $$
-
-Para cualquier constante $ \phi_{1m}, \phi_{2m}, ..., \phi_{pm}, m = 1, ..., M $. Se ajusta el modelo
-
-$$ y_{i} = \theta_{0} + \sum_{m = 1}^{M} \theta_{m}z_{im} + \epsilon_{i},  \qquad i = 1, ..., n $$
-
-En situaciones donde $p$ es relativamente grande con relación a n, seleccionar un valor de $M << p$ puede reducir considerablemente la varianzade los coeficientes. Es de notar que si $M = p$, ajustar el modelo con las combinanciones lineales de los coeficientes originales es equivalente a ajustar el modelo original.
-
-El Análisis de Componentes Principales (ACP) es una técnica que reduce la dimensión de una matríz de datos. La dirección del primer componente principal es aquella en la cual exista mayor variación entre las observaciones, es decir
-
-$$ Z_{1} = \phi_{11}X_{1} + \phi_{21}X_{2} + ... + \phi_{p1}X_{p} $$
-
-donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados $loadings$, en donde el subíndice representa el número de componente. Juntos, los $loadings$ forman el vector de loading de componente principar $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
-
-Dado una matriz de datos $X$ de $n x p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores, llamadas $scores$
-
-$$ z_{i1} = \phi_{11} x_{i1} + \phi_{21} x_{i2} + ... + \phi_{p1} x_{ip} $$
-
-que contiene la mayor varianza. El primer vector de loadings de componente principal resuelve el problema de optimización
-
-$$ \max_{\phi_{11}, ..., \phi_{p1}}
-\frac{1}{n} \sum_{i = 1}^{n} (\sum_{j=1}^{p} \phi_{j1} x_{ij})^2
-\qquad sujeto \ a  \sum_{j=1}^{p} \phi_{j1}^{2} = 1
-$$
-
-El problema de máximización en (formula de arriba) se soluciona mediante la descomposición de los eigenvalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
-
-$$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2 + ... + \phi_{p2}x_{ip}} $$
-
-donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlasionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
-
-El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinearidad entre las variables. 
-
-% \subsubsection{Colinealidad}
-\subsection{Matríz de Confusión}
-
-En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=2.5in]{images/confusion_matrix}
-\end{center}
-\caption{Matríz de Confusión}
-\end{figure}
-
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
-
-$$ Precisión = \frac{VP}{VP + FN} $$
-
-\section{Bases Legales}
-
-
+% \SweaveInput{body/chapter1/chapter1.Rnw}
+% \SweaveInput{body/chapter2/chapter2.Rnw}
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -357,7 +161,7 @@ A continuación se presentan los indicadores utilizados:
 \begin{itemize}
 \item Retornos con respecto al precio de Cierre.
 \item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
-\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs(Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
 \item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
 \item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
 \item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
@@ -426,30 +230,65 @@ La selección de los parámetros debería ser un estudio previo de la serie fina
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
-Como se señalo anteriormente, el modelo utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Se decidió entonces utilizar el ACP como método de reducción de las variables.
+La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el numero de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
+
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
+
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S&P500, en esta sección se referira a ésta como 'matriz de datos'.
 
 
+Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
+
+Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
+
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-008}
-\caption{d}
+\caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
+
+La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-009}
-\caption{d}
+\caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
 \end{figure}
+
+La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
+
+La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-010}
-\caption{d}
+\caption{Calidad de representación medida por $Cos^2$ de cada variable en PC1 y PC2}
 \end{figure}
+
+El gráfico de correlación ó Factor map muestra la relación entre las variables. Las claves para su interpretación son:
+
+\begin{itemize}
+\item Las variables positivamente correlacionadas se encuentran agrupadas
+\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos, es decir en lados contrarios.
+\item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
+\end{itemize}
+
+En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras mas oscuro menor es su contribución a los componentes.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+\includegraphics{main-011}
+\caption{Gráfico de Correlación entre PC1 y PC2}
+\end{figure}
+
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -461,14 +300,85 @@ En el presente capítulo se realiza la descripción de los resultados obtenidos 
 
 
 
-\begin{Schunk}
-\begin{Sinput}
-> 
-\end{Sinput}
-\end{Schunk}
 
 
 
+
+\begin{center}
+\captionof{table}[Resultados]{\textbf{Resultados}}
+\begin{minipage}{.45\textwidth}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Feb  6 18:44:33 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3599 & 0.0645 & -5.58 & 0.0000 \\ 
+  PC1 & -0.0146 & 0.0181 & -0.81 & 0.4183 \\ 
+  PC2 & -0.0134 & 0.0203 & -0.66 & 0.5085 \\ 
+  PC3 & 0.0050 & 0.0327 & 0.15 & 0.8779 \\ 
+  PC4 & 0.0873 & 0.0353 & 2.47 & 0.0135 \\ 
+  PC5 & -0.0222 & 0.0373 & -0.60 & 0.5514 \\ 
+  PC6 & -0.0158 & 0.0425 & -0.37 & 0.7100 \\ 
+  PC7 & 0.1057 & 0.0484 & 2.18 & 0.0289 \\ 
+   \hline
+\end{tabular}
+\end{table}\captionof*{table}{Fuente: Cálculos propios}
+\end{center}
+\end{minipage}
+
+\begin{minipage}{.45\textwidth}
+\begin{center}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Wed Feb  6 18:44:33 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.4093 & 0.0580 & -7.06 & 0.0000 \\ 
+  PC1 & 0.0222 & 0.0165 & 1.35 & 0.1785 \\ 
+  PC2 & -0.0072 & 0.0182 & -0.40 & 0.6925 \\ 
+  PC3 & 0.0169 & 0.0290 & 0.58 & 0.5596 \\ 
+  PC4 & 0.0537 & 0.0307 & 1.75 & 0.0800 \\ 
+  PC5 & 0.0237 & 0.0336 & 0.71 & 0.4797 \\ 
+  PC6 & 0.0393 & 0.0365 & 1.08 & 0.2817 \\ 
+  PC7 & -0.1222 & 0.0414 & -2.95 & 0.0032 \\ 
+   \hline
+\end{tabular}
+\end{table}\captionof*{table}{Fuente: Cálculods propios}
+\end{center}
+\end{minipage}
+
+% \begin{center}
+% \captionof{table}[Resultados]{\textbf{Resultados}}
+% <<echo=FALSE, results=tex>>=
+% library(xtable)
+% a <- xtable(summary(list_model[[1]][[1]]))
+% a
+% @
+% \captionof*{table}{Fuente: Cálculos propios}
+% \end{center}
+
+% \begin{center}
+% \captionof{table}[Resultados del contraste Ljung-Box]{\textbf{Resultados del contraste Ljung-Box}}
+% <<echo=FALSE, results=tex>>=
+% lj_petroleo <- Box.test(return_petroleo^2, lag = 10, type = 'Ljung-Box')
+% lj_harinasoja <- Box.test(return_harinasoja^2, lag = 10, type = 'Ljung-Box')
+% lj_oro <- Box.test(return_oro^2, lag = 10, type = 'Ljung-Box')
+% lj_aluminio <- Box.test(return_aluminio^2, lag = 10, type = 'Ljung-Box')
+% lj_cacao <- Box.test(return_cacao^2, lag = 10, type = 'Ljung-Box')
+% boxtable<-data.frame(c(lj_petroleo$statistic,lj_petroleo$p.value),c(lj_harinasoja$statistic,lj_harinasoja$p.value),
+% c(lj_oro$statistic,lj_oro$p.value),c(lj_aluminio$statistic,lj_aluminio$p.value),c(lj_cacao$statistic,lj_cacao$p.value))
+% rownames(boxtable)<-c("Estadístico de Contraste","P-value")
+% colnames(boxtable)<-c("Petróleo","Harina de Soja","Oro","Aluminio","Cacao")
+% xtable(boxtable,digits=4)
+% @
+% \captionof*{table}{Fuente: Cálculos propios}
+% \end{center}
 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
@@ -476,7 +386,7 @@ En el presente capítulo se realiza la descripción de los resultados obtenidos 
 \chapter*{Conclusiones y Recomendaciones}
 \addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
 
-El estudio presentado se centró en confirmar alternativas eficaces para el cálculo del VaR en mercados de materias primas. Los hechos estilizados de las series de tiempo financieras fueron considerados a los largo del trabajo. Y frente a estos planteamientos, se desarrolló una investigación que permitiera detectar una aproximación con el método GARCH-EVT-COPULAS que tuviese la capacidad de estimar el riesgo del mercado de commodities.\\
+
 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
