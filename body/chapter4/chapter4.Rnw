@@ -5,12 +5,33 @@
 
 En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 
-\section{Series de Rendimientos}
-
-
+\section{Resultados del modelo}
 
 <<echo=FALSE>>=
-source('scripts/summStrat.R')
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(gridExtra)
+library(TTR)
+library(caret)
+library(factoextra)
+library(purrr)
+library(PerformanceAnalytics)
+library(xtable)
+source('scripts/functions.R')
+
+serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
+list_serie <- list()
+for(s in serie){
+  .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
+    read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
+    select(-one_of(c('Vol.', '% var.'))) %>%
+    mutate(Fecha = dmy(Fecha)) %>%
+    setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>%
+    arrange(timestamp)
+
+  list_serie %<>% rlist::list.append(.aux_serie)
+}
 
 .tp <- 0.02
 .sl <- 0.025
@@ -47,53 +68,175 @@ for(i in 1:length(serie)){
 }
 @
 
+En la figura -- se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
 
-
-
-\begin{center}
-\captionof{table}[Resultados]{\textbf{Resultados}}
-\begin{minipage}{.45\textwidth}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
-library(xtable)
 xtable(summary(list_model[[1]][[1]]))
 @
-\captionof*{table}{Fuente: Cálculos propios}
-\end{center}
-\end{minipage}
-
-\begin{minipage}{.45\textwidth}
-\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[2]]))
 @
-\captionof*{table}{Fuente: Cálculods propios}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
+<<echo=FALSE, results=tex>>=
+xtable(summary(list_model[[1]][[3]]))
+@
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
+<<echo=FALSE, results=tex>>=
+xtable(summary(list_model[[1]][[4]]))
+@
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
+<<echo=FALSE, results=tex>>=
+xtable(summary(list_model[[1]][[5]]))
+@
+\newpage
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
+<<echo=FALSE, results=tex>>=
+xtable(summary(list_model[[1]][[6]]))
+@
+
+Se observa que para todos los períodos el ACP arroja componentes que recogen el 85\% de la variación. También se aprecia que a medida que aumentamos los años de entrenamiento el número de p-valores menores que 0.05 aumentan, insinuando que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+
+<<echo=FALSE>>=
+df_fr <- data.frame(nrow = 6)
+for(i in 1:length(serie)){
+  
+  aux_buys <- list_fr[[i]][[2]] %>% 
+    mutate(predictor = case_when(salida == 'Strategy' & buy_class == 'buy' ~ 'True Buy',
+                                 TRUE ~ 'False Buy')) %>% 
+    select('predictor') %>% 
+    group_by(predictor) %>% 
+    summarise(n = n()) %>% 
+    setNames(c('metric', i)) %>%
+    column_to_rownames(var = 'metric')
+  
+  aux_metric <- list_fr[[i]][[1]] %>%
+    select(c('total_nro_trades', 'perc_predict', 'return_accum', 'max_drawdown')) %>% 
+    mutate(perc_predict = perc_predict*100, 
+           return_accum = return_accum*100,
+           max_drawdown = max_drawdown*100) %>% 
+    t() %>% 
+    as.data.frame() %>% 
+    setNames(i)
+    
+  aux_fr <- rbind(aux_buys, aux_metric)
+  
+  df_fr %<>% cbind(aux_fr)
+  
+}
+df_fr[,1] <- NULL
+
+df_fr %<>% setNames(serie) %>% 
+  sapply(sprintf, fmt = c("%.0f", "%.0f", "%.0f", "%1.2f%%", "%1.2f%%", "%1.2f%%")) 
+
+ rownames(df_fr) <- c('True Buys', 'False Buys', 'N° trades', 'Accuracy', 
+                      'Accumulative Return', 'Max Drawdown')
+@
+
+\begin{center}
+\captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
+<<echo=FALSE, results=tex>>=
+xtable(df_fr, align = rep('c',6))
+@
 \end{center}
-\end{minipage}
+ 
+ 
+<<echo=FALSE>>=
+list_trades_plot <- list()
+for(i in 1:length(serie)){
+  
+  index <- case_when(i == 1 ~ 'S&P500',
+                     i == 2 ~ 'NASDAQ',
+                     i == 3 ~ 'NIKKEI_225',
+                     i == 4 ~ 'FTSE_100',
+                     i == 5 ~ 'BOVESPA')
+  
+  df_serie <- list_serie[[i]] %>% filter(year(timestamp) %in% seq(2013, 2019, 1)) %>% 
+    mutate(ind = index) 
+  
+  aux_trades <- list_fr[[i]][[2]] %>% select(c('buy_date', 'salida')) 
+  
+  aux_join <- left_join(df_serie, aux_trades, by = c('timestamp' = 'buy_date')) %>% 
+    select(c('timestamp', 'salida', 'ind'))
+  
+  list_trades_plot %<>% rlist::list.append(aux_join)
+  
+}
 
-% \begin{center}
-% \captionof{table}[Resultados]{\textbf{Resultados}}
-% <<echo=FALSE, results=tex>>=
-% library(xtable)
-% a <- xtable(summary(list_model[[1]][[1]]))
-% a
-% @
-% \captionof*{table}{Fuente: Cálculos propios}
-% \end{center}
+df_trades_plot <- map_dfr(list_trades_plot, as.data.frame) %>% 
+  mutate(timestamp = as.POSIXct(timestamp))
+@
+ 
+ 
+\begin{figure}[H]
+\setkeys{Gin}{width = 1\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
+  geom_point(shape = '|', size = 8) +
+  theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle=45)) + 
+  labs(x = NULL, y = NULL) +
+  scale_color_manual(values=c('blue3', "red2", "green4")) +
+  scale_x_datetime(breaks = "6 month",
+                   date_labels = "%b-%y")
+@
+\caption{Trades según tipo de salida}
+\end{figure}
 
-% \begin{center}
-% \captionof{table}[Resultados del contraste Ljung-Box]{\textbf{Resultados del contraste Ljung-Box}}
-% <<echo=FALSE, results=tex>>=
-% lj_petroleo <- Box.test(return_petroleo^2, lag = 10, type = 'Ljung-Box')
-% lj_harinasoja <- Box.test(return_harinasoja^2, lag = 10, type = 'Ljung-Box')
-% lj_oro <- Box.test(return_oro^2, lag = 10, type = 'Ljung-Box')
-% lj_aluminio <- Box.test(return_aluminio^2, lag = 10, type = 'Ljung-Box')
-% lj_cacao <- Box.test(return_cacao^2, lag = 10, type = 'Ljung-Box')
-% boxtable<-data.frame(c(lj_petroleo$statistic,lj_petroleo$p.value),c(lj_harinasoja$statistic,lj_harinasoja$p.value),
-% c(lj_oro$statistic,lj_oro$p.value),c(lj_aluminio$statistic,lj_aluminio$p.value),c(lj_cacao$statistic,lj_cacao$p.value))
-% rownames(boxtable)<-c("Estadístico de Contraste","P-value")
-% colnames(boxtable)<-c("Petróleo","Harina de Soja","Oro","Aluminio","Cacao")
-% xtable(boxtable,digits=4)
-% @
-% \captionof*{table}{Fuente: Cálculos propios}
-% \end{center}
+<<echo=FALSE>>=
+list_return_plot <- list()
+for(i in 1:length(serie)){
+  
+  index <- case_when(i == 1 ~ 'S&P500',
+                     i == 2 ~ 'NASDAQ',
+                     i == 3 ~ 'NIKKEI_225',
+                     i == 4 ~ 'FTSE_100',
+                     i == 5 ~ 'BOVESPA')
+  
+  aux_return_plot <- list_fr[[i]][[2]] %>% select(c('buy_date', 'returns'))
+  
+  aux_firstreturn <- data.frame(timestamp = c(dmy('01/01/2013'), as_date(aux_return_plot$buy_date)),
+                                cap = c(0, cumsum(aux_return_plot$returns)),
+                                index = index) %>% 
+    mutate(timestamp = as.POSIXct(timestamp))
+  
+  list_return_plot %<>% rlist::list.append(aux_firstreturn)
+  
+}
+
+df_return_plot <- map_dfr(list_return_plot, as.data.frame)
+@
+
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 1\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+df_return_plot %>%
+  ggplot(aes(x = timestamp, color = index)) +
+  geom_line(aes(y = cap)) +
+  theme_minimal() +
+  theme(legend.position = "top", axis.text.x = element_text(angle=45)) +
+  labs(x = NULL, y = 'Retorno Acumulado') +
+  scale_y_continuous(breaks = scales::pretty_breaks(), labels = scales::percent) +
+  scale_x_datetime(date_breaks = "4 month", date_labels = "%b-%y")
+@
+\caption{Retorno acumulado para cada índice}
+\end{figure}
+
+
+<<>>=
+list_runtest <- list_fr %>% map(function(x){
+  
+  x[[2]] %>% 
+    select(c('sell_date', 'profits_ind')) %>% 
+    filter(profits_ind %in% c(.tp*1000, -.sl*1000)) %>% 
+    pull(profits_ind) %>%  
+    factor() %>% 
+    tseries::runs.test()
+})
+@
 

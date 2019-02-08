@@ -28,6 +28,7 @@ library(caret)
 library(factoextra)
 library(purrr)
 library(PerformanceAnalytics)
+library(xtable)
 source('scripts/functions.R')
 
 serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
@@ -319,7 +320,7 @@ En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color 
 <<echo=FALSE, results=tex, fig=TRUE>>=
 fviz_pca_var(pca, 
              col.var = "contrib",
-             # select.var = list(cos2 = .7),
+             select.var = list(contrib = 20),
              # alpha.var = "contrib",
              repel = TRUE
 )
@@ -327,3 +328,4 @@ fviz_pca_var(pca,
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
+\subsection{Predicción del modelo}

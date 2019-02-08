@@ -877,7 +877,7 @@ fviz_cos2(pca, choice = "var", axes = 1:2, top = 20)
 
 fviz_pca_var(pca, 
              col.var = "contrib",
-             select.var = list(cos2 = .2),
+             select.var = list(contrib = 20),
              # gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
              # alpha.var = "contrib",
              repel = TRUE

@@ -531,3 +531,81 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add .
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git commit -m 'upda[K'
+[master 8e4f627] upd
+ Committer: Leonardo <leonardo@leonardo.nutrival-domain.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 27 files changed, 1412 insertions(+), 681 deletions(-)
+ rewrite .Rproj.user/8B3E69DA/console06/INDEX001 (87%)
+ rewrite .Rproj.user/shared/notebooks/paths (92%)
+ rewrite body/conclusion/conclusion.Rnw (75%)
+ rewrite main-009.pdf (68%)
+ create mode 100644 main-011.pdf
+ rewrite main.lof (100%)
+ delete mode 100644 main.pdf
+ delete mode 100644 main.synctex.gz
+ rewrite main.toc (100%)
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git push
+Username for 'https://github.com': rodserr
+Password for 'https://rodserr@github.com': 
+Counting objects: 36, done.
+Delta compression using up to 12 threads.
+Compressing objects:   3% (1/31)   Compressing objects:   6% (2/31)   Compressing objects:   9% (3/31)   Compressing objects:  12% (4/31)   Compressing objects:  16% (5/31)   Compressing objects:  19% (6/31)   Compressing objects:  22% (7/31)   Compressing objects:  25% (8/31)   Compressing objects:  29% (9/31)   Compressing objects:  32% (10/31)   Compressing objects:  35% (11/31)   Compressing objects:  38% (12/31)   Compressing objects:  41% (13/31)   Compressing objects:  45% (14/31)   Compressing objects:  48% (15/31)   Compressing objects:  51% (16/31)   Compressing objects:  54% (17/31)   Compressing objects:  58% (18/31)   Compressing objects:  61% (19/31)   Compressing objects:  64% (20/31)   Compressing objects:  67% (21/31)   Compressing objects:  70% (22/31)   Compressing objects:  74% (23/31)   Compressing objects:  77% (24/31)   Compressing objects:  80% (25/31)   Compressing objects:  83% (26/31)   Compressing objects:  87% (27/31)   Compressing objects:  90% (28/31)   Compressing objects:  93% (29/31)   Compressing objects:  96% (30/31)   Compressing objects: 100% (31/31)   Compressing objects: 100% (31/31), done.
+Writing objects:   2% (1/36)   Writing objects:   5% (2/36)   Writing objects:   8% (3/36)   Writing objects:  11% (4/36)   Writing objects:  13% (5/36)   Writing objects:  16% (6/36)   Writing objects:  19% (7/36)   Writing objects:  22% (8/36)   Writing objects:  25% (9/36)   Writing objects:  27% (10/36)   Writing objects:  30% (11/36)   Writing objects:  33% (12/36)   Writing objects:  36% (13/36)   Writing objects:  38% (14/36)   Writing objects:  41% (15/36)   Writing objects:  44% (16/36)   Writing objects:  47% (17/36)   Writing objects:  50% (18/36)   Writing objects:  55% (20/36)   Writing objects:  58% (21/36)   Writing objects:  61% (22/36)   Writing objects:  63% (23/36)   Writing objects:  66% (24/36)   Writing objects:  69% (25/36)   Writing objects:  72% (26/36)   Writing objects:  77% (28/36)   Writing objects:  80% (29/36)   Writing objects:  83% (30/36)   Writing objects:  86% (31/36)   Writing objects:  88% (32/36)   Writing objects:  91% (33/36)   Writing objects:  94% (34/36)   Writing objects:  97% (35/36)   Writing objects: 100% (36/36)   Writing objects: 100% (36/36), 31.57 KiB | 6.31 MiB/s, done.
+Total 36 (delta 21), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/21)   [Kremote: Resolving deltas:   4% (1/21)   [Kremote: Resolving deltas:   9% (2/21)   [Kremote: Resolving deltas:  14% (3/21)   [Kremote: Resolving deltas:  19% (4/21)   [Kremote: Resolving deltas:  23% (5/21)   [Kremote: Resolving deltas:  28% (6/21)   [Kremote: Resolving deltas:  33% (7/21)   [Kremote: Resolving deltas:  42% (9/21)   [Kremote: Resolving deltas:  47% (10/21)   [Kremote: Resolving deltas:  52% (11/21)   [Kremote: Resolving deltas:  57% (12/21)   [Kremote: Resolving deltas:  61% (13/21)   [Kremote: Resolving deltas:  66% (14/21)   [Kremote: Resolving deltas:  71% (15/21)   [Kremote: Resolving deltas:  76% (16/21)   [Kremote: Resolving deltas:  80% (17/21)   [Kremote: Resolving deltas:  85% (18/21)   [Kremote: Resolving deltas:  90% (19/21)   [Kremote: Resolving deltas:  95% (20/21)   [Kremote: Resolving deltas: 100% (21/21)   [Kremote: Resolving deltas: 100% (21/21), completed with 19 local objects.[K
+To https://github.com/rodserr/trading-ML.git
+   242e3bc..8e4f627  master -> master
+[K]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading--ML[00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/B83E15AF[m
+	[31mmodified:   .Rproj.user/shared/notebooks/paths[m
+	[31mmodified:   body/chapter3/chapter3.Rnw[m
+	[31mmodified:   body/chapter4/chapter4.Rnw[m
+	[31mmodified:   main-002.pdf[m
+	[31mmodified:   main-003.pdf[m
+	[31mmodified:   main-004.pdf[m
+	[31mmodified:   main-006.pdf[m
+	[31mmodified:   main-008.pdf[m
+	[31mmodified:   main-009.pdf[m
+	[31mmodified:   main-010.pdf[m
+	[31mmodified:   main-011.pdf[m
+	[31mmodified:   main-concordance.tex[m
+	[31mmodified:   main.Rnw[m
+	[31mmodified:   main.lof[m
+	[31mmodified:   main.log[m
+	[31mmodified:   main.lot[m
+	[31mmodified:   main.tex[m
+	[31mmodified:   main.toc[m
+	[31mmodified:   scripts/functions.R[m
+	[31mmodified:   scripts/tesis_V3.R[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31mmain-013.pdf[m
+	[31mmain.pdf[m
+	[31mmain.synctex.gz[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/traading-ML[00m$ git add .
