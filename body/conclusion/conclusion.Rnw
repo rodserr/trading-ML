@@ -4,5 +4,16 @@
 \chapter*{Conclusiones y Recomendaciones}
 \addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
 
+En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de de trading automatizado. En ningún momento se busca medir la posible ganancia en base a la simulación, sino, demostrar que es posible obtener rendimientos con una estrategia basada en indicadores técnicos utilizados como variables predictoras en un modelo de aprendizaje automático. En los resultados no se contemplan las comisiones acarreadas por la operación de los activo. Se asume también que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez.
+
+Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. 
+
+Este modelo puede ser mejorado de muchas maneras, incluyendo por ejemplo la calibración de los mejores parámetros para el activo a operar, u optimizar los períodos de entrenamiento y prueba a menos de un año. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como árboles de decisíon o SVM mejoren la predicción. 
+
+El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa de obtener protección sería invertir el modelo para predecir ahora una disminución del preciol, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
+
+Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las confifuraciones de los mismos buscando mejorar la predicción del modelo
+
+De cualquier manera esta investigación busca ser un punto de partida para futuras investigaciones.
 
 

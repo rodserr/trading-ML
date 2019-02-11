@@ -142,6 +142,7 @@ xtable(df_fr, align = rep('c',6))
 @
 \end{center}
  
+En la figura -- se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por limite de tiempo.
  
 <<echo=FALSE>>=
 list_trades_plot <- list()
@@ -168,8 +169,7 @@ for(i in 1:length(serie)){
 df_trades_plot <- map_dfr(list_trades_plot, as.data.frame) %>% 
   mutate(timestamp = as.POSIXct(timestamp))
 @
- 
- 
+
 \begin{figure}[H]
 \setkeys{Gin}{width = 1\textwidth}
 \centering
@@ -183,8 +183,10 @@ df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
   scale_x_datetime(breaks = "6 month",
                    date_labels = "%b-%y")
 @
-\caption{Trades según tipo de salida}
+\caption{Clasificación de la simulación}
 \end{figure}
+
+Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años practicamente sin operaciones.
 
 <<echo=FALSE>>=
 list_return_plot <- list()
