@@ -608,4 +608,65 @@ Untracked files:
 	[31mmain.synctex.gz[m
 
 no changes added to commit (use "git add" and/or "git commit -a")
-]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/traading-ML[00m$ git add .
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/traading-ML[00m$ git add .Saved working directory and index state WIP on master: c930d06 update
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git[K[K[Kgit p ull
+Username for 'https://github.com': rodserr
+Password for 'https://rodserr@github.com': 
+Updating c930d06..8e962bb
+Fast-forward
+ body/chapter4/chapter4.Rnw     |  8 [32m+++++[m[31m---[m
+ body/conclusion/conclusion.Rnw | 11 [32m+++++++++++[m
+ 2 files changed, 16 insertions(+), 3 deletions(-)
+[K]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML [00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/B83E15AF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/sources/prop/INDEX[m
+	[31mmodified:   .Rproj.user/shared/notebooks/paths[m
+	[31mmodified:   body/bibliografia/bibliografia.Rnw[m
+	[31mmodified:   body/chapter2/chapter2.Rnw[m
+	[31mmodified:   body/chapter3/chapter3.Rnw[m
+	[31mmodified:   body/chapter4/chapter4.Rnw[m
+	[31mmodified:   body/conclusion/conclusion.Rnw[m
+	[31mmodified:   main-002.pdf[m
+	[31mmodified:   main-003.pdf[m
+	[31mmodified:   main-004.pdf[m
+	[31mmodified:   main-006.pdf[m
+	[31mmodified:   main-008.pdf[m
+	[31mmodified:   main-009.pdf[m
+	[31mmodified:   main-010.pdf[m
+	[31mmodified:   main-011.pdf[m
+	[31mmodified:   main-013.pdf[m
+	[31mmodified:   main-concordance.tex[m
+	[31mmodified:   main.Rnw[m
+	[31mmodified:   main.lof[m
+	[31mmodified:   main.log[m
+	[31mmodified:   main.lot[m
+	[31mmodified:   main.pdf[m
+	[31mmodified:   main.synctex.gz[m
+	[31mmodified:   main.tex[m
+	[31mmodified:   main.toc[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31mmain-018.pdf[m
+	[31mmain-020.pdf[m
+	[31mmain-022.pdf[m
+	[31mmain-024.pdf[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/tradinng-ML[00m$ git add.
+git: 'add.' is not a git command. See 'git --help'.
+
+The most similar command is
+	add
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/tradinng-ML[00m$ git add .

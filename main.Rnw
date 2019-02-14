@@ -2,8 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{graphicx}
-\usepackage{subcaption, siunitx, booktabs}
+\usepackage{siunitx, booktabs}
 \usepackage{caption}
+\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
 
 % \usepackage[spanish]{babel}
 % \input{body/preamble/preamble.Rnw}
@@ -74,9 +76,9 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 
 
 \SweaveInput{body/introduccion/introduccion.Rnw}
-% \SweaveInput{body/chapter1/chapter1.Rnw}
-% \SweaveInput{body/chapter2/chapter2.Rnw}
-% \SweaveInput{body/chapter3/chapter3.Rnw}
+\SweaveInput{body/chapter1/chapter1.Rnw}
+\SweaveInput{body/chapter2/chapter2.Rnw}
+\SweaveInput{body/chapter3/chapter3.Rnw}
 \SweaveInput{body/chapter4/chapter4.Rnw}
 \SweaveInput{body/conclusion/conclusion.Rnw}
 \SweaveInput{body/bibliografia/bibliografia.Rnw}

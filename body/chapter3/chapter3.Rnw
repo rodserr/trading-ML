@@ -8,7 +8,7 @@
 
 La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma, resume en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo. En el caso de la presente investigación, de un día. Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos. 
 
-Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su prestigioso calendario económico y directorio de brokers.
+Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su calendario económico y directorio de brokers.
 
 \subsection{Series de Índices}
 
@@ -119,7 +119,7 @@ list_serie[[1]] %>% createIndicators(full = TRUE) %>%
                    col.pos = 'r', cl.pos = 'r', number.cex = 0.65, number.digits = 1)
 
 @
-\caption{Correlación entre indicadores originales calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
 
 Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger.
@@ -138,7 +138,7 @@ list_serie[[1]] %>% createIndicators(full = FALSE) %>%
     corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust',
                      cl.pos = 'r', tl.col = 'black')
 @
-\caption{Correlación entre indicadores definitivos calculados con los precios del S&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Correlación entre indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
 
 Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
@@ -207,9 +207,7 @@ list_plotex_pred <- list(
     geom_line(colour = 'grey') +
     geom_point(aes(y = buy_close), colour = 'darkgreen', size = 0.4) +
     labs(title = 'tp = 6%   h = 30', x = 'Tiempo', y = ' ')
-
 )
-
 @
 
 \begin{figure}[H]
@@ -218,7 +216,7 @@ list_plotex_pred <- list(
 <<echo=FALSE, results=tex, fig=TRUE>>=
 do.call('grid.arrange', list_plotex_pred)
 @
-\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S&P500, para diferentes valores de tp y h}
+\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
 \end{figure}
 
 \subsection{Reducción de la dimensión con Análisis de Componentes Principales}
@@ -227,7 +225,7 @@ La técnica que utiliza el ánalisis de componentes principales (PCA) para reduc
 
 Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S&P500, en esta sección se referira a ésta como 'matriz de datos'.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'.
 
 <<echo=FALSE>>=
 
@@ -307,12 +305,12 @@ La calidad de representación en el gráfico viene dada por el valor de $Cos^2$,
 El gráfico de correlación ó Factor map muestra la relación entre las variables. Las claves para su interpretación son:
 
 \begin{itemize}
-\item Las variables positivamente correlacionadas se encuentran agrupadas
-\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos, es decir en lados contrarios.
+\item Las variables positivamente correlacionadas se encuentran agrupadas entre sí
+\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos.
 \item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
 \end{itemize}
 
-En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras mas oscuro menor es su contribución a los componentes.
+En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -328,4 +326,3 @@ fviz_pca_var(pca,
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-\subsection{Predicción del modelo}

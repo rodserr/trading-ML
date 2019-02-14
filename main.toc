@@ -1,8 +1,42 @@
 \babel@toc {spanish}{}
-\contentsline {chapter}{\'{I}ndice de figuras}{4}{chapter*.3}
-\contentsline {chapter}{\'{I}ndice de tablas}{5}{chapter*.4}
-\contentsline {chapter}{Introduccion}{6}{chapter*.5}
-\contentsline {chapter}{\numberline {1}An\IeC {\'a}lisis de Resultados}{7}{chapter.1}
-\contentsline {section}{\numberline {1.1}Resultados del modelo}{7}{section.1.1}
-\contentsline {chapter}{Conclusiones y Recomendaciones}{12}{chapter*.15}
-\contentsline {chapter}{Lista de Referencias}{13}{chapter*.16}
+\contentsline {chapter}{\'{I}ndice de figuras}{5}{chapter*.3}
+\contentsline {chapter}{\'{I}ndice de tablas}{6}{chapter*.4}
+\contentsline {chapter}{Introduccion}{7}{chapter*.5}
+\contentsline {chapter}{\numberline {1}El Problema}{8}{chapter.1}
+\contentsline {section}{\numberline {1.1}Justificaci\IeC {\'o}n}{8}{section.1.1}
+\contentsline {section}{\numberline {1.2}Planteamiento del Problema}{8}{section.1.2}
+\contentsline {section}{\numberline {1.3}Objetivo General}{8}{section.1.3}
+\contentsline {section}{\numberline {1.4}Objetivos Espec\IeC {\'\i }ficos}{8}{section.1.4}
+\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}Antecedentes}{9}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Trading de Cryptomonedas basado en Aprendizaje Automatico}{9}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Modelos predictivos para el mercado FOREX}{9}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Dise\IeC {\~n}o e implementaci\IeC {\'o}n de un sistema automatizado para operar en el mercado de divisas usando reglas de asociaci\IeC {\'o}n}{9}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Bases Te\IeC {\'o}ricas}{9}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Hip\IeC {\'o}tesis del Mercado Eficiente}{9}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}An\IeC {\'a}lisis T\IeC {\'e}cnico}{10}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{11}{subsection.2.2.3}
+\contentsline {subsubsection}{M\IeC {\'e}todos Param\IeC {\'e}tricos vs No Param\IeC {\'e}tricos}{11}{subsubsection*.6}
+\contentsline {subsubsection}{Aprendizaje Supervisado vs No Supervisado}{12}{subsubsection*.7}
+\contentsline {subsubsection}{Regresi\IeC {\'o}n vs Clasificasi\IeC {\'o}n}{12}{subsubsection*.8}
+\contentsline {subsubsection}{Compensasi\IeC {\'o}n entre sesgo y varianza}{12}{subsubsection*.9}
+\contentsline {subsection}{\numberline {2.2.4}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{12}{subsection.2.2.4}
+\contentsline {subsubsection}{M\IeC {\'a}xima Verosimilitud}{13}{subsubsection*.10}
+\contentsline {subsection}{\numberline {2.2.5}An\IeC {\'a}lisis de Componentes Principales como m\IeC {\'e}todo de reducci\IeC {\'o}n de variables}{14}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}Matr\IeC {\'\i }z de Confusi\IeC {\'o}n}{15}{subsection.2.2.6}
+\contentsline {section}{\numberline {2.3}Bases Legales}{16}{section.2.3}
+\contentsline {chapter}{\numberline {3}Marco Met\IeC {\'o}dico}{17}{chapter.3}
+\contentsline {section}{\numberline {3.1}An\IeC {\'a}lisis Exploratorio de los datos}{17}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Datos OHLC y Fuente de los datos}{17}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Series de \IeC {\'I}ndices}{17}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Entrenamiento del Modelo}{18}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Variable dependiente}{18}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Indicadores T\IeC {\'e}cnicos como variables predictoras}{19}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Validaci\IeC {\'o}n Cruzada en Series de Tiempo}{21}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}WalkForward Backtesting}{22}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Reducci\IeC {\'o}n de la dimensi\IeC {\'o}n con An\IeC {\'a}lisis de Componentes Principales}{23}{subsection.3.2.5}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis de Resultados}{29}{chapter.4}
+\contentsline {section}{\numberline {4.1}Coeficientes del modelo}{29}{section.4.1}
+\contentsline {section}{\numberline {4.2}Resultados de la simulaci\IeC {\'o}n}{31}{section.4.2}
+\contentsline {chapter}{Conclusiones y Recomendaciones}{35}{chapter*.31}
+\contentsline {chapter}{Lista de Referencias}{36}{chapter*.32}

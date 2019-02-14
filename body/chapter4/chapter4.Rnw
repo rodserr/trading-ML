@@ -5,37 +5,37 @@
 
 En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 
-\section{Resultados del modelo}
+\section{Coeficientes del modelo}
 
 <<echo=FALSE>>=
-library(tidyverse)
-library(magrittr)
-library(lubridate)
-library(gridExtra)
-library(TTR)
-library(caret)
-library(factoextra)
-library(purrr)
-library(PerformanceAnalytics)
-library(xtable)
-source('scripts/functions.R')
-
-serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
-list_serie <- list()
-for(s in serie){
-  .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
-    read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-    select(-one_of(c('Vol.', '% var.'))) %>%
-    mutate(Fecha = dmy(Fecha)) %>%
-    setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>%
-    arrange(timestamp)
-
-  list_serie %<>% rlist::list.append(.aux_serie)
-}
-
-.tp <- 0.02
-.sl <- 0.025
-.h <- 20
+# library(tidyverse)
+# library(magrittr)
+# library(lubridate)
+# library(gridExtra)
+# library(TTR)
+# library(caret)
+# library(factoextra)
+# library(purrr)
+# library(PerformanceAnalytics)
+# library(xtable)
+# source('scripts/functions.R')
+# 
+# serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
+# list_serie <- list()
+# for(s in serie){
+#   .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
+#     read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
+#     select(-one_of(c('Vol.', '% var.'))) %>%
+#     mutate(Fecha = dmy(Fecha)) %>%
+#     setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>%
+#     arrange(timestamp)
+# 
+#   list_serie %<>% rlist::list.append(.aux_serie)
+# }
+# 
+# .tp <- 0.02
+# .sl <- 0.025
+# .h <- 20
 .cut <- 0.5
 
 list_cm <- list()
@@ -68,36 +68,51 @@ for(i in 1:length(serie)){
 }
 @
 
-En la figura -- se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
-
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
+\begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[1]]))
 @
+\end{center}
+
+\newpage
+\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[2]]))
 @
+\end{center}
+\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[3]]))
 @
+\end{center}
+\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[4]]))
 @
+\end{center}
+\newpage
+\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[5]]))
 @
-\newpage
+\end{center}
+\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[6]]))
 @
+\end{center}
 
 Se observa que para todos los períodos el ACP arroja componentes que recogen el 85\% de la variación. También se aprecia que a medida que aumentamos los años de entrenamiento el número de p-valores menores que 0.05 aumentan, insinuando que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+
+\section{Resultados de la simulación}
 
 <<echo=FALSE>>=
 df_fr <- data.frame(nrow = 6)
@@ -131,9 +146,11 @@ df_fr[,1] <- NULL
 df_fr %<>% setNames(serie) %>% 
   sapply(sprintf, fmt = c("%.0f", "%.0f", "%.0f", "%1.2f%%", "%1.2f%%", "%1.2f%%")) 
 
- rownames(df_fr) <- c('True Buys', 'False Buys', 'N° trades', 'Accuracy', 
+ rownames(df_fr) <- c('False Buys', 'True Buys', 'N° trades', 'Accuracy', 
                       'Accumulative Return', 'Max Drawdown')
 @
+
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los indices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
 
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
@@ -141,8 +158,6 @@ df_fr %<>% setNames(serie) %>%
 xtable(df_fr, align = rep('c',6))
 @
 \end{center}
- 
-En la figura -- se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por limite de tiempo.
  
 <<echo=FALSE>>=
 list_trades_plot <- list()
@@ -170,8 +185,10 @@ df_trades_plot <- map_dfr(list_trades_plot, as.data.frame) %>%
   mutate(timestamp = as.POSIXct(timestamp))
 @
 
+En la figura 4.1 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
+
 \begin{figure}[H]
-\setkeys{Gin}{width = 1\textwidth}
+\setkeys{Gin}{height = .7\linewidth}
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
@@ -212,7 +229,6 @@ for(i in 1:length(serie)){
 df_return_plot <- map_dfr(list_return_plot, as.data.frame)
 @
 
-
 \begin{figure}[H]
 \setkeys{Gin}{width = 1\textwidth}
 \centering
@@ -229,8 +245,16 @@ df_return_plot %>%
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
+Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 1000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
 
-<<>>=
+La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
+
+\begin{itemize}
+\item \textbf{H0}: La secuencia es producida de manera aleatoria.
+\item \textbf{Hi}: La secuencia no es producida de manera aleatoria.
+\end{itemize}
+
+<<echo=FALSE>>=
 list_runtest <- list_fr %>% map(function(x){
   
   x[[2]] %>% 
@@ -240,5 +264,16 @@ list_runtest <- list_fr %>% map(function(x){
     factor() %>% 
     tseries::runs.test()
 })
+  table_runstest <- list_runtest %>% map_dfr(function(x)x[c('statistic', 'p.value')])
+  row.names(table_runstest) <- serie
 @
+ 
+\begin{center}
+\captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
+<<echo=FALSE, results=tex>>=
+xtable(table_runstest)
+@
+\end{center}
 
+Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechzar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+  

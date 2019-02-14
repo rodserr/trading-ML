@@ -6,6 +6,22 @@
 
 \begin{itemize}
 
-\item Alexander, N. Y Zafer, D. (2016). \textit{Gestión del riesgo con el uso de commodities energéticos utilizando Valor en riesgo y Teoría del Valor Extremo}. Suecia, Universidad de Lund.
+\item Lu Ning (2016). \textit{A machine Learning Approach to Automated Trading}. USA, Coston College Computer Science.
+
+\item Huertas López Alejandro (2015). \textit{Modelos Predictivos para el mercado FOREX}. España, Universidad de Murcia.
+
+\item Shagilla Kadida Ramadhani (2006). \textit{Ab Analysis of Technical Trading Strategies}. Inglaterra, Leeds University Business School.
+
+\item Bach William y Nielsen Kasper (2018). \textit{On Machine Learning Based Cryptocurrency Trading}. Dinamarca, Aalborg University.
+
+\item Araneda Hugo (2015). \textit{Diseño e Implementación de un Sistema Automatizado Para Operar en el Mercado de Divisas Usando Reglas de Asociación}. Chile, Universidad de Chile.
+
+\item Fernández Cristián (2008). \textit{Modelos Ocultos de Markov Aplicados al Reconocimiento de PAtrones del Análisis Técnico Búrsatil}. Argentina, Universidad Nacional de Córdoba.
+
+\item James Gareth, Witten Daniela, Hastie Trevor y Tibshirani Robert (2013). \textit{An Introduction to Statistical Learning}. Springer.
+
+\item Abhijit Ghatak (2017). \textit{Machine Learning with R}. Springer.
+
+\item Murphy, J.J. (1999). \textit{Análisis Técnico de los Mercados Financieros}. New York Institute of Finance. New York: Gestión 2000.
 
 \end{itemize}
