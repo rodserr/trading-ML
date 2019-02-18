@@ -108,22 +108,42 @@ Las economías de países latinoamericanos son reconocidas históricamente por d
 
 \section{Justificación}
 
+A principios del siglo XX los mercados bursátiles eran operados manualmente, los corredores y demás participantes realizaban una serie de labores sin asistencia de sistemas informáticos, que evidentemente no existían para la época. El 8 de febrero de 1971 comienza operaciones la bolsa de valores NASDAQ -National Association of Securities Dealers Automated Quotation-, la cual marca un precedente en la industria. NASDAQ fue el primer mercado bursátil en el mundo en adoptar el uso de sistemas electrónicos para proveer cotizaciones de las acciones. Más tarde añadirían, también, la capacidad de manejar operaciones electrónicamente, ejecutando órdenes de compras y ventas sin necesidad de encontrarse físicamente en el lugar destinado para las transacciones.
+
+Este precedente aunado con el rápido crecimiento de la industria tecnológica y la creación del internet, facilitan al mercado bursátil digitalizarse rápidamente. Esto permite a los competidores y la industria en general obtener un sistema más eficiente en términos de operatividad, además de globalizar la actividad financiera y propiciar la participación de más inversores en los mercados. El globalizar la información incrementa la competitividad en el sector e incentiva estudios de privados e independientes para maximizar retornos, de donde surgen los análisis técnicos y fundamentales.
+
+Ahora bien la iniciación al mundo bursátil trae consigo grandes riesgos si no se opera con conocimiento y planificación financiera. Es por esto que cada año los individuos pierden dinero al querer incursionar en el mundo del trading sin la preparación adecuada, lo que por otro lado, le da oportunidad a participantes ya establecidos y con conocimiento de aprovechar esta dinámica. El trading requiere de una planificación exhaustiva en cuanto al manejo de riesgo y aplicación de estrategias, es así como los algoritmos automáticos suponen un manejo ideal de los factores, estableciendo reglas sistemáticas para las operaciones.
+
+En los últimos años y con el impulso de computadores cada vez más potentes, ha surgido un nicho dentro del mercado financiero destinado a compañías que operan con algoritmos automatizados, llamadas comúnmente “Quantitave Funds” -Fondos Cuantitativos-. Según un informe realizado por Credit Suisse Group, estos fondos son los de mayor crecimientos en los últimos años. Los fondos cuantitativos y de inversión pasiva controlan actualmente el 60\% de los activos del mercado, incluso, tan solo el 10\% del volumen de transacciones proviene de inversores discrecionales, según JPMorgan Chase \& Co. en cita de Bloomberg. Es así como compañías como Goldman Sachs han reemplazado gran cantidad de operadores por algoritmos, como dio a conocer en el 2017. La mayoría de las grandes instituciones y proveedores del sector ya cuentan con servicios que cumplen con los requerimientos para la aplicación de los sistemas automatizados, como plataformas con puertos API y datas históricas destinadas a testear algoritmos de trading. En palabras de Frank Thermitus (2018), presidente de la Asociación de Trading Algorítmico de Argentina “No tenemos datos oficiales en Argentina, pero sabemos que la aparición de soporte para este tipo de trading está llamando a un crecimiento de la participación de agentes automatizados”.
+
+La mayor ventaja del trading basado en algoritmos es que realiza la labor de inversión de manera sistemática, removiendo el factor emocional de las personas. Apegarse a un estrategia de inverión es vital para lograr resultados consistentes en el trading. Sin embargo, es difícil encontrar estrategias que generen rendimientos positivos todo el tiempo, y aún así los factores emocionales de las personas pueden destruir cualquier plan al enfrentarse a momentos transitorios de pérdida continua, llamados 'drawdowns' en el mundo financiero. El necesitar un plan consistente y sistemático, promueve la utilización de sistemas automatizados dado que elimina cualquier aspecto emocional durante el proceso de la inversión, manteniendo la disciplina durante momentos de alta volatilidad.
+
+La otra gran ventaja de los sistemas automatizados es que permite la posibilidad de realizar pruebas del algoritmo en data histórica para entender el comportamiento de la estrategia, este proceso es conocido como 'backtesting'. De esta manera el inversor tiene una idea de como se comportará el sistema en situaciones similares a las testeadas en el backtesting. El backtesting también permite optimizar los parámetros de la estrategia en busca de máximizar los retornos con el menor riesgo, sin embargo, se debe tener cuidado en no sobreoptimizar el sistema. 
 
 \section{Planteamiento del Problema}
 
+Con este panorama es evidente la utilidad que supone la utilización de métodos de aprendizaje estadístico para el desarrollo de algoritmos automáticos. El aprendizaje estadístico, referido en la literatura anglosajona como “Machine Learning” es definido por uno de sus principales exponentes -el profesor de la universidad de Carnegie Mellon- Tom Mitchell como “el campo de estudio que da a las computadoras la habilidad de aprender sin ser explícitamente programada”. En este sentido, expone que “Un algoritmo aprende de la experiencia E con respecto a una tarea T cuyo rendimiento es medido por el indicador P, si su desempeño en T como medida de P mejora con la experiencia E”. Esta referencia a que la “computadora aprende”, no son más que técnicas estadísticas aplicadas a distintos problemas, en donde se busca mejorar el desempeño del modelo calibrando una medida de error.
+
+El desarrollo tecnológico, especialmente el potenciamiento de los procesadores computacionales y el surgimiento del software libre, han provocado un crecimiento en el número de profesionales que aplican el “Machine Learning”. Esto ha ocasionado que innumerables problemas sean abordados con estas técnicas, desde transformar historiales de compras de consumidores en enfoques publicitario, ó intentar imitar el razonamiento humano en una tarea en específico, como jugar ajedrez.
+
+En la presente investigación se busca utilizar las técnicas de aprendizaje estadístico para realizar predicciones sobre el comportamiento de un activo financiero en el corto  plazo, intentando capitalizar este conocimiento. Ahora bien, existe un debate sobre si las inversiones activas, son realmente efectivas. La principal razón de la polémica, es debido a la complejidad que involucra realizar una predicción con tan poco margen de error y durante un período de tiempo sostenido. Aunado de las múltiples fuentes de riesgo concernientes a los portafolios de inversión, sería impensable tratar de definir en una primera investigación una estrategia eficaz para el desarrollo del trading.
+
+Por otro lado el explosivo crecimiento en los últimos años de los métodos de aprendizaje estadístico ha creado innumerables variantes de los algoritmos, por lo que abarcar varios de estos supondría un trabajo arduo, realizado probablemente por un equipo de trabajo con experiencia, tanto en el mundo financiero como computacional y estadístico. En las investigaciones similares a la presente, se toman algunos métodos y se intenta definir cuáles de ellos arroja mayor precisión. En esta investigación se abordará el aprendizaje supervisado, basado en un modelo lineal generalizado -MLG-, específicamente, una regresión logística. Se intenta contrarrestar la debilidad de asumir linealidad en el modelo, agrupando las variables con una técnica no supervisada como el Análisis de Componentes Principales.
+
+La idea del modelo es predecir los casos en los cuales, el incurrir en una posición en largo provocaría una ganancia, asegurando que la posición se capitalice a un porcentaje t del precio inicial, sin antes haber incurrido en una pérdida de s porciento, en un horizonte de tiempo h. Es decir que en el intervalo de tiempo h debe ocurrir primero la toma de ganancia -take profit- que la pérdida -stop loss-. Para esto se identifica en un período de la data utilizada, todas las observaciones en la que esto ocurre, y se intenta generar un modelo que entienda las condiciones del activo cuando este patrón sucede.
 
 \section{Objetivo General}
 
-Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendizaje automático en diferentes instrumentos financieros
+Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendizaje estadístico
 
 \section{Objetivos Específicos}
 
 \begin{itemize}
 \item Definir los parámetros de la estrategia, así como los indicadores técnicos a utilizar como variables predictoras
 \item Utilizar Análisis de Componentes Principales como técnica de reducción de la dimensión de variables predictoras
-\item Aplicar método de Regresión Logística con las componentes arrojadas por el ACP
+\item Aplicar Regresión Logística con las componentes arrojadas por el ACP
 \item Desarrollar la metodología Walkforward para tomar en cuenta el dinamismo del mercado en la estrategia
-\item Evaluar la predicción del modelo como estrategia en los instrumentos seleccionados
+\item Evaluar la predicción del modelo como estrategia en los índices seleccionados
 \end{itemize}
 
 % !TeX root = ./main.Rnw
@@ -135,9 +155,27 @@ Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendiz
 
 \subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
 
+Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan diversos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Prueban los algoritmos en seis pares basados en Tether: Bitcoin, Etherum, Binance Coin, NEO, Litecoin y Bitcoin Cash.
+
+\subsection{Un enfoque de aprendizaje automático para el comercio automatizado}
+
+Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en serie de precios de activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el activo principal.
+
 \subsection{Modelos predictivos para el mercado FOREX}
 
+Huerta López utiliza dos enfoques para el trading automático en el mercado FOREX: los modelos de series de tiempo y los modelos basados en técnicas de aprendizaje automático. Por un lado aplica modelos ARIMA y métodos de automatización para su implementación basados en criterios de información -BIC y AIC-. Para el enfoque basado en aprendizaje automático implementa diversos algoritmos de KNN y Árboles de desición, optimizando los algoritmos en la distintas horas del día utilizando datos del par EUR-USD. Señala que los modelos de aprendizaje obtienen mejor predicción que los modelos ARIMA, acercandose a un 60\% de precisión.
+
+\subsection{Un Análisis de estrategias de trading técnico}
+
+Kadida Shagilla profundiza sobre las alternativas a la hipótesis del mercado eficiente y como se relacionan el riesgo y los retornos de una estrategia de trading. Simula tres portafolios conformados por una muestra de acciones de tres mercados Norteamericanos y algunos mercados emergentes de Africa. El estudio demuestra como la relación 'book-to-market ratio', la liquidez y los acuerdos institucionales pueden explicar el exceso de ganancia a partir del análisis técnico. 
+
+\subsection{Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del Análisis Técnico Bursátil}
+
+Cristián Fernández introduce un sistema autómatico para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de desición y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios activos que operan en el mercado bursátil argentino.
+
 \subsection{Diseño e implementación de un sistema automatizado para operar en el mercado de divisas usando reglas de asociación}
+
+
 
 \section{Bases Teóricas}
 
@@ -148,7 +186,7 @@ La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los año
 
 Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competirdores intentarán ajustar sus posiciones lo más rapido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
 
-$Eficiencia débil$, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. $Eficiencia media$, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. $Eficiencia fuerte$, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
+Eficiencia débil, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. Eficiencia media, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. Eficiencia fuerte, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales a los de los mercados.
 
 Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones cesgada de los individuos, formuladas por la manera en como estos responden ante nueva información. Algunas de las hipótesis que explican este razonamieto cesgado son: 
 
@@ -162,7 +200,7 @@ Es evidente la postura que se asume en la presente investigación con respecto a
 
 \subsection{Análisis Técnico}
 
-Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama $Análisis Fundamental$ y el segundo $Análisis Técnico$. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
+Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama Análisis Fundamental y el segundo Análisis Técnico. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
 
 El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro mediante el uso de gráficos. Según J.J.Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico: Los movimientos del mercado lo descuentan  todo, los precios se mueven por tendencias y la historia se repite.
 
@@ -499,12 +537,12 @@ En el presente capítulo se realiza la descripción de los resultados obtenidos 
 \section{Coeficientes del modelo}
 
 
-En la figura -- se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -527,7 +565,7 @@ En la figura -- se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -548,7 +586,7 @@ En la figura -- se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -569,7 +607,7 @@ En la figura -- se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -591,7 +629,7 @@ En la figura -- se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -612,7 +650,7 @@ En la figura -- se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -636,12 +674,12 @@ Se observa que para todos los períodos el ACP arroja componentes que recogen el
 \section{Resultados de la simulación}
 
 
-En la tabla -- se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los indices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los indices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
 
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -659,7 +697,7 @@ False Buys & 21 & 61 & 99 & 53 & 128 \\
 \end{table}\end{center}
  
 
-En la figura -- se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
+En la figura 4.1 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
@@ -691,7 +729,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Tue Feb 12 12:52:58 2019
+% Mon Feb 18 17:56:16 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -707,7 +745,7 @@ S\&P\_500 & -0.83 & 0.41 \\
 \end{tabular}
 \end{table}\end{center}
 
-Frente a p-values mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechzar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechzar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
   
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
@@ -715,17 +753,13 @@ Frente a p-values mayores a 0.05, y con un nivel de significación del 5\% no ex
 \chapter*{Conclusiones y Recomendaciones}
 \addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
 
-En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de de trading automatizado. En ningún momento se busca medir la posible ganancia en base a la simulación, sino, demostrar que es posible obtener rendimientos con una estrategia basada en indicadores técnicos utilizados como variables predictoras en un modelo de aprendizaje automático. En los resultados no se contemplan las comisiones acarreadas por la operación de los activo. Se asume también que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez.
+En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. En ningún momento se busca medir la posible ganancia en base a la simulación, sino, demostrar que es posible obtener rendimientos con una estrategia basada en indicadores técnicos utilizados como variables predictoras en un modelo de aprendizaje automático. En los resultados no se contemplan las comisiones acarreadas por la operación de los activo. Se asume también que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez.
 
-Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia.
+Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros tp, sl y h para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como árboles de decisíon o SVM mejoren la predicción. 
 
-Este modelo puede ser mejorado de muchas maneras, incluyendo por ejemplo la calibración de los mejores parámetros para el activo a operar, u optimizar los períodos de entrenamiento y prueba a menos de un año. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como árboles de decisíon o SVM mejoren la predicción. 
+El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa para obtener protección podría ser invertir el modelo, es decir predecir una disminución del precio, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
 
-El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa de obtener protección sería invertir el modelo para predecir ahora una disminución del preciol, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
-
-Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las confifuraciones de los mismos buscando mejorar la predicción del modelo
-
-De cualquier manera esta investigación busca ser un punto de partida para futuras investigaciones.
+Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las confifuraciones de los mismos buscando mejorar la predicción del modelo. De cualquier manera esta investigación busca ser un punto de partida para futuras investigaciones.
 
 
 % !TeX root = ./main.Rnw
@@ -736,7 +770,23 @@ De cualquier manera esta investigación busca ser un punto de partida para futur
 
 \begin{itemize}
 
-\item Alexander, N. Y Zafer, D. (2016). \textit{Gestión del riesgo con el uso de commodities energéticos utilizando Valor en riesgo y Teoría del Valor Extremo}. Suecia, Universidad de Lund.
+\item Lu Ning (2016). \textit{A machine Learning Approach to Automated Trading}. USA, Coston College Computer Science.
+
+\item Huertas López Alejandro (2015). \textit{Modelos Predictivos para el mercado FOREX}. España, Universidad de Murcia.
+
+\item Shagilla Kadida Ramadhani (2006). \textit{Ab Analysis of Technical Trading Strategies}. Inglaterra, Leeds University Business School.
+
+\item Bach William y Nielsen Kasper (2018). \textit{On Machine Learning Based Cryptocurrency Trading}. Dinamarca, Aalborg University.
+
+\item Araneda Hugo (2015). \textit{Diseño e Implementación de un Sistema Automatizado Para Operar en el Mercado de Divisas Usando Reglas de Asociación}. Chile, Universidad de Chile.
+
+\item Fernández Cristián (2008). \textit{Modelos Ocultos de Markov Aplicados al Reconocimiento de PAtrones del Análisis Técnico Búrsatil}. Argentina, Universidad Nacional de Córdoba.
+
+\item James Gareth, Witten Daniela, Hastie Trevor y Tibshirani Robert (2013). \textit{An Introduction to Statistical Learning}. Springer.
+
+\item Abhijit Ghatak (2017). \textit{Machine Learning with R}. Springer.
+
+\item Murphy, J.J. (1999). \textit{Análisis Técnico de los Mercados Financieros}. New York Institute of Finance. New York: Gestión 2000.
 
 \end{itemize}
 
