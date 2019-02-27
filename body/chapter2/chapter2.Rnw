@@ -7,11 +7,11 @@
 
 \subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
 
-Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan diversos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Prueban los algoritmos en seis pares basados en Tether: Bitcoin, Etherum, Binance Coin, NEO, Litecoin y Bitcoin Cash.
+Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan diversos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Utilizan el mismo enfoque en cuanto a buscar predecir la subida del precio dado un objetivo sin salir por 'Stop Loss' en un determinado período de tiempo.
 
 \subsection{Un enfoque de aprendizaje automático para el comercio automatizado}
 
-Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en serie de precios de activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el activo principal.
+Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el activo principal.
 
 \subsection{Modelos predictivos para el mercado FOREX}
 
@@ -24,9 +24,6 @@ Kadida Shagilla profundiza sobre las alternativas a la hipótesis del mercado ef
 \subsection{Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del Análisis Técnico Bursátil}
 
 Cristián Fernández introduce un sistema autómatico para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de desición y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios activos que operan en el mercado bursátil argentino.
-
-\subsection{Diseño e implementación de un sistema automatizado para operar en el mercado de divisas usando reglas de asociación}
-
 
 
 \section{Bases Teóricas}
@@ -58,7 +55,40 @@ El análisis técnico es aquel que busca patrones y tendencias de comportamiento
 
 Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es mas que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
 
-El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana, la cual según murphy se repite. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
+El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
+
+A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en t calculada con p observaciones enteriores con respecto a la serie de precio X:
+
+\begin{itemize}
+\item Retornos con respecto al precio de Cierre.
+
+$$ R_{t} = \frac{Pcierre_{t}}{Pcierre_{t-1}-1}$$
+
+\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+
+$$ RSI_{t} = 100 - \frac{100}{1 + RS_{t}} \qquad 
+donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{Pérdida\ Promedio\ en\ n\ observaciones}$$
+
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+
+$$ MACD_{t} =  EMA_{(t, 12)}(Pcierre) - EMA_{(t, 26)}(Pcierre) \qquad
+Signal\ Line_{t} = EMA_{(t, 9)}(MACD_{t}) $$
+
+\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
+
+$$ ATR_{t} =  EMA_{(t, 14)}(TR_{t}) \qquad
+TR_{t} = Max\ (Pmax - Pmin, |Pmax - Pc_{t-1}|, |Pmin - Pc_{t-1}|)$$
+
+\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+
+$$ ADX_{t} =  100\ EMA_{(t, 14)}(|+DI - -DI|)$$
+
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+
+$$ Banda Superior_{t} = EMA{(t, 14)}(Pcierre) + 2,5\sigma \qquad 
+Banda Inferior_{t} = EMA{(t, 14)}(Pcierre) - 2,5\sigma $$
+
+\end{itemize}
 
 \subsection{Introducción al aprendizaje automático}
 
@@ -133,7 +163,7 @@ $$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i
 
 Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
 
-\subsection{Análisis de Componentes Principales como método de reducción de variables}
+\subsection{Análisis de Componentes Principales}
 
 Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los metodos no lineales. Exiten técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
 

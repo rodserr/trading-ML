@@ -2,7 +2,7 @@
 %\SweaveUTF8
 
 \chapter{Marco Metódico}
-\section{Análisis Exploratorio de los datos}
+\section{Estrategia de Análisis}
 
 \subsection{Datos OHLC y Fuente de los datos}
 
@@ -10,13 +10,74 @@ La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus sigl
 
 Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su calendario económico y directorio de brokers.
 
-\subsection{Series de Índices}
+\subsection{Series de Índices Bursátiles}
 
 El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
 En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumeto en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
 
-% hablar de cada indice
+\subsection{Variable Dependiente}
+
+Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
+
+$$
+P_{X}(x) = 
+\begin{array}{ll} 
+\ \ \ \ p \ ; \qquad x = c
+\\
+\ 1-p \ ; \qquad x = -d
+\end{array}
+$$
+
+Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
+
+En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
+
+\subsection{Variables Predictoras}
+
+Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
+
+No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
+
+Lo que busca la investigación es utilizar la relación entre los indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores. Algunos de los indicadores inicialmente escogidos para el modelo fueron excluidos debido a la alta correlación que presentaban. A continuación se presentan los indicadores utilizados:
+
+\begin{itemize}
+\item Retornos con respecto al precio de Cierre.
+\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un EMA de 9 períodos. 
+\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
+\end{itemize}
+
+Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el número de variables dejando solo las más representativas de cada indicador.
+
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+
+Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
+
+\subsection{Validación Cruzada en Series de Tiempo}
+
+La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+
+\subsection{WalkForward Backtesting}
+
+Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamísmo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
+
+Para contrarestar esta situación se opto por el método de $backtesting Walkforward$, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamísmo del mercado permitiendole al modelo -y por ende a la estrategia- utilizar el período mas reciente con respecto al cual será implementado. En la presente figura se ilustra la metodología implementada.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=2.5in]{images/walkforward_plot}
+\end{center}
+\caption{Metodología WalkForward}
+\end{figure}
+
+Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
+
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
 
 <<echo=FALSE>>=
 library(tidyverse)
@@ -43,138 +104,6 @@ for(s in serie){
 
   list_serie %<>% rlist::list.append(.aux_serie)
 }
-
-plot_serie <- list()
-for(i in 1:5){
-  .aux_plot <- list_serie[[i]] %>%
-    ggplot(aes(x = timestamp, y = close)) +
-    geom_line() +
-    labs(x = 'Fecha', y = 'Precio de Cierre', title = serie[i]) +
-    theme_minimal(base_size = 8) +
-    scale_y_continuous(labels = scales::number)
-
-  plot_serie %<>% rlist::list.append(.aux_plot)
-}
-@
-
-\begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-do.call('grid.arrange', plot_serie)
-@
-\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
-\end{figure}
-
-\section{Entrenamiento del Modelo}
-
-\subsection{Variable dependiente}
-
-Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
-
-$$
-P_{X}(x) = 
-\begin{array}{ll} 
-\ \ \ \ p \ ; \qquad x = c
-\\
-\ 1-p \ ; \qquad x = -d
-\end{array}
-$$
-
-Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
-
-En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
-
-\subsection{Indicadores Técnicos como variables predictoras}
-
-Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
-
-No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
-
-Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
-
-A continuación se presentan los indicadores utilizados:
-
-\begin{itemize}
-\item Retornos con respecto al precio de Cierre.
-\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
-\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
-\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
-\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
-\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
-\end{itemize}
-
-Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el numero de variables dejando solo las más representativas de cada indicador.
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.6\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-list_serie[[1]] %>% createIndicators(full = TRUE) %>% 
-    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
-    select(-one_of('timestamp')) %>%  
-    na.omit() %>%
-    cor() %>% 
-    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust', tl.col = 'black',
-                   col.pos = 'r', cl.pos = 'r', number.cex = 0.65, number.digits = 1)
-
-@
-\caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
-\end{figure}
-
-Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger.
-
-En la figura -- se muestra las correlaciones de las variables definitivas
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.6\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-list_serie[[1]] %>% createIndicators(full = FALSE) %>% 
-    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
-    select(-one_of('timestamp', 'open', 'high', 'low')) %>%  
-    na.omit() %>%
-    cor() %>% 
-    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust',
-                     cl.pos = 'r', tl.col = 'black')
-@
-\caption{Correlación entre indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
-\end{figure}
-
-Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
-
-Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
-
-A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores.
-
-
-
-
-
-\subsection{Validación Cruzada en Series de Tiempo}
-
-La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
-
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
-
-\subsection{WalkForward Backtesting}
-
-Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamísmo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
-
-Para contrarestar esta situación se opto por el método de $backtesting Walkforward$, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamísmo del mercado permitiendole al modelo -y por ende a la estrategia- utilizar el período mas reciente con respecto al cual será implementado. En la presente figura se ilustra la metodología implementada.
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=2.5in]{images/walkforward_plot}
-\end{center}
-\caption{Metodología WalkForward}
-\end{figure}
-
-Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
-
-La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
-
-<<echo=FALSE>>=
 
 list_plotex_pred <- list(
   
@@ -219,110 +148,13 @@ do.call('grid.arrange', list_plotex_pred)
 \caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
 \end{figure}
 
-\subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
-La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el numero de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
+\subsection{Reducción de la dimensión con ACP}
+
+La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
 
 Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'.
-
-<<echo=FALSE>>=
-
-.tp = 0.02
-.sl = 0.025
-.h = 20
-
-predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
-  mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
-  select(-one_of('class')) %>% 
-  createIndicators() %>% 
-  filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
-  getPredictors()
-
-pca <- predictors_var %>% prcomp(scale = FALSE)
-
-@
-
-Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
-
 Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
 
-La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
-
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-list_pca_eigen <- list(
-  fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue', 
-           main = ''),
-  fviz_eig(pca, addlabels = TRUE, choice = 'variance', 
-           main = '')
-
-)
-
-do.call('grid.arrange', list_pca_eigen)
-@
-\caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
-\end{figure}
-
-La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-list_contrib_pca <- list(
-  # Contributions of variables to PC1
-  fviz_contrib(pca, choice = "var", axes = 1, top = 30),
-  # Contributions of variables to PC2
-  fviz_contrib(pca, choice = "var", axes = 2, top = 30),
-
-  fviz_contrib(pca, choice = "var", axes = 1:2, top = 30)
-)
-
-do.call('grid.arrange', list_contrib_pca)
-@
-\caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
-\end{figure}
-
-La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
-
-La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-  fviz_cos2(pca, choice = "var", axes = 1:2, top = 20)
-@
-\caption{Calidad de representación medida por $Cos^2$ de cada variable en PC1 y PC2}
-\end{figure}
-
-El gráfico de correlación ó Factor map muestra la relación entre las variables. Las claves para su interpretación son:
-
-\begin{itemize}
-\item Las variables positivamente correlacionadas se encuentran agrupadas entre sí
-\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos.
-\item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
-\end{itemize}
-
-En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.8\textwidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-fviz_pca_var(pca, 
-             col.var = "contrib",
-             select.var = list(contrib = 20),
-             # alpha.var = "contrib",
-             repel = TRUE
-)
-@
-\caption{Gráfico de Correlación entre PC1 y PC2}
-\end{figure}
 

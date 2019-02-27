@@ -3,40 +3,346 @@
 
 \chapter{Análisis de Resultados}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
+\section{Análisis Exploratorio de los datos}
+
+\subsection{Análisis de los Índices}
+
+En la figura -- se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que...
+
+<<echo=FALSE>>=
+
+plot_serie <- list()
+for(i in 1:5){
+  .aux_plot <- list_serie[[i]] %>%
+    ggplot(aes(x = timestamp, y = close)) +
+    geom_line() +
+    labs(x = 'Fecha', y = 'Precio de Cierre', title = serie[i]) +
+    theme_minimal(base_size = 8) +
+    scale_y_continuous(labels = scales::number)
+
+  plot_serie %<>% rlist::list.append(.aux_plot)
+}
+@
+
+\begin{figure}[H]
+\setkeys{Gin}{width =0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+do.call('grid.arrange', plot_serie)
+@
+\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
+\end{figure}
+
+
+\subsection{Análisis de las Variables Predictoras}
+
+En la figura -- se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura -- se muestra las correlaciones de las variables definitivas
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_serie[[1]] %>% createIndicators(full = TRUE) %>% 
+    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    select(-one_of('timestamp')) %>%  
+    na.omit() %>%
+    cor() %>% 
+    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust', tl.col = 'black',
+                   col.pos = 'r', cl.pos = 'r', number.cex = 0.65, number.digits = 1)
+
+@
+\caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_serie[[1]] %>% createIndicators(full = FALSE) %>% 
+    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    select(-one_of('timestamp', 'open', 'high', 'low')) %>%  
+    na.omit() %>% 
+    cor() %>% 
+    corrplot::corrplot(method = 'number', type = 'lower', order = 'hclust',
+                     cl.pos = 'r', tl.col = 'black')
+@
+\caption{Correlación entre indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en cuanto a la relación entre los indicadores.
+
+<<echo=FALSE>>=
+var_predict <- list_serie[[1]] %>% 
+    predict_tp(tp = 0.02, sl = 0.025, h = 20) %>%
+    mutate(class_2 = factor(class)) %>%
+    select(-one_of('class')) %>% 
+    createIndicators(full = FALSE) %>% 
+    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    select(-one_of('timestamp', 'open', 'high', 'low')) %>%  
+    na.omit()
+
+# Box-plot's
+.plot_OHLC <- var_predict %>% 
+  select(c('class_2', 'close')) %>% 
+  reshape2::melt() %>%
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
+  geom_boxplot()
+
+.plot_lags <- var_predict %>% 
+  select(c('class_2', 'lag_1', 'lag_3', 'lag_5')) %>% 
+  reshape2::melt() %>%
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
+  geom_boxplot()
+
+.plot_adx_rsi <- var_predict %>% 
+  select(c('class_2', 'adx', 'rsi')) %>% 
+  reshape2::melt() %>%
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
+  geom_boxplot()
+
+.plot_macd <- var_predict %>% 
+  select(c('class_2', 'macd', 'macd_signal')) %>% 
+  reshape2::melt() %>%
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
+  geom_boxplot()
+
+.plot_atr <- var_predict %>% 
+  select(c('class_2', 'atr')) %>% 
+  reshape2::melt() %>%
+  ggplot(aes(x = variable, y = value, fill = class_2)) +
+  geom_boxplot()
+
+.plot_boxplot <- list(.plot_OHLC, .plot_lags, .plot_adx_rsi, .plot_macd, .plot_atr)
+
+# Histogram
+.ind <- names(var_predict)[-2]
+.plot_hist <- list()
+for(i in .ind){
+  .histo_plot <- var_predict %>% 
+    select(i) %>% 
+    reshape2::melt() %>% 
+    ggplot(aes(x = value)) +
+    geom_histogram(color="darkblue", fill="lightblue") +
+    labs(x = i)
+  
+  .plot_hist %<>% rlist::list.append(.histo_plot)
+}
+
+# Density
+.plot_dens <- list()
+for(i in .ind){
+  .dens_plot <- var_predict %>% 
+    select(c('class_2', i)) %>% 
+    reshape2::melt() %>%
+    ggplot(aes(x = value, color = class_2)) +
+    geom_density() +
+    labs(x = i)
+  
+  .plot_dens %<>% rlist::list.append(.dens_plot)
+}
+
+# list of all plots
+descr_plots <- list(.plot_boxplot, .plot_hist, .plot_dens)
+@
+
+\begin{figure}[H]
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+# Box-Plot
+do.call('grid.arrange', descr_plots[[1]])
+@
+\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+# Histograms
+do.call('grid.arrange', c(descr_plots[[2]], ncol = 2, nrow = 5))
+@
+\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+# Density
+do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
+@
+\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\subsection{Resultados del ACP}
+
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'.
+
+<<echo=FALSE>>=
+
+.tp = 0.02
+.sl = 0.025
+.h = 20
+.cut <- 0.5
+
+predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+  mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
+  select(-one_of('class')) %>% 
+  createIndicators() %>% 
+  filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+  getPredictors()
+
+pca <- predictors_var %>% prcomp(scale = FALSE)
+
+@
+
+Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
+
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
+
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_pca_eigen <- list(
+  fviz_eig(pca, addlabels = TRUE, choice = 'eigenvalue') +
+           labs(title = '', x = 'Componentes', y = 'Autovalores'),
+  fviz_eig(pca, addlabels = TRUE, choice = 'variance') +
+           labs(title = '', x = 'Componentes', y = '% Variabilidad explicada')
+)
+
+do.call('grid.arrange', list_pca_eigen)
+@
+\caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
+\end{figure}
+
+La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+list_contrib_pca <- list(
+  # Contributions of variables to PC1
+  fviz_contrib(pca, choice = "var", axes = 1, top = 30) +
+    labs(y = '% Contribución', title = 'Contribución de variables a Com-1'),
+  # Contributions of variables to PC2
+  fviz_contrib(pca, choice = "var", axes = 2, top = 30) +
+    labs(y = '% Contribución', title = 'Contribución de variables a Com-2'),
+
+  fviz_contrib(pca, choice = "var", axes = 1:2, top = 30) +
+    labs(y = '% Contribución', title = 'Contribución de variables a Com- 1-2')
+)
+
+do.call('grid.arrange', list_contrib_pca)
+@
+\caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
+\end{figure}
+
+La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
+
+La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+  fviz_cos2(pca, choice = "var", axes = 1:2, top = 20) +
+            labs(y = 'Calidad de la representación', title = 'Calidad de Representación para Com- 1-2')
+@
+\caption{Calidad de representación medida por $Cos^2$ de cada variable en PC1 y PC2}
+\end{figure}
+
+El gráfico de correlación ó Factor map muestra la relación entre las variables. Las claves para su interpretación son:
+
+\begin{itemize}
+\item Las variables positivamente correlacionadas se encuentran agrupadas entre sí
+\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos.
+\item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
+\end{itemize}
+
+En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.8\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+fviz_pca_var(pca, 
+             col.var = "contrib",
+             select.var = list(contrib = 45),
+             # alpha.var = "contrib",
+             repel = TRUE
+)
+@
+\caption{Gráfico de Correlación entre PC1 y PC2}
+\end{figure}
+
+En la figura -- se muestran los gráficos de dispersión entre los componentes, 
+
+<<echo=FALSE>>=
+aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
+  mutate(class_2 = factor(class)) %>% 
+  select(-one_of('class')) %>% 
+  filter(year(timestamp) %in% seq(2009, 2012, 1))
+
+itercomp <- list(x = seq(1,7,1), y = seq(1,7,1)) %>% 
+  cross_df() %>% 
+  filter(x != y & x < y) %>% 
+  arrange(x)
+
+.scatter_plot <- list()
+for(i in 1:nrow(itercomp)){
+  aux_scatter <- fviz_pca_ind(pca, 
+                              axes = c(itercomp$x[i], itercomp$y[i]),
+                              geom.ind = "point",
+                              select.ind = list(contrib = 500),
+                              col.ind = aux_scatterplot$class_2,
+                              title = '') +
+    theme(legend.position = "none", 
+          axis.title.x = element_text(size = 7),
+          axis.title.y = element_text(size = 7))
+  
+  .scatter_plot %<>% rlist::list.append(aux_scatter)
+}
+
+# .lay <- rbind(c(1,2,3,4,5,6),
+#               c(NA,7,8,9,10,11),
+#               c(NA,NA,12,13,14,15),
+#               c(NA,NA,NA,16,17,18),
+#               c(NA,NA,NA,NA,19,20),
+#               c(NA,NA,NA,NA,NA,21))
+
+
+@
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 1\textwidth, height = 1.2\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+grid.arrange(grobs = .scatter_plot, ncol = 4)
+@
+\caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
 
 \section{Coeficientes del modelo}
 
+En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 <<echo=FALSE>>=
-# library(tidyverse)
-# library(magrittr)
-# library(lubridate)
-# library(gridExtra)
-# library(TTR)
-# library(caret)
-# library(factoextra)
-# library(purrr)
-# library(PerformanceAnalytics)
-# library(xtable)
-# source('scripts/functions.R')
-# 
-# serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
-# list_serie <- list()
-# for(s in serie){
-#   .aux_serie <- paste('data/', s, '.csv', sep = '') %>%
-#     read_csv(locale = locale(decimal_mark = ",", grouping_mark = ".")) %>%
-#     select(-one_of(c('Vol.', '% var.'))) %>%
-#     mutate(Fecha = dmy(Fecha)) %>%
-#     setNames(c('timestamp', 'close', 'open', 'high', 'low')) %>%
-#     arrange(timestamp)
-# 
-#   list_serie %<>% rlist::list.append(.aux_serie)
-# }
-# 
-# .tp <- 0.02
-# .sl <- 0.025
-# .h <- 20
-.cut <- 0.5
 
 list_cm <- list()
 list_fr <- list()
@@ -77,32 +383,36 @@ xtable(summary(list_model[[1]][[1]]))
 @
 \end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[2]]))
 @
 \end{center}
+
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[3]]))
 @
 \end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[4]]))
 @
 \end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[1]][[5]]))
 @
 \end{center}
+
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 <<echo=FALSE, results=tex>>=
@@ -275,5 +585,11 @@ xtable(table_runstest)
 @
 \end{center}
 
-Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechzar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechazar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+
+Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme es posible modelar el riesgo individual de cada trade
+  
+  
+  
+  
   

@@ -206,7 +206,40 @@ El análisis técnico es aquel que busca patrones y tendencias de comportamiento
 
 Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es mas que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
 
-El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana, la cual según murphy se repite. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
+El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
+
+A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en t calculada con p observaciones enteriores con respecto a la serie de precio X:
+
+\begin{itemize}
+\item Retornos con respecto al precio de Cierre.
+
+$$ R_{t} = \frac{Pcierre_{t}}{Pcierre_{t-1}-1}$$
+
+\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+
+$$ RSI_{t} = 100 - \frac{100}{1 + RS_{t}} \qquad 
+donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{Pérdida\ Promedio\ en\ n\ observaciones}$$
+
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+
+$$ MACD_{t} =  EMA_{(t, 12)}(Pcierre) - EMA_{(t, 26)}(Pcierre) \qquad
+Signal\ Line_{t} = EMA_{(t, 9)}(MACD_{t}) $$
+
+\item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
+
+$$ ATR_{t} =  EMA_{(t, 14)}(TR_{t}) \qquad
+TR_{t} = Max\ (Pmax - Pmin, |Pmax - Pc_{t-1}|, |Pmin - Pc_{t-1}|)$$
+
+\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+
+$$ ADX_{t} =  100\ EMA_{(t, 14)}(|+DI - -DI|)$$
+
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+
+$$ Banda Superior_{t} = EMA{(t, 14)}(Pcierre) + 2,5\sigma \qquad 
+Banda Inferior_{t} = EMA{(t, 14)}(Pcierre) - 2,5\sigma $$
+
+\end{itemize}
 
 \subsection{Introducción al aprendizaje automático}
 
@@ -281,7 +314,7 @@ $$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i
 
 Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
 
-\subsection{Análisis de Componentes Principales como método de reducción de variables}
+\subsection{Análisis de Componentes Principales}
 
 Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los metodos no lineales. Exiten técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
 
@@ -343,7 +376,7 @@ $$ Precisión = \frac{VP}{VP + FN} $$
 %\SweaveUTF8
 
 \chapter{Marco Metódico}
-\section{Análisis Exploratorio de los datos}
+\section{Estrategia de Análisis}
 
 \subsection{Datos OHLC y Fuente de los datos}
 
@@ -351,25 +384,13 @@ La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus sigl
 
 Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su calendario económico y directorio de brokers.
 
-\subsection{Series de Índices}
+\subsection{Series de Índices Bursátiles}
 
 El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
 En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumeto en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
 
-% hablar de cada indice
-
-
-\begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
-\centering
-\includegraphics{main-002}
-\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
-\end{figure}
-
-\section{Entrenamiento del Modelo}
-
-\subsection{Variable dependiente}
+\subsection{Variable Dependiente}
 
 Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
 
@@ -386,54 +407,28 @@ Dado los datos OHLC del activo es posible identificar los períodos en donde se 
 
 En la práctica se identifica los registros que cumplen con esta condición añadiendo una columna a la data donde incluimos 'buy' para identificar los registros donde se da la señal y 'stay' en caso de que no haya ocurrido o hubiese ocurrido primero el retroceso del precio.
 
-\subsection{Indicadores Técnicos como variables predictoras}
+\subsection{Variables Predictoras}
 
 Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
 
 No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
 
-Lo que busca la investigación es utilizar la relación entre estos indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores.
-
-A continuación se presentan los indicadores utilizados:
+Lo que busca la investigación es utilizar la relación entre los indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores. Algunos de los indicadores inicialmente escogidos para el modelo fueron excluidos debido a la alta correlación que presentaban. A continuación se presentan los indicadores utilizados:
 
 \begin{itemize}
 \item Retornos con respecto al precio de Cierre.
 \item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
-\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un EMA de 9 períodos. 
 \item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
 \item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
 \item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
 \end{itemize}
 
-Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el numero de variables dejando solo las más representativas de cada indicador.
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.6\textwidth}
-\centering
-\includegraphics{main-003}
-\caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
-\end{figure}
-
-Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger.
-
-En la figura -- se muestra las correlaciones de las variables definitivas
-
-\begin{figure}[H]
-\setkeys{Gin}{width = 0.6\textwidth}
-\centering
-\includegraphics{main-004}
-\caption{Correlación entre indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
-\end{figure}
+Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el número de variables dejando solo las más representativas de cada indicador.
 
 Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
 
 Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
-
-A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en relación a la colinealidad entre los indicadores.
-
-
-
-
 
 \subsection{Validación Cruzada en Series de Tiempo}
 
@@ -462,22 +457,86 @@ La selección de los parámetros debería ser un estudio previo de la serie fina
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-006}
+\includegraphics{main-002}
 \caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
 \end{figure}
 
-\subsection{Reducción de la dimensión con Análisis de Componentes Principales}
 
-La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el numero de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
+\subsection{Reducción de la dimensión con ACP}
+
+La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
 
 Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
+
+Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+
+
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter{Análisis de Resultados}
+
+\section{Análisis Exploratorio de los datos}
+
+\subsection{Análisis de los Índices}
+
+En la figura -- se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que...
+
+
+\begin{figure}[H]
+\setkeys{Gin}{width =0.8\textwidth}
+\centering
+\includegraphics{main-004}
+\caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
+\end{figure}
+
+
+\subsection{Análisis de las Variables Predictoras}
+
+En la figura -- se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura -- se muestra las correlaciones de las variables definitivas
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+\includegraphics{main-005}
+\caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+
+\begin{figure}[H]
+\setkeys{Gin}{width = 0.6\textwidth}
+\centering
+\includegraphics{main-006}
+\caption{Correlación entre indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en cuanto a la relación entre los indicadores.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics{main-008}
+\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{main-009}
+\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{main-010}
+\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\end{figure}
+
+\subsection{Resultados del ACP}
 
 A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'.
 
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
-
-Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
 
 La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
 
@@ -486,7 +545,7 @@ Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-008}
+\includegraphics{main-012}
 \caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
 
@@ -495,7 +554,7 @@ La contribución de las variables representan la variabilidad contenida en un co
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-009}
+\includegraphics{main-013}
 \caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
 \end{figure}
 
@@ -506,7 +565,7 @@ La calidad de representación en el gráfico viene dada por el valor de $Cos^2$,
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-010}
+\includegraphics{main-014}
 \caption{Calidad de representación medida por $Cos^2$ de cada variable en PC1 y PC2}
 \end{figure}
 
@@ -523,26 +582,44 @@ En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
-\includegraphics{main-011}
+\includegraphics{main-015}
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-% !TeX root = ./main.Rnw
-%\SweaveUTF8
+En la figura -- se muestran los gráficos de dispersión entre los componentes, 
 
-\chapter{Análisis de Resultados}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
+\begin{figure}[H]
+\setkeys{Gin}{width = 1\textwidth, height = 1.2\textwidth}
+\centering
+\includegraphics{main-017}
+\caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage
 
 \section{Coeficientes del modelo}
 
+En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas.
 
 En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -561,11 +638,10 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -583,10 +659,12 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -604,10 +682,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -625,11 +704,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -647,10 +726,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -679,7 +759,7 @@ En la tabla 4.2 se muestran los resultados de la simulación para cada uno de lo
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -702,7 +782,7 @@ En la figura 4.1 se observa los trades realizados por la simulación según el r
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
 \centering
-\includegraphics{main-022}
+\includegraphics{main-028}
 \caption{Clasificación de la simulación}
 \end{figure}
 
@@ -712,7 +792,7 @@ Se observa como en la simulación utilizando el índice BOVESPA, los trades posi
 \begin{figure}[H]
 \setkeys{Gin}{width = 1\textwidth}
 \centering
-\includegraphics{main-024}
+\includegraphics{main-030}
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
@@ -729,7 +809,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.5.2 by xtable 1.8-3 package
-% Mon Feb 18 17:56:16 2019
+% Tue Feb 26 14:41:36 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -745,7 +825,9 @@ S\&P\_500 & -0.83 & 0.41 \\
 \end{tabular}
 \end{table}\end{center}
 
-Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechzar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechazar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
+
+Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme es posible modelar el riesgo individual de cada trade
   
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
@@ -761,6 +843,546 @@ El modelo solo considera la prediccion del incremento del precio. Se utiliza la 
 
 Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las confifuraciones de los mismos buscando mejorar la predicción del modelo. De cualquier manera esta investigación busca ser un punto de partida para futuras investigaciones.
 
+
+% !TeX root = ./main.Rnw
+%\SweaveUTF8
+
+\chapter{Anexos}
+
+\section{Coeficientes de los modelos}
+
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NASDAQ.
+\begin{center}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof*{table}{Período de entrenamiento 2009 - 2012}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3153 & 0.0641 & -4.92 & 0.0000 \\ 
+  PC1 & -0.0020 & 0.0181 & -0.11 & 0.9133 \\ 
+  PC2 & 0.0055 & 0.0206 & 0.27 & 0.7905 \\ 
+  PC3 & -0.0248 & 0.0316 & -0.79 & 0.4319 \\ 
+  PC4 & -0.0245 & 0.0339 & -0.73 & 0.4684 \\ 
+  PC5 & -0.0041 & 0.0369 & -0.11 & 0.9107 \\ 
+  PC6 & -0.0903 & 0.0392 & -2.31 & 0.0212 \\ 
+  PC7 & 0.0570 & 0.0449 & 1.27 & 0.2038 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3669 & 0.0574 & -6.39 & 0.0000 \\ 
+  PC1 & 0.0123 & 0.0164 & 0.75 & 0.4527 \\ 
+  PC2 & -0.0000 & 0.0184 & -0.00 & 0.9992 \\ 
+  PC3 & 0.0129 & 0.0280 & 0.46 & 0.6459 \\ 
+  PC4 & -0.0142 & 0.0296 & -0.48 & 0.6313 \\ 
+  PC5 & -0.0049 & 0.0316 & -0.16 & 0.8762 \\ 
+  PC6 & 0.0084 & 0.0331 & 0.25 & 0.8005 \\ 
+  PC7 & 0.0034 & 0.0394 & 0.09 & 0.9322 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3036 & 0.0522 & -5.81 & 0.0000 \\ 
+  PC1 & 0.0291 & 0.0153 & 1.91 & 0.0564 \\ 
+  PC2 & -0.0210 & 0.0172 & -1.22 & 0.2238 \\ 
+  PC3 & 0.0341 & 0.0230 & 1.48 & 0.1390 \\ 
+  PC4 & 0.0006 & 0.0263 & 0.02 & 0.9809 \\ 
+  PC5 & 0.0062 & 0.0305 & 0.20 & 0.8392 \\ 
+  PC6 & -0.0362 & 0.0314 & -1.15 & 0.2490 \\ 
+  PC7 & 0.0169 & 0.0373 & 0.45 & 0.6505 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2767 & 0.0485 & -5.71 & 0.0000 \\ 
+  PC1 & 0.0524 & 0.0148 & 3.55 & 0.0004 \\ 
+  PC2 & -0.0257 & 0.0162 & -1.59 & 0.1123 \\ 
+  PC3 & 0.0477 & 0.0207 & 2.31 & 0.0210 \\ 
+  PC4 & -0.0027 & 0.0251 & -0.11 & 0.9137 \\ 
+  PC5 & -0.0398 & 0.0287 & -1.39 & 0.1655 \\ 
+  PC6 & -0.0424 & 0.0296 & -1.44 & 0.1511 \\ 
+  PC7 & -0.0138 & 0.0353 & -0.39 & 0.6951 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2653 & 0.0452 & -5.86 & 0.0000 \\ 
+  PC1 & -0.0421 & 0.0135 & -3.12 & 0.0018 \\ 
+  PC2 & 0.0301 & 0.0150 & 2.01 & 0.0448 \\ 
+  PC3 & 0.0527 & 0.0192 & 2.74 & 0.0062 \\ 
+  PC4 & -0.0023 & 0.0231 & -0.10 & 0.9223 \\ 
+  PC5 & -0.0131 & 0.0265 & -0.49 & 0.6219 \\ 
+  PC6 & -0.0302 & 0.0282 & -1.07 & 0.2839 \\ 
+  PC7 & -0.0084 & 0.0328 & -0.25 & 0.7990 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3421 & 0.0428 & -7.99 & 0.0000 \\ 
+  PC1 & 0.0352 & 0.0128 & 2.75 & 0.0059 \\ 
+  PC2 & -0.0316 & 0.0142 & -2.23 & 0.0257 \\ 
+  PC3 & -0.0096 & 0.0178 & -0.54 & 0.5888 \\ 
+  PC4 & -0.0227 & 0.0213 & -1.06 & 0.2870 \\ 
+  PC5 & -0.0062 & 0.0250 & -0.25 & 0.8053 \\ 
+  PC6 & 0.0388 & 0.0260 & 1.49 & 0.1358 \\ 
+  PC7 & 0.0225 & 0.0306 & 0.74 & 0.4613 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NIKKEI 225.
+\begin{center}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof*{table}{Período de entrenamiento 2009 - 2012}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2578 & 0.0650 & -3.96 & 0.0001 \\ 
+  PC1 & -0.0159 & 0.0181 & -0.88 & 0.3796 \\ 
+  PC2 & -0.0238 & 0.0229 & -1.04 & 0.2989 \\ 
+  PC3 & -0.0435 & 0.0310 & -1.40 & 0.1605 \\ 
+  PC4 & 0.0308 & 0.0370 & 0.83 & 0.4053 \\ 
+  PC5 & -0.0809 & 0.0413 & -1.96 & 0.0504 \\ 
+  PC6 & -0.0728 & 0.0434 & -1.68 & 0.0933 \\ 
+  PC7 & -0.1040 & 0.0556 & -1.87 & 0.0614 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3339 & 0.0585 & -5.71 & 0.0000 \\ 
+  PC1 & -0.0259 & 0.0159 & -1.63 & 0.1035 \\ 
+  PC2 & -0.0098 & 0.0206 & -0.47 & 0.6364 \\ 
+  PC3 & -0.0463 & 0.0284 & -1.63 & 0.1027 \\ 
+  PC4 & -0.0377 & 0.0326 & -1.16 & 0.2478 \\ 
+  PC5 & -0.1228 & 0.0379 & -3.24 & 0.0012 \\ 
+  PC6 & -0.0380 & 0.0391 & -0.97 & 0.3322 \\ 
+  PC7 & -0.0256 & 0.0473 & -0.54 & 0.5875 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3361 & 0.0533 & -6.30 & 0.0000 \\ 
+  PC1 & -0.0148 & 0.0147 & -1.01 & 0.3126 \\ 
+  PC2 & -0.0109 & 0.0185 & -0.59 & 0.5550 \\ 
+  PC3 & -0.0226 & 0.0254 & -0.89 & 0.3730 \\ 
+  PC4 & -0.0641 & 0.0302 & -2.12 & 0.0340 \\ 
+  PC5 & -0.0969 & 0.0339 & -2.86 & 0.0042 \\ 
+  PC6 & -0.0484 & 0.0360 & -1.34 & 0.1792 \\ 
+  PC7 & -0.0357 & 0.0415 & -0.86 & 0.3898 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.3076 & 0.0491 & -6.26 & 0.0000 \\ 
+  PC1 & 0.0006 & 0.0140 & 0.04 & 0.9680 \\ 
+  PC2 & -0.0062 & 0.0172 & -0.36 & 0.7162 \\ 
+  PC3 & 0.0035 & 0.0207 & 0.17 & 0.8670 \\ 
+  PC4 & -0.0645 & 0.0263 & -2.45 & 0.0143 \\ 
+  PC5 & -0.0589 & 0.0302 & -1.95 & 0.0509 \\ 
+  PC6 & -0.0345 & 0.0328 & -1.05 & 0.2938 \\ 
+  PC7 & -0.0558 & 0.0381 & -1.47 & 0.1424 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2862 & 0.0459 & -6.24 & 0.0000 \\ 
+  PC1 & 0.0107 & 0.0134 & 0.80 & 0.4221 \\ 
+  PC2 & -0.0055 & 0.0158 & -0.35 & 0.7268 \\ 
+  PC3 & 0.0031 & 0.0191 & 0.16 & 0.8709 \\ 
+  PC4 & 0.0659 & 0.0240 & 2.74 & 0.0061 \\ 
+  PC5 & -0.0204 & 0.0270 & -0.76 & 0.4494 \\ 
+  PC6 & -0.0488 & 0.0293 & -1.67 & 0.0958 \\ 
+  PC7 & 0.0564 & 0.0362 & 1.56 & 0.1191 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2769 & 0.0430 & -6.44 & 0.0000 \\ 
+  PC1 & 0.0010 & 0.0125 & 0.08 & 0.9348 \\ 
+  PC2 & 0.0031 & 0.0150 & 0.21 & 0.8353 \\ 
+  PC3 & -0.0264 & 0.0188 & -1.41 & 0.1592 \\ 
+  PC4 & 0.0533 & 0.0226 & 2.35 & 0.0186 \\ 
+  PC5 & -0.0141 & 0.0255 & -0.55 & 0.5794 \\ 
+  PC6 & 0.0960 & 0.0308 & 3.12 & 0.0018 \\ 
+  PC7 & -0.0452 & 0.0315 & -1.44 & 0.1510 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+
+
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del FTSE 100.
+\begin{center}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof*{table}{Período de entrenamiento 2009 - 2012}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1552 & 0.0636 & -2.44 & 0.0147 \\ 
+  PC1 & -0.0386 & 0.0182 & -2.12 & 0.0343 \\ 
+  PC2 & -0.0074 & 0.0208 & -0.36 & 0.7207 \\ 
+  PC3 & -0.0355 & 0.0306 & -1.16 & 0.2467 \\ 
+  PC4 & 0.0327 & 0.0361 & 0.91 & 0.3643 \\ 
+  PC5 & -0.0481 & 0.0364 & -1.32 & 0.1859 \\ 
+  PC6 & 0.0770 & 0.0429 & 1.79 & 0.0731 \\ 
+  PC7 & -0.0519 & 0.0509 & -1.02 & 0.3071 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1569 & 0.0568 & -2.76 & 0.0057 \\ 
+  PC1 & 0.0402 & 0.0164 & 2.45 & 0.0142 \\ 
+  PC2 & 0.0237 & 0.0186 & 1.28 & 0.2017 \\ 
+  PC3 & -0.0240 & 0.0281 & -0.85 & 0.3938 \\ 
+  PC4 & 0.0090 & 0.0312 & 0.29 & 0.7722 \\ 
+  PC5 & -0.0282 & 0.0325 & -0.87 & 0.3863 \\ 
+  PC6 & 0.0237 & 0.0357 & 0.66 & 0.5077 \\ 
+  PC7 & -0.0446 & 0.0453 & -0.98 & 0.3253 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.0439 & 0.0522 & -0.84 & 0.4007 \\ 
+  PC1 & -0.0597 & 0.0155 & -3.85 & 0.0001 \\ 
+  PC2 & -0.0513 & 0.0177 & -2.90 & 0.0037 \\ 
+  PC3 & -0.0617 & 0.0266 & -2.32 & 0.0204 \\ 
+  PC4 & 0.0001 & 0.0290 & 0.00 & 0.9980 \\ 
+  PC5 & -0.0624 & 0.0308 & -2.03 & 0.0425 \\ 
+  PC6 & 0.0899 & 0.0326 & 2.75 & 0.0059 \\ 
+  PC7 & 0.0054 & 0.0424 & 0.13 & 0.8989 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & 0.0397 & 0.0486 & 0.82 & 0.4137 \\ 
+  PC1 & -0.0790 & 0.0151 & -5.25 & 0.0000 \\ 
+  PC2 & -0.0381 & 0.0163 & -2.34 & 0.0192 \\ 
+  PC3 & 0.0688 & 0.0263 & 2.62 & 0.0088 \\ 
+  PC4 & -0.0075 & 0.0283 & -0.26 & 0.7920 \\ 
+  PC5 & -0.0187 & 0.0285 & -0.66 & 0.5111 \\ 
+  PC6 & 0.1536 & 0.0327 & 4.70 & 0.0000 \\ 
+  PC7 & -0.0560 & 0.0422 & -1.33 & 0.1849 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.0231 & 0.0454 & -0.51 & 0.6110 \\ 
+  PC1 & -0.0713 & 0.0140 & -5.09 & 0.0000 \\ 
+  PC2 & -0.0478 & 0.0156 & -3.07 & 0.0021 \\ 
+  PC3 & 0.0664 & 0.0248 & 2.68 & 0.0073 \\ 
+  PC4 & 0.0020 & 0.0261 & 0.08 & 0.9378 \\ 
+  PC5 & -0.0181 & 0.0268 & -0.67 & 0.5005 \\ 
+  PC6 & 0.1481 & 0.0315 & 4.70 & 0.0000 \\ 
+  PC7 & -0.0981 & 0.0354 & -2.77 & 0.0055 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & 0.0301 & 0.0429 & 0.70 & 0.4821 \\ 
+  PC1 & -0.0784 & 0.0134 & -5.87 & 0.0000 \\ 
+  PC2 & -0.0546 & 0.0147 & -3.73 & 0.0002 \\ 
+  PC3 & 0.0659 & 0.0232 & 2.84 & 0.0045 \\ 
+  PC4 & -0.0188 & 0.0245 & -0.77 & 0.4416 \\ 
+  PC5 & -0.0139 & 0.0253 & -0.55 & 0.5841 \\ 
+  PC6 & 0.1413 & 0.0280 & 5.05 & 0.0000 \\ 
+  PC7 & -0.0374 & 0.0361 & -1.04 & 0.2997 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+
+
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del BOVESPA.
+\begin{center}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof*{table}{Período de entrenamiento 2009 - 2012}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.2445 & 0.0646 & -3.78 & 0.0002 \\ 
+  PC1 & -0.0190 & 0.0177 & -1.07 & 0.2835 \\ 
+  PC2 & -0.0090 & 0.0223 & -0.40 & 0.6878 \\ 
+  PC3 & 0.0169 & 0.0293 & 0.58 & 0.5637 \\ 
+  PC4 & -0.0675 & 0.0325 & -2.08 & 0.0380 \\ 
+  PC5 & 0.0081 & 0.0387 & 0.21 & 0.8344 \\ 
+  PC6 & 0.0929 & 0.0433 & 2.14 & 0.0320 \\ 
+  PC7 & -0.0947 & 0.0450 & -2.11 & 0.0351 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1524 & 0.0574 & -2.66 & 0.0079 \\ 
+  PC1 & -0.0158 & 0.0158 & -1.00 & 0.3179 \\ 
+  PC2 & -0.0183 & 0.0201 & -0.91 & 0.3640 \\ 
+  PC3 & 0.0306 & 0.0274 & 1.12 & 0.2635 \\ 
+  PC4 & -0.0373 & 0.0293 & -1.27 & 0.2029 \\ 
+  PC5 & 0.0233 & 0.0346 & 0.68 & 0.4993 \\ 
+  PC6 & 0.0196 & 0.0378 & 0.52 & 0.6038 \\ 
+  PC7 & 0.1188 & 0.0416 & 2.86 & 0.0043 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1078 & 0.0520 & -2.07 & 0.0380 \\ 
+  PC1 & -0.0138 & 0.0144 & -0.95 & 0.3399 \\ 
+  PC2 & -0.0185 & 0.0179 & -1.04 & 0.3004 \\ 
+  PC3 & 0.0276 & 0.0248 & 1.11 & 0.2660 \\ 
+  PC4 & -0.0498 & 0.0264 & -1.88 & 0.0597 \\ 
+  PC5 & 0.0108 & 0.0311 & 0.35 & 0.7284 \\ 
+  PC6 & 0.0147 & 0.0328 & 0.45 & 0.6529 \\ 
+  PC7 & 0.0979 & 0.0376 & 2.61 & 0.0092 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.0762 & 0.0479 & -1.59 & 0.1122 \\ 
+  PC1 & 0.0127 & 0.0133 & 0.96 & 0.3382 \\ 
+  PC2 & -0.0097 & 0.0165 & -0.59 & 0.5559 \\ 
+  PC3 & -0.0329 & 0.0230 & -1.43 & 0.1516 \\ 
+  PC4 & 0.0445 & 0.0242 & 1.84 & 0.0657 \\ 
+  PC5 & 0.0032 & 0.0286 & 0.11 & 0.9096 \\ 
+  PC6 & -0.0450 & 0.0306 & -1.47 & 0.1410 \\ 
+  PC7 & 0.0768 & 0.0351 & 2.19 & 0.0288 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\newpage
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1270 & 0.0448 & -2.83 & 0.0046 \\ 
+  PC1 & 0.0098 & 0.0122 & 0.80 & 0.4227 \\ 
+  PC2 & -0.0063 & 0.0156 & -0.41 & 0.6848 \\ 
+  PC3 & -0.0143 & 0.0210 & -0.68 & 0.4970 \\ 
+  PC4 & 0.0314 & 0.0225 & 1.40 & 0.1625 \\ 
+  PC5 & 0.0064 & 0.0268 & 0.24 & 0.8101 \\ 
+  PC6 & -0.0206 & 0.0280 & -0.73 & 0.4625 \\ 
+  PC7 & 0.0827 & 0.0324 & 2.56 & 0.0106 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
+\begin{center}
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Tue Feb 26 14:41:36 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -0.1857 & 0.0424 & -4.38 & 0.0000 \\ 
+  PC1 & 0.0068 & 0.0114 & 0.60 & 0.5492 \\ 
+  PC2 & -0.0043 & 0.0147 & -0.29 & 0.7718 \\ 
+  PC3 & -0.0149 & 0.0198 & -0.75 & 0.4536 \\ 
+  PC4 & 0.0156 & 0.0211 & 0.74 & 0.4607 \\ 
+  PC5 & 0.0042 & 0.0252 & 0.17 & 0.8672 \\ 
+  PC6 & 0.0144 & 0.0268 & 0.54 & 0.5905 \\ 
+  PC7 & 0.0517 & 0.0297 & 1.74 & 0.0818 \\ 
+   \hline
+\end{tabular}
+\end{table}\end{center}
 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8

@@ -81,6 +81,7 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 \SweaveInput{body/chapter3/chapter3.Rnw}
 \SweaveInput{body/chapter4/chapter4.Rnw}
 \SweaveInput{body/conclusion/conclusion.Rnw}
+\SweaveInput{body/anexos/anexos.Rnw}
 \SweaveInput{body/bibliografia/bibliografia.Rnw}
 
 \end{document}
