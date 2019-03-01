@@ -67,8 +67,8 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 
 \newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1} 
 
-\SweaveInput{body/reconocimiento/reconocimiento.Rnw}
-\SweaveInput{body/agradecimientos/agradecimientos.Rnw}
+% \SweaveInput{body/reconocimiento/reconocimiento.Rnw}
+% \SweaveInput{body/agradecimientos/agradecimientos.Rnw}
 
 \tableofcontents
 \listoffigures
