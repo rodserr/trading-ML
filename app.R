@@ -15,6 +15,7 @@ library(caret)
 library(factoextra)
 library(purrr)
 library(xtable)
+library(rsconnect)
 source('scripts/functions.R')
 
 # Model Generator ----
@@ -166,7 +167,7 @@ server <- function(input, output, session) {
                geom = 'bar',
                barfill = 'tomato3',
                barcolor = 'tomato3') +
-        labs(title = '', x = 'Componentes', y = 'Autovalores')
+        labs(title = 'Histograma de Autovalores', x = 'Componentes', y = 'Autovalores')
 
     })
 
@@ -177,7 +178,7 @@ server <- function(input, output, session) {
              geom = 'bar',
              barfill = 'tomato3',
              barcolor = 'tomato3') +
-      labs(title = '', x = 'Componentes', y = '% Variabilidad explicada')
+      labs(title = 'Histograma de variabilidad explicada', x = 'Componentes', y = '% Variabilidad explicada')
     
   })
   

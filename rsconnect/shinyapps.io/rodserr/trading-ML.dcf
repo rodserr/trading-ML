@@ -1,0 +1,12 @@
+name: trading-ML
+title: trading-ML
+username:
+account: rodserr
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 769743
+bundleId: 1920781
+url: https://rodserr.shinyapps.io/trading-ML/
+when: 1551907983.5143
+asMultiple: FALSE
+asStatic: FALSE
