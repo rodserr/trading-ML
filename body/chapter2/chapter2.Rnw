@@ -137,7 +137,7 @@ Despejando se obtiene
 
 $$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
 
-El lado izquierdo de la ecuación puede tomar valores entre 0 e \infinity, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logarítmo en ambos miembros de la ecuación se obtiene la función logit
+El lado izquierdo de la ecuación puede tomar valores entre 0 e $\infty$, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logarítmo en ambos miembros de la ecuación se obtiene la función logit
 
 $$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
 
@@ -202,7 +202,6 @@ donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de no
 
 El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinearidad entre las variables. 
 
-% \subsubsection{Colinealidad}
 \subsection{Matríz de Confusión}
 
 En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
@@ -217,6 +216,60 @@ En los problemas de clasificación se utiliza la matríz de confusión para eval
 La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
 
 $$ Precisión = \frac{VP}{VP + FN} $$
+
+\subsection{Medidas de Riesgo}
+
+\subsubsection{Valor en Riesgo}
+
+El valor en riesgo ó VaR por sus siglas en ingles -Value at Risk- es una medida común del riesgo implementado en instituciones financieras. Se define como la pérdida en un portafolio, tal que existe una probabilidad $p$ que las pérdidas sean iguales o mayores que el VaR y una probabilidad $(1-p)$ que sean menores que el VaR, en un tiempo determinado. Este valor se corresponde con el cuantíl de la distribución de pérdida. 
+
+$$ Pr(Q \leq -VaR(p)) = p $$
+
+ó
+
+$$ p = \int_{-\infty}^{-VaR(p)}f_{q}(x)\ dx $$
+
+siendo $f_{q}(x)$ la función de densidad de la variable aleatoria pérdida/ganancia del portafolio denotada por Q.
+
+Aunque el VaR es utilizado comunmente en instituciones financieras e incluso exigido en alunas regulaciones como Basilea, existen varias críticas en cuanto a su implementación. Una de las críticas es su inconclusividad en cuando al tamaño de la pérdida, en este sentido, el VaR es un cuantíl de la distribución que establece un umbral en cuanto a la posible pérdida en un período, dado un nivel de significancia. Jon Danielsson (2011)
+
+\subsubsection{Pérdida Esperada}
+
+La pérdida esperada mejor conocida conocida como 'Expected Shortfall' -ES- es una medida alternativa al VaR que responde la pregunta ¿Cuál es la pérdida esperada cuando éstas exceden el VaR?. Formalmente la pérdida esperada se define cómo
+
+$$ ES = E(Q/Q \leq VaR(p)) $$ 
+
+ó utilizando la formulación matemática de esperanza
+
+$$ ES = \int_{-\infty}^{-VaR(p)} xf_{VaR}(x)\ dx $$
+
+Es importante acotar que para el ES existen dos fuentes de error ya que primero se debe estimar el VaR y luego obtener la esperanza de la cola de la distribución. Sin embargo es una medida que complementa el VaR. En la figura 2.2 se observa la función de densidad de una distribución normal (0,1) donde se representa el VaR y ES, el VaR vendría siendo la frontera entre las dos áreas mientras que el ES la esperanza del área azul o cola superior.
+Es importante acotar que tanto el VaR como ES a pesar ser medidas de pérdidas potenciales, pueden ser referidas con signo negativo ó positivo.
+
+\begin{figure}[H]
+\setkeys{Gin}{height = .7\textwidth}
+\centering
+<<echo=FALSE, results=tex, fig=TRUE>>=
+x = seq(-4, 4, by = 0.5)
+regionX = seq(1.65, 4, 0.25)
+xP <- c(1.65, regionX, 4)
+yP <- c(0, dnorm(regionX), 0)
+
+curve(dnorm(x), xlim = c(-4,4), ylim = c(0,0.4), ylab = "f(x)",
+      main = 'Densidad N(0,1)') 
+polygon(xP, yP, col = "skyblue1")
+# abline(v = 0, lty = 5)
+lines(x = c(0, 0), y = c(0, 0.40), lty = 5)
+lines(x = c(1.65, 1.65), y = c(0.09, 0.18), lty = 5)
+lines(x = c(2.2, 2.2), y = c(0.04, 0.18), lty = 5)
+text(0.4, 0.2, 'E(x)')
+text(0.4, 0.03, expression(1-alpha))
+text(2, 0.03, expression(alpha))
+text(1.60, 0.2, 'VaR')
+text(2.2, 0.2, 'ES')
+@
+\caption{Función de densidad con VaR y ES}
+\end{figure}
 
 \section{Bases Legales}
 

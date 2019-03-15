@@ -22,11 +22,14 @@ Las decisiones de entrada en el trading pueden ser producto de muchos factores, 
 
 $$
 P_{X}(x) = 
+\left\{ 
 \begin{array}{ll} 
-\ \ \ \ p \ ; \qquad x = c
+p \ ; \qquad x = c
 \\
-\ 1-p \ ; \qquad x = -d
+\\
+1-p \ ; \qquad x = -d
 \end{array}
+\right
 $$
 
 Dado los datos OHLC del activo es posible identificar los períodos en donde se materializa la variable dependiente. la identificación se realiza, comparando el precio de cierre con los precios máximos y mínimos de las siguientes h observaciones, donde h es el número de períodos, en este caso días en los cuales se desea evaluar la condición.
@@ -153,8 +156,28 @@ do.call('grid.arrange', list_plotex_pred)
 
 La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
 
-Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. 
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
 
-Los eigenvalores pueden usarse para establecer el número de componentes a utilizar. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+\subsection{Modelado de los Retornos}
 
+Tal como se establece en la sección -- la variable aleatoria retorno del trade puede obtener 2 posibles valores, si el trade es exitoso toma el valor c con probabilidad p, en caso contrario toma el valor -d con probabilidad 1-p. Para cada activo se puede asumir p como la probabilidad positiva -precisión- obtenida en el modelo. Por su parte c y -d son fijados en 20 y -25 respectivamente, esto viene dado por haber establecido los porcentajes de salida en 0.02 de ganancia y 0.025 de perdida y asumir un capital a riesgo en cada trade de 1000 unidades.
 
+Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme en el tiempo, y con un número de muestra suficientemente grande podemos concluir que
+
+$$ \frac{\sum x_{i} + nE(x)}{n\sigma_{x}} \sim N(0,1) $$
+
+siendo
+
+$$ E(x) = pc - (1-p)d \qquad y \qquad \sigma_{x} = (pc - (1-p)d)^{2} - (pc^{2} - (1-p)d^{2}) $$
+
+Es posible modelar los retornos producidos por la estrategia y calcular el valor a riesgo -VaR- y pérdida esperada -ES- dado un número de operaciones. Tanto el VaR como el ES son medidas comunmente utilizadas para representar el riesgo de pérdida en un período de tiempo determinado, en este caso, se establecerá en vez de tiempo, un número de trades cerrados por la estrategia.
+
+Dado que el retorno de la estrategia se distribuye N(0, 1), se definen el VaR y ES cómo
+
+$$ VaR_{\alpha} = \sigma \Phi^{-1}(\alpha) + \mu $$
+
+$$ ES_{\alpha} = \sigma \frac{\phi(\Phi^{-1}(\alpha))}{1-\alpha} + \mu $$
+
+En la presente investigación se establecen $n = 200$ y $\sigma = 0.95$. Es decir que el VaR puede interpretarse como: "Existe una probabilidad del 5\% que la estrategia genere una pérdida igual ó menor que $VaR_{\alpha}$, luego de 200 trades realizados".
+
+Mientras que el ES se interpreta como: "En caso de que la estrategia genere una pérdida mayor que $VaR_{\alpha}$ luego de 200 trades, se espera que ésta pérdida sea de $ES_{\alpha}$"

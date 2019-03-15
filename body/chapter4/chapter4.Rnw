@@ -17,7 +17,7 @@ El FTSE 100 es un índice búrsatil calculado con las cotizaciones de las 100 em
 
 Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el ecándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rapido crecimiento del índice en los últimos tres años.
 
-<<echo=FALSE>>=
+<<Index_Graph, echo=FALSE>>=
 
 plot_serie <- list()
 for(i in 1:5){
@@ -80,7 +80,7 @@ list_serie[[1]] %>% createIndicators(full = FALSE) %>%
 
 A continuación se presentan una serie de gráficos para reflejar lo anteriormente expuesto en cuanto a la relación entre los indicadores.
 
-<<echo=FALSE>>=
+<<Descriptive_Plots, echo=FALSE>>=
 var_predict <- list_serie[[1]] %>% 
     predict_tp(tp = 0.02, sl = 0.025, h = 20) %>%
     mutate(class_2 = factor(class)) %>%
@@ -185,7 +185,7 @@ do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
 
 A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace https://rodserr.shinyapps.io/trading-ML/.
 
-<<echo=FALSE>>=
+<<PCA, echo=FALSE>>=
 
 .tp = 0.02
 .sl = 0.025
@@ -288,7 +288,7 @@ fviz_pca_var(pca,
 
 En la figura -- se muestran los gráficos de dispersión entre los componentes, 
 
-<<echo=FALSE>>=
+<<Dispersion_Plots, echo=FALSE>>=
 aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% 
   select(-one_of('class')) %>% 
@@ -351,8 +351,7 @@ grid.arrange(grobs = .scatter_plot, ncol = 4)
 
 En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
 
-<<echo=FALSE>>=
-
+<<Create_Model, echo=FALSE>>=
 list_cm <- list()
 list_fr <- list()
 list_model <- list()
@@ -385,22 +384,37 @@ for(i in 1:length(serie)){
 
 En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
 
-comp1... Macd.Pos-Neg
-comp6... Rezago.Neg
-comp7... ATR.Pos-RM.Neg
-
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[1]]))
+summ_11 <- summary(list_model[[1]][[1]])
+row.names(summ_11$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+
+xtable(summ_11$coefficients)
 @
 \end{center}
 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[2]]))
+summ_12 <- summary(list_model[[1]][[2]])
+row.names(summ_12$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+xtable(summ_12$coefficients)
 @
 \end{center}
 
@@ -408,21 +422,48 @@ xtable(summary(list_model[[1]][[2]]))
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[3]]))
+summ_13 <- summary(list_model[[1]][[3]])
+row.names(summ_13$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+xtable(summ_13$coefficients)
 @
 \end{center}
 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[4]]))
+summ_14 <- summary(list_model[[1]][[4]])
+row.names(summ_14$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+xtable(summ_14$coefficients)
 @
 \end{center}
 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[5]]))
+summ_15 <- summary(list_model[[1]][[5]])
+row.names(summ_15$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+xtable(summ_15$coefficients)
 @
 \end{center}
 
@@ -430,7 +471,16 @@ xtable(summary(list_model[[1]][[5]]))
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 <<echo=FALSE, results=tex>>=
-xtable(summary(list_model[[1]][[6]]))
+summ_16 <- summary(list_model[[1]][[6]])
+row.names(summ_16$coefficients) <- c('(Intercept)',
+                                     'ATR.Pos-Macd.Neg',
+                                     'Macd.Pos-Rezago.Neg', 
+                                     'ADX.Pos-Macd.Neg',
+                                     'Rezago.Pos-ADX.Neg',
+                                     'Bollinger.Pos-Rezago.Neg',
+                                     'Macd.Pos-RSI.Neg',
+                                     'ATR.Pos-RSI.Neg')
+xtable(summ_16$coefficients)
 @
 \end{center}
 
@@ -438,7 +488,7 @@ Se observa que para todos los períodos el ACP arroja componentes que recogen el
 
 \section{Resultados de la simulación}
 
-<<echo=FALSE>>=
+<<simulation_result, echo=FALSE>>=
 df_fr <- data.frame(nrow = 6)
 for(i in 1:length(serie)){
   
@@ -467,10 +517,10 @@ for(i in 1:length(serie)){
 }
 df_fr[,1] <- NULL
 
-df_fr %<>% setNames(serie) %>% 
+df_fr_show <- df_fr %>% setNames(serie) %>% 
   sapply(sprintf, fmt = c("%.0f", "%.0f", "%.0f", "%1.2f%%", "%1.2f%%", "%1.2f%%")) 
 
- rownames(df_fr) <- c('False Buys', 'True Buys', 'N° trades', 'Accuracy', 
+ rownames(df_fr_show) <- c('False Buys', 'True Buys', 'N° trades', 'Accuracy', 
                       'Accumulative Return', 'Max Drawdown')
 @
 
@@ -479,11 +529,11 @@ En la tabla 4.2 se muestran los resultados de la simulación para cada uno de lo
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 <<echo=FALSE, results=tex>>=
-xtable(df_fr, align = rep('c',6))
+xtable(df_fr_show, align = rep('c',6))
 @
 \end{center}
  
-<<echo=FALSE>>=
+<<trades_plot, echo=FALSE>>=
 list_trades_plot <- list()
 for(i in 1:length(serie)){
   
@@ -529,7 +579,7 @@ df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
 
 Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años practicamente sin operaciones.
 
-<<echo=FALSE>>=
+<<return_plot, echo=FALSE>>=
 list_return_plot <- list()
 for(i in 1:length(serie)){
   
@@ -569,6 +619,8 @@ df_return_plot %>%
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
+\subsection{Medidas de Riesgo}
+
 Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 1000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
 
 La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
@@ -578,7 +630,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \item \textbf{Hi}: La secuencia no es producida de manera aleatoria.
 \end{itemize}
 
-<<echo=FALSE>>=
+<<runTest, echo=FALSE>>=
 list_runtest <- list_fr %>% map(function(x){
   
   x[[2]] %>% 
@@ -601,9 +653,37 @@ xtable(table_runstest)
 
 Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechazar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
 
-Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme es posible modelar el riesgo individual de cada trade
+Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme es posible modelar el retorno de capital y calcular VaR y ES para cada índice.
+
+<<Risk_Measure, echo=FALSE>>=
+c <- 20
+d <- 25
+n <- 200
+
+perc_predict <- df_fr["perc_predict",]/100
+
+vares <- list()
+for(p in perc_predict){
   
+  E <- p*c-(1-p)*d
+  sd <- ((E^2) - ((p*(c^2))-(1-p)*(d^2))) %>% sqrt()
+
+  var <- qnorm(0.95)*(n*sd) + n*E
+  es <- (n*sd*dnorm(qnorm(0.95))/0.05) + n*E
   
-  
-  
+  vares %<>% rlist::list.append(list(VaR = var, ES = es)) 
+
+}
+
+VaR_df <- vares %>% map_dfr(data.frame) %>% t()
+colnames(VaR_df) <- serie
+
+@
+
+\begin{center}
+\captionof{table}{VaR y ES para retornos de cada índice}
+<<echo=FALSE, results=tex>>=
+xtable(VaR_df)
+@
+\end{center}
   
