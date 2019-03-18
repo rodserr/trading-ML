@@ -409,11 +409,11 @@ summ_12 <- summary(list_model[[1]][[2]])
 row.names(summ_12$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
                                      'Macd.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
+                                     'Macd.Pos-ADX.Neg',
                                      'Rezago.Pos-ADX.Neg',
                                      'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'RSI.Pos-Macd.Neg',
+                                     'Rezago.Pos-Macd.Neg')
 xtable(summ_12$coefficients)
 @
 \end{center}
@@ -442,11 +442,11 @@ summ_14 <- summary(list_model[[1]][[4]])
 row.names(summ_14$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
                                      'Macd.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
+                                     'RSI.Pos-Rezago.Neg',
                                      'Rezago.Pos-ADX.Neg',
                                      'Bollinger.Pos-Rezago.Neg',
                                      'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'Rezago.Pos-Macd.Neg')
 xtable(summ_14$coefficients)
 @
 \end{center}
@@ -474,12 +474,12 @@ xtable(summ_15$coefficients)
 summ_16 <- summary(list_model[[1]][[6]])
 row.names(summ_16$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
+                                     'Precio.Pos-Rezago.Neg', 
                                      'ADX.Pos-Macd.Neg',
                                      'Rezago.Pos-ADX.Neg',
                                      'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'RSI.Pos-Rezago.Neg',
+                                     'ADX.Pos-Rezago.Neg')
 xtable(summ_16$coefficients)
 @
 \end{center}
@@ -687,3 +687,4 @@ xtable(VaR_df)
 @
 \end{center}
   
+Se puede observar en el cuadro -- como el VaR para cada estrategia varía en función de la precisión del modelo como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto el ES. 
