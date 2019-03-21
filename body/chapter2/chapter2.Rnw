@@ -7,11 +7,11 @@
 
 \subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
 
-Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan diversos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Utilizan el mismo enfoque en cuanto a buscar predecir la subida del precio dado un objetivo sin salir por 'Stop Loss' en un determinado período de tiempo.
+Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan distintos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Utilizan el mismo enfoque buscando predecir la subida del precio dado un objetivo en un determinado período de tiempo.
 
 \subsection{Un enfoque de aprendizaje automático para el comercio automatizado}
 
-Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el activo principal.
+Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el principal.
 
 \subsection{Modelos predictivos para el mercado FOREX}
 

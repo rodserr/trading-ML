@@ -191,7 +191,7 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
 }
 
 longStrat <- function(back_data, cap_inic = 10000, comission = 0, sl = 0.02,
-                      tp = 0.02, sli_pag = 0, horizon = 20){
+                      tp = 0.02, sli_pag = 0, horizon = 20, ps = 10000){
   
   last_balance <- 0
   balance <- rep(0, nrow(back_data))
@@ -224,7 +224,7 @@ longStrat <- function(back_data, cap_inic = 10000, comission = 0, sl = 0.02,
     {
       last_balance <- 1
       last_buy_price <- back_data$close[i] * (1+sli_pag)
-      last_quantity <- 1000
+      last_quantity <- ps
       
       stop_loss <- last_buy_price*(1 - sl)
       take_profit <- last_buy_price*(1 + tp)

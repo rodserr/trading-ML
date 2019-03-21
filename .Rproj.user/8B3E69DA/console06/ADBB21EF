@@ -1,68 +1,4 @@
 
-	[31mdata/S&P_500.csv[m
-
-no changes added to commit (use "git add" and/or "git commit -a")
-]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML [00m$ git add .
-]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML [00m$ git commitm-[K[K -m ''.'.'.'[1P'[1P'[1P's'e'r'i'e' 'p'l'o't'as'[1P'[1P's'
-[master c28882e] serie plots
- Committer: Leonardo <leonardo@leonardo.nutrival-domain.lan>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly. Run the
-following command and follow the instructions in your editor to edit
-your configuration file:
-
-    git config --global --edit
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 56 files changed, 129 insertions(+), 1715 deletions(-)
- rewrite .Rproj.user/8B3E69DA/console06/INDEX001 (100%)
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/14D6AF63-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/159DA2D6-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/199A3FEA-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/1AC03660
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/1AC03660-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/1EC13CB5-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/1FDE423D-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/262F4550-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/38679DB8-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/3B8A60B7-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/3E65BD36-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/40045B7F-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/47E489CC-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/56F0C9E9-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/67B370B6-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/6B35286B-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/71E92766
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/71E92766-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/74E4ED8C-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/770E24A2-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/7E1F020E-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/8BD99F72-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/8FC20AED-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/92BA0134-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/9F023656
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/9F023656-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/A2A1382-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3C8F9BA-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3CE6AEC-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/A3E58773-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/B0C95BDD
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/B0C95BDD-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/CD9D4292
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/CD9D4292-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/CE4F2D32-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/CEFFBDD6-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/D1347EA7-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/D3B5AADB-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/E730FB15-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/EE0B902D-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/F02ECFA2-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/FC6EDCE-contents
- delete mode 100644 .Rproj.user/8B3E69DA/sources/s-4BDB9312/lock_file
  rename data/{Bovespa.csv => BOVESPA.csv} (100%)
  rename data/{FTSE 100.csv => FTSE_100.csv} (100%)
  rename data/{IBEX 35.csv => IBEX_35.csv} (100%)
@@ -1013,3 +949,102 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add. [K[K .
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git push
+Username for 'https://github.com': rodserr
+Password for 'https://rodserr@github.com': 
+Everything up-to-date
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	[32mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[32mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[32mmodified:   body/chapter4/chapter4.Rnw[m
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git commit -m 'updt'
+[master 3f30a2e] updt
+ Committer: Leonardo <leonardo@leonardo.nutrival-domain.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 82 insertions(+), 96 deletions(-)
+ rewrite .Rproj.user/8B3E69DA/console06/INDEX001 (76%)
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git push
+Username for 'https://github.com': rodserr
+Password for 'https://rodserr@github.com': 
+Counting objects: 10, done.
+Delta compression using up to 12 threads.
+Compressing objects:  11% (1/9)   Compressing objects:  22% (2/9)   Compressing objects:  33% (3/9)   Compressing objects:  44% (4/9)   Compressing objects:  55% (5/9)   Compressing objects:  66% (6/9)   Compressing objects:  77% (7/9)   Compressing objects:  88% (8/9)   Compressing objects: 100% (9/9)   Compressing objects: 100% (9/9), done.
+Writing objects:  10% (1/10)   Writing objects:  20% (2/10)   Writing objects:  30% (3/10)   Writing objects:  40% (4/10)   Writing objects:  50% (5/10)   Writing objects:  60% (6/10)   Writing objects:  70% (7/10)   Writing objects:  80% (8/10)   Writing objects:  90% (9/10)   Writing objects: 100% (10/10)   Writing objects: 100% (10/10), 2.03 KiB | 2.03 MiB/s, done.
+Total 10 (delta 5), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/5)   [Kremote: Resolving deltas:  20% (1/5)   [Kremote: Resolving deltas:  40% (2/5)   [Kremote: Resolving deltas:  60% (3/5)   [Kremote: Resolving deltas:  80% (4/5)   [Kremote: Resolving deltas: 100% (5/5)   [Kremote: Resolving deltas: 100% (5/5), completed with 5 local objects.[K
+To https://github.com/rodserr/trading-ML.git
+   2ab203d..3f30a2e  master -> master
+[K]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ gi t statis[K[Kus
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF.env[m
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/INDEX001[m
+	[31mmodified:   body/chapter1/chapter1.Rnw[m
+	[31mmodified:   body/chapter2/chapter2.Rnw[m
+	[31mmodified:   body/chapter3/chapter3.Rnw[m
+	[31mmodified:   body/chapter4/chapter4.Rnw[m
+	[31mmodified:   main-001.pdf[m
+	[31mdeleted:    main-002.pdf[m
+	[31mmodified:   main-003.pdf[m
+	[31mdeleted:    main-004.pdf[m
+	[31mmodified:   main-005.pdf[m
+	[31mmodified:   main-006.pdf[m
+	[31mmodified:   main-007.pdf[m
+	[31mdeleted:    main-008.pdf[m
+	[31mmodified:   main-009.pdf[m
+	[31mmodified:   main-010.pdf[m
+	[31mmodified:   main-011.pdf[m
+	[31mdeleted:    main-012.pdf[m
+	[31mmodified:   main-013.pdf[m
+	[31mmodified:   main-014.pdf[m
+	[31mmodified:   main-015.pdf[m
+	[31mmodified:   main-016.pdf[m
+	[31mdeleted:    main-017.pdf[m
+	[31mmodified:   main-018.pdf[m
+	[31mdeleted:    main-028.pdf[m
+	[31mmodified:   main-029.pdf[m
+	[31mdeleted:    main-030.pdf[m
+	[31mmodified:   main-031.pdf[m
+	[31mmodified:   main-concordance.tex[m
+	[31mmodified:   main.lof[m
+	[31mmodified:   main.log[m
+	[31mmodified:   main.lot[m
+	[31mmodified:   main.pdf[m
+	[31mmodified:   main.synctex.gz[m
+	[31mmodified:   main.tex[m
+	[31mmodified:   main.toc[m
+	[31mmodified:   scripts/functions.R[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ gi t add .

@@ -18,7 +18,6 @@ El FTSE 100 es un índice búrsatil calculado con las cotizaciones de las 100 em
 Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el ecándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rapido crecimiento del índice en los últimos tres años.
 
 <<Index_Graph, echo=FALSE>>=
-
 plot_serie <- list()
 for(i in 1:5){
   .aux_plot <- list_serie[[i]] %>%
@@ -82,7 +81,7 @@ A continuación se presentan una serie de gráficos para reflejar lo anteriormen
 
 <<Descriptive_Plots, echo=FALSE>>=
 var_predict <- list_serie[[1]] %>% 
-    predict_tp(tp = 0.02, sl = 0.025, h = 20) %>%
+    predict_tp(tp = .tp, sl = .sl, h = .h) %>%
     mutate(class_2 = factor(class)) %>%
     select(-one_of('class')) %>% 
     createIndicators(full = FALSE) %>% 
@@ -186,12 +185,6 @@ do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
 A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace https://rodserr.shinyapps.io/trading-ML/.
 
 <<PCA, echo=FALSE>>=
-
-.tp = 0.02
-.sl = 0.025
-.h = 20
-.cut <- 0.5
-
 predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class')) %>% 
@@ -352,6 +345,7 @@ grid.arrange(grobs = .scatter_plot, ncol = 4)
 En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
 
 <<Create_Model, echo=FALSE>>=
+posit_size <- 10000
 list_cm <- list()
 list_fr <- list()
 list_model <- list()
@@ -375,7 +369,7 @@ for(i in 1:length(serie)){
   
   data %<>% cbind(prediction)
   
-  long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h) 
+  long_all <- data %>% longStrat(tp = .tp, sl = .sl, horizon = .h, cap_inic = 100000, ps = posit_size) 
   long_result <- summStrat(long_all)
   
   list_fr %<>% rlist::list.append(long_result)
@@ -484,11 +478,12 @@ xtable(summ_16$coefficients)
 @
 \end{center}
 
-Se observa que para todos los períodos el ACP arroja componentes que recogen el 85\% de la variación. También se aprecia que a medida que aumentamos los años de entrenamiento el número de p-valores menores que 0.05 aumentan, insinuando que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+Se observa que para todos los períodos el ACP arroja 7 componentes que juntos recogen al menos el 85\% de la variación. También se aprecia que a medida que aumentamos los años de entrenamiento el número de p-valores menores que 0.05 aumentan, insinuando que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
 
 \section{Resultados de la simulación}
 
 <<simulation_result, echo=FALSE>>=
+
 df_fr <- data.frame(nrow = 6)
 for(i in 1:length(serie)){
   
@@ -502,9 +497,9 @@ for(i in 1:length(serie)){
     column_to_rownames(var = 'metric')
   
   aux_metric <- list_fr[[i]][[1]] %>%
-    select(c('total_nro_trades', 'perc_predict', 'return_accum', 'max_drawdown')) %>% 
+    select(c('total_nro_trades', 'perc_predict', 'total_net_profit', 'max_drawdown')) %>% 
     mutate(perc_predict = perc_predict*100, 
-           return_accum = return_accum*100,
+           # return_accum = return_accum*100,
            max_drawdown = max_drawdown*100) %>% 
     t() %>% 
     as.data.frame() %>% 
@@ -518,13 +513,13 @@ for(i in 1:length(serie)){
 df_fr[,1] <- NULL
 
 df_fr_show <- df_fr %>% setNames(serie) %>% 
-  sapply(sprintf, fmt = c("%.0f", "%.0f", "%.0f", "%1.2f%%", "%1.2f%%", "%1.2f%%")) 
+  sapply(sprintf, fmt = c("%.0f", "%.0f", "%.0f", "%1.2f%%", "%.2f", "%1.2f%%")) 
 
  rownames(df_fr_show) <- c('False Buys', 'True Buys', 'N° trades', 'Accuracy', 
-                      'Accumulative Return', 'Max Drawdown')
+                      'Net Profit', 'Max Drawdown')
 @
 
-En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los indices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
 
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
@@ -592,7 +587,7 @@ for(i in 1:length(serie)){
   aux_return_plot <- list_fr[[i]][[2]] %>% select(c('buy_date', 'returns'))
   
   aux_firstreturn <- data.frame(timestamp = c(dmy('01/01/2013'), as_date(aux_return_plot$buy_date)),
-                                cap = c(0, cumsum(aux_return_plot$returns)),
+                                cap = c(0, cumsum(aux_return_plot$returns)), #cumprod(aux_return_plot$returns+1)),
                                 index = index) %>% 
     mutate(timestamp = as.POSIXct(timestamp))
   
@@ -613,7 +608,7 @@ df_return_plot %>%
   theme_minimal() +
   theme(legend.position = "top", axis.text.x = element_text(angle=45)) +
   labs(x = NULL, y = 'Retorno Acumulado') +
-  scale_y_continuous(breaks = scales::pretty_breaks(), labels = scales::percent) +
+  scale_y_continuous(breaks = scales::pretty_breaks()) +#, labels = scales::percent) +
   scale_x_datetime(date_breaks = "4 month", date_labels = "%b-%y")
 @
 \caption{Retorno acumulado para cada índice}
@@ -621,7 +616,7 @@ df_return_plot %>%
 
 \subsection{Medidas de Riesgo}
 
-Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 1000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
+Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
 
 La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 
@@ -631,11 +626,14 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \end{itemize}
 
 <<runTest, echo=FALSE>>=
+c <- .tp*posit_size
+d <- .sl*posit_size
+
 list_runtest <- list_fr %>% map(function(x){
   
   x[[2]] %>% 
     select(c('sell_date', 'profits_ind')) %>% 
-    filter(profits_ind %in% c(.tp*1000, -.sl*1000)) %>% 
+    filter(profits_ind %in% c(c, -d)) %>% 
     pull(profits_ind) %>%  
     factor() %>% 
     tseries::runs.test()
@@ -651,17 +649,13 @@ xtable(table_runstest)
 @
 \end{center}
 
-Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechazar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes.
-
-Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme es posible modelar el retorno de capital y calcular VaR y ES para cada índice.
+Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no existen elementos suficientes para rechazar la hipótesis nula de aleatoriedad en la secuencia de los resultados de los trades, por lo que se puede concluir que los trades son independientes. Esta independencia permite asumir que la suma de las variables al tener una muestra suficientemente grande, se distribuye N(0, 1). Se calcula entonces el VaR y ES para cada una de las estrategias.
 
 <<Risk_Measure, echo=FALSE>>=
-c <- 20
-d <- 25
-n <- 200
 
 perc_predict <- df_fr["perc_predict",]/100
 
+n <- 300 %>% sqrt()
 vares <- list()
 for(p in perc_predict){
   
@@ -678,6 +672,8 @@ for(p in perc_predict){
 VaR_df <- vares %>% map_dfr(data.frame) %>% t()
 colnames(VaR_df) <- serie
 
+VaR_df %<>% apply(2, function(x) format(round(x, 2), big.mark = ',', nsmal = 2))
+
 @
 
 \begin{center}
@@ -687,4 +683,4 @@ xtable(VaR_df)
 @
 \end{center}
   
-Se puede observar en el cuadro -- como el VaR para cada estrategia varía en función de la precisión del modelo como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto el ES. 
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\%P500 como "Cuando la estrategia toma como activo el índice S\%P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 1,313.83 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 1,552.12 USD"

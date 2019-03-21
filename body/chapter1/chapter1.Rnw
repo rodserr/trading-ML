@@ -31,15 +31,15 @@ La idea del modelo es predecir los casos en los cuales, el incurrir en una posic
 
 \section{Objetivo General}
 
-Evaluar la eficacia de una estrategia de trading basada en técnicas de aprendizaje estadístico
+Modelar los retornos de la inversión de una estrategia automatizada utilizando Modelo Lineal Generalizado
 
 \section{Objetivos Específicos}
 
 \begin{itemize}
-\item Definir los parámetros de la estrategia, así como los indicadores técnicos a utilizar como variables predictoras
-\item Utilizar Análisis de Componentes Principales como técnica de reducción de la dimensión de variables predictoras
-\item Aplicar Regresión Logística con las componentes arrojadas por el ACP
-\item Desarrollar la metodología Walkforward para tomar en cuenta el dinamismo del mercado en la estrategia
-\item Evaluar la predicción del modelo como estrategia en los índices seleccionados
+\item Generar la variable dicotómica la cual identifica si se materializa un precio objetivo o no
+\item Generar las variables predictoras, en este caso, los indicadores técnicos que luego serán reconstruidos por el Análisis de Componentes Principales
+\item Desarrollar el marco de backtesting con la metodología WalkForward
+\item Simular las compras y ventas en función a la prediccón del modelo 
+\item Calcular el Valor a Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación
 \end{itemize}
 

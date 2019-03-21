@@ -94,6 +94,10 @@ library(purrr)
 library(PerformanceAnalytics)
 library(xtable)
 source('scripts/functions.R')
+.tp = 0.02
+.sl = 0.025
+.h = 20
+.cut <- 0.5
 
 serie <- c('S&P_500', 'NASDAQ', 'NIKKEI_225', 'FTSE_100', 'BOVESPA')
 list_serie <- list()
@@ -160,11 +164,11 @@ Por su parte el modelo propuesto utiliza las interacciones entre las variables p
 
 \subsection{Modelado de los Retornos}
 
-Tal como se establece en la sección -- la variable aleatoria retorno del trade puede obtener 2 posibles valores, si el trade es exitoso toma el valor c con probabilidad p, en caso contrario toma el valor -d con probabilidad 1-p. Para cada activo se puede asumir p como la probabilidad positiva -precisión- obtenida en el modelo. Por su parte c y -d son fijados en 20 y -25 respectivamente, esto viene dado por haber establecido los porcentajes de salida en 0.02 de ganancia y 0.025 de perdida y asumir un capital a riesgo en cada trade de 1000 unidades.
+Tal como se establece en la sección -- la variable aleatoria retorno del trade puede obtener 2 posibles valores, si el trade es exitoso toma el valor c con probabilidad p, en caso contrario toma el valor -d con probabilidad 1-p. Para cada activo se puede asumir p como la probabilidad positiva -precisión- obtenida en el modelo. Por su parte c y -d son fijados en 20 y -25 respectivamente, esto viene dado por haber establecido los porcentajes de salida en 0.02 de ganancia y 0.025 de perdida y asumir un capital a riesgo en cada trade de 10.000 USD
 
-Asumiendo que la ocurrencia de los trades se distribuye de manera uniforme en el tiempo, y con un número de muestra suficientemente grande podemos concluir que
+Asumiendo que la ocurrencia de los trades es una variable aleatoria i.i.d, es posible aplicar el teorema central del límite. Con un número de muestra suficientemente grande, la suma de estas variables se aproxima una distribución normal 0,1.
 
-$$ \frac{\sum x_{i} + nE(x)}{n\sigma_{x}} \sim N(0,1) $$
+$$ \frac{\sum x_{i} + nE(x)}{\sqrt{n}\sigma_{x}} \sim N(0,1) $$
 
 siendo
 
