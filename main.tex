@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{siunitx, booktabs}
 \usepackage{caption}
+\usepackage{hyperref}
 \setlength{\parindent}{4em}
 \setlength{\parskip}{1em}
 
@@ -97,17 +98,17 @@ Este precedente aunado con el rápido crecimiento de la industria tecnológica y
 
 Ahora bien la iniciación al mundo bursátil trae consigo grandes riesgos si no se opera con conocimiento y planificación financiera. Es por esto que cada año los individuos pierden dinero al querer incursionar en el mundo del trading sin la preparación adecuada, lo que por otro lado, le da oportunidad a participantes ya establecidos y con conocimiento de aprovechar esta dinámica. El trading requiere de una planificación exhaustiva en cuanto al manejo de riesgo y aplicación de estrategias, es así como los algoritmos automáticos suponen un manejo ideal de los factores, estableciendo reglas sistemáticas para las operaciones.
 
-En los últimos años y con el impulso de computadores cada vez más potentes, ha surgido un nicho dentro del mercado financiero destinado a compañías que operan con algoritmos automatizados, llamadas comúnmente “Quantitave Funds” -Fondos Cuantitativos-. Según un informe realizado por Credit Suisse Group, estos fondos son los de mayor crecimientos en los últimos años. Los fondos cuantitativos y de inversión pasiva controlan actualmente el 60\% de los activos del mercado, incluso, tan solo el 10\% del volumen de transacciones proviene de inversores discrecionales, según JPMorgan Chase \& Co. en cita de Bloomberg. Es así como compañías como Goldman Sachs han reemplazado gran cantidad de operadores por algoritmos, como dio a conocer en el 2017. La mayoría de las grandes instituciones y proveedores del sector ya cuentan con servicios que cumplen con los requerimientos para la aplicación de los sistemas automatizados, como plataformas con puertos API y datas históricas destinadas a testear algoritmos de trading. En palabras de Frank Thermitus (2018), presidente de la Asociación de Trading Algorítmico de Argentina “No tenemos datos oficiales en Argentina, pero sabemos que la aparición de soporte para este tipo de trading está llamando a un crecimiento de la participación de agentes automatizados”.
+En los últimos años y con el impulso de computadores cada vez más potentes, ha surgido un nicho dentro del mercado financiero destinado a compañías que operan con algoritmos automatizados, llamadas comúnmente “Quantitave Funds” -Fondos Cuantitativos-. Según un informe realizado por Credit Suisse Group, estos fondos son los de mayor crecimientos en los últimos años. Los fondos cuantitativos y de inversión pasiva controlan actualmente el 60\% de los activos del mercado, incluso, tan solo el 10\% del volumen de transacciones proviene de inversores discrecionales, según JPMorgan Chase \& Co. en cita de Bloomberg. De esta manera compañías como Goldman Sachs han reemplazado gran cantidad de operadores por algoritmos, como dio a conocer en el 2017. La mayoría de las grandes instituciones y proveedores del sector ya cuentan con servicios que cumplen con los requerimientos para la aplicación de los sistemas automatizados, como plataformas con puertos API y datas históricas destinadas a testear algoritmos de trading. En palabras de Frank Thermitus (2018), presidente de la Asociación de Trading Algorítmico de Argentina “No tenemos datos oficiales en Argentina, pero sabemos que la aparición de soporte para este tipo de trading está llamando a un crecimiento de la participación de agentes automatizados”.
 
-La mayor ventaja del trading basado en algoritmos es que realiza la labor de inversión de manera sistemática, removiendo el factor emocional de las personas. Apegarse a un estrategia de inverión es vital para lograr resultados consistentes en el trading. Sin embargo, es difícil encontrar estrategias que generen rendimientos positivos todo el tiempo, y aún así los factores emocionales de las personas pueden destruir cualquier plan al enfrentarse a momentos transitorios de pérdida continua, llamados 'drawdowns' en el mundo financiero. El necesitar un plan consistente y sistemático, promueve la utilización de sistemas automatizados dado que elimina cualquier aspecto emocional durante el proceso de la inversión, manteniendo la disciplina durante momentos de alta volatilidad.
+La mayor ventaja del trading basado en algoritmos es que realiza la labor de inversión de manera sistemática, removiendo el factor emocional de las personas. Apegarse a un estrategia de inversión es vital para lograr resultados consistentes en el trading. Sin embargo, es difícil encontrar estrategias que generen rendimientos positivos todo el tiempo, y aún así los factores emocionales de las personas pueden destruir cualquier plan al enfrentarse a momentos transitorios de pérdida continua, llamados 'drawdowns' en el mundo financiero. El necesitar un plan consistente y sistemático, promueve la utilización de sistemas automatizados dado que elimina cualquier aspecto emocional durante el proceso de la inversión, manteniendo la disciplina durante momentos de alta volatilidad.
 
-La otra gran ventaja de los sistemas automatizados es que permite la posibilidad de realizar pruebas del algoritmo en data histórica para entender el comportamiento de la estrategia, este proceso es conocido como 'backtesting'. De esta manera el inversor tiene una idea de como se comportará el sistema en situaciones similares a las testeadas en el backtesting. El backtesting también permite optimizar los parámetros de la estrategia en busca de máximizar los retornos con el menor riesgo, sin embargo, se debe tener cuidado en no sobreoptimizar el sistema. 
+La otra gran ventaja de los sistemas automatizados es que permite la posibilidad de realizar pruebas del algoritmo en data histórica para entender el comportamiento de la estrategia, este proceso es conocido como 'backtesting'. De esta manera el inversor tiene una idea de cómo se comportará el sistema en situaciones similares a las testeadas en el backtesting. El backtesting también permite optimizar los parámetros de la estrategia en busca de maximizar los retornos con el menor riesgo, sin embargo, se debe tener cuidado en no sobre optimizar el sistema. 
 
 \section{Planteamiento del Problema}
 
 Con este panorama es evidente la utilidad que supone la utilización de métodos de aprendizaje estadístico para el desarrollo de algoritmos automáticos. El aprendizaje estadístico, referido en la literatura anglosajona como “Machine Learning” es definido por uno de sus principales exponentes -el profesor de la universidad de Carnegie Mellon- Tom Mitchell como “el campo de estudio que da a las computadoras la habilidad de aprender sin ser explícitamente programada”. En este sentido, expone que “Un algoritmo aprende de la experiencia E con respecto a una tarea T cuyo rendimiento es medido por el indicador P, si su desempeño en T como medida de P mejora con la experiencia E”. Esta referencia a que la “computadora aprende”, no son más que técnicas estadísticas aplicadas a distintos problemas, en donde se busca mejorar el desempeño del modelo calibrando una medida de error.
 
-El desarrollo tecnológico, especialmente el potenciamiento de los procesadores computacionales y el surgimiento del software libre, han provocado un crecimiento en el número de profesionales que aplican el “Machine Learning”. Esto ha ocasionado que innumerables problemas sean abordados con estas técnicas, desde transformar historiales de compras de consumidores en enfoques publicitario, ó intentar imitar el razonamiento humano en una tarea en específico, como jugar ajedrez.
+El desarrollo tecnológico, especialmente el potenciamiento de los procesadores de información y el surgimiento del software libre, han provocado un crecimiento en el número de profesionales que aplican el “Machine Learning”. Esto ha ocasionado que innumerables problemas sean abordados con estas técnicas, desde transformar historiales de compras de consumidores en enfoques publicitario, ó intentar imitar el razonamiento humano en una tarea en específico, como jugar ajedrez.
 
 En la presente investigación se busca utilizar las técnicas de aprendizaje estadístico para realizar predicciones sobre el comportamiento de un activo financiero en el corto  plazo, intentando capitalizar este conocimiento. Ahora bien, existe un debate sobre si las inversiones activas, son realmente efectivas. La principal razón de la polémica, es debido a la complejidad que involucra realizar una predicción con tan poco margen de error y durante un período de tiempo sostenido. Aunado de las múltiples fuentes de riesgo concernientes a los portafolios de inversión, sería impensable tratar de definir en una primera investigación una estrategia eficaz para el desarrollo del trading.
 
@@ -146,15 +147,15 @@ Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en 
 
 \subsection{Modelos predictivos para el mercado FOREX}
 
-Huerta López utiliza dos enfoques para el trading automático en el mercado FOREX: los modelos de series de tiempo y los modelos basados en técnicas de aprendizaje automático. Por un lado aplica modelos ARIMA y métodos de automatización para su implementación basados en criterios de información -BIC y AIC-. Para el enfoque basado en aprendizaje automático implementa diversos algoritmos de KNN y Árboles de desición, optimizando los algoritmos en la distintas horas del día utilizando datos del par EUR-USD. Señala que los modelos de aprendizaje obtienen mejor predicción que los modelos ARIMA, acercandose a un 60\% de precisión.
+Huerta López utiliza dos enfoques para el trading automático en el mercado FOREX: los modelos de series de tiempo y los modelos basados en técnicas de aprendizaje automático. Por un lado aplica modelos ARIMA y métodos de automatización para su implementación basados en criterios de información -BIC y AIC-. Para el enfoque basado en aprendizaje automático implementa diversos algoritmos de KNN y Árboles de decisión, optimizando los algoritmos en la distintas horas del día utilizando datos del par EUR-USD. Señala que los modelos de aprendizaje obtienen mejor predicción que los modelos ARIMA, acercándose a un 60\% de precisión.
 
 \subsection{Un Análisis de estrategias de trading técnico}
 
-Kadida Shagilla profundiza sobre las alternativas a la hipótesis del mercado eficiente y como se relacionan el riesgo y los retornos de una estrategia de trading. Simula tres portafolios conformados por una muestra de acciones de tres mercados Norteamericanos y algunos mercados emergentes de Africa. El estudio demuestra como la relación 'book-to-market ratio', la liquidez y los acuerdos institucionales pueden explicar el exceso de ganancia a partir del análisis técnico. 
+Kadida Shagilla profundiza sobre las alternativas a la hipótesis del mercado eficiente y cómo se relacionan el riesgo y los retornos de una estrategia de trading. Simula tres portafolios conformados por una muestra de acciones de tres mercados Norteamericanos y algunos mercados emergentes de África El estudio demuestra cómo la relación 'book-to-market ratio', la liquidez y los acuerdos institucionales pueden explicar el exceso de ganancia a partir del análisis técnico. 
 
 \subsection{Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del Análisis Técnico Bursátil}
 
-Cristián Fernández introduce un sistema autómatico para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de desición y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios activos que operan en el mercado bursátil argentino.
+Cristián Fernández introduce un sistema automático para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de decisión y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios activos que operan en el mercado bursátil argentino.
 
 
 \section{Bases Teóricas}
@@ -164,31 +165,31 @@ Cristián Fernández introduce un sistema autómatico para el reconocimiento de 
 
 La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
 
-Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competirdores intentarán ajustar sus posiciones lo más rapido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
+Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competidores intentarán ajustar sus posiciones lo más rápido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
 
 Eficiencia débil, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. Eficiencia media, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. Eficiencia fuerte, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales al de los mercados.
 
-Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y dispustada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones cesgada de los individuos, formuladas por la manera en como estos responden ante nueva información.
+Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y disputada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones sesgada de los individuos, formuladas por la manera en cómo estos responden ante nueva información.
 
-Los inversores interpretan la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo, lo que sugiere que la reacción del inversor a la misma noticia será distinta. Day and Wangr (2002) argumentan que si los precios son continuamente influenciados por estas interpretaciones erróneas, los movimientos contrarios del precio pueden ser predecidos estudiando la data histórica. Sugieren también que mientras más extremo sea el movimiento incial, mayor será el ajuste de precio.
+Los inversores interpretan la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo, lo que sugiere que la reacción del inversor a la misma noticia será distinta. Day and Wangr (2002) argumentan que si los precios son continuamente influenciados por estas interpretaciones erróneas, los movimientos contrarios del precio pueden ser predecidos estudiando la data histórica. Sugieren también que mientras más extremo sea el movimiento inicial, mayor será el ajuste de precio.
 
-Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos de colapso del mercado como en la caída del mercado búrsatil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra como estos comportamientos pueden resultar en ineficiencias del mercado.
+Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos de colapso del mercado como en la caída del mercado bursátil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra cómo estos comportamientos pueden resultar en ineficiencias del mercado.
 
-Aglunos académicos como Hong y Stein's (1999) categorizan a los inversores en $Informados$ y $No informados$. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
+Algunos académicos como Hong y Stein's (1999) categorizan a los inversores en Informados y No informados. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
 
-Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competires, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, Los avances técnologicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados. Shagilla Kadida (2006)
+Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competidores, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, Los avances tecnológicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados. Shagilla Kadida (2006)
 
 \subsection{Análisis Técnico}
 
-Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extrer patrones de conducta. A la primera técnica se le llama Análisis Fundamental y el segundo Análisis Técnico. El Análisis Fundamental está mas asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
+Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extraer patrones de conducta. A la primera técnica se le llama Análisis Fundamental y el segundo Análisis Técnico. El Análisis Fundamental está más asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
 
 El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro mediante el uso de gráficos. Según J.J.Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico: Los movimientos del mercado lo descuentan  todo, los precios se mueven por tendencias y la historia se repite.
 
-Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es mas que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
+Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es más que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
 
-El análista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
+El analista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
 
-A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en t calculada con p observaciones enteriores con respecto a la serie de precio X:
+A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en t calculada con p observaciones anteriores con respecto a la serie de precio X:
 
 \begin{itemize}
 \item Retornos con respecto al precio de Cierre.
@@ -198,7 +199,7 @@ $$ R_{t} = \frac{Pcierre_{t}}{Pcierre_{t-1}-1}$$
 \item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
 
 $$ RSI_{t} = 100 - \frac{100}{1 + RS_{t}} \qquad 
-donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{Pérdida\ Promedio\ en\ n\ observaciones}$$
+donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{Perdida\ Promedio\ en\ n\ observaciones}$$
 
 \item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
 
@@ -214,7 +215,7 @@ TR_{t} = Max\ (Pmax - Pmin, |Pmax - Pc_{t-1}|, |Pmin - Pc_{t-1}|)$$
 
 $$ ADX_{t} =  100\ EMA_{(t, 14)}(|+DI - -DI|)$$
 
-\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media móvil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
 
 $$ Banda Superior_{t} = EMA{(t, 14)}(Pcierre) + 2,5\sigma \qquad 
 Banda Inferior_{t} = EMA{(t, 14)}(Pcierre) - 2,5\sigma $$
@@ -233,26 +234,26 @@ En escencia, el aprendizaje automático refiere a un conjunto de enfoques para e
 
 \subsubsection{Métodos Paramétricos vs No Paramétricos}
 
-La mayoría de los metodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. Primero se asume que los datos toman una forma específica, una vez asumida la forma que debe tener la función $f$, el problema de la estimación se simplifica. al seleccionar el modelo se procede a ajustar el modelo en la data de entrenamiento. Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que el modelo escogido puede no ser apropiado a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
+La mayoría de los métodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. Primero se asume que los datos toman una forma específica, una vez asumida la forma que debe tener la función $f$, el problema de la estimación se simplifica. al seleccionar el modelo se procede a ajustar el modelo en la data de entrenamiento. Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que el modelo escogido puede no ser apropiado a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
 
-Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, estos modelos buscan estimar $f$ acercandola lo mas posible a los datos observados. Esto les permite evadir el problema de ajustarse a alguna forma en específico. Sin embargo, al no reducir el problema a estimar unos parámetros sino uilizar los datos directamente, se necesita un gran numero de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además en general la iterpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización
+Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, estos modelos buscan estimar $f$ acercandola lo más posible a los datos observados. Esto les permite evadir el problema de ajustarse a alguna forma en específico. Sin embargo, al no reducir el problema a estimar unos parámetros sino utilizar los datos directamente, se necesita un gran número de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además en general la interpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización
 
 \subsubsection{Aprendizaje Supervisado vs No Supervisado}
 
-Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertivamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM, GAM, etc. 
+Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertadamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM, GAM, etc. 
 
-En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es buscar entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociasión. Los primeros intentan describir las agrupaciones subyacientes en los datos, como por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociasion buscan descrubrir patrones inehentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$.
+En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es buscar entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociación Los primeros intentan describir las agrupaciones subyacentes en los datos, como por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociación buscan descubrir patrones inherentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$.
 
-\subsubsection{Regresión vs Clasificasión}
+\subsubsection{Regresión vs Clasificación}
 
-Las variables pueden ser divididas entre cuantitativas ó cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numericos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitavia se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
+Las variables pueden ser divididas entre cuantitativas o cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numéricos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitativa se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
 
 \subsubsection{Compensasión entre sesgo y varianza}
 
 
 \subsection{Regresión Logística}
 
-Los modelos Lineales Generalizados asumen que exite una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
+Los modelos Lineales Generalizados asumen que existe una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
 
 $$ Y \approx \beta_{0} + \beta_{1}X_{1} + ... + \beta_{j}X_{j} $$
 
@@ -268,19 +269,19 @@ Despejando se obtiene
 
 $$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
 
-El lado izquierdo de la ecuación puede tomar valores entre 0 e $\infty$, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logarítmo en ambos miembros de la ecuación se obtiene la función logit
+El lado izquierdo de la ecuación puede tomar valores entre 0 e $\infty$, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logaritmo en ambos miembros de la ecuación se obtiene la función logit
 
 $$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
 
-Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una linea recta, $\beta$ no corresponde a un cambio en $p(X)$ asosiado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
+Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una línea recta, $\beta$ no corresponde a un cambio en $p(X)$ asociado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
 
 \subsubsection{Máxima Verosimilitud}
 
-Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el metódo de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de prediccion para cada individuo, utilizando (formula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
+Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el método de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de predicción para cada individuo, utilizando (fórmula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
 
 $$ l(\beta) = \prod_{i=1}^{j}{P(x_{i} / \beta)} $$
   
-Por conveniencia se  trabaja con el logarítmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
+Por conveniencia se  trabaja con el logaritmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
 
 $$ l(\beta) = \sum_{i=1}^{N} \log{P(y_{i}/ x_{i}; \beta)} $$
 
@@ -296,9 +297,9 @@ Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización l
 
 \subsection{Análisis de Componentes Principales}
 
-Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los metodos no lineales. Exiten técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
+Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los métodos no lineales. Existen técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
 
-Una clase de métodos es el enfoque de $Reducción de la Dimensión$, el cual involucra proyectar los p predictores en M-dimensiones o componentes, donde $M < p$. Esto se logra transformando los predictores en combinaciones lineales que recogan prate de la información, estas $M$ componentes o dimensiones son entonces utilizadas como nuevos predictores en el modelo de regresión. Esto es:
+Una clase de métodos es el enfoque de Reducción de la Dimensión, el cual involucra proyectar los p predictores en M-dimensiones o componentes, donde $M < p$. Esto se logra transformando los predictores en combinaciones lineales que recogen parte de la información, estas $M$ componentes o dimensiones son entonces utilizadas como nuevos predictores en el modelo de regresión. Esto es:
 
 $$ Z_{m} = \sum_{i = 1}^{p} \phi_{im}X_{i} $$
 
@@ -306,45 +307,45 @@ Para cualquier constante $ \phi_{1m}, \phi_{2m}, ..., \phi_{pm}, m = 1, ..., M $
 
 $$ y_{i} = \theta_{0} + \sum_{m = 1}^{M} \theta_{m}z_{im} + \epsilon_{i},  \qquad i = 1, ..., n $$
 
-En situaciones donde $p$ es relativamente grande con relación a n, seleccionar un valor de $M << p$ puede reducir considerablemente la varianzade los coeficientes. Es de notar que si $M = p$, ajustar el modelo con las combinanciones lineales de los coeficientes originales es equivalente a ajustar el modelo original.
+En situaciones donde $p$ es relativamente grande con relación a n, seleccionar un valor de $M << p$ puede reducir considerablemente la varianza de los coeficientes. Es de notar que si $M = p$, ajustar el modelo con las combinaciones lineales de los coeficientes originales es equivalente a ajustar el modelo original.
 
-El Análisis de Componentes Principales (ACP) es una técnica que reduce la dimensión de una matríz de datos. La dirección del primer componente principal es aquella en la cual exista mayor variación entre las observaciones, es decir
+El Análisis de Componentes Principales (ACP) es una técnica que reduce la dimensión de una matriz de datos. La dirección del primer componente principal es aquella en la cual exista mayor variación entre las observaciones, es decir
 
 $$ Z_{1} = \phi_{11}X_{1} + \phi_{21}X_{2} + ... + \phi_{p1}X_{p} $$
 
-donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados $loadings$, en donde el subíndice representa el número de componente. Juntos, los $loadings$ forman el vector de loading de componente principar $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
+donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados $loadings$, y el subíndice representa el número de componente. Juntos, los $loadings$ forman el vector de $loadings$ $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
 
-Dado una matriz de datos $X$ de $n x p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores, llamadas $scores$
+Dado una matriz de datos $X$ de $n$ x $p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores que contiene la mayor varianza, llamadas $scores$.
 
 $$ z_{i1} = \phi_{11} x_{i1} + \phi_{21} x_{i2} + ... + \phi_{p1} x_{ip} $$
 
-que contiene la mayor varianza. El primer vector de loadings de componente principal resuelve el problema de optimización
+El primer vector de loadings de componente principal resuelve el problema de optimización
 
 $$ \max_{\phi_{11}, ..., \phi_{p1}}
 \frac{1}{n} \sum_{i = 1}^{n} (\sum_{j=1}^{p} \phi_{j1} x_{ij})^2
 \qquad sujeto \ a  \sum_{j=1}^{p} \phi_{j1}^{2} = 1
 $$
 
-El problema de máximización en (formula de arriba) se soluciona mediante la descomposición de los eigenvalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
+El problema de maximización en (fórmula de arriba) se soluciona mediante la descomposición de los eigenvalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
 
 $$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2 + ... + \phi_{p2}x_{ip}} $$
 
-donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlasionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
+donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlacionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
 
-El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinearidad entre las variables. 
+El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinealidad entre las variables. 
 
 \subsection{Matríz de Confusión}
 
-En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
+En los problemas de clasificación se utiliza la matriz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=2.5in]{images/confusion_matrix}
 \end{center}
-\caption{Matríz de Confusión}
+\caption{Matriz de Confusión}
 \end{figure}
 
-La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como $Precisión$.
+La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como Precisión.
 
 $$ Precisión = \frac{VP}{VP + FN} $$
 
@@ -352,7 +353,7 @@ $$ Precisión = \frac{VP}{VP + FN} $$
 
 \subsubsection{Valor en Riesgo}
 
-El valor en riesgo ó VaR por sus siglas en ingles -Value at Risk- es una medida común del riesgo implementado en instituciones financieras. Se define como la pérdida en un portafolio, tal que existe una probabilidad $p$ que las pérdidas sean iguales o mayores que el VaR y una probabilidad $(1-p)$ que sean menores que el VaR, en un tiempo determinado. Este valor se corresponde con el cuantíl de la distribución de pérdida. 
+El valor en riesgo ó VaR por sus siglas en inglés -Value at Risk- es una medida común del riesgo implementado en instituciones financieras. Se define como la pérdida en un portafolio, tal que existe una probabilidad $p$ que las pérdidas sean iguales o mayores que el VaR y una probabilidad $(1-p)$ que sean menores que el VaR, en un tiempo determinado. Este valor se corresponde con el cuantil de la distribución de pérdida. 
 
 $$ Pr(Q \leq -VaR(p)) = p $$
 
@@ -362,7 +363,7 @@ $$ p = \int_{-\infty}^{-VaR(p)}f_{q}(x)\ dx $$
 
 siendo $f_{q}(x)$ la función de densidad de la variable aleatoria pérdida/ganancia del portafolio denotada por Q.
 
-Aunque el VaR es utilizado comunmente en instituciones financieras e incluso exigido en alunas regulaciones como Basilea, existen varias críticas en cuanto a su implementación. Una de las críticas es su inconclusividad en cuando al tamaño de la pérdida, en este sentido, el VaR es un cuantíl de la distribución que establece un umbral en cuanto a la posible pérdida en un período, dado un nivel de significancia. Jon Danielsson (2011)
+Aunque el VaR es utilizado comúnmente en instituciones financieras e incluso exigido en algunas regulaciones como Basilea, existen varias críticas en cuanto a su implementación. Una de las críticas es su inconclusividad en cuanto al tamaño de la pérdida, en este sentido, el VaR es un cuantil de la distribución que establece un umbral en cuanto a la posible pérdida en un período, dado un nivel de significancia. Jon Danielsson (2011)
 
 \subsubsection{Pérdida Esperada}
 
@@ -370,7 +371,7 @@ La pérdida esperada mejor conocida conocida como 'Expected Shortfall' -ES- es u
 
 $$ ES = E(Q/Q \leq VaR(p)) $$ 
 
-ó utilizando la formulación matemática de esperanza
+ó, utilizando la formulación matemática de esperanza
 
 $$ ES = \int_{-\infty}^{-VaR(p)} xf_{VaR}(x)\ dx $$
 
@@ -401,13 +402,13 @@ Los datos fueron extraídos del portal www.investing.com, uno de los portales fi
 
 \subsection{Series de Índices Bursátiles}
 
-El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice búrsatil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
-En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumeto en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumento en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
 
 \subsection{Variable Dependiente}
 
-Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializará en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
+Las decisiones de entrada en el trading pueden ser producto de muchos factores, en la presente investigación se analiza el enfoque donde se define un porcentaje objetivo de ganancia y se intenta predecir si dicho objetivo se materializa en un futuro cercano, sin que se haya concretado una venta por Stop Loss. Este enfoque reduce la toma de decisión en una variable tal que:
 
 $$
 P_{X}(x) = 
@@ -429,36 +430,36 @@ En la práctica se identifica los registros que cumplen con esta condición aña
 
 Los indicadores a utilizar fueron seleccionados buscando recoger la mayor información posible sobre el precio del activo, se pueden resumir en tres categorías: tendencia, momentum y volatilidad.
 
-No es de interés en la presente investigación describir como funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asciación. 
+No es de interés en la presente investigación describir cómo funciona cada indicador para la toma de decisiones en el trading basado en fundamentos técnicos. Cada indicador puede utilizarse de distintas maneras, calcularse con distintos parámetros y asociarse a discreción del trader, lo que conlleva a un sin fin de reglas de asociación 
 
-Lo que busca la investigación es utilizar la relación entre los indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores. Algunos de los indicadores inicialmente escogidos para el modelo fueron excluidos debido a la alta correlación que presentaban. A continuación se presentan los indicadores utilizados:
+Lo que busca la investigación es utilizar la relación entre los indicadores como variables independientes que ayuden al modelo a predecir oportunidades de entradas. En este sentido se asume la existencia de una dinámica local del mercado que puede ser predecida con ayuda de estos indicadores. Algunos de los indicadores inicialmente escogidos para el modelo fueron excluidos debido a la alta correlación que presentan. A continuación se exponen los indicadores utilizados:
 
 \begin{itemize}
 \item Retornos con respecto al precio de Cierre.
 \item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
 \item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un EMA de 9 períodos. 
 \item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
-\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media movil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
+\item Bandas de Bollinger, el cual es un indicador de tendencia y volatilidad, utiliza dos bandas calculadas a partir de una media móvil con desviaciones estándar. Se utilizó en base a 14 períodos y una desviación de 2.5.
 \item ATR (Average True Range), es un indicador de volatilidad calculado a partir de los máximos y mínimos de un período, en este caso 14.
 \end{itemize}
 
 Estos indicadores están fuertemente correlacionados por lo que se decidió, disminuir el número de variables dejando solo las más representativas de cada indicador.
 
-Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, exite una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detallará más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
+Ahora bien, la idea base de la investigación era utilizar los valores de cada indicador como variables predictora. Dado que el cálculo de todos los indicadores provienen de la misma variable -precio del activo, en la mayoría de los casos precio de cierre-, existe una alta colinealidad entre ellos, la idea de utilizar el ACP es precisamente para enfrentar este problema como se detalla más adelante. Sin embargo, es de notar que los valores de los indicadores por sí solos no proveen un poder predictivo, lo que realmente usa el trader son las asociaciones entre indicadores para encontrar patrones. 
 
-Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordo agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
+Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordó agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
 
 \subsection{Validación Cruzada en Series de Tiempo}
 
-La validación Cruzada es un metódo de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
 
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condicion de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 \subsection{WalkForward Backtesting}
 
-Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra seccion es destinada a validación, para elegir los parámetros óptimos, y finalmente se testeaba el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamísmo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
+Al principio de la investigación se implementó el método de entrenamiento, validación y prueba comúnmente utilizado, en donde la mayor parte de la data es destinada a entrenamiento del modelo, otra sección es destinada a validación, para elegir los parámetros óptimos, y finalmente se aplica el modelo en la data de prueba. Sin embargo este tipo de metodología en opinión del investigador no es el más óptimo para desarrollar el presente modelo, dado el dinamismo de los mercados bursátiles la estrategia no puede permanecer estática en el tiempo.
 
-Para contrarestar esta situación se opto por el método de $backtesting Walkforward$, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamísmo del mercado permitiendole al modelo -y por ende a la estrategia- utilizar el período mas reciente con respecto al cual será implementado. En la presente figura se ilustra la metodología implementada.
+Para contrarrestar esta situación se optó por el método de backtesting Walkforward, el cual consiste en entrenar el modelo en un período base de data, en este caso los primeros 4 años de estudio, posteriormente se aplica la estrategia en el año siguiente y se obtiene los primeros resultados. Luego este año de aplicación es incluído en la data de entrenamiento -es decir, la data de entrenamiento pasa a ser de 5 años- y se evalúa el modelo en el siguiente año. De esta manera, contemplamos el dinamismo del mercado permitiéndole al modelo -y por ende a la estrategia- utilizar el período más reciente con respecto al cual será implementado. En la presente figura 3.1 se ilustra la metodología implementada.
 
 \begin{figure}[ht]
 \begin{center}
@@ -467,9 +468,9 @@ Para contrarestar esta situación se opto por el método de $backtesting Walkfor
 \caption{Metodología WalkForward}
 \end{figure}
 
-Otra de las caracteristicas de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible cesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones óptimas den los mejores resultados no asegura que se replique en el siguiente año.
+Otra de las características de la metodología que se modificó fue la elección de los parámetros óptimos. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismo parámetros. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible sesgo de sobreoptimización. El hecho de que en un año determinado una configuracione de los mejores resultados no asegura que se replique en el siguiente año.
 
-La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo mas corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data imbalanceada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la invstigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
+La selección de los parámetros debería ser un estudio previo de la serie financiera a testear. Evidentemente al seleccionar un período de tiempo más corto se obtendrán menos observaciones que cumplan con el patrón por lo tanto se estaría en presencia de un problema de data desequilibrada que debe tener un tratamiento distinto. Por otro lado el utilizar un horizonte mayor no representa gran cambio en el número de ocurrencias, pero sí en el caso de que la transacción quede abierta -hay recordar que h representa una condición de salida para la estrategia de no ocurrir el target ni el stop loss-. La estrategia implementada en la investigación toma un horizonte de 20 períodos ya que este valor representa un umbral para la ocurrencia del objetivo.
 
 
 \begin{figure}[H]
@@ -482,13 +483,13 @@ La selección de los parámetros debería ser un estudio previo de la serie fina
 
 \subsection{Reducción de la dimensión con ACP}
 
-La técnica que utiliza el ánalisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matríz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales. Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximizen la variación.
+La técnica que utiliza el análisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matriz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximicen la variación.
 
-Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen al rededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. Para el modelo se estableció que en cada período de entrenamiento se utilizaría la cantidad de componentes necesarias para explicar el 85\% de la variación de la matríz de datos.
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen alrededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. Para el modelo se estableció que en cada período de entrenamiento se utilizará la cantidad de componentes necesarias para explicar el 85\% de la variación de la matriz de datos.
 
 \subsection{Modelado de los Retornos}
 
-Tal como se establece en la sección -- la variable aleatoria retorno del trade puede obtener 2 posibles valores, si el trade es exitoso toma el valor c con probabilidad p, en caso contrario toma el valor -d con probabilidad 1-p. Para cada activo se puede asumir p como la probabilidad positiva -precisión- obtenida en el modelo. Por su parte c y -d son fijados en 20 y -25 respectivamente, esto viene dado por haber establecido los porcentajes de salida en 0.02 de ganancia y 0.025 de perdida y asumir un capital a riesgo en cada trade de 10.000 USD
+Tal como se establece en la sección -- la variable aleatoria retorno del trade puede obtener 2 posibles valores, si el trade es exitoso toma el valor c con probabilidad p, en caso contrario toma el valor -d con probabilidad 1-p. Para cada activo se puede asumir p como la probabilidad positiva -precisión- obtenida en el modelo. Por su parte c y -d son fijados en 20 y -25 respectivamente, esto viene dado por haber establecido los porcentajes de salida en 0.02 de ganancia y 0.025 de pérdida y asumir un capital a riesgo en cada trade de 10.000 USD
 
 Asumiendo que la ocurrencia de los trades es una variable aleatoria i.i.d, es posible aplicar el teorema central del límite. Con un número de muestra suficientemente grande, la suma de estas variables se aproxima una distribución normal 0,1.
 
@@ -498,7 +499,7 @@ siendo
 
 $$ E(x) = pc - (1-p)d \qquad y \qquad \sigma_{x} = (pc - (1-p)d)^{2} - (pc^{2} - (1-p)d^{2}) $$
 
-Es posible modelar los retornos producidos por la estrategia y calcular el valor a riesgo -VaR- y pérdida esperada -ES- dado un número de operaciones. Tanto el VaR como el ES son medidas comunmente utilizadas para representar el riesgo de pérdida en un período de tiempo determinado, en este caso, se establecerá en vez de tiempo, un número de trades cerrados por la estrategia.
+Es posible modelar los retornos producidos por la estrategia y calcular el valor a riesgo -VaR- y pérdida esperada -ES- dado un número de operaciones. Tanto el VaR como el ES son medidas comúnmente utilizadas para representar el riesgo de pérdida en un período de tiempo determinado, en este caso, se establecerá en vez de tiempo, un número de trades cerrados por la estrategia.
 
 Dado que el retorno de la estrategia se distribuye N(0, 1), se definen el VaR y ES cómo
 
@@ -506,9 +507,9 @@ $$ VaR_{\alpha} = \sigma \Phi^{-1}(\alpha) + \mu $$
 
 $$ ES_{\alpha} = \sigma \frac{\phi(\Phi^{-1}(\alpha))}{1-\alpha} + \mu $$
 
-En la presente investigación se establecen $n = 200$ y $\sigma = 0.95$. Es decir que el VaR puede interpretarse como: "Existe una probabilidad del 5\% que la estrategia genere una pérdida igual ó menor que $VaR_{\alpha}$, luego de 200 trades realizados".
+En la presente investigación se establecen $n = 200$ y $\sigma = 0.95$. Es decir que el VaR puede interpretarse como: ''Existe una probabilidad del 5\% que la estrategia genere una pérdida igual ó menor que $VaR_{\alpha}$, luego de 200 trades realizados''.
 
-Mientras que el ES se interpreta como: "En caso de que la estrategia genere una pérdida mayor que $VaR_{\alpha}$ luego de 200 trades, se espera que ésta pérdida sea de $ES_{\alpha}$"
+Mientras que el ES se interpreta como: ''En caso de que la estrategia genere una pérdida mayor que $VaR_{\alpha}$ luego de 200 trades, se espera que ésta pérdida sea de $ES_{\alpha}$''
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -518,15 +519,15 @@ Mientras que el ES se interpreta como: "En caso de que la estrategia genere una 
 
 \subsection{Análisis de los Índices}
 
-En la figura -- se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que en general los cinco mercados tienen tendencia a la alta. En general para el S\&P y NASDAQ se aprecia una menor variabilidad que en los demás índices.
+En la figura 4.1 se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que en general los cinco mercados tienen tendencia a la alta. En general para el S\&P y NASDAQ se aprecia una menor variabilidad que en los demás índices.
 
 Las curvas del S\&P y NASDAQ son muy parecidas ya que ambas representan cotizaciones de las mayores empresas americanas. Se aprecia un crecimiento sostenido desde el año 2009, con algunos períodos mas estables, a principios del 2016 -por la polémica victoria de Donald Trump como presidente- y en 2018 provocado por el miedo a un incremento en las tasas de interés por parte de la Reserva Federal y las tensas negociaciones con China.
 
-Por su parte el NIKKEI es el índice búrsatil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyecto dinero en la economía a gran escala.
+Por su parte el NIKKEI es el índice bursátil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyectó dinero en la economía a gran escala.
 
-El FTSE 100 es un índice búrsatil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros indices. Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
+El FTSE 100 es un índice bursátil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros índices Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
 
-Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el ecándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rapido crecimiento del índice en los últimos tres años.
+Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el escándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rápido crecimiento del índice en los últimos tres años.
 
 
 \begin{figure}[H]
@@ -539,7 +540,7 @@ Por último el índice BOVESPA representa las 50 empresas de mayor capitalizaci�
 
 \subsection{Análisis de las Variables Predictoras}
 
-En la figura -- se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura -- se muestra las correlaciones de las variables definitivas
+En la figura 4.2 se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura 4.3 se muestra las correlaciones de las variables definitivas
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.6\textwidth}
@@ -579,14 +580,14 @@ A continuación se presentan una serie de gráficos para reflejar lo anteriormen
 
 \subsection{Resultados del ACP}
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace https://rodserr.shinyapps.io/trading-ML/.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}.
 
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
 
 La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
 
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 Se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -595,7 +596,7 @@ Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la
 \caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
 
-La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
+La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matriz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura 4.8 se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -604,9 +605,9 @@ La contribución de las variables representan la variabilidad contenida en un co
 \caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
 \end{figure}
 
-La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
+La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia cómo las interacciones que predominan en ambos componentes están relacionadas con el indicador MACD.
 
-La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
+La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura 4.9 se muestra los valores de $Cos^2$ para las primeras 2 componentes
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -619,11 +620,11 @@ El gráfico de correlación ó Factor map muestra la relación entre las variabl
 
 \begin{itemize}
 \item Las variables positivamente correlacionadas se encuentran agrupadas entre sí
-\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos.
+\item Las variables negativamente correlacionadas se posicionan en cuadrantes opuestos.
 \item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
 \end{itemize}
 
-En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -632,7 +633,7 @@ En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color 
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-En la figura -- se muestran los gráficos de dispersión entre los componentes, 
+En la figura 4.11 se muestran los gráficos de dispersión entre los componentes, 
 
 
 \begin{figure}[H]
@@ -658,7 +659,7 @@ En la figura -- se muestran los gráficos de dispersión entre los componentes,
 
 \section{Coeficientes del modelo}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
+En el presente capítulo se realiza la descripción de los resultados obtenidos después de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
 
 
 En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
@@ -667,7 +668,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -689,7 +690,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -712,7 +713,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -734,7 +735,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -756,7 +757,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -779,7 +780,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -808,7 +809,7 @@ En la tabla 4.2 se muestran los resultados de la simulación para cada uno de lo
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -826,7 +827,7 @@ False Buys & 21 & 61 & 99 & 53 & 128 \\
 \end{table}\end{center}
  
 
-En la figura 4.1 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
+En la figura 4.12 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en pérdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
@@ -835,7 +836,7 @@ En la figura 4.1 se observa los trades realizados por la simulación según el r
 \caption{Clasificación de la simulación}
 \end{figure}
 
-Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años practicamente sin operaciones.
+Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
 
 
 \begin{figure}[H]
@@ -847,7 +848,7 @@ Se observa como en la simulación utilizando el índice BOVESPA, los trades posi
 
 \subsection{Medidas de Riesgo}
 
-Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
+Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades sólo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comúnmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
 
 La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 
@@ -860,7 +861,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -882,7 +883,7 @@ Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no e
 \begin{center}
 \captionof{table}{VaR y ES para retornos de cada índice}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlllll}
@@ -923,7 +924,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -946,7 +947,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -967,7 +968,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -988,7 +989,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1010,7 +1011,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1031,7 +1032,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1056,7 +1057,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1079,7 +1080,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1100,7 +1101,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1121,7 +1122,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1143,7 +1144,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1164,7 +1165,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1190,7 +1191,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1213,7 +1214,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1234,7 +1235,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1255,7 +1256,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1277,7 +1278,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1298,7 +1299,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1324,7 +1325,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1347,7 +1348,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1368,7 +1369,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1389,7 +1390,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1411,7 +1412,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1432,7 +1433,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Thu Mar 21 17:40:33 2019
+% Fri Mar 22 11:32:04 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}

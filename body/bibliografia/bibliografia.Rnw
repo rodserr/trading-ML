@@ -24,4 +24,9 @@
 
 \item Murphy, J.J. (1999). \textit{Análisis Técnico de los Mercados Financieros}. New York Institute of Finance. New York: Gestión 2000.
 
+\item Danielsson, Jon (2011). \textit{Financial Risk Forecasting}. Wiley.
+
+\item Pfaff, Bernhard (2016). \textit{Financial Risk Modelling and
+Portfolio Optimization with R}. Wiley.
+
 \end{itemize}

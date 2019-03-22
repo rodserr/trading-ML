@@ -7,15 +7,15 @@
 
 \subsection{Análisis de los Índices}
 
-En la figura -- se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que en general los cinco mercados tienen tendencia a la alta. En general para el S\&P y NASDAQ se aprecia una menor variabilidad que en los demás índices.
+En la figura 4.1 se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que en general los cinco mercados tienen tendencia a la alta. En general para el S\&P y NASDAQ se aprecia una menor variabilidad que en los demás índices.
 
 Las curvas del S\&P y NASDAQ son muy parecidas ya que ambas representan cotizaciones de las mayores empresas americanas. Se aprecia un crecimiento sostenido desde el año 2009, con algunos períodos mas estables, a principios del 2016 -por la polémica victoria de Donald Trump como presidente- y en 2018 provocado por el miedo a un incremento en las tasas de interés por parte de la Reserva Federal y las tensas negociaciones con China.
 
-Por su parte el NIKKEI es el índice búrsatil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyecto dinero en la economía a gran escala.
+Por su parte el NIKKEI es el índice bursátil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyectó dinero en la economía a gran escala.
 
-El FTSE 100 es un índice búrsatil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros indices. Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
+El FTSE 100 es un índice bursátil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros índices Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
 
-Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el ecándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rapido crecimiento del índice en los últimos tres años.
+Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el escándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rápido crecimiento del índice en los últimos tres años.
 
 <<Index_Graph, echo=FALSE>>=
 plot_serie <- list()
@@ -43,7 +43,7 @@ do.call('grid.arrange', plot_serie)
 
 \subsection{Análisis de las Variables Predictoras}
 
-En la figura -- se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura -- se muestra las correlaciones de las variables definitivas
+En la figura 4.2 se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura 4.3 se muestra las correlaciones de las variables definitivas
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.6\textwidth}
@@ -182,7 +182,7 @@ do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
 
 \subsection{Resultados del ACP}
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referira a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace https://rodserr.shinyapps.io/trading-ML/.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny de R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}.
 
 <<PCA, echo=FALSE>>=
 predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
@@ -200,7 +200,7 @@ Los eigenvalores miden la cantidad de variación retenida por cada componente. L
 
 La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
 
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura -- Se puede observar que el 85\% de la variación esta contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 Se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -218,7 +218,7 @@ do.call('grid.arrange', list_pca_eigen)
 \caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
 
-La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matráz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura -- se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
+La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matriz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura 4.8 se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -241,9 +241,9 @@ do.call('grid.arrange', list_contrib_pca)
 \caption{Contribución de cada variable para PC1, PC2 y el total de la contribución en ambos componentes}
 \end{figure}
 
-La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia como las interacciones que predominan en ambos componentes estan relacionadas con el indicador MACD.
+La línea roja indica el promedio esperado de contribución si las variables fueran uniformes, es decir $ \frac{1}{N° de Variables} = \frac{1}{45} = 2,2\%$. Una variable sobre este umbral se considera importante en la contribución al componente. Se aprecia cómo las interacciones que predominan en ambos componentes están relacionadas con el indicador MACD.
 
-La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura -- se muestra los valores de $Cos^2$ para las primeras 2 componentes
+La calidad de representación en el gráfico viene dada por el valor de $Cos^2$, el cual se refiere a la importancia que tiene la variable para interpretar el componente. Para una variable la suma de $Cos^2$ en todas las componentes equivale a 1. En la figura 4.9 se muestra los valores de $Cos^2$ para las primeras 2 componentes
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -259,11 +259,11 @@ El gráfico de correlación ó Factor map muestra la relación entre las variabl
 
 \begin{itemize}
 \item Las variables positivamente correlacionadas se encuentran agrupadas entre sí
-\item Las variables negativamente correlacionadas se posicionan en quadrantes opuestos.
+\item Las variables negativamente correlacionadas se posicionan en cuadrantes opuestos.
 \item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
 \end{itemize}
 
-En la figura -- se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -279,7 +279,7 @@ fviz_pca_var(pca,
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-En la figura -- se muestran los gráficos de dispersión entre los componentes, 
+En la figura 4.11 se muestran los gráficos de dispersión entre los componentes, 
 
 <<Dispersion_Plots, echo=FALSE>>=
 aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
@@ -342,7 +342,7 @@ grid.arrange(grobs = .scatter_plot, ncol = 4)
 
 \section{Coeficientes del modelo}
 
-En el presente capítulo se realiza la descripción de los resultados obtenidos despues de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
+En el presente capítulo se realiza la descripción de los resultados obtenidos después de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3
 
 <<Create_Model, echo=FALSE>>=
 posit_size <- 10000
@@ -554,7 +554,7 @@ df_trades_plot <- map_dfr(list_trades_plot, as.data.frame) %>%
   mutate(timestamp = as.POSIXct(timestamp))
 @
 
-En la figura 4.1 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en perdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
+En la figura 4.12 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en pérdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
@@ -572,7 +572,7 @@ df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
 \caption{Clasificación de la simulación}
 \end{figure}
 
-Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años practicamente sin operaciones.
+Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
 
 <<return_plot, echo=FALSE>>=
 list_return_plot <- list()
@@ -584,10 +584,10 @@ for(i in 1:length(serie)){
                      i == 4 ~ 'FTSE_100',
                      i == 5 ~ 'BOVESPA')
   
-  aux_return_plot <- list_fr[[i]][[2]] %>% select(c('buy_date', 'returns'))
+  aux_return_plot <- list_fr[[i]][[2]] %>% select(c('buy_date', 'profits_ind'))
   
   aux_firstreturn <- data.frame(timestamp = c(dmy('01/01/2013'), as_date(aux_return_plot$buy_date)),
-                                cap = c(0, cumsum(aux_return_plot$returns)), #cumprod(aux_return_plot$returns+1)),
+                                cap = c(0, cumsum(aux_return_plot$profits_ind)), #cumprod(aux_return_plot$returns+1)),
                                 index = index) %>% 
     mutate(timestamp = as.POSIXct(timestamp))
   
@@ -616,7 +616,7 @@ df_return_plot %>%
 
 \subsection{Medidas de Riesgo}
 
-Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades solo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comunmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
+Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades sólo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comúnmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
 
 La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 

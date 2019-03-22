@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{siunitx, booktabs}
 \usepackage{caption}
+\usepackage{hyperref}
 \setlength{\parindent}{4em}
 \setlength{\parskip}{1em}
 

@@ -20,7 +20,7 @@
 \contentsline {subsection}{\numberline {2.2.3}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{15}{subsection.2.2.3}
 \contentsline {subsubsection}{M\IeC {\'e}todos Param\IeC {\'e}tricos vs No Param\IeC {\'e}tricos}{15}{subsubsection*.5}
 \contentsline {subsubsection}{Aprendizaje Supervisado vs No Supervisado}{15}{subsubsection*.6}
-\contentsline {subsubsection}{Regresi\IeC {\'o}n vs Clasificasi\IeC {\'o}n}{16}{subsubsection*.7}
+\contentsline {subsubsection}{Regresi\IeC {\'o}n vs Clasificaci\IeC {\'o}n}{16}{subsubsection*.7}
 \contentsline {subsubsection}{Compensasi\IeC {\'o}n entre sesgo y varianza}{16}{subsubsection*.8}
 \contentsline {subsection}{\numberline {2.2.4}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{16}{subsection.2.2.4}
 \contentsline {subsubsection}{M\IeC {\'a}xima Verosimilitud}{17}{subsubsection*.9}
