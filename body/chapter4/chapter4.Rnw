@@ -5,17 +5,12 @@
 
 \section{Análisis Exploratorio de los datos}
 
+En el presente capítulo se realiza la descripción de los resultados obtenidos luego de la aplicación del método propuesto para la simulación de la estrategia. De igual modo, se presentan los coeficientes arrojados por el MLG así como un analisis de los componentes principales para el índice S\&P500 
+
+
 \subsection{Análisis de los Índices}
 
 En la figura 4.1 se observa el precio de cierre de cada índice durante el período de estudio. Se puede apreciar que en general los cinco mercados tienen tendencia a la alta. En general para el S\&P y NASDAQ se aprecia una menor variabilidad que en los demás índices.
-
-Las curvas del S\&P y NASDAQ son muy parecidas ya que ambas representan cotizaciones de las mayores empresas americanas. Se aprecia un crecimiento sostenido desde el año 2009, con algunos períodos mas estables, a principios del 2016 -por la polémica victoria de Donald Trump como presidente- y en 2018 provocado por el miedo a un incremento en las tasas de interés por parte de la Reserva Federal y las tensas negociaciones con China.
-
-Por su parte el NIKKEI es el índice bursátil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyectó dinero en la economía a gran escala.
-
-El FTSE 100 es un índice bursátil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros índices Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
-
-Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el escándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rápido crecimiento del índice en los últimos tres años.
 
 <<Index_Graph, echo=FALSE>>=
 plot_serie <- list()
@@ -40,10 +35,15 @@ do.call('grid.arrange', plot_serie)
 \caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
 \end{figure}
 
+Las curvas del S\&P y NASDAQ son muy parecidas ya que ambas representan cotizaciones de las mayores empresas americanas. Se aprecia un crecimiento sostenido desde el año 2009, con algunos períodos mas estables, a principios del 2016 -por la polémica victoria de Donald Trump como presidente- y en 2018 provocado por el miedo a un incremento en las tasas de interés por parte de la Reserva Federal y las tensas negociaciones con China.
+
+Por su parte el NIKKEI es el índice bursátil de la bolsa de Tokio, resume las cotizaciones de 225 grandes empresas de Japón de distintos sectores industriales. Al ver la gráfica de sus cotizaciones se observa un rápido crecimiento entre 2009 y 2010, sin embargo con la ocurrencia del terremoto registrado en el norte del país a principios del 2011 el índice se vio afectado y llegó a su nivel más bajo de 8160 puntos el 25 de noviembre desde el 10 de marzo de 2009. La recuperación ocurrió en 2013 debido a los cambios implementados por el país en materia de política fiscal y monetaria. El Gobierno impulsó el gasto público y el Banco Central de Japón inyectó dinero en la economía a gran escala.
+
+El FTSE 100 es un índice bursátil calculado con las cotizaciones de las 100 empresas más grandes de Reino Unido, en su gráfica se observa una tendencia alcista aunque con mayor ruido o variabilidad que los otros índices Se puede apreciar una caída en las cotizaciones el año 2015 debido a resultados negativos mostrados por la actividad manufacturera en Asia, especialmente en China. Esto afecta los mercados europeos dada que este es el principal consumidor del mercado asiático.
+
+Por último el índice BOVESPA representa las 50 empresas de mayor capitalización de la Bolsa de Valores de Sao Paulo. Se aprecia que a diferencia de los anteriores, éste mantiene una tendencia a la baja hasta 2016 debido a la recesión económica sufrida por Brasil mostrando una contracción del PIB en un 3.8\% para 2015. Aunado a factores ambientales como el virus del Zika y el escándalo de corrupción de Petrobras. A partir de 2016 con la inflación gradualmente bajo control y tasas de interés en decrecimiento, la confianza de los inversores llevó a un rápido crecimiento del índice en los últimos tres años.
 
 \subsection{Análisis de las Variables Predictoras}
-
-En la figura 4.2 se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura 4.3 se muestra las correlaciones de las variables definitivas
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.6\textwidth}
@@ -61,6 +61,7 @@ list_serie[[1]] %>% createIndicators(full = TRUE) %>%
 \caption{Correlación entre indicadores originales calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
 
+En la figura 4.2 se observa la correlación de las variables originales para el primer período de entrenamiento del índice S\&P500. Como se puede observar existe alta correlación entre las distintas variables del precio (Apertura, Cierre, Máximo y Mínimo) por lo que se decidió trabajar solo con los precios de cierre dado que ésta es la misma utilizada para determinar la variable dependiente. Así mismo se observa alta correlación entre los rezagos de los rendimientos, para esto se decidió trabajar solo con los rezagos de 1, 3 y 5 períodos. Por su parte se descarta la variable dip -elemento utilizado en el indicador ADX- por su fuerte correlación con el RSI. Se determina lo mismo para la banda inferior del indicador de Bollinger. En la figura 4.3 se muestra las correlaciones de las variables definitivas
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.6\textwidth}
@@ -162,6 +163,10 @@ do.call('grid.arrange', descr_plots[[1]])
 \caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
 
+En la figura 4.4 se observan gráficos de cajas para cada una de las variables predictoras, diferenciando entre los registros identificados como 'buy' y 'stay'. En el caso de la variable close, se aprecia que la caja está ligeramente mas abajo para los registros marcados como 'buy', señalando que efectivamente las entradas ocurren a precios bajos. En el caso los rezagos -lags- se observa que mientras mayor sea el número de períodos para su cálculo, más dispersos serán los valores y mayor diferencia existirá entre las clases.
+
+Para la variable ADX la caja de los registros 'buy' está ligeramente más arriba que los 'stay' lo que indicaría que se debería comprar en tendencia alcista. Igualmente ocurre con la variable RSI lo que indicaría que se compra cuando se está cerca de un cambio de tendencia ó por el contrario la consolidación de la misma. Para la variable RSI se observa como la caja de los registros identificados como 'buy' esta más abajo y es más estrecha, por lo cual se inferiría que se debe comprar en períodos de baja volatilidad.
+
 \begin{figure}[H]
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
@@ -171,6 +176,10 @@ do.call('grid.arrange', c(descr_plots[[2]], ncol = 2, nrow = 5))
 \caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
 
+En la figura 4.5 se observa histogramas de frecuencias para cada indicador. Se observa como la distribución de los rezagos es similar entre ellos, mostrando datos simétricos con picos en los valores cercanos a 0. En cuanto a la variable ATR se observa que los datos son asimétricos hacia la derecha con algunos casos atípicos cercanos a 30, mostrando que el índice en general es de baja volatilidad. Para el caso de la banda de bollinger, sigue una distribución muy parecida a la del valor de cierre de precio, una distribución asimétrica hacia la izquierda con algunos picos en la cola, lo que referencia una tendencia alcista. Por otro lado el ADX muestra una distribución asimétrica hacia la derecha con valores entre 10 y 20 lo cual indicaría que esta tendencia alcista del índice es constante pero lenta. 
+
+La distibucion de la variable RSI es asimétrica hacia la izquierda con la mayor frecuencia entre los valores cercanos a 60, lo cual reforzaría lo indicado por los otros indicadores en cuanto a la tendencia del índice 
+
 \begin{figure}[H]
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
@@ -179,6 +188,8 @@ do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
 @
 \caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
 \end{figure}
+
+En la figura 4.6 se observan gráficos de densidad para cada variable diferenciando entre clases, buscando algún comportamiento diferenciador. Sin embargo se muestra como para todos los indicadores la densidad es muy similar entre clases.
 
 \subsection{Resultados del ACP}
 
@@ -198,9 +209,12 @@ pca <- predictors_var %>% prcomp(scale = FALSE)
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
 
+
 La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
 
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 Se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+
+El número de componentes a utilizar se establece en función a estos dos gráficos. Este comportamiento anteriormente descrito se replica en los demás períodos de entrenamiento y demás pares. Se decide utilizar los dos primeros componentes como variables explicatoria en el MLG ya que la diferencia entre el 2do y 3er componentes es significativa, por lo que se espera que la variabilidad explicada en los dos primeros componentes sea suficiente.
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
@@ -286,45 +300,22 @@ aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>
   mutate(class_2 = factor(class)) %>% 
   select(-one_of('class')) %>% 
   filter(year(timestamp) %in% seq(2009, 2012, 1))
-
-itercomp <- list(x = seq(1,7,1), y = seq(1,7,1)) %>% 
-  cross_df() %>% 
-  filter(x != y & x < y) %>% 
-  arrange(x)
-
-.scatter_plot <- list()
-for(i in 1:nrow(itercomp)){
-  aux_scatter <- fviz_pca_ind(pca, 
-                              axes = c(itercomp$x[i], itercomp$y[i]),
-                              geom.ind = "point",
-                              select.ind = list(contrib = 500),
-                              col.ind = aux_scatterplot$class_2,
-                              title = '') +
-    theme(legend.position = "none", 
-          axis.title.x = element_text(size = 7),
-          axis.title.y = element_text(size = 7))
-  
-  .scatter_plot %<>% rlist::list.append(aux_scatter)
-}
-
-# .lay <- rbind(c(1,2,3,4,5,6),
-#               c(NA,7,8,9,10,11),
-#               c(NA,NA,12,13,14,15),
-#               c(NA,NA,NA,16,17,18),
-#               c(NA,NA,NA,NA,19,20),
-#               c(NA,NA,NA,NA,NA,21))
-
-
 @
 
 \begin{figure}[H]
-\setkeys{Gin}{width = 1\textwidth, height = 1.2\textwidth}
+\setkeys{Gin}{width = 0.8\textwidth}
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
-grid.arrange(grobs = .scatter_plot, ncol = 4)
+
+fviz_pca_ind(pca, 
+             axes = c(1, 2),
+             geom.ind = "point",
+             select.ind = list(contrib = 900),
+             col.ind = aux_scatterplot$class_2)
 @
 \caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
 \end{figure}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -376,7 +367,14 @@ for(i in 1:length(serie)){
 }
 @
 
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500.
+En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500. Se muestra para cada variable su respectivo coeficiente, así como su error estándar. Se realiza también el contraste Wald - Chi-Cuadrado para verificar la significancia de cada variable en el modelo. Por lo que para cada variable se expone estadístico z que viene dado por $\beta_{i}/SE(\beta_{i})$ y su respectivo p-valor.
+
+El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
+
+\begin{itemize}
+\item \textbf{H0}: $\beta_{i} = 0$
+\item \textbf{Hi}: $\beta_{i} \neq 0$
+\end{itemize}
 
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
@@ -385,12 +383,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 summ_11 <- summary(list_model[[1]][[1]])
 row.names(summ_11$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'Macd.Pos-Rezago.Neg')
 
 xtable(summ_11$coefficients)
 @
@@ -402,45 +395,30 @@ xtable(summ_11$coefficients)
 summ_12 <- summary(list_model[[1]][[2]])
 row.names(summ_12$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
-                                     'Macd.Pos-ADX.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'RSI.Pos-Macd.Neg',
-                                     'Rezago.Pos-Macd.Neg')
+                                     'Macd.Pos-Rezago.Neg')
 xtable(summ_12$coefficients)
 @
 \end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
 summ_13 <- summary(list_model[[1]][[3]])
 row.names(summ_13$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'Macd.Pos-Rezago.Neg')
 xtable(summ_13$coefficients)
 @
 \end{center}
 
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 summ_14 <- summary(list_model[[1]][[4]])
 row.names(summ_14$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
-                                     'RSI.Pos-Rezago.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'Rezago.Pos-Macd.Neg')
+                                     'Macd.Pos-Rezago.Neg')
 xtable(summ_14$coefficients)
 @
 \end{center}
@@ -451,34 +429,26 @@ xtable(summ_14$coefficients)
 summ_15 <- summary(list_model[[1]][[5]])
 row.names(summ_15$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Macd.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'Macd.Pos-RSI.Neg',
-                                     'ATR.Pos-RSI.Neg')
+                                     'Macd.Pos-Rezago.Neg')
 xtable(summ_15$coefficients)
 @
 \end{center}
 
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 <<echo=FALSE, results=tex>>=
 summ_16 <- summary(list_model[[1]][[6]])
 row.names(summ_16$coefficients) <- c('(Intercept)',
                                      'ATR.Pos-Macd.Neg',
-                                     'Precio.Pos-Rezago.Neg', 
-                                     'ADX.Pos-Macd.Neg',
-                                     'Rezago.Pos-ADX.Neg',
-                                     'Bollinger.Pos-Rezago.Neg',
-                                     'RSI.Pos-Rezago.Neg',
-                                     'ADX.Pos-Rezago.Neg')
+                                     'Precio.Pos-Rezago.Neg')
 xtable(summ_16$coefficients)
 @
 \end{center}
 
-Se observa que para todos los períodos el ACP arroja 7 componentes que juntos recogen al menos el 85\% de la variación. También se aprecia que a medida que aumentamos los años de entrenamiento el número de p-valores menores que 0.05 aumentan, insinuando que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+Se observa que recién para el 3er período de entrenamiento se obtiene un p-valor menor a 0.05 lo cual indica que el coeficiente es significativo. A medida que la data de entrenamiento es más grande, los coeficientes son más significativos. Se infiere entonces que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+
+También se observa que el signo de los coeficientes varía en las distintas datas de entrenamiento, por ejemplo para el período 2009-2014 ambas variables influyen positivamente en la correcta predicción del retorno objetivo. En los períodos 2009-2015 y 2009-2016 la variable ATR.Pos-Macd.Neg influye negativamente en la variable dependiente caso contrario para la variable Macd.Pos-Rezago.Neg, que influye positivamente.
 
 \section{Resultados de la simulación}
 
@@ -655,15 +625,17 @@ Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no e
 
 perc_predict <- df_fr["perc_predict",]/100
 
-n <- 300 %>% sqrt()
+n <- sqrt(300)
 vares <- list()
 for(p in perc_predict){
   
   E <- p*c-(1-p)*d
-  sd <- ((E^2) - ((p*(c^2))-(1-p)*(d^2))) %>% sqrt()
-
-  var <- qnorm(0.95)*(n*sd) + n*E
-  es <- (n*sd*dnorm(qnorm(0.95))/0.05) + n*E
+  # v <- (E^2) - ((p*(c^2))-(1-p)*(d^2))
+  v <- ((p*(c^2))+(1-p)*(d^2)) - (E^2)
+  sd <- sqrt(v)
+  
+  var <- qnorm(0.95)*(n*sd) - n*E
+  es <- (n*sd*dnorm(qnorm(0.95))/0.05) - n*E
   
   vares %<>% rlist::list.append(list(VaR = var, ES = es)) 
 
@@ -683,4 +655,4 @@ xtable(VaR_df)
 @
 \end{center}
   
-Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\%P500 como "Cuando la estrategia toma como activo el índice S\%P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 1,313.83 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 1,552.12 USD"
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 1,313.83 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 1,552.12 USD'

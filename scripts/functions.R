@@ -156,7 +156,7 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
                                classProbs = TRUE,
                                savePredictions = TRUE,
                                summaryFunction = twoClassSummary,
-                               preProcOptions = list(thresh = 0.85) #thresh = 0.85,pcaComp = 3)
+                               preProcOptions = list(pcaComp = 2) #thresh = 0.85,pcaComp = 3)
     )
     
     PCA_model <- train(class_2 ~ (.)^2 - close #- high - low - open 
