@@ -19,7 +19,7 @@
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \title{Evaluación de la Eficacia de una estrategia de trading basada en Modelo Lineal Generalizado}
-\title{Modelado de los retornos de la inversión}
+\title{Modelado de los retornos de la inversión para prnósticar movimientos en el mércado bursátil}
 \author{Rodrigo Alejandro Serrano Morales} 
 \facultad{Facultad de Ciencias Económicas y Sociales\\
 Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
@@ -97,7 +97,7 @@ La idea del modelo es predecir los casos en los cuales, el incurrir en una posic
 
 \section{Planteamiento del Problema}
 
-A principios del siglo XX los mercados bursátiles eran operados manualmente, los corredores y demás participantes realizaban una serie de labores sin asistencia de sistemas informáticos, que evidentemente no existían para la época. El 8 de febrero de 1971 comienza operaciones la bolsa de valores NASDAQ -National Association of Securities Dealers Automated Quotation-, la cual marca un precedente en la industria. NASDAQ fue el primer mercado bursátil en el mundo en adoptar el uso de sistemas electrónicos para proveer cotizaciones de las acciones. Más tarde añadirían, también, la capacidad de manejar operaciones electrónicamente, ejecutando órdenes de compras y ventas sin necesidad de encontrarse físicamente en el lugar destinado para las transacciones.
+A principios del siglo XX los mercados bursátiles eran operados manualmente, los corredores y demás participantes realizaban una serie de labores sin asistencia de sistemas informáticos, que evidentemente no existían para la época. El 8 de febrero de 1971 comienza operaciones la bolsa de valores NASDAQ -National Association of Securities Dealers Automated Quotation-, la cual marca un precedente en la industria. NASDAQ fue el primer mercado bursátil en el mundo en adoptar el uso de sistemas electrónicos para proveer cotizaciones de las acciones. Más tarde añadirían, también, la capacidad de manejar operaciones electrónicamente, ejecutando órdenes de compra y venta sin necesidad de encontrarse físicamente en el lugar destinado para las transacciones.
 
 Este precedente aunado con el rápido crecimiento de la industria tecnológica y la creación del internet, facilitan al mercado bursátil digitalizarse rápidamente. Esto permite a los competidores y la industria en general obtener un sistema más eficiente en términos de operatividad, además de globalizar la actividad financiera y propiciar la participación de más inversores en los mercados. El globalizar la información incrementa la competitividad en el sector e incentiva estudios de privados e independientes para maximizar retornos, de donde surgen los análisis técnicos y fundamentales.
 
@@ -105,13 +105,17 @@ Ahora bien la iniciación al mundo bursátil trae consigo grandes riesgos si no 
 
 En los últimos años y con el impulso de computadores cada vez más potentes, ha surgido un nicho dentro del mercado financiero destinado a compañías que operan con algoritmos automatizados, llamadas comúnmente “Quantitave Funds” -Fondos Cuantitativos-. Según un informe realizado por Credit Suisse Group, estos fondos son los de mayor crecimientos en los últimos años. Los fondos cuantitativos y de inversión pasiva controlan actualmente el 60\% de los activos del mercado, incluso, tan solo el 10\% del volumen de transacciones proviene de inversores discrecionales, según JPMorgan Chase \& Co. en cita de Bloomberg. De esta manera compañías como Goldman Sachs han reemplazado gran cantidad de operadores por algoritmos, como dio a conocer en el 2017. La mayoría de las grandes instituciones y proveedores del sector ya cuentan con servicios que cumplen con los requerimientos para la aplicación de los sistemas automatizados, como plataformas con puertos API y datas históricas destinadas a testear algoritmos de trading. En palabras de Frank Thermitus (2018), presidente de la Asociación de Trading Algorítmico de Argentina “No tenemos datos oficiales en Argentina, pero sabemos que la aparición de soporte para este tipo de trading está llamando a un crecimiento de la participación de agentes automatizados”.
 
-Con este panorama es evidente la utilidad que supone la utilización de métodos de aprendizaje estadístico para el desarrollo de algoritmos automáticos. El aprendizaje estadístico, referido en la literatura anglosajona como “Machine Learning” es definido por uno de sus principales exponentes -el profesor de la universidad de Carnegie Mellon- Tom Mitchell como “el campo de estudio que da a las computadoras la habilidad de aprender sin ser explícitamente programada”. En este sentido, expone que “Un algoritmo aprende de la experiencia E con respecto a una tarea T cuyo rendimiento es medido por el indicador P, si su desempeño en T como medida de P mejora con la experiencia E”. Esta referencia a que la “computadora aprende”, no son más que técnicas estadísticas aplicadas a distintos problemas, en donde se busca mejorar el desempeño del modelo calibrando una medida de error.
+Con este panorama es evidente la utilidad que supone la aplicación de métodos de aprendizaje estadístico para el desarrollo de algoritmos automáticos. El aprendizaje estadístico, referido en la literatura anglosajona como “Machine Learning” es definido por uno de sus principales exponentes -el profesor de la universidad de Carnegie Mellon- Tom Mitchell como “el campo de estudio que da a las computadoras la habilidad de aprender sin ser explícitamente programada”. En este sentido, expone que “Un algoritmo aprende de la experiencia E con respecto a una tarea T cuyo rendimiento es medido por el indicador P, si su desempeño en T como medida de P mejora con la experiencia E”. Esta referencia a que la “computadora aprende”, no son más que técnicas estadísticas aplicadas a distintos problemas, en donde se busca mejorar el desempeño del modelo calibrando una medida de error.
 
 El desarrollo tecnológico, especialmente el potenciamiento de los procesadores de información y el surgimiento del software libre, han provocado un crecimiento en el número de profesionales que aplican el “Machine Learning”. Esto ha ocasionado que innumerables problemas sean abordados con estas técnicas, desde transformar historiales de compras de consumidores en enfoques publicitario, ó intentar imitar el razonamiento humano en una tarea en específico, como jugar ajedrez.
 
+Una de las principales críticas al trading discresional se debe a la complejidad de entender los movimientos del activo. Los patrones gráficos basados en indicadores técnicos buscan exponer el comportamiento del precio. La ídea de esta investigación es comprender si un modelo de aprendizaje estadístico puede, en base a estos indicadores, pronósticar el momento correcto de entrada para obtener una ganancia.
+
+En base a la problemática, surge la interrogante: ¿El enfoque de desarrollar un estrategia de trading automatizado basada en aprendizaje estadístico es eficaz para pronósticar ganancias?
+
 \section{Objetivo General}
 
-Modelar los retornos de la inversión de una estrategia automatizada
+Modelar los retornos de la inversión de una estrategia automatizada para pronósticar movimientos en el mercado búrsatil
 
 \section{Objetivos Específicos}
 
@@ -247,6 +251,14 @@ En contraste, lo métodos No Supervisados describen una situación más complica
 Las variables pueden ser divididas entre cuantitativas o cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numéricos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitativa se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
 
 \subsubsection{Compensasión entre sesgo y varianza}
+
+
+
+\subsection{Validación Cruzada en Series de Tiempo}
+
+La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 
 \subsection{Regresión Logística}
@@ -390,19 +402,35 @@ Es importante acotar que tanto el VaR como ES a pesar ser medidas de pérdidas p
 %\SweaveUTF8
 
 \chapter{Marco Metódico}
-\section{Estrategia de Análisis}
 
-\subsection{Datos OHLC y Fuente de los datos}
+En el presente capítulo se describen los métodos utilizados en la investigación, con la finalidad de dar respuesta a los objetivos planteados, se indica el tipo de investigaciión, universo y muestra, la fuente donde se extraen los datos a usar y otros detalles referentes al método de estudio. De igual manera se expone la metodología para el análisis de los resultados.
+
+\section{Tipo de Investigación}
+
+Para definir el tipo de investigación a realizar se establece como referencia la clasificación expuesta por Balestrini (1997). La autora señala varias categorías: formulativo o exploratorio, descriptivo, diagnóstico, evaluativo, experimental ó proyecto factible. De acuerdo al problema planteado, la presente investigación es de tipo descriptivo donde se verifica que se alcancen los objetivos planteados con las conclusiones derivadas de los resultados de la simulación
+
+\section{Universo y Muestra}
+
+Balestrini (1993) define al universo ó población como cualquier conjunto de elementos de los que se pretende investigar y conocer sus caracteristicas, para el cuál serán válidas las conclusiones obtenidas en la investigación. Así mismo define la muestra como una parte de la población seleccionados científicamente, obtenida con el fin de investigar, a partir del conocim¡ento de sus características particulares, las propiedades de esa población.
+
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
+
+En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumento en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+
+
+\subsection{Tipo de Muestreo}
+
+Seijas, G. (1993) define dos tipos de muestreo: Probabilístico y No Probabilístico.  El muestreo es probabilístico cuando se puede determinar de antemano la probabilidad de selección de cada uno de los elementos de la población siendo ésta distinta de cero; por lo tanto, calcular con antelación la probabilidad de obtener cada una de las muestras posibles.
+
+En este caso, se realizó un muestreo no probabilístico de clase opinática, ya que la selección de los elementos de la muestra se debe a su nivel de representatividad dentro de los mercados bursátiles, por ende, la totalidad de los índices bursátiles no fueron equiprobables en su selección.
+
+\section{Fuentes de Datos}
 
 La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma, resume en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo. En el caso de la presente investigación, de un día. Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos.
 
 Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su calendario económico y directorio de brokers.
 
-\subsection{Series de Índices Bursátiles}
-
-El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
-
-En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumento en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+\section{Variables}
 
 \subsection{Variable Dependiente}
 
@@ -447,11 +475,7 @@ Ahora bien, la idea base de la investigación era utilizar los valores de cada i
 
 Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordó agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
 
-\subsection{Validación Cruzada en Series de Tiempo}
-
-La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
-
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+\section{Estrategia de Análisis}
 
 \subsection{WalkForward Backtesting}
 
@@ -483,7 +507,7 @@ Si se utiliza un stop ó target muy altos, baja el número de observaciones que 
 
 La técnica que utiliza el análisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matriz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximicen la variación.
 
-Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen alrededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. Para el modelo se estableció que en cada período de entrenamiento se utilizará la cantidad de componentes necesarias para explicar el 85\% de la variación de la matriz de datos.
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables a dos componentes que contienen alrededor del 50\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento.
 
 \subsection{Modelado de los Retornos}
 
@@ -524,7 +548,7 @@ En la figura 4.1 se observa el precio de cierre de cada índice durante el perí
 
 
 \begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
+\setkeys{Gin}{width = 0.8 \textwidth}
 \centering
 \includegraphics{main-005}
 \caption{Precios de Cierre de los índices en el período de estudio (26/10/2008 - 18/01/2019)}
@@ -594,16 +618,17 @@ A continuación se analizan los resultados de los componentes arrojados por el m
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
 
-La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
-
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. Dado que la mayoría de los 
-
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-013}
 \caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
+
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-. Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+
+El número de componentes a utilizar se establece en función a estos dos gráficos. Este comportamiento anteriormente descrito se replica en los demás períodos de entrenamiento y demás pares. Se decide utilizar los dos primeros componentes como variables explicatorias en el MLG ya que la diferencia entre el 2do y 3er componentes es significativa, por lo que se espera que la variabilidad explicada en los dos primeros componentes -aproximadamente 50\%- sea suficiente. Esto también se basa en el hecho de que los indicadores son transformaciones del precio del activo por lo que existe correlación entre ellos. Se asume entonces que no es necesaria toda la información provista por los indicadores.
+
 
 La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matriz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura 4.8 se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
 
@@ -633,8 +658,6 @@ El gráfico de correlación ó Factor map muestra la relación entre las variabl
 \item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
 \end{itemize}
 
-En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
-
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
@@ -642,7 +665,7 @@ En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el colo
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-En la figura 4.11 se muestran los gráficos de dispersión entre los componentes, 
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados. En los cuadrantes positivos para el eje x predominan variables con una menor contribución a los componentes.
 
 
 \begin{figure}[H]
@@ -652,6 +675,7 @@ En la figura 4.11 se muestran los gráficos de dispersión entre los componentes
 \caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
 \end{figure}
 
+En la figura 4.11 se muestra el gráfico de dispersión por clases. Se observa que no hay una región que agrupe una sola clase sino que las observaciones están dispersas en todos los cuadrantes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -685,7 +709,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -702,7 +726,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -719,7 +743,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -733,10 +757,11 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -753,7 +778,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -771,7 +796,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -792,12 +817,10 @@ También se observa que el signo de los coeficientes varía en las distintas dat
 \section{Resultados de la simulación}
 
 
-En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
-
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:45 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -813,6 +836,8 @@ False Buys & 62 & 72 & 116 & 58 & 141 \\
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice.
  
 
 En la figura 4.12 se observa los trades realizados por la simulación según el resultado de la operación, los trades verdes son aquellos clasificados como 'True buys' y resultaron en ganancia, los rojos, son clasificados como 'False buys' y resultaron en pérdidas y los azules son clasificados como 'False buys' pero cerraron el trade por límite de tiempo.
@@ -834,6 +859,8 @@ Se observa como en la simulación utilizando el índice BOVESPA, los trades posi
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
+En la figura 4.13 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento positivo.
+
 \subsection{Medidas de Riesgo}
 
 Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades sólo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comúnmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
@@ -849,7 +876,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -871,7 +898,7 @@ Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no e
 \begin{center}
 \captionof{table}{VaR y ES para retornos de cada índice}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlllll}
@@ -884,7 +911,7 @@ VaR & 6,297.49 & 5,622.23 & 6,246.23 & 6,386.23 & 6,451.87 \\
 \end{tabular}
 \end{table}\end{center}
   
-Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 1,313.83 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 1,552.12 USD'
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,297.49 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 7,912.80 USD'
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -893,7 +920,9 @@ Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en fun
 
 En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. Se busca demostrar que es posible obtener rendimientos con una estrategia basada en indicadores técnicos utilizados como variables predictoras en un modelo de aprendizaje automático. En los resultados no se contemplan las comisiones acarreadas por la operación de los activo. Se asume también que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez.
 
-Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de especulación, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover volúmenes de dinero con una posición menor que la que en verdad se necesitaría. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros target, stop y horizonte para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como Bosques Aleatorios, SVM ó Redes Neuronales mejoren la predicción. 
+Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de especulación, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover altos volúmenes de dinero con una posición menor que la que en verdad se necesitaría. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. 
+
+Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros target, stop y horizonte para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento ó el número de componentes a utilizar como variables predictoras. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como Bosques Aleatorios, SVM ó Redes Neuronales mejoren la predicción. 
 
 El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa para obtener protección podría ser invertir el modelo, es decir predecir una disminución del precio, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
 
@@ -907,12 +936,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 
 \section{Coeficientes de los modelos}
 
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NASDAQ.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NASDAQ}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -926,11 +954,10 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -946,7 +973,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -959,10 +986,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -975,11 +1005,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -995,7 +1025,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1009,13 +1039,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
 
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NIKKEI 225.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NIKKEI 225}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1029,11 +1059,10 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1046,10 +1075,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1062,10 +1092,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1078,11 +1111,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1098,7 +1131,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1112,14 +1145,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
 
-
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del FTSE 100.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando FTSE 100}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1133,11 +1165,10 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1153,7 +1184,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1166,10 +1197,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1182,11 +1216,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1202,7 +1236,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1216,14 +1250,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
 
-
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del BOVESPA.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando BOVESPA}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1237,11 +1270,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1257,7 +1290,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1270,10 +1303,13 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1286,11 +1322,11 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
    \hline
 \end{tabular}
 \end{table}\end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1306,7 +1342,7 @@ En la tabla 4.1 se describen los resultados de los parámetros arrojados por la 
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Tue Apr 16 16:54:46 2019
+% Mon Apr 22 17:37:46 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}

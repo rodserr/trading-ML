@@ -2,19 +2,35 @@
 %\SweaveUTF8
 
 \chapter{Marco Metódico}
-\section{Estrategia de Análisis}
 
-\subsection{Datos OHLC y Fuente de los datos}
+En el presente capítulo se describen los métodos utilizados en la investigación, con la finalidad de dar respuesta a los objetivos planteados, se indica el tipo de investigaciión, universo y muestra, la fuente donde se extraen los datos a usar y otros detalles referentes al método de estudio. De igual manera se expone la metodología para el análisis de los resultados.
+
+\section{Tipo de Investigación}
+
+Para definir el tipo de investigación a realizar se establece como referencia la clasificación expuesta por Balestrini (1997). La autora señala varias categorías: formulativo o exploratorio, descriptivo, diagnóstico, evaluativo, experimental ó proyecto factible. De acuerdo al problema planteado, la presente investigación es de tipo descriptivo donde se verifica que se alcancen los objetivos planteados con las conclusiones derivadas de los resultados de la simulación
+
+\section{Universo y Muestra}
+
+Balestrini (1993) define al universo ó población como cualquier conjunto de elementos de los que se pretende investigar y conocer sus caracteristicas, para el cuál serán válidas las conclusiones obtenidas en la investigación. Así mismo define la muestra como una parte de la población seleccionados científicamente, obtenida con el fin de investigar, a partir del conocim¡ento de sus características particulares, las propiedades de esa población.
+
+El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
+
+En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumento en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+
+
+\subsection{Tipo de Muestreo}
+
+Seijas, G. (1993) define dos tipos de muestreo: Probabilístico y No Probabilístico.  El muestreo es probabilístico cuando se puede determinar de antemano la probabilidad de selección de cada uno de los elementos de la población siendo ésta distinta de cero; por lo tanto, calcular con antelación la probabilidad de obtener cada una de las muestras posibles.
+
+En este caso, se realizó un muestreo no probabilístico de clase opinática, ya que la selección de los elementos de la muestra se debe a su nivel de representatividad dentro de los mercados bursátiles, por ende, la totalidad de los índices bursátiles no fueron equiprobables en su selección.
+
+\section{Fuentes de Datos}
 
 La estructura de los datos utilizados en el trabajo es de tipo OHLC por sus siglas en inglés Open, High, Low, Close. La misma, resume en 4 registros el comportamiento del precio del activo (Apertura, Cierre, Mínimo y Máximo) en un intervalo de tiempo. En el caso de la presente investigación, de un día. Este tipo de dato provee la información necesaria para cubrir las exigencia del modelo, tanto para la creación de la variable dependiente como para el cálculo de los indicadores técnicos.
 
 Los datos fueron extraídos del portal www.investing.com, uno de los portales financieros con mayor prestigio en el mundo. Fue fundado en 2007 y es conocido por su calendario económico y directorio de brokers.
 
-\subsection{Series de Índices Bursátiles}
-
-El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
-
-En la presente investigación se utilizan los índices como reflejo del comportamiento de varios activos, de esta manera, se mide la estrategia en un sector y no en un instrumento en específico. Otras de las ventajas de utilizar los índices es que al representar un promedio de varios activos, sus variaciones son menos drásticas. La muestra está constituida por 5 índices bursátiles que representan distintos mercados del mundo: NASDAQ, NIKKEI, FTSE 100, BOVESPA y SP500.
+\section{Variables}
 
 \subsection{Variable Dependiente}
 
@@ -59,11 +75,7 @@ Ahora bien, la idea base de la investigación era utilizar los valores de cada i
 
 Se decidió entonces, utilizar como predictores no los indicadores por si solos, sino, las relaciones entre cada uno de ellos. Esto se abordó agregando al modelo las interacciones entre todos los indicador, y removiendo los valores de los indicadores por sí solos. De esta manera el hecho de utilizar ACP, no solo es visto ahora como una manera de remover la colinealidad entre predictores sino como método de reducción de variables, ya que el modelo pasó de tener 10 predictores -incluyendo el precio de cierre- a 45.
 
-\subsection{Validación Cruzada en Series de Tiempo}
-
-La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
-
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+\section{Estrategia de Análisis}
 
 \subsection{WalkForward Backtesting}
 
@@ -160,7 +172,7 @@ do.call('grid.arrange', list_plotex_pred)
 
 La técnica que utiliza el análisis de componentes principales (PCA) para reducir el número de variables predictoras es conocido como Principal Component Regression (PCR). PCR es utilizado para extraer la información más importante de una matriz de datos multivariante y expresar ésta información en nuevas variables llamadas componentes principales Éstas son una combinación lineal de las variables originales. Aunque el número de componentes principañes puede ser igual al número de variables, la idea es utilizar un grupo reducido de componentes que maximicen la variación.
 
-Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables en la mayoría de los casos a 7 componentes donde las dos primeras contienen alrededor del 25\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento. Para el modelo se estableció que en cada período de entrenamiento se utilizará la cantidad de componentes necesarias para explicar el 85\% de la variación de la matriz de datos.
+Por su parte el modelo propuesto utiliza las interacciones entre las variables predictoras, esto aumenta el número de variables de 10 a 45, las cuales además en muchos casos están correlacionadas. Al utilizar PCR se reduce el número de variables a dos componentes que contienen alrededor del 50\% de la variación, es importante recordar que esta reducción se realiza en cada período de entrenamiento.
 
 \subsection{Modelado de los Retornos}
 

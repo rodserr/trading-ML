@@ -5,16 +5,14 @@
 
 \section{Coeficientes de los modelos}
 
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NASDAQ.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NASDAQ}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[2]][[1]]))
 @
 \end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
@@ -27,13 +25,16 @@ xtable(summary(list_model[[2]][[2]]))
 xtable(summary(list_model[[2]][[3]]))
 @
 \end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[2]][[4]]))
 @
 \end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
@@ -47,36 +48,39 @@ xtable(summary(list_model[[2]][[6]]))
 @
 \end{center}
 
+\newpage
 
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del NIKKEI 225.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NIKKEI 225}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[3]][[1]]))
 @
 \end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[3]][[2]]))
 @
 \end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[3]][[3]]))
 @
 \end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[3]][[4]]))
 @
 \end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
@@ -90,18 +94,16 @@ xtable(summary(list_model[[3]][[6]]))
 @
 \end{center}
 
+\newpage
 
-
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del FTSE 100.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando FTSE 100}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[4]][[1]]))
 @
 \end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
@@ -114,13 +116,16 @@ xtable(summary(list_model[[4]][[2]]))
 xtable(summary(list_model[[4]][[3]]))
 @
 \end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[4]][[4]]))
 @
 \end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
@@ -134,18 +139,17 @@ xtable(summary(list_model[[4]][[6]]))
 @
 \end{center}
 
+\newpage
 
-
-En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del BOVESPA.
 \begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando BOVESPA}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[5]][[1]]))
 @
 \end{center}
 
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
@@ -158,13 +162,16 @@ xtable(summary(list_model[[5]][[2]]))
 xtable(summary(list_model[[5]][[3]]))
 @
 \end{center}
+
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 xtable(summary(list_model[[5]][[4]]))
 @
 \end{center}
-\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=

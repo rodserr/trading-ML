@@ -119,6 +119,14 @@ Las variables pueden ser divididas entre cuantitativas o cualitativas -también 
 \subsubsection{Compensasión entre sesgo y varianza}
 
 
+
+\subsection{Validación Cruzada en Series de Tiempo}
+
+La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+
+Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
+
+
 \subsection{Regresión Logística}
 
 Los modelos Lineales Generalizados asumen que existe una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:

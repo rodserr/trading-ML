@@ -27,7 +27,7 @@ for(i in 1:5){
 @
 
 \begin{figure}[H]
-\setkeys{Gin}{width =0.8\textwidth}
+\setkeys{Gin}{width = 0.8 \textwidth}
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 do.call('grid.arrange', plot_serie)
@@ -209,13 +209,6 @@ pca <- predictors_var %>% prcomp(scale = FALSE)
 
 Los eigenvalores miden la cantidad de variación retenida por cada componente. Los eigenvalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
 
-
-La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-.
-
-Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
-
-El número de componentes a utilizar se establece en función a estos dos gráficos. Este comportamiento anteriormente descrito se replica en los demás períodos de entrenamiento y demás pares. Se decide utilizar los dos primeros componentes como variables explicatoria en el MLG ya que la diferencia entre el 2do y 3er componentes es significativa, por lo que se espera que la variabilidad explicada en los dos primeros componentes sea suficiente.
-
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
@@ -231,6 +224,11 @@ do.call('grid.arrange', list_pca_eigen)
 @
 \caption{Eigenvalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \end{figure}
+
+La proporción de variación explicada por cada eigenvalor viene dada de dividir cada eigenvalor por su sumatoria, en este caso 45 -el número de variables originales-. Un eigenvalor mayor que 1 indica que el componente tiene mayor variación que la contenida en una de las variables originales. En la figura 4.7 se puede observar que el 85\% de la variación está contenida en los primeros 7 componentes. Igualmente se aprecia que el eigenvalor de los 10 PCs es mayor que 1. 
+
+El número de componentes a utilizar se establece en función a estos dos gráficos. Este comportamiento anteriormente descrito se replica en los demás períodos de entrenamiento y demás pares. Se decide utilizar los dos primeros componentes como variables explicatorias en el MLG ya que la diferencia entre el 2do y 3er componentes es significativa, por lo que se espera que la variabilidad explicada en los dos primeros componentes -aproximadamente 50\%- sea suficiente. Esto también se basa en el hecho de que los indicadores son transformaciones del precio del activo por lo que existe correlación entre ellos. Se asume entonces que no es necesaria toda la información provista por los indicadores.
+
 
 La contribución de las variables representan la variabilidad contenida en un componente. Las variables correlacionadas con el componente principal 1 (PC1) y PC2 son las más importantes en explicar la variabilidad en la matriz de datos. Aquellas que no se correlacionan con ninguna componente son desechadas por su baja contribución. En la figura 4.8 se observa la contribución de las primeras 30 variables en PC1, PC2 y la contribución obtenida en ambas.
 
@@ -277,8 +275,6 @@ El gráfico de correlación ó Factor map muestra la relación entre las variabl
 \item La distancia entre las variables y el origen mide la calidad de representación de las variables en el gráfico. Mientras más alejado del origen, mejor representadas 
 \end{itemize}
 
-En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
-
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
@@ -293,7 +289,7 @@ fviz_pca_var(pca,
 \caption{Gráfico de Correlación entre PC1 y PC2}
 \end{figure}
 
-En la figura 4.11 se muestran los gráficos de dispersión entre los componentes, 
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados. En los cuadrantes positivos para el eje x predominan variables con una menor contribución a los componentes.
 
 <<Dispersion_Plots, echo=FALSE>>=
 aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
@@ -316,6 +312,7 @@ fviz_pca_ind(pca,
 \caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
 \end{figure}
 
+En la figura 4.11 se muestra el gráfico de dispersión por clases. Se observa que no hay una región que agrupe una sola clase sino que las observaciones están dispersas en todos los cuadrantes.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -489,14 +486,14 @@ df_fr_show <- df_fr %>% setNames(serie) %>%
                       'Net Profit', 'Max Drawdown')
 @
 
-En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, dado que la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. 
-
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 <<echo=FALSE, results=tex>>=
 xtable(df_fr_show, align = rep('c',6))
 @
 \end{center}
+
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice.
  
 <<trades_plot, echo=FALSE>>=
 list_trades_plot <- list()
@@ -584,6 +581,8 @@ df_return_plot %>%
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
+En la figura 4.13 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento positivo.
+
 \subsection{Medidas de Riesgo}
 
 Al asumir que siempre se abre la posición con la misma cantidad de dinero, en este caso 10.000 USD, se sabe que los trades sólo pueden arrojar dos resultados -0.02\% de ganancia en caso que sea positivo ó 0.025\% de pérdida en caso contrario, descartando las liquidaciones por límite de tiempo- En este sentido se aplica el contraste Wald–Wolfowitz comúnmente llamado test de racha, para verificar la aleatoriedad de los resultados de los trades.
@@ -655,4 +654,4 @@ xtable(VaR_df)
 @
 \end{center}
   
-Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 1,313.83 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 1,552.12 USD'
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,297.49 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 7,912.80 USD'
