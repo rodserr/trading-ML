@@ -29,4 +29,10 @@
 \item Pfaff, Bernhard (2016). \textit{Financial Risk Modelling and
 Portfolio Optimization with R}. Wiley.
 
+\item González, Lisbeth (2002) \textit(Análisis Financiero del Portafolio Mercantil de Inversión de MERINVEST. Período 1998-2000). Venezuela, Universidad Católica Andrés Bello
+
+\item Balestrini, Miriam (1997) \textit(Como se Elabora el Proyecto de Investigación). BL Consultores y Asociados
+
+\item Rebolledo, Valeria (2018) \textit(Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el Cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos). Venezuela, Universidad Central de Venezuela
+
 \end{itemize}

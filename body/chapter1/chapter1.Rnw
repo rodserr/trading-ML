@@ -19,24 +19,26 @@ El desarrollo tecnológico, especialmente el potenciamiento de los procesadores 
 
 Una de las principales críticas al trading discresional se debe a la complejidad de entender los movimientos del activo. Los patrones gráficos basados en indicadores técnicos buscan exponer el comportamiento del precio. La ídea de esta investigación es comprender si un modelo de aprendizaje estadístico puede, en base a estos indicadores, pronósticar el momento correcto de entrada para obtener una ganancia.
 
-En base a la problemática, surge la interrogante: ¿El enfoque de desarrollar un estrategia de trading automatizado basada en aprendizaje estadístico es eficaz para pronósticar ganancias?
+En base a la problemática, surge la interrogante: ¿El enfoque de desarrollar una estrategia de trading automatizado basada en aprendizaje estadístico es eficaz para pronósticar ganancias?
 
 \section{Objetivo General}
 
-Modelar los retornos de la inversión de una estrategia automatizada para pronósticar movimientos en el mercado búrsatil
+Modelar los retornos de la inversión para pronósticar movimientos en el mercado búrsatil
 
 \section{Objetivos Específicos}
 
 \begin{itemize}
-\item Identificar la variable dicotómica la cual señala la materialización de un precio objetivo o no
-\item Calcular las variables predictoras, en este caso, los indicadores técnicos que luego serán reconstruidos por el Análisis de Componentes Principales
-\item Desarrollar el marco de backtesting con la metodología WalkForward
-\item Simular las compras y ventas en función a la predicción del modelo 
+\item Identificar las observaciones en las que se alcance un precio objetivo en un tiempo determinada
+\item Calcular los indicadores técnicos en base a cada índice
+\item Desarrollar el marco de backtesting para la construcción del modelo
+\item Simular las compras y ventas en función de la predicción del modelo 
 \item Calcular el Valor a Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación
 \end{itemize}
 
 \section{Justificación}
 
-La mayor ventaja del trading basado en algoritmos es que realiza la labor de inversión de manera sistemática, removiendo el factor emocional de las personas. Apegarse a un estrategia de inversión es vital para lograr resultados consistentes en el trading. Sin embargo, es difícil encontrar estrategias que generen rendimientos positivos todo el tiempo, y aún así los factores emocionales de las personas pueden destruir cualquier plan al enfrentarse a momentos transitorios de pérdida continua, llamados 'drawdowns' en el mundo financiero. El necesitar un plan consistente y sistemático, promueve la utilización de sistemas automatizados dado que elimina cualquier aspecto emocional durante el proceso de la inversión, manteniendo la disciplina durante momentos de alta volatilidad.
+La especulación en el mercado bursátil contribuye a que los fondos de inversión controlen adecuadamente los riesgos financieros y a su vez diversifiquen portafolios. Estos algoritmos contribuyen también a la formación correcta del precio de los activos, que de no existir especuladores estarían en manos de monopolios, además generan liquidez al mercado y permiten a más participantes beneficiarse de las ganancias de grandes corporaciones.
+
+Los beneficios del trading discrecional se ven aumentados cuando la estrategia se basa en algoritmos ya que realiza la labor de inversión de manera sistemática, removiendo el factor emocional de las personas. Apegarse a un estrategia de inversión es vital para lograr resultados consistentes en el trading. Sin embargo, es difícil encontrar estrategias que generen rendimientos positivos todo el tiempo, y aún así los factores emocionales de las personas pueden destruir cualquier plan al enfrentarse a momentos transitorios de pérdida continua, llamados 'drawdowns' en el mundo financiero. El necesitar un plan consistente y sistemático, promueve la utilización de sistemas automatizados dado que elimina cualquier aspecto emocional durante el proceso de la inversión, manteniendo la disciplina durante momentos de alta volatilidad.
 
 La otra gran ventaja de los sistemas automatizados es que permite la posibilidad de realizar pruebas del algoritmo en data histórica para entender el comportamiento de la estrategia, este proceso es conocido como 'backtesting'. De esta manera el inversor tiene una idea de cómo se comportará el sistema en situaciones similares a las testeadas en el backtesting. El backtesting también permite optimizar los parámetros de la estrategia en busca de maximizar los retornos con el menor riesgo, sin embargo, se debe tener cuidado en no sobre optimizar el sistema. 

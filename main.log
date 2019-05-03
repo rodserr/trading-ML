@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000) (preloaded format=pdflatex 2019.4.15)  22 APR 2019 17:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000) (preloaded format=pdflatex 2019.4.15)  3 MAY 2019 12:42
 entering extended mode
 **./main.tex
 (main.tex
@@ -1056,13 +1056,13 @@ LaTeX Font Info:    Try loading font information for U+rsfs on input line 66.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
 (main-concordance.tex)
-<Latex/Classes/Escudos/ucvlogo.jpg, id=209, 676.02562pt x 668.4975pt>
+<Latex/Classes/Escudos/ucvlogo.jpg, id=217, 676.02562pt x 668.4975pt>
 File: Latex/Classes/Escudos/ucvlogo.jpg Graphic file (type jpg)
 <use Latex/Classes/Escudos/ucvlogo.jpg>
 Package pdftex.def Info: Latex/Classes/Escudos/ucvlogo.jpg  used on input line 
 69.
 (pdftex.def)             Requested size: 68.27701pt x 85.35725pt.
-<images/faces.png, id=210, 346.29375pt x 200.75pt>
+<images/faces.png, id=218, 346.29375pt x 200.75pt>
 File: images/faces.png Graphic file (type png)
 <use images/faces.png>
 Package pdftex.def Info: images/faces.png  used on input line 69.
@@ -1088,8 +1088,8 @@ LaTeX Info: Redefining \% on input line 1.
  [1
 
 ]
-LaTeX Info: Redefining \. on input line 53.
-LaTeX Info: Redefining \% on input line 53.
+LaTeX Info: Redefining \. on input line 52.
+LaTeX Info: Redefining \% on input line 52.
  [2])
 \tf@toc=\write5
 \openout5 = `main.toc'.
@@ -1128,7 +1128,13 @@ LaTeX Info: Redefining \% on input line 1.
 
  [6
 
-] [7
+]
+Overfull \hbox (8.69183pt too wide) in paragraph at lines 89--90
+\T1/aer/m/n/10 algoritmos, por lo que abarcar varios de estos supondría un trab
+ajo arduo, realizado probablemente
+ []
+
+[7
 
 ]
 Cap\'{\i }tulo 1.
@@ -1143,35 +1149,29 @@ de desarrollar un estrategia
 LaTeX Info: Redefining \. on input line 124.
 LaTeX Info: Redefining \% on input line 124.
 [9]
-Overfull \hbox (3.2793pt too wide) in paragraph at lines 132--133
-\T1/aer/m/n/10 emocionales de las personas pueden destruir cualquier plan al en
-frentarse a momentos transitorios
+Overfull \hbox (3.74028pt too wide) in paragraph at lines 132--133
+[]\T1/aer/m/n/10 La especulación en el mercado bursátil contribuye a que los fo
+ndos de inversión controlen
  []
 
 
-Overfull \hbox (8.6875pt too wide) in paragraph at lines 132--133
-\T1/aer/m/n/10 de pérdida continua, llamados 'drawdowns' en el mundo financiero
-. El necesitar un plan consistente
+Overfull \hbox (13.5803pt too wide) in paragraph at lines 132--133
+\T1/aer/m/n/10 contribuyen también a la formación correcta del precio de los ac
+tivos, que de no existir especuladores
  []
 
-
-Overfull \hbox (5.20076pt too wide) in paragraph at lines 132--133
-\T1/aer/m/n/10 aspecto emocional durante el proceso de la inversión, manteniend
-o la disciplina durante momentos
- []
-
-LaTeX Info: Redefining \. on input line 138.
-LaTeX Info: Redefining \% on input line 138.
+LaTeX Info: Redefining \. on input line 140.
+LaTeX Info: Redefining \% on input line 140.
 [10]
 Cap\'{\i }tulo 2.
 
-Overfull \hbox (3.15999pt too wide) in paragraph at lines 144--145
+Overfull \hbox (3.15999pt too wide) in paragraph at lines 146--147
 []\T1/aer/m/n/10 Bach y Nielsen examinan la efectividad de diversos algoritmos 
 de aprendizaje estadístico
  []
 
 
-Overfull \hbox (34.94588pt too wide) in paragraph at lines 146--146
+Overfull \hbox (34.94588pt too wide) in paragraph at lines 148--148
 |[]\T1/aer/bx/n/12 Un enfoque de aprendizaje automático para el comercio automa
 tizado| 
  []
@@ -1179,29 +1179,29 @@ tizado|
 [11
 
 ]
-Overfull \hbox (2.03004pt too wide) in paragraph at lines 160--161
+Overfull \hbox (2.03004pt too wide) in paragraph at lines 162--163
 []\T1/aer/m/n/10 Cristián Fernández introduce un sistema automático para el rec
 onocimiento de patrones
  []
 
-LaTeX Info: Redefining \. on input line 173.
-LaTeX Info: Redefining \% on input line 173.
+LaTeX Info: Redefining \. on input line 175.
+LaTeX Info: Redefining \% on input line 175.
 [12]
-Overfull \hbox (10.64119pt too wide) in paragraph at lines 174--175
+Overfull \hbox (10.64119pt too wide) in paragraph at lines 176--177
 []\T1/aer/m/n/10 Aunque esta hipótesis es la piedra angular de la teoría financ
 iera moderna, es controversial
  []
 
 
-Overfull \hbox (13.74104pt too wide) in paragraph at lines 180--181
+Overfull \hbox (13.74104pt too wide) in paragraph at lines 182--183
 []\T1/aer/m/n/10 Algunos académicos como Hong y Stein's (1999) categorizan a lo
 s inversores en Informados
  []
 
-LaTeX Info: Redefining \. on input line 191.
-LaTeX Info: Redefining \% on input line 191.
+LaTeX Info: Redefining \. on input line 193.
+LaTeX Info: Redefining \% on input line 193.
 [13]
-Overfull \hbox (26.5861pt too wide) detected at line 209
+Overfull \hbox (26.5861pt too wide) detected at line 211
 \OML/cmm/m/it/10 MACD[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 EMA[]\OT1/cmr/m/n/10
  (\OML/cmm/m/it/10 Pcierre\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10   \OML/cmm/m/it/10
  EMA[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Pcierre\OT1/cmr/m/n/10 ) \OML/cmm/m/it/
@@ -1210,7 +1210,7 @@ cmm/m/it/10 MACD[]\OT1/cmr/m/n/10 )
  []
 
 
-Overfull \hbox (9.95172pt too wide) detected at line 214
+Overfull \hbox (9.95172pt too wide) detected at line 216
 \OML/cmm/m/it/10 ATR[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 EMA[]\OT1/cmr/m/n/10 
 (\OML/cmm/m/it/10 TR[]\OT1/cmr/m/n/10 ) \OML/cmm/m/it/10 TR[] \OT1/cmr/m/n/10 =
  \OML/cmm/m/it/10 Max \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 Pmax \OMS/cmsy/m/n/10  
@@ -1221,7 +1221,7 @@ j\OML/cmm/m/it/10 Pmin \OMS/cmsy/m/n/10   \OML/cmm/m/it/10 Pc[]\OMS/cmsy/m/n/10
  []
 
 
-Overfull \hbox (50.25182pt too wide) detected at line 223
+Overfull \hbox (50.25182pt too wide) detected at line 225
 \OML/cmm/m/it/10 BandaSuperior[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 EMA[]\OT1/c
 mr/m/n/10 (\OML/cmm/m/it/10 Pcierre\OT1/cmr/m/n/10 ) + 2\OML/cmm/m/it/10 ; \OT1
 /cmr/m/n/10 5\OML/cmm/m/it/10  BandaInferior[] \OT1/cmr/m/n/10 = \OML/cmm/m/it
@@ -1230,13 +1230,13 @@ mr/m/n/10 (\OML/cmm/m/it/10 Pcierre\OT1/cmr/m/n/10 ) + 2\OML/cmm/m/it/10 ; \OT1
 
  []
 
-LaTeX Info: Redefining \. on input line 230.
-LaTeX Info: Redefining \% on input line 230.
+LaTeX Info: Redefining \. on input line 232.
+LaTeX Info: Redefining \% on input line 232.
 [14]
-LaTeX Info: Redefining \. on input line 248.
-LaTeX Info: Redefining \% on input line 248.
+LaTeX Info: Redefining \. on input line 250.
+LaTeX Info: Redefining \% on input line 250.
  [15]
-Overfull \hbox (10.38643pt too wide) in paragraph at lines 251--252
+Overfull \hbox (10.38643pt too wide) in paragraph at lines 253--254
 \T1/aer/m/n/10 categóricas-. Las cuantitativas toman valores numéricos mientras
  que las cualitativas son categorías
  []
@@ -1245,17 +1245,17 @@ LaTeX Info: Redefining \. on input line 273.
 LaTeX Info: Redefining \% on input line 273.
 [16]
 
-LaTeX Warning: Command \' invalid in math mode on input line 290.
+LaTeX Warning: Command \' invalid in math mode on input line 289.
 
 Missing character: There is no á in font cmr10!
 
-Overfull \hbox (18.28503pt too wide) in paragraph at lines 290--291
+Overfull \hbox (18.28503pt too wide) in paragraph at lines 289--290
 []\T1/aer/m/n/10 Los coeficientes $\OML/cmm/m/it/10 $ \T1/aer/m/n/10 son desco
 nocidos, por lo que deben estimarse en la data de entrenamiento.
  []
 
 
-Overfull \hbox (3.89212pt too wide) in paragraph at lines 290--291
+Overfull \hbox (3.89212pt too wide) in paragraph at lines 289--290
 \T1/aer/m/n/10 Para esto se utiliza el método de $\OML/cmm/m/it/10 MximaVerosim
 ilitud$\T1/aer/m/n/10 , el cual consiste en estimar los coeficientes
  []
@@ -1263,49 +1263,54 @@ ilitud$\T1/aer/m/n/10 , el cual consiste en estimar los coeficientes
 LaTeX Info: Redefining \. on input line 299.
 LaTeX Info: Redefining \% on input line 299.
 [17]
-LaTeX Info: Redefining \. on input line 324.
-LaTeX Info: Redefining \% on input line 324.
+LaTeX Info: Redefining \. on input line 326.
+LaTeX Info: Redefining \% on input line 326.
  [18]
-Overfull \hbox (13.00984pt too wide) in paragraph at lines 332--333
+Overfull \hbox (13.00984pt too wide) in paragraph at lines 331--332
 []\T1/aer/m/n/10 El primer vector de loadings de componente principal resuelve 
 el problema de optimización 
  []
 
 
-Overfull \hbox (23.92014pt too wide) in paragraph at lines 339--340
+Overfull \hbox (23.92014pt too wide) in paragraph at lines 338--339
 []\T1/aer/m/n/10 El problema de maximización en (fórmula de arriba) se solucion
 a mediante la descomposición
  []
 
-<images/confusion_matrix.png, id=413, 324.21124pt x 156.585pt>
+<images/confusion_matrix.png, id=424, 324.21124pt x 156.585pt>
 File: images/confusion_matrix.png Graphic file (type png)
 <use images/confusion_matrix.png>
-Package pdftex.def Info: images/confusion_matrix.png  used on input line 353.
+Package pdftex.def Info: images/confusion_matrix.png  used on input line 352.
 (pdftex.def)             Requested size: 180.67499pt x 87.2617pt.
 
-LaTeX Warning: Command \' invalid in math mode on input line 360.
+LaTeX Warning: Command \' invalid in math mode on input line 359.
 
 Missing character: There is no ó in font cmr10!
-LaTeX Info: Redefining \. on input line 360.
-LaTeX Info: Redefining \% on input line 360.
+LaTeX Info: Redefining \. on input line 366.
+LaTeX Info: Redefining \% on input line 366.
 [19]
-LaTeX Info: Redefining \. on input line 381.
-LaTeX Info: Redefining \% on input line 381.
+LaTeX Info: Redefining \. on input line 385.
+LaTeX Info: Redefining \% on input line 385.
  [20 <./images/confusion_matrix.png>]
-<main-001.pdf, id=425, 433.62pt x 433.62pt>
+<main-001.pdf, id=437, 433.62pt x 433.62pt>
 File: main-001.pdf Graphic file (type pdf)
 <use main-001.pdf>
-Package pdftex.def Info: main-001.pdf  used on input line 394.
+Package pdftex.def Info: main-001.pdf  used on input line 393.
 (pdftex.def)             Requested size: 330.07071pt x 288.81021pt.
-LaTeX Info: Redefining \. on input line 404.
-LaTeX Info: Redefining \% on input line 404.
+LaTeX Info: Redefining \. on input line 402.
+LaTeX Info: Redefining \% on input line 402.
  [21 <./main-001.pdf>]
-LaTeX Info: Redefining \. on input line 404.
-LaTeX Info: Redefining \% on input line 404.
- [22]
+Overfull \hbox (8.05623pt too wide) in paragraph at lines 405--406
+\T1/aer/m/n/10 elaboración propia del modelo de riesgo para determinar requerim
+ientos de capital. Recomendando
+ []
+
+LaTeX Info: Redefining \. on input line 415.
+LaTeX Info: Redefining \% on input line 415.
+[22]
 Cap\'{\i }tulo 3.
 
-Overfull \hbox (3.69002pt too wide) in paragraph at lines 410--411
+Overfull \hbox (3.69002pt too wide) in paragraph at lines 421--422
 []\T1/aer/m/n/10 Para definir el tipo de investigación a realizar se establece 
 como referencia la clasificación
  []
@@ -1313,7 +1318,7 @@ como referencia la clasificación
 [23
 
 ]
-Overfull \hbox (1.89119pt too wide) in paragraph at lines 431--432
+Overfull \hbox (1.89119pt too wide) in paragraph at lines 442--443
 []\T1/aer/m/n/10 Los datos fueron extraídos del portal www.investing.com, uno d
 e los portales financieros
  []
@@ -1321,7 +1326,7 @@ e los portales financieros
 ! Missing delimiter (. inserted).
 <to be read again> 
                    $
-l.449 $
+l.460 $
        $
 I was expecting to see something like `(' or `\{' or
 `\}' here. If you typed, e.g., `{' instead of `\{', you
@@ -1330,320 +1335,344 @@ braces don't get unbalanced. Otherwise just proceed.
 Acceptable delimiters are characters whose \delcode is
 nonnegative, or you can use `\delimiter <delimiter code>'.
 
-LaTeX Info: Redefining \. on input line 449.
-LaTeX Info: Redefining \% on input line 449.
+LaTeX Info: Redefining \. on input line 460.
+LaTeX Info: Redefining \% on input line 460.
 [24]
-Overfull \hbox (7.79889pt too wide) in paragraph at lines 451--452
+Overfull \hbox (7.79889pt too wide) in paragraph at lines 462--463
 []\T1/aer/m/n/10 Dado los datos OHLC del activo es posible identificar los perí
 odos en donde se materializa
  []
 
-LaTeX Info: Redefining \. on input line 473.
-LaTeX Info: Redefining \% on input line 473.
+LaTeX Info: Redefining \. on input line 484.
+LaTeX Info: Redefining \% on input line 484.
 [25]
-<images/walkforward_plot.jpg, id=455, 963.6pt x 722.7pt>
+<images/walkforward_plot.jpg, id=466, 963.6pt x 722.7pt>
 File: images/walkforward_plot.jpg Graphic file (type jpg)
 <use images/walkforward_plot.jpg>
-Package pdftex.def Info: images/walkforward_plot.jpg  used on input line 488.
+Package pdftex.def Info: images/walkforward_plot.jpg  used on input line 499.
 (pdftex.def)             Requested size: 289.06752pt x 289.07487pt.
-LaTeX Info: Redefining \. on input line 496.
-LaTeX Info: Redefining \% on input line 496.
+LaTeX Info: Redefining \. on input line 507.
+LaTeX Info: Redefining \% on input line 507.
  [26]
-<main-003.pdf, id=460, 433.62pt x 433.62pt>
+<main-003.pdf, id=471, 433.62pt x 433.62pt>
 File: main-003.pdf Graphic file (type pdf)
 <use main-003.pdf>
-Package pdftex.def Info: main-003.pdf  used on input line 501.
+Package pdftex.def Info: main-003.pdf  used on input line 512.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 504.
-LaTeX Info: Redefining \% on input line 504.
+LaTeX Info: Redefining \. on input line 515.
+LaTeX Info: Redefining \% on input line 515.
  [27 <./images/walkforward_plot.jpg>]
-Overfull \hbox (6.83856pt too wide) in paragraph at lines 508--509
+Overfull \hbox (6.83856pt too wide) in paragraph at lines 519--520
 \T1/aer/m/n/10 PCR es utilizado para extraer la información más importante de u
 na matriz de datos multivariante
  []
 
 
-Overfull \hbox (0.83975pt too wide) in paragraph at lines 510--511
+Overfull \hbox (0.83975pt too wide) in paragraph at lines 521--522
 []\T1/aer/m/n/10 Por su parte el modelo propuesto utiliza las interacciones ent
 re las variables predictoras,
  []
 
-LaTeX Info: Redefining \. on input line 515.
-LaTeX Info: Redefining \% on input line 515.
+LaTeX Info: Redefining \. on input line 526.
+LaTeX Info: Redefining \% on input line 526.
 [28 <./main-003.pdf>]
-LaTeX Info: Redefining \. on input line 538.
-LaTeX Info: Redefining \% on input line 538.
+LaTeX Info: Redefining \. on input line 549.
+LaTeX Info: Redefining \% on input line 549.
  [29]
 Cap\'{\i }tulo 4.
-<main-005.pdf, id=478, 433.62pt x 433.62pt>
-File: main-005.pdf Graphic file (type pdf)
-<use main-005.pdf>
-Package pdftex.def Info: main-005.pdf  used on input line 553.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-[30
 
-]
-Overfull \hbox (8.88895pt too wide) in paragraph at lines 557--558
+Overfull \hbox (8.88895pt too wide) in paragraph at lines 560--561
 []\T1/aer/m/n/10 Las curvas del S&P y NASDAQ son muy parecidas ya que ambas rep
 resentan cotizaciones
  []
 
+<main-005.pdf, id=489, 433.62pt x 433.62pt>
+File: main-005.pdf Graphic file (type pdf)
+<use main-005.pdf>
+Package pdftex.def Info: main-005.pdf  used on input line 566.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+[30
 
-Overfull \hbox (0.87999pt too wide) in paragraph at lines 559--560
+]
+Overfull \hbox (0.87999pt too wide) in paragraph at lines 570--571
 []\T1/aer/m/n/10 Por su parte el NIKKEI es el índice bursátil de la bolsa de To
 kio, resume las cotizaciones
  []
 
 
-Overfull \hbox (10.206pt too wide) in paragraph at lines 561--562
+Overfull \hbox (10.206pt too wide) in paragraph at lines 572--573
 \T1/aer/m/n/10 especialmente en China. Esto afecta los mercados europeos dada q
 ue este es el principal consumidor
  []
 
-LaTeX Info: Redefining \. on input line 562.
-LaTeX Info: Redefining \% on input line 562.
+LaTeX Info: Redefining \. on input line 575.
+LaTeX Info: Redefining \% on input line 575.
 [31 <./main-005.pdf>]
-<main-006.pdf, id=493, 433.62pt x 433.62pt>
+<main-006.pdf, id=504, 433.62pt x 433.62pt>
 File: main-006.pdf Graphic file (type pdf)
 <use main-006.pdf>
-Package pdftex.def Info: main-006.pdf  used on input line 570.
+Package pdftex.def Info: main-006.pdf  used on input line 581.
 (pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
-<main-007.pdf, id=494, 433.62pt x 433.62pt>
+<main-007.pdf, id=505, 433.62pt x 433.62pt>
 File: main-007.pdf Graphic file (type pdf)
 <use main-007.pdf>
-Package pdftex.def Info: main-007.pdf  used on input line 579.
+Package pdftex.def Info: main-007.pdf  used on input line 590.
 (pdftex.def)             Requested size: 247.54149pt x 247.5431pt.
-LaTeX Info: Redefining \. on input line 581.
-LaTeX Info: Redefining \% on input line 581.
+LaTeX Info: Redefining \. on input line 593.
+LaTeX Info: Redefining \% on input line 593.
  [32 <./main-006.pdf>]
-Overfull \hbox (1.48952pt too wide) in paragraph at lines 583--584
+Overfull \hbox (1.48952pt too wide) in paragraph at lines 594--595
 []\T1/aer/m/n/10 A continuación se presentan una serie de gráficos para refleja
 r lo anteriormente expuesto
  []
 
-<main-009.pdf, id=505, 433.62pt x 433.62pt>
+<main-009.pdf, id=516, 433.62pt x 433.62pt>
 File: main-009.pdf Graphic file (type pdf)
 <use main-009.pdf>
-Package pdftex.def Info: main-009.pdf  used on input line 588.
+Package pdftex.def Info: main-009.pdf  used on input line 599.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 591.
-LaTeX Info: Redefining \% on input line 591.
+LaTeX Info: Redefining \. on input line 602.
+LaTeX Info: Redefining \% on input line 602.
 [33 <./main-007.pdf>]
-<main-010.pdf, id=516, 433.62pt x 433.62pt>
+<main-010.pdf, id=527, 433.62pt x 433.62pt>
 File: main-010.pdf Graphic file (type pdf)
 <use main-010.pdf>
-Package pdftex.def Info: main-010.pdf  used on input line 598.
+Package pdftex.def Info: main-010.pdf  used on input line 609.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 601.
-LaTeX Info: Redefining \% on input line 601.
+LaTeX Info: Redefining \. on input line 612.
+LaTeX Info: Redefining \% on input line 612.
  [34 <./main-009.pdf>]
-Overfull \hbox (2.37926pt too wide) in paragraph at lines 604--605
+Overfull \hbox (2.37926pt too wide) in paragraph at lines 615--616
 []\T1/aer/m/n/10 La distibucion de la variable RSI es asimétrica hacia la izqui
 erda con la mayor frecuencia
  []
 
-<main-011.pdf, id=526, 433.62pt x 433.62pt>
+<main-011.pdf, id=537, 433.62pt x 433.62pt>
 File: main-011.pdf Graphic file (type pdf)
 <use main-011.pdf>
-Package pdftex.def Info: main-011.pdf  used on input line 608.
+Package pdftex.def Info: main-011.pdf  used on input line 619.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 611.
-LaTeX Info: Redefining \% on input line 611.
+LaTeX Info: Redefining \. on input line 622.
+LaTeX Info: Redefining \% on input line 622.
 [35 <./main-010.pdf>]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 616.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 627.
 
 
 (/home/leonardo/.miktex/texmfs/install/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-LaTeX Info: Redefining \. on input line 620.
-LaTeX Info: Redefining \% on input line 620.
- [36 <./main-011.pdf>]
-<main-013.pdf, id=548, 433.62pt x 433.62pt>
-File: main-013.pdf Graphic file (type pdf)
-<use main-013.pdf>
-Package pdftex.def Info: main-013.pdf  used on input line 624.
-(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
 LaTeX Info: Redefining \. on input line 631.
 LaTeX Info: Redefining \% on input line 631.
+ [36 <./main-011.pdf>]
+<main-013.pdf, id=559, 433.62pt x 433.62pt>
+File: main-013.pdf Graphic file (type pdf)
+<use main-013.pdf>
+Package pdftex.def Info: main-013.pdf  used on input line 635.
+(pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
+LaTeX Info: Redefining \. on input line 642.
+LaTeX Info: Redefining \% on input line 642.
  [37 <./main-013.pdf>]
-Overfull \hbox (4.46025pt too wide) in paragraph at lines 633--634
+Overfull \hbox (4.46025pt too wide) in paragraph at lines 644--645
 []\T1/aer/m/n/10 La contribución de las variables representan la variabilidad c
 ontenida en un componente.
  []
 
 
-Overfull \hbox (3.0pt too wide) in paragraph at lines 633--634
+Overfull \hbox (3.0pt too wide) in paragraph at lines 644--645
 \T1/aer/m/n/10 Las variables correlacionadas con el componente principal 1 (PC1
 ) y PC2 son las más importantes
  []
 
-<main-014.pdf, id=558, 433.62pt x 433.62pt>
+<main-014.pdf, id=569, 433.62pt x 433.62pt>
 File: main-014.pdf Graphic file (type pdf)
 <use main-014.pdf>
-Package pdftex.def Info: main-014.pdf  used on input line 638.
+Package pdftex.def Info: main-014.pdf  used on input line 649.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 642.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 653.
 
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 642.
+LaTeX Font Info:    Try loading font information for TS1+aer on input line 653.
 
 (/usr/share/R/share/texmf/tex/latex/ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 642.
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 653.
 
 
-LaTeX Warning: Command \textdegree invalid in math mode on input line 642.
+LaTeX Warning: Command \textdegree invalid in math mode on input line 653.
 
 Missing character: There is no ° in font cmr7!
-<main-015.pdf, id=559, 433.62pt x 433.62pt>
+<main-015.pdf, id=570, 433.62pt x 433.62pt>
 File: main-015.pdf Graphic file (type pdf)
 <use main-015.pdf>
-Package pdftex.def Info: main-015.pdf  used on input line 649.
+Package pdftex.def Info: main-015.pdf  used on input line 660.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 651.
-LaTeX Info: Redefining \% on input line 651.
+LaTeX Info: Redefining \. on input line 662.
+LaTeX Info: Redefining \% on input line 662.
 [38 <./main-014.pdf>]
-<main-016.pdf, id=569, 433.62pt x 433.62pt>
+<main-016.pdf, id=580, 433.62pt x 433.62pt>
 File: main-016.pdf Graphic file (type pdf)
 <use main-016.pdf>
-Package pdftex.def Info: main-016.pdf  used on input line 664.
+Package pdftex.def Info: main-016.pdf  used on input line 675.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 667.
-LaTeX Info: Redefining \% on input line 667.
+LaTeX Info: Redefining \. on input line 678.
+LaTeX Info: Redefining \% on input line 678.
  [39 <./main-015.pdf>]
-<main-018.pdf, id=581, 433.62pt x 433.62pt>
+<main-018.pdf, id=592, 433.62pt x 433.62pt>
 File: main-018.pdf Graphic file (type pdf)
 <use main-018.pdf>
-Package pdftex.def Info: main-018.pdf  used on input line 674.
+Package pdftex.def Info: main-018.pdf  used on input line 685.
 (pdftex.def)             Requested size: 330.05322pt x 330.07071pt.
-LaTeX Info: Redefining \. on input line 677.
-LaTeX Info: Redefining \% on input line 677.
+LaTeX Info: Redefining \. on input line 688.
+LaTeX Info: Redefining \% on input line 688.
  [40 <./main-016.pdf>]
-LaTeX Info: Redefining \. on input line 692.
-LaTeX Info: Redefining \% on input line 692.
+LaTeX Info: Redefining \. on input line 703.
+LaTeX Info: Redefining \% on input line 703.
  [41 <./main-018.pdf>]
+LaTeX Info: Redefining \. on input line 762.
+LaTeX Info: Redefining \% on input line 762.
+ [42]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 709.
+(caption)                particular \caption on input line 771.
 See the caption package documentation for explanation.
 
-LaTeX Info: Redefining \. on input line 760.
-LaTeX Info: Redefining \% on input line 760.
-[42]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 821.
-See the caption package documentation for explanation.
-
-LaTeX Info: Redefining \. on input line 841.
-LaTeX Info: Redefining \% on input line 841.
+LaTeX Info: Redefining \. on input line 822.
+LaTeX Info: Redefining \% on input line 822.
 [43]
-<main-029.pdf, id=617, 433.62pt x 433.62pt>
-File: main-029.pdf Graphic file (type pdf)
-<use main-029.pdf>
-Package pdftex.def Info: main-029.pdf  used on input line 848.
-(pdftex.def)             Requested size: 330.07071pt x 288.81021pt.
-LaTeX Info: Redefining \. on input line 853.
-LaTeX Info: Redefining \% on input line 853.
- [44 <./main-029.pdf>]
-<main-031.pdf, id=628, 433.62pt x 433.62pt>
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 883.
+See the caption package documentation for explanation.
+
+LaTeX Info: Redefining \. on input line 903.
+LaTeX Info: Redefining \% on input line 903.
+[44]
+<main-031.pdf, id=633, 433.62pt x 433.62pt>
 File: main-031.pdf Graphic file (type pdf)
 <use main-031.pdf>
-Package pdftex.def Info: main-031.pdf  used on input line 858.
-(pdftex.def)             Requested size: 412.56496pt x 412.58508pt.
-LaTeX Info: Redefining \. on input line 864.
-LaTeX Info: Redefining \% on input line 864.
+Package pdftex.def Info: main-031.pdf  used on input line 910.
+(pdftex.def)             Requested size: 330.07071pt x 288.81021pt.
+LaTeX Info: Redefining \. on input line 915.
+LaTeX Info: Redefining \% on input line 915.
  [45 <./main-031.pdf>]
+<main-033.pdf, id=644, 433.62pt x 433.62pt>
+File: main-033.pdf Graphic file (type pdf)
+<use main-033.pdf>
+Package pdftex.def Info: main-033.pdf  used on input line 920.
+(pdftex.def)             Requested size: 412.56496pt x 412.58508pt.
+LaTeX Info: Redefining \. on input line 926.
+LaTeX Info: Redefining \% on input line 926.
+ [46 <./main-033.pdf>]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 877.
+(caption)                particular \caption on input line 939.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 899.
+(caption)                particular \caption on input line 961.
 See the caption package documentation for explanation.
 
-LaTeX Info: Redefining \. on input line 918.
-LaTeX Info: Redefining \% on input line 918.
-[46] [47
+LaTeX Info: Redefining \. on input line 980.
+LaTeX Info: Redefining \% on input line 980.
+[47]
+<main-039.pdf, id=660, 433.62pt x 433.62pt>
+File: main-039.pdf Graphic file (type pdf)
+<use main-039.pdf>
+Package pdftex.def Info: main-039.pdf  used on input line 989.
+(pdftex.def)             Requested size: 330.07071pt x 288.81021pt.
+ [48
 
-]
+ <./main-039.pdf>]
+LaTeX Info: Redefining \. on input line 1009.
+LaTeX Info: Redefining \% on input line 1009.
+ [49]
 Cap\'{\i }tulo 5.
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 940.
+(caption)                particular \caption on input line 1014.
 See the caption package documentation for explanation.
 
-[48
+[50
 
 ]
-LaTeX Info: Redefining \. on input line 1042.
-LaTeX Info: Redefining \% on input line 1042.
- [49]
-
-Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1045.
-See the caption package documentation for explanation.
-
-LaTeX Info: Redefining \. on input line 1096.
-LaTeX Info: Redefining \% on input line 1096.
-[50]
-LaTeX Info: Redefining \. on input line 1148.
-LaTeX Info: Redefining \% on input line 1148.
+LaTeX Info: Redefining \. on input line 1116.
+LaTeX Info: Redefining \% on input line 1116.
  [51]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1151.
+(caption)                particular \caption on input line 1119.
 See the caption package documentation for explanation.
 
-LaTeX Info: Redefining \. on input line 1201.
-LaTeX Info: Redefining \% on input line 1201.
+LaTeX Info: Redefining \. on input line 1170.
+LaTeX Info: Redefining \% on input line 1170.
 [52]
-LaTeX Info: Redefining \. on input line 1253.
-LaTeX Info: Redefining \% on input line 1253.
+LaTeX Info: Redefining \. on input line 1222.
+LaTeX Info: Redefining \% on input line 1222.
  [53]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 1256.
+(caption)                particular \caption on input line 1225.
 See the caption package documentation for explanation.
 
-LaTeX Info: Redefining \. on input line 1307.
-LaTeX Info: Redefining \% on input line 1307.
+LaTeX Info: Redefining \. on input line 1275.
+LaTeX Info: Redefining \% on input line 1275.
 [54]
-LaTeX Info: Redefining \. on input line 1362.
-LaTeX Info: Redefining \% on input line 1362.
+LaTeX Info: Redefining \. on input line 1327.
+LaTeX Info: Redefining \% on input line 1327.
  [55]
-Overfull \hbox (3.70522pt too wide) in paragraph at lines 1371--1372
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 1330.
+See the caption package documentation for explanation.
+
+LaTeX Info: Redefining \. on input line 1381.
+LaTeX Info: Redefining \% on input line 1381.
+[56]
+LaTeX Info: Redefining \. on input line 1436.
+LaTeX Info: Redefining \% on input line 1436.
+ [57]
+Overfull \hbox (3.70522pt too wide) in paragraph at lines 1445--1446
 []\T1/aer/m/n/10 Shagilla Kadida Ramadhani (2006). \T1/aer/m/it/10 Ab Analysis 
 of Technical Trading Strategies\T1/aer/m/n/10 . Inglaterra,
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1392.
-[56
+
+Overfull \hbox (17.20183pt too wide) in paragraph at lines 1468--1469
+[]\T1/aer/m/n/10 Rebolledo, Valeria (2018) \T1/aer/m/it/10 (\T1/aer/m/n/10 Eval
+uación de la Efectividad del Método GARCH-EVT-COPULAS
+ []
+
+
+Overfull \hbox (28.63933pt too wide) in paragraph at lines 1468--1469
+\T1/aer/m/n/10 para el Cálculo del VaR como Medida de Riesgo en Mercados de Com
+modities Latinoamericanos).
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1472.
+[58
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1392.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1472.
  (main.aux
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1392.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1392.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1472.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1472.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 41444F161954B1BD8DC7A586CE98F27C;3839.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1392.
+(rerunfilecheck)             Checksum: 590C7EFB53E28076B2AD0EA35D11AAD7;4054.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1472.
  ) 
 Here is how much of TeX's memory you used:
- 23871 strings out of 494889
- 429990 string characters out of 3178471
- 477766 words of memory out of 3000000
- 26978 multiletter control sequences out of 15000+200000
- 576896 words of font info for 121 fonts, out of 3000000 for 9000
+ 23885 strings out of 494889
+ 430206 string characters out of 3178471
+ 477771 words of memory out of 3000000
+ 26985 multiletter control sequences out of 15000+200000
+ 577387 words of font info for 123 fonts, out of 3000000 for 9000
  0 hyphenation exceptions out of 8191
  43i,12n,63p,1363b,1052s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/leonardo/.miktex/texmfs/data/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1
@@ -1664,13 +1693,14 @@ lic/amsfonts/cm/cmr5.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/pub
 lic/amsfonts/cm/cmr6.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/pub
 lic/amsfonts/cm/cmr7.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/pub
 lic/amsfonts/cm/cmr9.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/pub
-lic/amsfonts/cm/cmsy10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/p
-ublic/amsfonts/cm/cmsy7.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1/
-public/amsfonts/cm/cmti10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type
-1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (57 pages, 1105815 bytes).
+lic/amsfonts/cm/cmsltt10.pfb></home/leonardo/.miktex/texmfs/install/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb></home/leonardo/.miktex/texmfs/install/fonts/typ
+e1/public/amsfonts/cm/cmsy7.pfb></home/leonardo/.miktex/texmfs/install/fonts/ty
+pe1/public/amsfonts/cm/cmti10.pfb></home/leonardo/.miktex/texmfs/install/fonts/
+type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (59 pages, 1139401 bytes).
 PDF statistics:
- 816 PDF objects out of 1000 (max. 8388607)
- 173 named destinations out of 1000 (max. 500000)
- 528 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 846 PDF objects out of 1000 (max. 8388607)
+ 177 named destinations out of 1000 (max. 500000)
+ 549 words of extra memory for PDF output out of 10000 (max. 10000000)
 

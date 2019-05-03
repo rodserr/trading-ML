@@ -1,23 +1,24 @@
 \babel@toc {spanish}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Matriz de Confusi\IeC {\'o}n\relax }}{20}{figure.caption.10}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Funci\IeC {\'o}n de densidad con VaR y ES\relax }}{21}{figure.caption.13}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Matriz de Confusi\IeC {\'o}n\relax }}{20}{figure.caption.9}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Funci\IeC {\'o}n de densidad con VaR y ES\relax }}{21}{figure.caption.12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Metodolog\IeC {\'\i }a WalkForward\relax }}{27}{figure.caption.14}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el \IeC {\'\i }ndice S\&P500, para diferentes valores de tp y h\relax }}{28}{figure.caption.15}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Metodolog\IeC {\'\i }a WalkForward\relax }}{27}{figure.caption.13}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el \IeC {\'\i }ndice S\&P500, para diferentes valores de tp y h\relax }}{28}{figure.caption.14}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Precios de Cierre de los \IeC {\'\i }ndices en el per\IeC {\'\i }odo de estudio (26/10/2008 - 18/01/2019)\relax }}{31}{figure.caption.16}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Correlaci\IeC {\'o}n entre indicadores originales calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{32}{figure.caption.17}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Correlaci\IeC {\'o}n entre indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{33}{figure.caption.18}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Gr\IeC {\'a}fico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{34}{figure.caption.19}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{35}{figure.caption.20}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Gr\IeC {\'a}fico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{36}{figure.caption.21}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Eigenvalores y Porcentaje de contribuci\IeC {\'o}n para los 10 componentes m\IeC {\'a}s importantes obtenidos por la matr\IeC {\'\i }z de datos\relax }}{37}{figure.caption.22}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Contribuci\IeC {\'o}n de cada variable para PC1, PC2 y el total de la contribuci\IeC {\'o}n en ambos componentes\relax }}{38}{figure.caption.23}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Calidad de representaci\IeC {\'o}n medida por $Cos^2$ de cada variable en PC1 y PC2\relax }}{39}{figure.caption.24}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Gr\IeC {\'a}fico de Correlaci\IeC {\'o}n entre PC1 y PC2\relax }}{40}{figure.caption.25}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Gr\IeC {\'a}fico Dispersi\IeC {\'o}n entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los tri\IeC {\'a}ngulos azules los 'stays'\relax }}{41}{figure.caption.26}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Clasificaci\IeC {\'o}n de la simulaci\IeC {\'o}n\relax }}{44}{figure.caption.34}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Retorno acumulado para cada \IeC {\'\i }ndice\relax }}{45}{figure.caption.35}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Precios de Cierre de los \IeC {\'\i }ndices en el per\IeC {\'\i }odo de estudio (26/10/2008 - 18/01/2019)\relax }}{31}{figure.caption.15}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Correlaci\IeC {\'o}n entre indicadores originales calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{32}{figure.caption.16}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Correlaci\IeC {\'o}n entre indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{33}{figure.caption.17}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Gr\IeC {\'a}fico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{34}{figure.caption.18}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{35}{figure.caption.19}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Gr\IeC {\'a}fico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer per\IeC {\'\i }odo de entrenamiento(01/01/2009 - 31/12/2012)\relax }}{36}{figure.caption.20}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Eigenvalores y Porcentaje de contribuci\IeC {\'o}n para los 10 componentes m\IeC {\'a}s importantes obtenidos por la matr\IeC {\'\i }z de datos\relax }}{37}{figure.caption.21}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Contribuci\IeC {\'o}n de cada variable para PC1, PC2 y el total de la contribuci\IeC {\'o}n en ambos componentes\relax }}{38}{figure.caption.22}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Calidad de representaci\IeC {\'o}n medida por $Cos^2$ de cada variable en PC1 y PC2\relax }}{39}{figure.caption.23}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Gr\IeC {\'a}fico de Correlaci\IeC {\'o}n entre PC1 y PC2\relax }}{40}{figure.caption.24}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Gr\IeC {\'a}fico Dispersi\IeC {\'o}n entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los tri\IeC {\'a}ngulos azules los 'stays'\relax }}{41}{figure.caption.25}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Clasificaci\IeC {\'o}n de los trades\relax }}{45}{figure.caption.33}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Retorno acumulado para cada \IeC {\'\i }ndice\relax }}{46}{figure.caption.34}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Gr\IeC {\'a}fico de Disperci\IeC {\'o}n de los p-valores vs per\IeC {\'\i }odo de entrenamiento\relax }}{48}{figure.caption.38}
 \addvspace {10\p@ }
