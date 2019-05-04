@@ -19,7 +19,7 @@
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \title{Evaluación de la Eficacia de una estrategia de trading basada en Modelo Lineal Generalizado}
-\title{Modelado de los retornos de la inversión de una estrategia automatizada en el mércado bursátil}
+\title{Modelado de los retornos de la inversión en el mércado bursátil}
 \author{Rodrigo Alejandro Serrano Morales} 
 \facultad{Facultad de Ciencias Económicas y Sociales\\
 Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
@@ -84,12 +84,17 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 \chapter*{Introducción}
 \addcontentsline{toc}{chapter}{Introduccion}
 
-En la presente investigación se busca utilizar las técnicas de aprendizaje estadístico para realizar predicciones sobre el comportamiento de un activo financiero en el corto  plazo, intentando capitalizar este conocimiento. Ahora bien, existe un debate sobre si las inversiones activas, son realmente efectivas. La principal razón de la polémica, es debido a la complejidad que involucra realizar una predicción con tan poco margen de error y durante un período de tiempo sostenido. Aunado de las múltiples fuentes de riesgo concernientes a los portafolios de inversión, sería impensable tratar de definir en una primera investigación una estrategia eficaz para el desarrollo del trading.
+La inversión es el acto mediante el cual se utilizan bienes con el objetivo de obtener ingresos en un tiempo determinado. Específicamente en la inversión financiera esos bienes son recursos económicos y el acto es la colocación de esos recursos en títulos, valores y demás instrumentos financieros a cargo de otros entes. El trading es entonces una inversión financiera que busca obtener rendimientos en el corto plazo utilizando como fundamento lógico el análisis técnico ó fundamental y cuyo instrumento cotice en un mercado financiero. 
 
-En las investigaciones similares a la presente, se toman algunos métodos y se intenta definir cuáles de ellos arroja mayor precisión. Por otro lado el explosivo crecimiento en los últimos años de los métodos de aprendizaje estadístico ha creado innumerables variantes de los algoritmos, por lo que abarcar varios de estos supondría un trabajo arduo, realizado probablemente por un equipo de trabajo con experiencia, tanto en el mundo financiero como computacional y estadístico.  En esta investigación se abordará el aprendizaje supervisado, basado en un modelo lineal generalizado -MLG-, específicamente, una regresión logística. Se intenta contrarrestar la debilidad de asumir linealidad en el modelo, agrupando las variables con una técnica no supervisada como el Análisis de Componentes Principales.
+El trading era hasta hace pocos años una actividad donde solo participaban instituciones con un importante poder económico, sin embargo el auge del internet y las nuevas tecnologías han permitido los intermediarios desarrollar plataformas en las que cualquier persona con una computadora tenga acceso a cualquier mercado bursátil.
 
-La idea del modelo es predecir los casos en los cuales, el incurrir en una posición en largo provocaría una ganancia, asegurando que la posición se capitalice a un porcentaje t del precio inicial, sin antes haber incurrido en una pérdida de s porciento, en un horizonte de tiempo h. Para esto se identifica en un período de la data utilizada, todas las observaciones en la que esto ocurre, y se intenta generar un modelo que entienda las condiciones del activo cuando este patrón sucede.
+% En la presente investigación se busca utilizar las técnicas de aprendizaje estadístico para realizar predicciones sobre el comportamiento de un activo financiero en el corto  plazo, intentando capitalizar este conocimiento. Ahora bien, existe un debate sobre si las inversiones activas, son realmente efectivas. La principal razón de la polémica, es debido a la complejidad que involucra realizar una predicción con tan poco margen de error y durante un período de tiempo sostenido. Aunado de las múltiples fuentes de riesgo concernientes a los portafolios de inversión, sería impensable tratar de definir en una primera investigación una estrategia eficaz para el desarrollo del trading.
 
+% En las investigaciones similares a la presente, se toman algunos métodos y se intenta definir cuáles de ellos arroja mayor precisión. Por otro lado el explosivo crecimiento en los últimos años de los métodos de aprendizaje estadístico ha creado innumerables variantes de los algoritmos, por lo que abarcar varios de estos supondría un trabajo arduo, realizado probablemente por un equipo de trabajo con experiencia, tanto en el mundo financiero como computacional y estadístico.  
+
+En la presente investigación se busca utilizar las técnicas de aprendizaje estadístico para realizar predicciones sobre el comportamiento de un activo financiero en el corto  plazo, intentando capitalizar este conocimiento. Se abordará el aprendizaje supervisado, basado en un modelo lineal generalizado -MLG-, específicamente, una regresión logística. Se intenta contrarrestar la debilidad de asumir linealidad en el modelo, agrupando las variables con una técnica no supervisada como el Análisis de Componentes Principales. La idea del modelo es predecir los casos en los cuales, el incurrir en una posición en largo provocaría una ganancia, asegurando que la posición se capitalice a un porcentaje t del precio inicial, sin antes haber incurrido en una pérdida de s porciento, en un horizonte de tiempo h. Para esto se identifica en un período de la data utilizada, todas las observaciones en la que esto ocurre, y se intenta generar un modelo que entienda las condiciones del activo cuando este patrón sucede.
+
+En el capítulo I se desarrolla el planteamiento del problema, se enumeran los objetivos definidos para la elaboración de la investigación y se argumenta la justificación para su realización. En el capítulo II se presentan los antecedentes que fundamentan la investigación, se desarrollan los conceptos teóricos escenciales para la comprensión de la problemática, y se abordan los aspectos legales que conciernen a la trabajo desarrollado. En el capítulo III se aborda la estructura del método de investigación, como el universo, muestra, tipo de investigación, variables del estudio, etc. Así mismo se desarrolla la estrategia de análisis a seguir. Finalmente en el capítulo IV se exponen los resultados obtenidos tanto del modelo como de la simulación y se realiza el análisis de los mismos, exponiendo las conclusiones recomendaciones para futuras investigaciones.
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -111,23 +116,25 @@ El desarrollo tecnológico, especialmente el potenciamiento de los procesadores 
 
 Una de las principales críticas al trading discresional se debe a la complejidad de entender los movimientos del activo. Los patrones gráficos basados en indicadores técnicos buscan exponer el comportamiento del precio. La ídea de esta investigación es comprender si un modelo de aprendizaje estadístico puede, en base a estos indicadores, pronósticar el momento correcto de entrada para obtener una ganancia.
 
-En base a la problemática, surge la interrogante: ¿El enfoque de desarrollar un estrategia de trading automatizado basada en aprendizaje estadístico es eficaz para pronósticar ganancias?
+En base a la problemática, surge la interrogante: ¿El enfoque de desarrollar una estrategia de trading automatizado basada en aprendizaje estadístico es eficaz para pronósticar ganancias?
 
 \section{Objetivo General}
 
-Modelar los retornos de la inversión de una estrategia automatizada para pronósticar movimientos en el mercado búrsatil
+Modelar los retornos de la inversión para pronósticar movimientos en el mercado búrsatil
 
 \section{Objetivos Específicos}
 
 \begin{itemize}
-\item Identificar la variable dicotómica la cual señala la materialización de un precio objetivo o no
-\item Calcular las variables predictoras, en este caso, los indicadores técnicos que luego serán reconstruidos por el Análisis de Componentes Principales
-\item Desarrollar el marco de backtesting con la metodología WalkForward
-\item Simular las compras y ventas en función a la predicción del modelo 
+\item Identificar las observaciones en las que se alcance un precio objetivo en un tiempo determinada
+\item Calcular los indicadores técnicos en base a cada índice
+\item Desarrollar el marco de backtesting para la construcción del modelo
+\item Simular las compras y ventas en función de la predicción del modelo 
 \item Calcular el Valor a Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación
 \end{itemize}
 
 \section{Justificación}
+
+Desarrollar mecanismos de trading automatizados beneficia principalmente a los fondos privados cuya principal actividad es la especulación en el mercado bursátil, y cuyos principios y límites en términos de inversión son más flexibles que los entes públicos. Hoy en día la tecnología ha perfeccionado las labores de las personas en cualquier ámbito profesional; en la actividad financiera existen espacios para que esto ocurra y la inversión es uno de ellos. Estos mecanismos pueden ser utilizados para la diversificación de portafolios y creación de carteras con un perfil de riesgo y retorno definido que contribuyan a la generación de beneficios económicos para los clientes.
 
 La especulación en el mercado bursátil contribuye a que los fondos de inversión controlen adecuadamente los riesgos financieros y a su vez diversifiquen portafolios. Estos algoritmos contribuyen también a la formación correcta del precio de los activos, que de no existir especuladores estarían en manos de monopolios, además generan liquidez al mercado y permiten a más participantes beneficiarse de las ganancias de grandes corporaciones.
 
@@ -260,50 +267,6 @@ La validación Cruzada es un método de validación y prueba que consiste en div
 Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
 
 
-\subsection{Regresión Logística}
-
-Los modelos Lineales Generalizados asumen que existe una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
-
-$$ Y \approx \beta_{0} + \beta_{1}X_{1} + ... + \beta_{j}X_{j} $$
-
-En donde $X_{j}$ representa las variables predictoras y los coeficientes $\beta_{j}$ cuantifican la asociación entre la variable predictora $X_{j}$ y la variable respuesta $Y$. Por lo que se interpreta a $\beta_{j}$ como el efecto promedio que tiene en $Y$ un incremento de una unidad en $X_{j}$, bajo el supuesto de que todas las demás variables se mantienen constantes.
-
-En problemas de clasificación, la variable predictora asume valores categóricos, por lo que al utilizar este enfoque se pueden obtener probabilidades fuera del intervalo [0, 1], haciendo imposible su interpretación. Esto concluye en que se deba utilizar una función, tal que permita la generación de valores entre [0, 1], en el caso de la regresión logística esta función es:
-
-$$
-p(X) = \frac{e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}{1 + e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}
-$$
-
-Despejando se obtiene
-
-$$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
-
-El lado izquierdo de la ecuación puede tomar valores entre 0 e $\infty$, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logaritmo en ambos miembros de la ecuación se obtiene la función logit
-
-$$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
-
-Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una línea recta, $\beta$ no corresponde a un cambio en $p(X)$ asociado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
-
-\subsubsection{Máxima Verosimilitud}
-
-Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el método de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de predicción para cada individuo, utilizando (fórmula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
-
-$$ l(\beta) = \prod_{i=1}^{j}{P(x_{i} / \beta)} $$
-  
-Por conveniencia se  trabaja con el logaritmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
-
-$$ l(\beta) = \sum_{i=1}^{N} \log{P(y_{i}/ x_{i}; \beta)} $$
-
-Al codificar las clases en 0 y 1, la función de verosimilitud para la regresión logarítmica puede ser escrita como
-
-$$ l(\beta) = \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i} - \log{1 + e^{\beta^{T}x_{i}}}) $$
-
-Para maximizar la función, se iguala la derivada a 0
-
-$$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i}; \beta)) = 0 $$
-
-Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
-
 \subsection{Análisis de Componentes Principales}
 
 Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los métodos no lineales. Existen técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
@@ -335,9 +298,9 @@ $$ \max_{\phi_{11}, ..., \phi_{p1}}
 \qquad sujeto \ a  \sum_{j=1}^{p} \phi_{j1}^{2} = 1
 $$
 
-El problema de maximización en (fórmula de arriba) se soluciona mediante la descomposición de los eigenvalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
+Éste problema de maximización se soluciona mediante la descomposición de los autovalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
 
-$$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2 + ... + \phi_{p2}x_{ip}} $$
+$$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2} + ... + \phi_{p2}x_{ip} $$
 
 donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlacionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
 
@@ -356,7 +319,7 @@ En los problemas de clasificación se utiliza la matriz de confusión para evalu
 
 La estrategia solo toma la señal cuando el modelo predice un incremento en el precio, la venta por el contrario no depende del modelo, sino de los parámetros predefinidos (porcentaje de Stop Loss y Horizonte de tiempo). Esta característica implica que el valor a maximizar es la predicción de los verdaderos positivos, conocido como Precisión.
 
-$$ Precisión = \frac{VP}{VP + FN} $$
+$$ Prec = \frac{VP}{VP + FN} $$
 
 \subsection{Medidas de Riesgo}
 
@@ -400,9 +363,17 @@ Es importante acotar que tanto el VaR como ES a pesar ser medidas de pérdidas p
 
 La Ley que rige las entidades de inversión en Venezuela  entró en vigencia el 22 de agosto de 1996 y fue publicada en Gaceta Oficial Número 36.027. Esta se centra en entidades con capacidad de manejar importantes flujos de recurso de inversionistas hacia el mercado de capitales. El órgano encargado de autorizar, regular, controlar, vigilar y supervisar a las Entidades de Inversión y sus sociedades administradoras es la Superintendencia Nacional de Valores
 
-\subsection{El uso del VaR para la Regulación de Entidades Financieras}
+\subsection{Basilea II y el uso del VaR para la Regulación de Entidades Financieras}
 
-La utilización del VaR para la regulación en riesgo financiero se inicia en 1988 con el acuerdo de Basilea, principalmente dada las correlaciones entre los elementos de los portafolios. En 1995 se presentó un anexo sobre el modelo de riesgo de mercado, el cual autorizaba la elaboración propia del modelo de riesgo para determinar requerimientos de capital. Recomendando para la aplicación del VaR los siguientes parámetros:
+El Comité de Supervisión Bancaria de Basilea es un ente regulador que emite acuerdos para legislar la actividad bancaria. Basilea II es el segundo de estos acuerdos, fue publicado en junio de 2004 con el objeto de proteger a las entidades frente a riesgos financieros y operativos, estableciendo requerimientos de capital mínimos. Se basa en tres pilares:
+
+Requerimientos mínimos de capital: para cubrir riesgo de crédito, mercado y operacional
+
+Revisión de supervisores: busca que los reguladores supervisen que las entidades mantengan reservas por encima de los requisitos mínimos y que tengan un sistema para evaluar sus riesgos.
+
+Disciplina de mercado: crea incentivos para que las entidades financieras operen clara y eficientemente, siguiendo una serie de recomendaciones que buscan la publicación de movimientos financieros, perfiles de riesgo y reservas de capital
+
+La utilización del VaR para la regulación en riesgo financiero se inicia principalmente dada las correlaciones entre los elementos de los portafolios. En 1995 se presentó un anexo sobre el modelo de riesgo de mercado, el cual autorizaba la elaboración propia del modelo de riesgo para determinar requerimientos de capital. Recomendando para la aplicación del VaR los siguientes parámetros:
 
 \begin{itemize}
 \item Horizonte de 10 días de operación o de dos semanas de calendario
@@ -422,7 +393,7 @@ Para definir el tipo de investigación a realizar se establece como referencia l
 
 \section{Universo y Muestra}
 
-Balestrini (1993) define al universo ó población como cualquier conjunto de elementos de los que se pretende investigar y conocer sus caracteristicas, para el cuál serán válidas las conclusiones obtenidas en la investigación. Así mismo define la muestra como una parte de la población seleccionados científicamente, obtenida con el fin de investigar, a partir del conocim¡ento de sus características particulares, las propiedades de esa población.
+Seijas, F. (1993) define al universo ó población como un conjunto finito o infinito de elementos, seres o cosas. Así mismo define la muestra como un subconjunto de la población, que se obtiene para averiguar las propiedades o características de esta última, por lo que se interesa que sea representativa de la población.
 
 El universo de estudio está representado por los índices bursátiles de los mercados financieros existentes entre el período 26/10/2008 - 18/01/2019. Un índice bursátil es un promedio de los precios de los activos que representan un mercado o sector determinado. Los mismos sirven como 'benchmark' o referencia de la economía de un país, sector financiero, etc. En el ámbito de los 'hedge funds' son una referencia para medir la rentabilidad de una estrategia de inversión y el riesgo del mercado.
 
@@ -431,7 +402,7 @@ En la presente investigación se utilizan los índices como reflejo del comporta
 
 \subsection{Tipo de Muestreo}
 
-Seijas, G. (1993) define dos tipos de muestreo: Probabilístico y No Probabilístico.  El muestreo es probabilístico cuando se puede determinar de antemano la probabilidad de selección de cada uno de los elementos de la población siendo ésta distinta de cero; por lo tanto, calcular con antelación la probabilidad de obtener cada una de las muestras posibles.
+Seijas, F. (1993) define dos tipos de muestreo: Probabilístico y No Probabilístico.  El muestreo es probabilístico cuando se puede determinar de antemano la probabilidad de selección de cada uno de los elementos de la población siendo ésta distinta de cero; por lo tanto, calcular con antelación la probabilidad de obtener cada una de las muestras posibles.
 
 En este caso, se realizó un muestreo no probabilístico de clase opinática, ya que la selección de los elementos de la muestra se debe a su nivel de representatividad dentro de los mercados bursátiles, por ende, la totalidad de los índices bursátiles no fueron equiprobables en su selección.
 
@@ -513,6 +484,51 @@ Si se utiliza un stop ó target muy altos, baja el número de observaciones que 
 \caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
 \end{figure}
 
+\subsection{Regresión Logística}
+
+Los modelos Lineales Generalizados asumen que existe una aproximada relación lineal entre la variable respuesta $Y$ y la variable predictora $X$. Matemáticamente se puede describir la relación como:
+
+$$ Y \approx \beta_{0} + \beta_{1}X_{1} + ... + \beta_{j}X_{j} $$
+
+En donde $X_{j}$ representa las variables predictoras y los coeficientes $\beta_{j}$ cuantifican la asociación entre la variable predictora $X_{j}$ y la variable respuesta $Y$. Por lo que se interpreta a $\beta_{j}$ como el efecto promedio que tiene en $Y$ un incremento de una unidad en $X_{j}$, bajo el supuesto de que todas las demás variables se mantienen constantes.
+
+% En problemas de clasificación, la variable predictora asume valores categóricos, por lo que al utilizar este enfoque se pueden obtener probabilidades fuera del intervalo [0, 1], haciendo imposible su interpretación. Esto concluye en que se deba utilizar una función, tal que permita la generación de valores entre [0, 1], en el caso de la regresión logística esta función es:
+
+En problemas de clasificación, la variable predictora asume valores categóricos, por lo que se necesita una función que arroje probabilidades propias de esta labor, en el caso de la regresión logística esta función es:
+
+$$
+p(X) = \frac{e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}{1 + e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} }}
+$$
+
+Despejando se obtiene
+
+$$ \frac{p(X)}{1 - p(X)} = e^{\beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j} } $$
+
+El lado izquierdo de la ecuación puede tomar valores entre 0 e $\infty$, lo cual indicaría muy bajas o muy altas probabilidades, aplicando logaritmo en ambos miembros de la ecuación se obtiene la función logit
+
+$$ \log{\frac{p(X)}{1 - p(X)}} = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + ... + + \beta_{j}X_{j}  $$
+
+Se observa que la función logit es lineal en $X$, por lo que incrementar una unidad de $X$ afecta el lado izquierdo de la ecuación en $\beta$. Sin embargo dado que la relación entre $p(X)$ y $X$ no es una línea recta, $\beta$ no corresponde a un cambio en $p(X)$ asociado a una unidad de incremento en $X$. Se debe hacer la respectiva transformación para interpretar el coeficiente $\beta$ en relación a $Y$.
+
+% \subsubsection{Máxima Verosimilitud}
+% 
+% Los coeficientes $\beta$ son desconocidos, por lo que deben estimarse en la data de entrenamiento. Para esto se utiliza el método de $Máxima Verosimilitud$, el cual consiste en estimar los coeficientes para los cuales la probabilidad de predicción para cada individuo, utilizando (fórmula arriba), corresponda lo más cercano posible al valor observado del individuo. Se define la función de verosimilitud como
+% 
+% $$ l(\beta) = \prod_{i=1}^{j}{P(x_{i} / \beta)} $$
+%   
+% Por conveniencia se  trabaja con el logaritmo, dado que esto transforma una operación de productos de probabilidades en una sumatoria, por lo que se obtiene
+% 
+% $$ l(\beta) = \sum_{i=1}^{N} \log{P(y_{i}/ x_{i}; \beta)} $$
+% 
+% Al codificar las clases en 0 y 1, la función de verosimilitud para la regresión logarítmica puede ser escrita como
+% 
+% $$ l(\beta) = \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i} - \log{1 + e^{\beta^{T}x_{i}}}) $$
+% 
+% Para maximizar la función, se iguala la derivada a 0
+% 
+% $$ \frac{\partial l(\beta)}{\partial \beta} = \sum_{i=1}^{N}x_{i}(y_{i} - P(x_{i}; \beta)) = 0 $$
+% 
+% Para resolver la ecuación (n arriba) se utiliza un algoritmo de optimización llamado $Newton-Raphson$
 
 \subsection{Reducción de la dimensión con ACP}
 
@@ -706,57 +722,15 @@ En la figura 4.11 se muestra el gráfico de dispersión por clases. Se observa q
 
 En el presente capítulo se realiza la descripción de los resultados obtenidos después de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3.
 
-\begin{Schunk}
-\begin{Sinput}
-> pca$x[,1:2] %>% cor()
-\end{Sinput}
-\begin{Soutput}
-             PC1          PC2
-PC1 1.000000e+00 1.479632e-16
-PC2 1.479632e-16 1.000000e+00
-\end{Soutput}
-\end{Schunk}
+
+% pca$x[,1:2] %>% cor()
 
 
-
-\begin{Schunk}
-\begin{Sinput}
-> list_model[[1]][[1]]$finalModel %>% car::durbinWatsonTest()
-\end{Sinput}
-\begin{Soutput}
- lag Autocorrelation D-W Statistic p-value
-   1       0.6562454     0.6855534       0
- Alternative hypothesis: rho != 0
-\end{Soutput}
-\begin{Sinput}
-> list_model[[1]][[6]]$finalModel %>% car::durbinWatsonTest()
-\end{Sinput}
-\begin{Soutput}
- lag Autocorrelation D-W Statistic p-value
-   1       0.7068565      0.585374       0
- Alternative hypothesis: rho != 0
-\end{Soutput}
-\begin{Sinput}
-> list_model[[1]][[1]]$finalModel %>% lmtest::dwtest()
-\end{Sinput}
-\begin{Soutput}
-	Durbin-Watson test
-
-data:  .
-DW = 0.68143, p-value < 2.2e-16
-alternative hypothesis: true autocorrelation is greater than 0
-\end{Soutput}
-\begin{Sinput}
-> list_model[[1]][[6]]$finalModel %>% lmtest::dwtest()
-\end{Sinput}
-\begin{Soutput}
-	Durbin-Watson test
-
-data:  .
-DW = 0.57755, p-value < 2.2e-16
-alternative hypothesis: true autocorrelation is greater than 0
-\end{Soutput}
-\end{Schunk}
+% list_model[[1]][[1]]$finalModel %>% car::durbinWatsonTest()
+% list_model[[1]][[6]]$finalModel %>% car::durbinWatsonTest()
+% 
+% list_model[[1]][[1]]$finalModel %>% lmtest::dwtest()
+% list_model[[1]][[6]]$finalModel %>% lmtest::dwtest()
 
 En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500. Se muestra para cada variable su respectivo coeficiente, así como su error estándar. Se realiza también el contraste Wald - Chi-Cuadrado para verificar la significancia de cada variable en el modelo. Por lo que para cada variable se expone estadístico z que viene dado por $\beta_{i}/SE(\beta_{i})$ y su respectivo p-valor.
 
@@ -771,7 +745,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -788,7 +762,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -805,7 +779,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -823,7 +797,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -840,7 +814,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -858,7 +832,7 @@ El test Wald - Chi-Cuadrado se puede definir de la siguiente manera:
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:03 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -882,7 +856,7 @@ También se observa que el signo de los coeficientes varía en las distintas dat
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:47:59 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
@@ -907,7 +881,7 @@ En la figura 4.12 se observa los trades realizados por la simulación según el 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
 \centering
-\includegraphics{main-031}
+\includegraphics{main-029}
 \caption{Clasificación de los trades}
 \end{figure}
 
@@ -917,7 +891,7 @@ Se observa como en la simulación utilizando el índice BOVESPA, los trades posi
 \begin{figure}[H]
 \setkeys{Gin}{width = 1\textwidth}
 \centering
-\includegraphics{main-033}
+\includegraphics{main-031}
 \caption{Retorno acumulado para cada índice}
 \end{figure}
 
@@ -938,7 +912,7 @@ La prueba de Wald–Wolfowitz se puede definir de la siguiente manera:
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -960,7 +934,7 @@ Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no e
 \begin{center}
 \captionof{table}{VaR y ES para retornos de cada índice}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlllll}
@@ -986,7 +960,7 @@ En esta investigación se ha planteado un marco de trabajo que permite el desarr
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth}
 \centering
-\includegraphics{main-039}
+\includegraphics{main-037}
 \caption{Gráfico de Disperción de los p-valores vs período de entrenamiento}
 \end{figure}
 
@@ -1014,7 +988,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NASDAQ}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1031,7 +1005,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1047,7 +1021,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1066,7 +1040,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1083,7 +1057,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1099,7 +1073,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1119,7 +1093,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NIKKEI 225}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1136,7 +1110,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1153,7 +1127,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1172,7 +1146,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1189,7 +1163,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1205,7 +1179,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1225,7 +1199,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando FTSE 100}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1242,7 +1216,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1258,7 +1232,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1277,7 +1251,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1294,7 +1268,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1310,7 +1284,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1330,7 +1304,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando BOVESPA}
 \captionof*{table}{Período de entrenamiento 2009 - 2012}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1348,7 +1322,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1364,7 +1338,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1383,7 +1357,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1400,7 +1374,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1416,7 +1390,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Fri May  3 12:42:04 2019
+% Sat May  4 16:48:00 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}

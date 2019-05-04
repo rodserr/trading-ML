@@ -332,11 +332,8 @@ En la figura 4.11 se muestra el gráfico de dispersión por clases. Se observa q
 
 En el presente capítulo se realiza la descripción de los resultados obtenidos después de la aplicación del método propuesto para la estrategia. De igual modo, se presentan los resultados arrojados por las pruebas de Backtesting simulando las entradas y salidas. Los nombres de los componentes fueron sustituidos por etiquetas que intentan explicar la representación del componente en el modelo con ayuda de las gráficas mostradas en la sección 4.1.3.
 
-<<>>=
 
-pca$x[,1:2] %>% cor()
-@
-
+% pca$x[,1:2] %>% cor()
 
 <<Create_Model, echo=FALSE>>=
 posit_size <- 10000
@@ -370,13 +367,11 @@ for(i in 1:length(serie)){
 }
 @
 
-<<>>=
-list_model[[1]][[1]]$finalModel %>% car::durbinWatsonTest()
-list_model[[1]][[6]]$finalModel %>% car::durbinWatsonTest()
-
-list_model[[1]][[1]]$finalModel %>% lmtest::dwtest()
-list_model[[1]][[6]]$finalModel %>% lmtest::dwtest()
-@
+% list_model[[1]][[1]]$finalModel %>% car::durbinWatsonTest()
+% list_model[[1]][[6]]$finalModel %>% car::durbinWatsonTest()
+% 
+% list_model[[1]][[1]]$finalModel %>% lmtest::dwtest()
+% list_model[[1]][[6]]$finalModel %>% lmtest::dwtest()
 
 En la tabla 4.1 se describen los resultados de los parámetros arrojados por la regresión logística en los 6 períodos de entrenamiento para la serie del S\&P500. Se muestra para cada variable su respectivo coeficiente, así como su error estándar. Se realiza también el contraste Wald - Chi-Cuadrado para verificar la significancia de cada variable en el modelo. Por lo que para cada variable se expone estadístico z que viene dado por $\beta_{i}/SE(\beta_{i})$ y su respectivo p-valor.
 
