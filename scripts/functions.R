@@ -102,7 +102,7 @@ getPredictors <- function(data){
   return(var_pred)
 }
 
-WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
+WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = FALSE){
   
   # Create class
   if(uniqueBUYs){
@@ -184,6 +184,129 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = TRUE){
     
     list_model %<>% rlist::list.append(PCA_model) 
   }
+  
+  list_final <- list(list_cm, list_pred, list_model) 
+  
+  return(list_final)
+}
+
+BackRegression <- function(serie, tp, sl, h, cut = .5){
+
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(class_2 = factor(class)) %>% 
+      select(-one_of('class'))
+  
+  # Create Indicators
+  data %<>% createIndicators() %>% select(-one_of('high', 'open', 'low'))
+  
+  list_cm <- list()
+  list_pred <- list()
+  list_model <- list()
+  
+    # Split Data
+    train <- data %>% filter(year(timestamp) %in% seq(2009, 2015, 1))
+    
+    test <- data %>% filter(year(timestamp) %in% c(2016, 2017, 2018, 2019))
+    
+    # PCA Model
+    .PCA_cntrl <- trainControl(classProbs = TRUE,
+                               savePredictions = TRUE,
+                               summaryFunction = twoClassSummary,
+                               preProcOptions = list(pcaComp = 2)
+    )
+    
+    PCA_model <- train(class_2 ~ (.)^2 - close #- high - low - open 
+                       - adx - macd - macd_signal - rsi - lag_1 - lag_5 - lag_3 
+                       - atr - bb_up, # - dip - din - sar - ema_50  - ema_13 - bb_down,
+                       data = train[,-1],
+                       method = "glm",
+                       family = 'binomial',
+                       metric = 'ROC',
+                       preProcess = c('pca'),
+                       trControl = .PCA_cntrl
+    )
+    
+    # Prediction
+    PCA_pred <- predict(PCA_model, newdata = test[,-1], type = 'prob')
+    
+    prediction <- ifelse(predict(PCA_model, newdata = test[,-1], type = 'prob')[, 'buy'] >= cut, 
+                         'buy', 'stay') %>% factor()
+    
+    aux_cm <- confusionMatrix(prediction, reference = test$class_2)
+    
+    list_cm %<>% rlist::list.append(aux_cm)
+    
+    list_pred %<>% rlist::list.append(prediction) 
+    
+    list_model %<>% rlist::list.append(PCA_model) 
+  
+  list_final <- list(list_cm, list_pred, list_model) 
+  
+  return(list_final)
+}
+
+OptiRegression <- function(serie, h, cut = .5){
+  
+  list_parameters <- list()
+  for(tp in c(0.015, 0.02, 0.025)) for(sl in c(0.015, 0.02, 0.025)){
+    
+    data <- predict_tp(serie, tp, sl, h) %>% 
+      mutate(class_2 = factor(class)) %>% 
+      select(-one_of('class'))
+    
+    # Create Indicators
+    data %<>% createIndicators() %>% select(-one_of('high', 'open', 'low'))
+    
+    list_cm <- list()
+    list_pred <- list()
+    list_model <- list()
+    
+    # Split Data
+    train <- data %>% filter(year(timestamp) %in% seq(2009, 2014, 1))
+    
+    validation <- data %>% filter(year(timestamp) %in% c(2015, 2016))
+    
+    test <- data %>% filter(year(timestamp) %in% c(2017, 2018, 2019))
+    
+    # PCA Model
+    .PCA_cntrl <- trainControl(classProbs = TRUE,
+                               savePredictions = TRUE,
+                               summaryFunction = twoClassSummary,
+                               preProcOptions = list(pcaComp = 2)
+    )
+    
+    PCA_model <- train(class_2 ~ (.)^2 - close #- high - low - open 
+                       - adx - macd - macd_signal - rsi - lag_1 - lag_5 - lag_3 
+                       - atr - bb_up, # - dip - din - sar - ema_50  - ema_13 - bb_down,
+                       data = train[,-1],
+                       method = "glm",
+                       family = 'binomial',
+                       metric = 'ROC',
+                       preProcess = c('pca'),
+                       trControl = .PCA_cntrl)
+    
+    prediction <- ifelse(predict(PCA_model, newdata = test[,-1], type = 'prob')[, 'buy'] >= cut, 
+                         'buy', 'stay') %>% factor()
+    
+    list_parameters %<>% rlist::list.append(prediction, parameters = c(tp, sl))
+    
+  } 
+ 
+  map_dfr(list_parameters[[1]], as.data.frame)
+  
+  # Prediction
+  PCA_pred <- predict(PCA_model, newdata = test[,-1], type = 'prob')
+  
+  prediction <- ifelse(predict(PCA_model, newdata = test[,-1], type = 'prob')[, 'buy'] >= cut, 
+                       'buy', 'stay') %>% factor()
+  
+  aux_cm <- confusionMatrix(prediction, reference = test$class_2)
+  
+  list_cm %<>% rlist::list.append(aux_cm)
+  
+  list_pred %<>% rlist::list.append(prediction) 
+  
+  list_model %<>% rlist::list.append(PCA_model) 
   
   list_final <- list(list_cm, list_pred, list_model) 
   

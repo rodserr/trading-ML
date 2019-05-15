@@ -19,7 +19,7 @@
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \title{Evaluación de la Eficacia de una estrategia de trading basada en Modelo Lineal Generalizado}
-\title{Modelado de los retornos de la inversión en el mércado bursátil}
+\title{Modelado de los retornos de la inversión en el mercado bursátil}
 \author{Rodrigo Alejandro Serrano Morales} 
 \facultad{Facultad de Ciencias Económicas y Sociales\\
 Escuela de Estadística y Ciencias Actuariales}                % Nombre de la facultad/escuela
@@ -32,7 +32,7 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 
 \degree{Licenciado en Ciencias Actuariales}        % Carrera
 \director{Prof. Jonattan Ramos \& Prof. Eloy Eligon}               % Director de tesis
-\degreedate{Marzo 2019}                           % Año de la fecha del examen
+\degreedate{Mayo 2019}                           % Año de la fecha del examen
 \lugar{Caracas}                        % Lugar
 
 %\portadafalse                              % Portada en NEGRO, descomentar y comentar la línea siguiente si se quiere utilizar
@@ -70,7 +70,7 @@ Escuela de Estadística y Ciencias Actuariales}                % Nombre de la fa
 \newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1} 
 
 % \SweaveInput{body/reconocimiento/reconocimiento.Rnw}
-% \SweaveInput{body/agradecimientos/agradecimientos.Rnw}
+\SweaveInput{body/agradecimientos/agradecimientos.Rnw}
 
 \tableofcontents
 \listoffigures

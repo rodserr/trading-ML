@@ -3,11 +3,14 @@
 \newpage
 \chapter*{Agradecimientos}
 
-Agradecimientos
+A mis padres, Mirla y Alejandro, ejemplos de dedicación y compromiso, por inspirarme a ser mejor profesional, estudiante y persona todos los días, sin su apoyo incansable no hubiese podido culminar esta meta. A mi hermana, Sofia, por ser mi propósito para este y todos los proyectos futuros en mi vida.
 
+A mis tutores Jonattan y Eloy por proporcionar la base conceptual y metodológica para el desarrollo de este proyecto además de su dedicación y paciencia para verlo culminado. Al igual que los profesores y personal de la Universidad Central de Venezuela, en especial a los de la Escuela de Estadística y Ciencias Actuariales que cada día que asisten a la universidad son ejemplo de compromiso para con el conocimiento y el futuro del país.
 
+A mis amigos y compañeros de estudio que tuve el placer de conocer a lo largo de la carrera, por acompañarme a lograr esta meta y salir adelante en medio de tanta dificultad.
 
+A toda la comunidad del software libre por ser fuente de conocimiento e impulsar el desarrollo de tecnologías y plataformas de educación; no hubiese logrado este proyecto sin toda la documentación elaborada por personas y equipos de trabajo que apoyan el movimiento 'open source'; desde Hadley Wickham y su contribución a toda una metodología de escritura de código en R, hasta páginas web educativas como Coursera y Udacity que mantienen cursos de alto nivel accesibles para cualquier persona, que contribuyen con el desarrollo de profesionales, especialmente en el área de Machine Learning y programación estadística.
 
-  \begin{flushright}
-  \textbf{Gracias}
-  \end{flushright}
+ \begin{flushright}
+ \textbf{Gracias}
+ \end{flushright}

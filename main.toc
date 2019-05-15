@@ -1,57 +1,65 @@
 \babel@toc {spanish}{}
-\contentsline {chapter}{\'{I}ndice de figuras}{4}{chapter*.2}
-\contentsline {chapter}{\'{I}ndice de tablas}{6}{chapter*.3}
-\contentsline {chapter}{Introduccion}{7}{chapter*.4}
-\contentsline {chapter}{\numberline {1}El Problema}{8}{chapter.1}
-\contentsline {section}{\numberline {1.1}Planteamiento del Problema}{8}{section.1.1}
-\contentsline {section}{\numberline {1.2}Objetivo General}{9}{section.1.2}
-\contentsline {section}{\numberline {1.3}Objetivos Espec\IeC {\'\i }ficos}{10}{section.1.3}
-\contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{10}{section.1.4}
-\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Antecedentes}{11}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Trading de Cryptomonedas basado en Aprendizaje Automatico}{11}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}Un enfoque de aprendizaje autom\IeC {\'a}tico para el comercio automatizado}{11}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}Modelos predictivos para el mercado FOREX}{11}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}Un An\IeC {\'a}lisis de estrategias de trading t\IeC {\'e}cnico}{12}{subsection.2.1.4}
-\contentsline {subsection}{\numberline {2.1.5}Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del An\IeC {\'a}lisis T\IeC {\'e}cnico Burs\IeC {\'a}til}{12}{subsection.2.1.5}
-\contentsline {section}{\numberline {2.2}Bases Te\IeC {\'o}ricas}{12}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Hip\IeC {\'o}tesis del Mercado Eficiente}{12}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}An\IeC {\'a}lisis T\IeC {\'e}cnico}{13}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{15}{subsection.2.2.3}
-\contentsline {subsubsection}{M\IeC {\'e}todos Param\IeC {\'e}tricos vs No Param\IeC {\'e}tricos}{15}{subsubsection*.5}
-\contentsline {subsubsection}{Aprendizaje Supervisado vs No Supervisado}{15}{subsubsection*.6}
-\contentsline {subsubsection}{Regresi\IeC {\'o}n vs Clasificaci\IeC {\'o}n}{16}{subsubsection*.7}
-\contentsline {subsection}{\numberline {2.2.4}Validaci\IeC {\'o}n Cruzada en Series de Tiempo}{16}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}An\IeC {\'a}lisis de Componentes Principales}{16}{subsection.2.2.5}
-\contentsline {subsection}{\numberline {2.2.6}Matr\IeC {\'\i }z de Confusi\IeC {\'o}n}{18}{subsection.2.2.6}
-\contentsline {subsection}{\numberline {2.2.7}Medidas de Riesgo}{18}{subsection.2.2.7}
-\contentsline {subsubsection}{Valor en Riesgo}{18}{subsubsection*.9}
-\contentsline {subsubsection}{P\IeC {\'e}rdida Esperada}{19}{subsubsection*.10}
-\contentsline {section}{\numberline {2.3}Bases Legales}{20}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Superintendencia Nacional de Valores}{20}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Basilea II y el uso del VaR para la Regulaci\IeC {\'o}n de Entidades Financieras}{20}{subsection.2.3.2}
-\contentsline {chapter}{\numberline {3}Marco Met\IeC {\'o}dico}{22}{chapter.3}
-\contentsline {section}{\numberline {3.1}Tipo de Investigaci\IeC {\'o}n}{22}{section.3.1}
-\contentsline {section}{\numberline {3.2}Universo y Muestra}{22}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Tipo de Muestreo}{23}{subsection.3.2.1}
-\contentsline {section}{\numberline {3.3}Fuentes de Datos}{23}{section.3.3}
-\contentsline {section}{\numberline {3.4}Variables}{23}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Variable Dependiente}{23}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Variables Predictoras}{24}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Estrategia de An\IeC {\'a}lisis}{25}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}WalkForward Backtesting}{25}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{27}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Reducci\IeC {\'o}n de la dimensi\IeC {\'o}n con ACP}{28}{subsection.3.5.3}
-\contentsline {subsection}{\numberline {3.5.4}Modelado de los Retornos}{28}{subsection.3.5.4}
-\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis de Resultados}{30}{chapter.4}
-\contentsline {section}{\numberline {4.1}An\IeC {\'a}lisis Exploratorio de los datos}{30}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}An\IeC {\'a}lisis de los \IeC {\'I}ndices}{30}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}An\IeC {\'a}lisis de las Variables Predictoras}{32}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Resultados del ACP}{36}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Coeficientes del modelo}{42}{section.4.2}
-\contentsline {section}{\numberline {4.3}Resultados de la simulaci\IeC {\'o}n}{43}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Medidas de Riesgo}{46}{subsection.4.3.1}
-\contentsline {chapter}{Conclusiones y Recomendaciones}{47}{chapter*.36}
-\contentsline {chapter}{\numberline {5}Anexos}{49}{chapter.5}
-\contentsline {section}{\numberline {5.1}Coeficientes de los modelos}{49}{section.5.1}
-\contentsline {chapter}{Lista de Referencias}{57}{chapter*.62}
+\contentsline {chapter}{\'{I}ndice de figuras}{5}{chapter*.3}
+\contentsline {chapter}{\'{I}ndice de tablas}{7}{chapter*.4}
+\contentsline {chapter}{Introduccion}{8}{chapter*.5}
+\contentsline {chapter}{\numberline {1}El Problema}{9}{chapter.1}
+\contentsline {section}{\numberline {1.1}Planteamiento del Problema}{9}{section.1.1}
+\contentsline {section}{\numberline {1.2}Objetivo General}{10}{section.1.2}
+\contentsline {section}{\numberline {1.3}Objetivos Espec\IeC {\'\i }ficos}{11}{section.1.3}
+\contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{11}{section.1.4}
+\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{12}{chapter.2}
+\contentsline {section}{\numberline {2.1}Antecedentes}{12}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Trading de Cryptomonedas basado en Aprendizaje Automatico}{12}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Un enfoque de aprendizaje autom\IeC {\'a}tico para el comercio automatizado}{12}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Modelos predictivos para el mercado FOREX}{12}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Un An\IeC {\'a}lisis de estrategias de trading t\IeC {\'e}cnico}{13}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del An\IeC {\'a}lisis T\IeC {\'e}cnico Burs\IeC {\'a}til}{13}{subsection.2.1.5}
+\contentsline {section}{\numberline {2.2}Bases Te\IeC {\'o}ricas}{13}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}\IeC {\'I}ndices Burs\IeC {\'a}tiles}{13}{subsection.2.2.1}
+\contentsline {subsubsection}{S\&P 500}{14}{subsubsection*.6}
+\contentsline {subsubsection}{NASDAQ}{14}{subsubsection*.7}
+\contentsline {subsubsection}{FTSE 100}{14}{subsubsection*.8}
+\contentsline {subsubsection}{NIKKEI}{14}{subsubsection*.9}
+\contentsline {subsubsection}{BOVESPA}{15}{subsubsection*.10}
+\contentsline {subsection}{\numberline {2.2.2}Hip\IeC {\'o}tesis del Mercado Eficiente}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}An\IeC {\'a}lisis T\IeC {\'e}cnico}{16}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Introducci\IeC {\'o}n al aprendizaje autom\IeC {\'a}tico}{18}{subsection.2.2.4}
+\contentsline {subsubsection}{M\IeC {\'e}todos Param\IeC {\'e}tricos vs No Param\IeC {\'e}tricos}{18}{subsubsection*.11}
+\contentsline {subsubsection}{Aprendizaje Supervisado vs No Supervisado}{18}{subsubsection*.12}
+\contentsline {subsubsection}{Regresi\IeC {\'o}n vs Clasificaci\IeC {\'o}n}{19}{subsubsection*.13}
+\contentsline {subsection}{\numberline {2.2.5}Validaci\IeC {\'o}n Cruzada en Series de Tiempo}{19}{subsection.2.2.5}
+\contentsline {subsection}{\numberline {2.2.6}An\IeC {\'a}lisis de Componentes Principales}{19}{subsection.2.2.6}
+\contentsline {subsubsection}{Codo de Jambu}{21}{subsubsection*.14}
+\contentsline {subsection}{\numberline {2.2.7}Matr\IeC {\'\i }z de Confusi\IeC {\'o}n}{21}{subsection.2.2.7}
+\contentsline {subsection}{\numberline {2.2.8}Medidas de Riesgo}{22}{subsection.2.2.8}
+\contentsline {subsubsection}{Valor en Riesgo}{22}{subsubsection*.16}
+\contentsline {subsubsection}{P\IeC {\'e}rdida Esperada}{22}{subsubsection*.17}
+\contentsline {section}{\numberline {2.3}Bases Legales}{23}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Superintendencia Nacional de Valores}{23}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Basilea II y el uso del VaR para la Regulaci\IeC {\'o}n de Entidades Financieras}{24}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}Marco Met\IeC {\'o}dico}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}Tipo de Investigaci\IeC {\'o}n}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Universo y Muestra}{25}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Tipo de Muestreo}{26}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Fuentes de Datos}{26}{section.3.3}
+\contentsline {section}{\numberline {3.4}Variables}{26}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Variable Dependiente}{26}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Variables Predictoras}{27}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Estrategia de An\IeC {\'a}lisis}{28}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}WalkForward Backtesting}{28}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Regresi\IeC {\'o}n Log\IeC {\'\i }stica}{30}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Reducci\IeC {\'o}n de la dimensi\IeC {\'o}n con ACP}{31}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.4}Modelado de los Retornos}{32}{subsection.3.5.4}
+\contentsline {chapter}{\numberline {4}An\IeC {\'a}lisis de Resultados}{33}{chapter.4}
+\contentsline {section}{\numberline {4.1}An\IeC {\'a}lisis Exploratorio de los datos}{33}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}An\IeC {\'a}lisis de los \IeC {\'I}ndices}{33}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}An\IeC {\'a}lisis de las Variables Predictoras}{35}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Resultados del ACP}{39}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Coeficientes del modelo}{45}{section.4.2}
+\contentsline {section}{\numberline {4.3}Resultados de la simulaci\IeC {\'o}n}{48}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Backtesting}{51}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Medidas de Riesgo}{51}{subsection.4.3.2}
+\contentsline {chapter}{Conclusiones y Recomendaciones}{54}{chapter*.45}
+\contentsline {chapter}{\numberline {5}Anexos}{56}{chapter.5}
+\contentsline {section}{\numberline {5.1}Coeficientes de los modelos}{56}{section.5.1}
+\contentsline {chapter}{Referencias}{64}{chapter*.70}

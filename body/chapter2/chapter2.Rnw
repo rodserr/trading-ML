@@ -7,69 +7,108 @@
 
 \subsection{Trading de Cryptomonedas basado en Aprendizaje Automatico}
 
-Bach y Nielsen examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan distintos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX, MACD y RSI, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Utilizan el mismo enfoque buscando predecir la subida del precio dado un objetivo en un determinado período de tiempo.
+Bach y Nielsen (2018) examinan la efectividad de diversos algoritmos de aprendizaje estadístico para operar en el mercado de cryptomonedas. Establecen un marco de trabajo en lenguaje R que les permite probar los distintos algoritmos cambiando las variables predictoras. Utilizan distintos intervalos de tiempo desde 1 minuto hasta 24 horas, diversos indicadores como ADX-Average Directional Index-, MACD-Moving Average Converge/Divergence- y RSI-Relative Strength Index-, así como algunas asociaciones establecidas manualmente. Consideraron cuatro algoritmos: Regresión Logística, Redes Neuronales, Gradient Boosting y Bosques aleatorios. Este antecedente aporta a la investigación la base conceptual de la estrategia, el enfoque de predecir la subida del precio dado un objetivo en un determinado periodo de tiempo.
 
 \subsection{Un enfoque de aprendizaje automático para el comercio automatizado}
 
-Ning Lu explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en el principal.
+Ning Lu (2016) explora la aplicación de varios algoritmos de aprendizaje enfocados en el trading automático, entre ellos: Regresión Logística, Naïve Bayes y Máquinas de vectores de soporte. Los algoritmos son probados en activos pertenecientes al S\&P500. El enfoque de Lu es el de utilizar como variables predictoras no solo precios del activo en el cual se va a invertir, sino, usar información de precios de otros activos que puedan influir en la variable dependiente. Este trabajo inspiró el uso de las técnicas de penalización Ridge y Lasso como un primer enfoque para mejorar la capacidad predictiva del modelo, posteriormente se decidió utilizar el ACP como técnica de reducción de la dimensión.
 
 \subsection{Modelos predictivos para el mercado FOREX}
 
-Huerta López utiliza dos enfoques para el trading automático en el mercado FOREX: los modelos de series de tiempo y los modelos basados en técnicas de aprendizaje automático. Por un lado aplica modelos ARIMA y métodos de automatización para su implementación basados en criterios de información -BIC y AIC-. Para el enfoque basado en aprendizaje automático implementa diversos algoritmos de KNN y Árboles de decisión, optimizando los algoritmos en la distintas horas del día utilizando datos del par EUR-USD. Señala que los modelos de aprendizaje obtienen mejor predicción que los modelos ARIMA, acercándose a un 60\% de precisión.
+Huerta López (2015) utiliza dos enfoques para el trading automático en el mercado FOREX: los modelos de series de tiempo y los modelos basados en técnicas de aprendizaje automático. Por un lado aplica modelos ARIMA y métodos de automatización para su implementación basados en criterios de información -BIC y AIC-. Para el enfoque basado en aprendizaje automático implementa diversos algoritmos de KNN y Árboles de decisión, optimizando los algoritmos en la distintas horas del día utilizando datos del par EUR-USD. Señala que los modelos de aprendizaje obtienen mejor predicción que los modelos ARIMA, acercándose a un 60\% de precisión. El autor varía el modelo a utilizar según la hora del día, ésto inspiró la aplicación de la metodología walkforward en la presente investigación.
 
 \subsection{Un Análisis de estrategias de trading técnico}
 
-Kadida Shagilla profundiza sobre las alternativas a la hipótesis del mercado eficiente y cómo se relacionan el riesgo y los retornos de una estrategia de trading. Simula tres portafolios conformados por una muestra de acciones de tres mercados Norteamericanos y algunos mercados emergentes de África El estudio demuestra cómo la relación 'book-to-market ratio', la liquidez y los acuerdos institucionales pueden explicar el exceso de ganancia a partir del análisis técnico. 
+Kadida Shagilla (2006) profundiza sobre las alternativas a la hipótesis del mercado eficiente y cómo se relacionan el riesgo y los retornos de una estrategia de trading. Simula tres portafolios conformados por una muestra de acciones de tres mercados Norteamericanos y algunos mercados emergentes de África. El estudio demuestra cómo la relación 'book-to-market ratio', la liquidez y los acuerdos institucionales pueden explicar el exceso de ganancia a partir del análisis técnico. Este antecedente aporta el marco argumental entre la hipótesis de mercado eficiente y el análisis técnico, dando razonamientos a ambas posturas y testeando en un marco de backtesting un enfoque tanto técnico como fundamental.
 
 \subsection{Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del Análisis Técnico Bursátil}
 
-Cristián Fernández introduce un sistema automático para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de decisión y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios activos que operan en el mercado bursátil argentino.
+Cristián Fernández (2008) introduce un sistema automático para el reconocimiento de patrones del análisis técnico basado en modelos de Markov. Desarrolla un algoritmo que extrae patrones del mercado y los clasifica en tres estados: lateral, alcista y bajista. Utiliza una clasificación basada en Árboles de decisión y apoya el reconocimiento de patrones en algunos indicadores técnicos. Concluye que es posible estimar correctamente el estado de un activo mediante una lectura automática de los patrones en su serie de tiempo. El modelo es testeado en varios instrumentos financieros que operan en el mercado bursátil argentino. Esta investigación aporta la idea de utilizar indicadores técnicos como variables predictoras.
 
 
 \section{Bases Teóricas}
 
+\subsection{Índices Bursátiles}
+
+Un índice bursátil es un valor estadístico que resume las cotizaciones de distintos activos financieros con una caracteristica en común. Cada índice tiene una manera de calcularse aunque la mayoría se basan en un promedio ponderado. Su principal función es referenciar los rendimientos de los activos de los cuales esta constituido.
+
+De esta manera un índice es utilizado como indicador de la situación actual del mercado al cual representa; los fondos de inversión lo usan también como una tasa de riesgo referencial para sus estrategias de inversión; en la comunidad académica son utilizados normalmente como la variable de estudio ya que reflejan mayor información que cualquier activo individual. Aunque no se puede invertir directamente en un índice, existen instrumentos como los ETF -Exchange Trade Fund- que simulan la composición del índice y son emitidos en la bolsa, por lo que invertir en el ETF simula una inversión en el índice. (Roberts Richard, 2008)
+
+\subsubsection{S\&P 500}
+
+El S\&P -Standard \& Poor- 500 es un índice ponderado por la capitalización de mercado, registra las 500 empresas más grandes que cotizan en la bolsa estadounidense. Es uno de los índices más seguidos y utilizados por la diversidad de rubros que representa en el mercado de mayor capitalización como el estadounidense. El S\&P500 es mantenido por el grupo 'The S\&P Dow Jones indices', el cual se encarga de seleccionar las empresas utilizadas en el índice. 
+
+La fórmula de cálculo del peso de cada compañía en el índice viene dado por la división del la capitalización de mercado de la compañía entre la capitalización de mercado total del índice. La capitalización de mercado es el producto del precio de la acción por el número de acciones en circulación de la compañia.
+
+\subsubsection{NASDAQ}
+
+El NASDAQ es una bolsa de valores electrónica que maneja su propio índice bursátil 'NASDAQ Composite' formado por más de 3000 empresas listadas en el mercado NASDAQ, donde predominan compañías tecnológicas como Apple, Amazon, Google, entre otras. Al igual que el S\&P 500 su forma de cálculo es un promedio ponderado por la capitalización del mercado de cada empresa. 
+
+\subsubsection{FTSE 100}
+
+El FTSE -Financial Times Stock Exchange- 100 es un índice que sigue las 100 compañías más grandes en capitalización de mercado que cotizan en la bolsa de londres. Representa el 80\% de la capitalización de todo el mercado de londres. Fue llamado así debido a que sus creadores fueron las compañias Financial Times y London Stock Exchange. Es uno de los índices con mayor relevancia en Europa por lo que esta fuertemente afectado por las políticas de la Unión Europea. Su cálculo es un promedio ponderado por la capitalización del mercado de cada compañía.
+
+\subsubsection{NIKKEI}
+
+El NIKKEI es el índice representativo del mercado asíatico, engloba las 225 compañias más importantes que cotizan en la bolsa de Tokio. Fue llamado así por la compañia encargada de su publicación y mantenimiento, el Japan Economic Newspaper o Nihon Keizai Shimbun. El índice es un promedio ponderado por el precio de la acción a diferencia de la mayoría de los índices cuya ponderación biene dada por la capitalización de mercado. Anualmente se revisan las 225 compañías que lo componen, estas se escogen de las 450 con mayor capitalización en la bolsa de Tokio.
+
+\subsubsection{BOVESPA}
+
+El índice Bovespa o Ibovespa es el índice representativo de la bolsa de Sao Paulo llamada B3 -Brasil Bolsa Balcao-. A diferencia de otros índices no representa un número fijo de compañias, en cambio, agrupa las empresas que juntas suman el 80\% de capitalización del mercado, normalmente son aproximadamente 60 compañías las que agrupan esa cantidad y se revisan trimestralmente.
 
 \subsection{Hipótesis del Mercado Eficiente}
 
-La Hipótesis del Mercado eficiente fue desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
+Desarrollada por Eugene Fama en los años 60, en la misma argumenta que los precios de los activos reflejan toda la información disponible, es decir que siempre son transados a un valor adecuado para su riesgo, haciendo imposible para los inversores obtener retornos más elevados que los del mercado en general. 
 
-Fama sugiere tres suposiciones. Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás. Tercero, todos los competidores intentarán ajustar sus posiciones lo más rápido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
+Fama sugiere tres suposiciones:
+\begin{itemize}
+\item Primero, el mercado eficiente requiere un gran número de competidores buscando maximizar ganancias. \item Segundo, la información que afecta al activo llega al mercado de manera aleatoria y cada anuncio es independiente de los demás.
+\item Tercero, todos los competidores intentarán ajustar sus posiciones lo más rápido posible conocida la información del mercado. Existen tres variantes de la hipótesis:
+\end{itemize}
 
-Eficiencia débil, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir cualquier movimiento del activo es determinado por información no contenida en la serie de precios. Eficiencia media, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. Eficiencia fuerte, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales al de los mercados.
+Eficiencia débil, en esta variante, los precios del pasado no sirven para predecir el precio futuro, es decir, cualquier movimiento del activo es determinado por información no contenida en la serie de precios. Eficiencia media, en esta forma se asume que los precios se ajustan instantáneamente a la información pública, por lo que rechaza cualquier tipo de arbitraje intentando aprovechar nueva información. Eficiencia fuerte, esta última forma de la hipótesis plantea que los precios reflejan tanto información pública como privada, por lo cual incluso obteniendo información no conocida por todos los competidores, no se pueden obtener retornos anormales al de los mercados.
 
 Aunque esta hipótesis es la piedra angular de la teoría financiera moderna, es controversial entre la comunidad financiera y disputada frecuentemente. Gran parte de sus detractores argumentan que el precio del activo está influenciado por suposiciones sesgada de los individuos, formuladas por la manera en cómo estos responden ante nueva información.
 
 Los inversores interpretan la información de manera distinta, por lo que generarán diferentes valuaciones de un mismo activo, lo que sugiere que la reacción del inversor a la misma noticia será distinta. Day and Wangr (2002) argumentan que si los precios son continuamente influenciados por estas interpretaciones erróneas, los movimientos contrarios del precio pueden ser predecidos estudiando la data histórica. Sugieren también que mientras más extremo sea el movimiento inicial, mayor será el ajuste de precio.
 
-Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos de colapso del mercado como en la caída del mercado bursátil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra cómo estos comportamientos pueden resultar en ineficiencias del mercado.
+Los inversores se dejan influenciar por la tendencia del mercado, este comportamiento se ha visto a lo largo de la historia en casos como la caída del mercado bursátil en 1987 ó la burbuja del puntocom a finales de los 90. Froot (1992) muestra cómo estos comportamientos pueden resultar en ineficiencias del mercado.
 
-Algunos académicos como Hong y Stein's (1999) categorizan a los inversores en Informados y No informados. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
+Algunos académicos como Hong y Stein's (1999) categorizan a los inversores en informados y no informados. Los inversores que tienen acceso a la información solo operan al obtener nueva información, mientras que los no informados operan basados en el pasado reciente del activo. A medida que la información es conocida por todos los competidores, se forma el fenómeno de reversión a la media.
 
-Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competidores, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, Los avances tecnológicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados. Shagilla Kadida (2006)
+Es evidente la postura que se asume en la presente investigación con respecto a la hipótesis de mercado eficiente. Además de los aspectos del comportamiento de los competidores, se ha evidenciado en la historia, casos de inversores que han logrado vencer el mercado por largos períodos de tiempo, como Warren Buffet, lo cual por definición de la hipótesis es imposible. Por otro lado, los avances tecnológicos y la capacidad de procesamiento de las computadoras en la actualidad hacen pensar que cualquier anomalía presente en el mercado por muy pequeña que sea puede ser aprovechada por sofisticados softwares automatizados. (Shagilla Kadida, 2006)
 
 \subsection{Análisis Técnico}
 
-Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extraer patrones de conducta. A la primera técnica se le llama Análisis Fundamental y el segundo Análisis Técnico. El Análisis Fundamental está más asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
+Los inversionistas que rechazan la hipótesis del mercado eficiente buscan interpretar la situación del mercado, bien a través de noticias que afecten al activo o estudiando su movimiento intentando extraer patrones de conducta. A la primera técnica se le llama análisis fundamental y el segundo análisis técnico. 
 
-El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del activo, con esto intenta predecir el movimiento futuro mediante el uso de gráficos. Según J.J.Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico: Los movimientos del mercado lo descuentan  todo, los precios se mueven por tendencias y la historia se repite.
+El análisis fundamental está más asociado a estrategias de inversión pasivas a largo plazo aunque en la actualidad se han desarrollado algoritmos de compra y venta que buscan predecir la dirección del precio en función de noticas utilizando minería de texto.
 
-Murphy establece que cualquier efecto que posiblemente pueda afectar al precio se ve reflejado en la cotización del mismo. Por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es más que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
-
-El analista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con el estudio de la psicología humana. Ésta afirmación tiene también una estrecha relación en los ciclos económicos. 
-
-A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en t calculada con p observaciones anteriores con respecto a la serie de precio X:
+El análisis técnico es aquel que busca patrones y tendencias de comportamiento en la cotización de los activos financieros, basándose en la serie de tiempo del mismo, con esto, intenta predecir el movimiento futuro mediante el uso de gráficos. Según J. Murphy (1999) existen tres fundamentos básicos en los que se basa el análisis técnico:
 
 \begin{itemize}
-\item Retornos con respecto al precio de Cierre.
+\item Los movimientos del mercado lo descuentan  todo
+\item Los precios se mueven por tendencias
+\item La historia se repite.
+\end{itemize}
+
+Murphy establece que cualquier efecto que pueda alterar al precio se ve reflejado en la cotización del mismo, por lo que un estudio del desplazamiento del activo en un período de tiempo sería suficiente para lograr predecir su movimiento. Esto quiere decir que el análisis técnico no es más que una manera indirecta de estudiar los fundamentos del activo, suponiendo que la cotización del mismo resume toda la información que lo afecta. 
+
+El analista técnico acepta la premisa de que los mercados tienen tendencias. Buscar tendencias en las primeras etapas de su desarrollo es la razón de toda la representación gráfica dentro del análisis, con el fin de que las transacciones vayan en dirección de esa tendencia. Por otro lado, la afirmación de que la historia se repite tiene que ver con la convicción de que el pronóstico se desarrolla en función del estudio del pasado. Si un comportamiento gráfico se ha repetido previamente en multiples ocasiones, se esperaría que vuelva a ocurrir. Ésta afirmación tiene también una estrecha relación con los ciclos económicos, en donde las fases de contracción y expansión de la economía se alternan, igualmente ocurre con las tendencias y patrones estudiados en el análisis técnico. (John Murphy, 1999) 
+
+A continuación se establece la formulación de cada indicador utilizado en el estudio, se utilizará la notación $EMA_{(t, p)}(X)$ para referirse a una media móvil exponencial en el momento $t$ calculada con $p$ observaciones anteriores con respecto a la serie de precio $X$. En análisis técnico la media móvil exponencial es un indicador que muestra el precio promedio de un activo durante un período de tiempo, el hecho de que sea exponencial quiere decir que da mayor peso a las observaciones mas recientes y menos a las más alejadas del periodo actual:
+
+\begin{itemize}
+\item Retornos con respecto al precio de cierre.
 
 $$ R_{t} = \frac{Pcierre_{t}}{Pcierre_{t-1}-1}$$
 
-\item RSI (Relative Strength Index) de 14 períodos, el cual es un indicador de volatilidad.
+\item RSI de 14 períodos, el cual es un indicador de volatilidad.
 
 $$ RSI_{t} = 100 - \frac{100}{1 + RS_{t}} \qquad 
-donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{Perdida\ Promedio\ en\ n\ observaciones}$$
+donde, RS_{t} = \frac{Ganancia\ Promedio\ en\ n\ observaciones}{\mbox{Pérdida Promedio en n observaciones}}$$
 
-\item MACD (Moving Average Converge/Divergence) el cual es una diferencia de dos EMAs (Exponential Moving Average) de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. 
+\item MACD el cual es una diferencia de dos EMAs de 12 y 26 períodos. Este es un indicador de tendencia que se complementa con un MA(Moving Averge) de 9 períodos. Los valores de los períodos vienen dado por la estrategia clásica aplicada con este indicador.
 
 $$ MACD_{t} =  EMA_{(t, 12)}(Pcierre) - EMA_{(t, 26)}(Pcierre) \qquad
 Signal\ Line_{t} = EMA_{(t, 9)}(MACD_{t}) $$
@@ -79,7 +118,7 @@ Signal\ Line_{t} = EMA_{(t, 9)}(MACD_{t}) $$
 $$ ATR_{t} =  EMA_{(t, 14)}(TR_{t}) \qquad
 TR_{t} = Max\ (Pmax - Pmin, |Pmax - Pc_{t-1}|, |Pmin - Pc_{t-1}|)$$
 
-\item ADX (Average Directional Index), este es un indicador que utiliza dos indicadores de dirección +Di y -Di, se calculó en base a 14 períodos y mide tendencia.
+\item ADX, este es un indicador que utiliza dos indicadores de dirección $+Di$ y $-Di$, se calculó en base a 14 períodos y mide tendencia.
 
 $$ ADX_{t} =  100\ EMA_{(t, 14)}(|+DI - -DI|)$$
 
@@ -92,41 +131,46 @@ Banda Inferior_{t} = EMA{(t, 14)}(Pcierre) - 2,5\sigma $$
 
 \subsection{Introducción al aprendizaje automático}
 
-Aprendizaje automático refiere a una rama de la Inteligencia Artificial, que busca crear algoritmos capaces de generalizar comportamientos y reconocer patrones a partir de un conjunto de datos. Supongamos que existe una variable respuesta $Y$ y distintos predictores $X_{1}, X_{2}, ..., X_{j}$. Se asume que existe una relación entre $Y$ y $X = X_{1}, X_{2}, ..., X_{j}$, la cual puede ser escrita de forma general como
+Aprendizaje Automático refiere a una rama de la Inteligencia Artificial, que busca crear algoritmos capaces de generalizar comportamientos y reconocer patrones a partir de un conjunto de datos. Supongamos que existe una variable respuesta $Y$ y distintos predictores $X_{1}, X_{2}, ..., X_{j}$. Se asume que existe una relación entre $Y$ y $X = X_{1}, X_{2}, ..., X_{j}$, la cual puede ser escrita de forma general como
 
 $$ Y = f(X) + \epsilon $$
 
 donde $f$ es una función desconocida de $X$ y $\epsilon$ es un término de error aleatorio, independiente de $X$ y de media 0. En esta formulación $f$ representa información sistemática que $X$ proporciona sobre $Y$.
 
-En escencia, el aprendizaje automático refiere a un conjunto de enfoques para estimar $f$
+En escencia, el aprendizaje automático refiere a un conjunto de enfoques para estimar $f$.
 
 \subsubsection{Métodos Paramétricos vs No Paramétricos}
 
-La mayoría de los métodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. Primero se asume que los datos toman una forma específica, una vez asumida la forma que debe tener la función $f$, el problema de la estimación se simplifica. al seleccionar el modelo se procede a ajustar el modelo en la data de entrenamiento. Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que el modelo escogido puede no ser apropiado a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
+La mayoría de los métodos de aprendizaje automático pueden ser caracterizados como paramétricos o no paramétricos. Los primeros, involucran un enfoque basado en dos pasos. 
+\begin{itemize}
+\item Primero se asume que los datos toman una función probabilística específica $\hat{f}$. Una vez asumida $\hat{f}$, el problema de estimación se simplifica de estimar la función $f$, a estimar solo los coeficientes de $\hat{f}$. 
+\item Posteriormente se procede a ajustar el modelo en la data de entrenamiento, es decir, estimar los coeficientes de $\hat{f}$ que prediga la variable dependiente con el menor error posible. 
+\end{itemize}
 
-Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, estos modelos buscan estimar $f$ acercandola lo más posible a los datos observados. Esto les permite evadir el problema de ajustarse a alguna forma en específico. Sin embargo, al no reducir el problema a estimar unos parámetros sino utilizar los datos directamente, se necesita un gran número de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además en general la interpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización
+Este es el caso de los Modelos Lineales Generalizados como la Regresión Logística. La desventaja de este enfoque paramétrico es que la función probabilística escogida puede no ser apropiada a la verdadera forma de $f$, por lo que la estimación puede ser pobre.
+
+Por otro lado los modelo No Paramétricos no asumen ninguna forma para $f$, en cambio, buscan estimarla ajustándola lo más posible a los datos observados. Sin embargo, al no reducir el problema a estimar unos parámetros sino utilizar los datos directamente, se necesita un gran número de observaciones -muchas más que las necesarias por los métodos paramétricos- para obtener una estimación precisa. Además, la interpretación del modelo se hace más difícil con estos métodos y son propensos a caer en sobreoptimización, ya que necesitan generar un modelo más complejo que se adapte a las observaciones de entramiento, por lo que pueden ajustarse a errores y ruido. (Gareth James, 2013)
 
 \subsubsection{Aprendizaje Supervisado vs No Supervisado}
 
-Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertadamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM, GAM, etc. 
+Se le llama aprendizaje Supervisado, a los métodos en los cuales para cada observación de las variables predictoras $x_{i}$ existe un valor asociado a la variable respuesta $y_{i}$. Por lo que se ajusta un modelo que relacione la respuesta con los predictores, con el fin de predecir acertadamente respuestas futuras. Este es el caso de los modelos Lineales así como los métodos de boosting, SVM -Support Vector Machine-, GAM -Generalized Additive Model-, etc. 
 
-En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es buscar entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociación Los primeros intentan describir las agrupaciones subyacentes en los datos, como por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociación buscan descubrir patrones inherentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$.
+En contraste, lo métodos No Supervisados describen una situación más complicada, en donde para cada observación, se cuenta con variables predictoras, pero no existe ninguna variable respuesta. Lo que se busca en este tipo de modelos es entender la relación entre las variables o entre las observaciones. Para esto se utilizan métodos de agrupación o cluster y métodos de reglas de asociación. Los primeros intentan describir las agrupaciones subyacentes en los datos, por ejemplo, el tipo de clientes dependiendo de su comportamiento de compra. Las reglas de asociación buscan descubrir patrones inherentes que describan el comportamiento de los datos u observaciones, por ejemplo, un grupo de clientes que compran un producto $r$ conjunto con otro producto $s$. (Abhijit Ghatak, 2017)
 
 \subsubsection{Regresión vs Clasificación}
 
-Las variables pueden ser divididas entre cuantitativas o cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numéricos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitativa se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
+Las variables pueden ser divididas entre cuantitativas o cualitativas -también llamadas categóricas-. Las cuantitativas toman valores numéricos mientras que las cualitativas son categorías o clases. Dependiendo del tipo de variable respuesta se realiza el enfoque del modelo. En el caso de que la variable respuesta sea cuantitativa, se refiere a problemas de regresión, mientras que los que involucran una variable respuesta cualitativa, son referidos como problemas de clasificación.
 
 
 \subsection{Validación Cruzada en Series de Tiempo}
 
-La validación Cruzada es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo que ha sido entrenado en el resto de los datos, este proceso se realiza k veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
+Es un método de validación y prueba que consiste en dividir los registros aleatoriamente en grupos de similar tamaño. El primer grupo es utilizado como validación del modelo, el cual ha sido entrenado previamente en el resto de los datos, este proceso se realiza $k$ veces, y el resultado final es el promedio arrojado por cada una de las k validaciones.
 
-Ahora bien este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación. 
-
+Ahora bien, este método asume que no existe relación entre las observaciones, es decir que son independientes. Esto no es verdad en el caso de las series de tiempo debido a la condición de autoregresión, donde la observacion esta correlacionada con sus valores pasados. Por lo tanto al dividir la data se debe respetar el orden temporal de cada observación, es decir no se puede escoger las observaciones de cada ventana de manera aleatoria. 
 
 \subsection{Análisis de Componentes Principales}
 
-Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los métodos no lineales. Existen técnicas para relajar el supuesto de  que la relación entre la respuesta y los predictores es lineal, arrojando mejores predicciones e interpretabilidad. 
+Los modelos lineales tienen distintas ventajas en cuanto a interpretación y muchas veces son sorprendentemente competitivos en relación con los métodos no lineales. Existen técnicas para compensar el supuesto de relación lineal entre la variables indedependientes y dependiente, arrojando mejores predicciones e interpretabilidad. 
 
 Una clase de métodos es el enfoque de Reducción de la Dimensión, el cual involucra proyectar los p predictores en M-dimensiones o componentes, donde $M < p$. Esto se logra transformando los predictores en combinaciones lineales que recogen parte de la información, estas $M$ componentes o dimensiones son entonces utilizadas como nuevos predictores en el modelo de regresión. Esto es:
 
@@ -142,30 +186,36 @@ El Análisis de Componentes Principales (ACP) es una técnica que reduce la dime
 
 $$ Z_{1} = \phi_{11}X_{1} + \phi_{21}X_{2} + ... + \phi_{p1}X_{p} $$
 
-donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados $loadings$, y el subíndice representa el número de componente. Juntos, los $loadings$ forman el vector de $loadings$ $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
+donde, $ \sum_{j=1}^{p} \phi_{j1}^{2} = 1 $. Los elementos de $ \phi $ son llamados loadings ó contribuciones, y el subíndice representa el número de componente. Juntos, las contribuciones forman el vector de $contribuciones$ $\phi_{1} = (\phi_{11} \phi_{21}... \phi_{p1})^T$.
 
-Dado una matriz de datos $X$ de $n$ x $p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores que contiene la mayor varianza, llamadas $scores$.
+Dado una matriz de datos $X$ dedimensión $n$x$p$, se asume que cada variable en $X$ está normalizada -tiene media 0-, entonces se obtiene la combinación lineal de los valores de los predictores que contiene la mayor varianza, llamadas $scores$.
 
 $$ z_{i1} = \phi_{11} x_{i1} + \phi_{21} x_{i2} + ... + \phi_{p1} x_{ip} $$
 
-El primer vector de loadings de componente principal resuelve el problema de optimización
+El primer vector de contribuciones de componente principal resuelve el problema de optimización
 
 $$ \max_{\phi_{11}, ..., \phi_{p1}}
 \frac{1}{n} \sum_{i = 1}^{n} (\sum_{j=1}^{p} \phi_{j1} x_{ij})^2
 \qquad sujeto \ a  \sum_{j=1}^{p} \phi_{j1}^{2} = 1
 $$
 
-Éste problema de maximización se soluciona mediante la descomposición de los autovalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma
+Éste problema de maximización se soluciona mediante la descomposición de los autovalores. Luego de determinar el primer componente $Z_{1}$, se procede a encontrar el segundo componente $Z_{2}$, el cual es una combinación lineal de $ X_{1}, ..., X_{p} $ que tiene la maximiza varianza de todas las combinaciones lineales que no están correlacionadas con $Z_{1}$. Así los scores del segundo componente principal toman la forma:
 
 $$ z_{i2} = \phi_{12}x_{i1} + \phi_{22}x_{i2} + ... + \phi_{p2}x_{ip} $$
 
-donde $\phi_{2}$ es el segundo vector loading del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlacionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
+donde $\phi_{2}$ es el segundo vector de contribuciones del componente principal. Es de notar que restringir $Z_{2}$ a no ser correlacionada con $Z_{1}$ es equivalente a restringir la dirección de $\phi_{2}$ a ser ortogonal a la dirección de $\phi_{1}$.
 
-El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinealidad entre las variables. 
+% El utilizar la técnica de componentes principales en el modelo de regresión también soluciona el tema de la multicolinealidad entre las variables. 
+
+\subsubsection{Codo de Jambu}
+
+Existen muchos criterios para seleccionar el número de componentes generados por el ACP. El que se aplica en la presente investigación se conoce como el Codo de Jambu. En general se quiere utilizar el menor número de componentes necesarios para explicar la mayor parte de variación en los datos. Normalmente cuando se utiliza el ACP como método de reducción de variables para luego aplicar una regresión, se fija un porcentaje de variabilidad y se utilizan todos los componentes que expliquen esa variabilidad. Sin embargo ese porcentaje es subjetivo y deja ambiguedad en la selección. 
+
+Al observar la gráfica de los autovalores se observa que después de un número de componentes el tamaño disminuye significativamente; el método del codo de Jambu consiste en localizar en el gráfico de los autovalores el punto donde la curva cambie su forma de empinada a plana y elegir el número de componentes antes de ese punto. (Herve Abdi, 2010)
 
 \subsection{Matríz de Confusión}
 
-En los problemas de clasificación se utiliza la matriz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
+En los problemas de clasificación se utiliza la matríz de confusión para evaluar el desempeño del modelo. La misma es una tabla que categoriza las predicciones realizadas por el modelo de acuerdo a la coincidencia con los valores reales. 
 
 \begin{figure}[ht]
 \begin{center}
@@ -192,20 +242,21 @@ $$ p = \int_{-\infty}^{-VaR(p)}f_{q}(x)\ dx $$
 
 siendo $f_{q}(x)$ la función de densidad de la variable aleatoria pérdida/ganancia del portafolio denotada por Q.
 
-Aunque el VaR es utilizado comúnmente en instituciones financieras e incluso exigido en algunas regulaciones como Basilea, existen varias críticas en cuanto a su implementación. Una de las críticas es su inconclusividad en cuanto al tamaño de la pérdida, en este sentido, el VaR es un cuantil de la distribución que establece un umbral en cuanto a la posible pérdida en un período, dado un nivel de significancia. Jon Danielsson (2011)
+Aunque el VaR es utilizado comúnmente en instituciones financieras e incluso exigido en algunas regulaciones como Basilea, existen varias críticas en cuanto a su implementación. Una de las críticas es su inconclusividad en cuanto al tamaño de la pérdida, en este sentido, el VaR es un cuantil de la distribución que establece un umbral en cuanto a la posible pérdida en un período, dado un nivel de significancia. (Jon Danielsson, 2011)
 
 \subsubsection{Pérdida Esperada}
 
-La pérdida esperada mejor conocida conocida como 'Expected Shortfall' -ES- es una medida alternativa al VaR que responde la pregunta ¿Cuál es la pérdida esperada cuando éstas exceden el VaR?. Formalmente la pérdida esperada se define cómo
+La pérdida esperada mejor conocida conocida como 'Expected Shortfall' -ES- es una medida alternativa al VaR que responde la pregunta: ¿Cuál es la pérdida esperada cuando éstas exceden el VaR?. Formalmente la pérdida esperada se define cómo:
 
 $$ ES = E(Q/Q \leq VaR(p)) $$ 
 
-ó, utilizando la formulación matemática de esperanza
+ó, utilizando la formulación matemática de esperanza:
 
 $$ ES = \int_{-\infty}^{-VaR(p)} xf_{VaR}(x)\ dx $$
 
-Es importante acotar que para el ES existen dos fuentes de error ya que primero se debe estimar el VaR y luego obtener la esperanza de la cola de la distribución. Sin embargo es una medida que complementa el VaR. En la figura 2.2 se observa la función de densidad de una distribución normal (0,1) donde se representa el VaR y ES, el VaR vendría siendo la frontera entre las dos áreas mientras que el ES la esperanza del área azul o cola superior.
-Es importante acotar que tanto el VaR como ES a pesar ser medidas de pérdidas potenciales, pueden ser referidas con signo negativo ó positivo.
+Es importante acotar que para el ES existen dos fuentes de error ya que primero se debe estimar el VaR y luego obtener la esperanza de la cola de la distribución. Sin embargo es una medida que complementa el VaR.  (Paff Bernhard, 2016)
+
+En la figura 2.2 se observa la función de densidad de una distribución normal (0,1) donde se representa el VaR y ES, el VaR vendría siendo la frontera entre las dos áreas mientras que el ES la esperanza del área azul o cola superior. Es importante acotar que tanto el VaR como ES a pesar ser medidas de pérdidas potenciales, pueden ser referidas con signo negativo ó positivo.
 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\textwidth}
@@ -230,23 +281,24 @@ text(1.60, 0.2, 'VaR')
 text(2.2, 0.2, 'ES')
 @
 \caption{Función de densidad con VaR y ES}
+\captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
 \section{Bases Legales}
 
 \subsection{Superintendencia Nacional de Valores}
 
-La Ley que rige las entidades de inversión en Venezuela  entró en vigencia el 22 de agosto de 1996 y fue publicada en Gaceta Oficial Número 36.027. Esta se centra en entidades con capacidad de manejar importantes flujos de recurso de inversionistas hacia el mercado de capitales. El órgano encargado de autorizar, regular, controlar, vigilar y supervisar a las Entidades de Inversión y sus sociedades administradoras es la Superintendencia Nacional de Valores
+La Ley de Entidades de Inversión Colectiva que rige las entidades de inversión en Venezuela entró en vigencia el 22 de agosto de 1996 y fue publicada en Gaceta Oficial Número 36.027. Esta se centra en entidades con capacidad de manejar importantes flujos de recurso de inversionistas hacia el mercado de capitales. El órgano encargado de autorizar, regular, controlar, vigilar y supervisar a las Entidades de Inversión y sus sociedades administradoras es la Superintendencia Nacional de Valores. (González Lisbeth, 2002)
 
 \subsection{Basilea II y el uso del VaR para la Regulación de Entidades Financieras}
 
 El Comité de Supervisión Bancaria de Basilea es un ente regulador que emite acuerdos para legislar la actividad bancaria. Basilea II es el segundo de estos acuerdos, fue publicado en junio de 2004 con el objeto de proteger a las entidades frente a riesgos financieros y operativos, estableciendo requerimientos de capital mínimos. Se basa en tres pilares:
 
-Requerimientos mínimos de capital: para cubrir riesgo de crédito, mercado y operacional
-
-Revisión de supervisores: busca que los reguladores supervisen que las entidades mantengan reservas por encima de los requisitos mínimos y que tengan un sistema para evaluar sus riesgos.
-
-Disciplina de mercado: crea incentivos para que las entidades financieras operen clara y eficientemente, siguiendo una serie de recomendaciones que buscan la publicación de movimientos financieros, perfiles de riesgo y reservas de capital
+\begin{itemize}
+\item Requerimientos mínimos de capital: para cubrir riesgo de crédito, mercado y operacional
+\item Revisión de supervisores: busca que los reguladores supervisen que las entidades mantengan reservas por encima de los requisitos mínimos y que tengan un sistema para evaluar sus riesgos.
+\item Disciplina de mercado: crea incentivos para que las entidades financieras operen clara y eficientemente, siguiendo una serie de recomendaciones que buscan la publicación de movimientos financieros, perfiles de riesgo y reservas de capital
+\end{itemize}
 
 La utilización del VaR para la regulación en riesgo financiero se inicia principalmente dada las correlaciones entre los elementos de los portafolios. En 1995 se presentó un anexo sobre el modelo de riesgo de mercado, el cual autorizaba la elaboración propia del modelo de riesgo para determinar requerimientos de capital. Recomendando para la aplicación del VaR los siguientes parámetros:
 

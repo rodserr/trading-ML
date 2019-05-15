@@ -42,7 +42,7 @@ ui <- shinyUI(dashboardPage(
   # Sidebar----
   dashboardSidebar(
     tags$a(href = "http://www.ucv.ve/",
-           tags$img(src = "ucv_logo.png", height = 100, width = 100, 
+           tags$img(src = "white-logo.png", height = 100, width = 100, 
            style = 'margin-left: 55px; margin-top: 12px;')),
     tags$a(href = "http://www.ucv.ve/estructura/facultades/facultad-de-ciencias-economicas-y-sociales.html",
            tags$img(src = "faces.png", height = 75, width = 150, 

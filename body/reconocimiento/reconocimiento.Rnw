@@ -2,5 +2,7 @@
 %\SweaveUTF8
 
 \begin{dedication}
+
 Dedicado a mis padres y a mi hermana, por ser los pilares de mi vida y ser mi motivo de haber cumplido esta meta.
+
 \end{dedication}

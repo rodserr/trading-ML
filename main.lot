@@ -3,12 +3,13 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando S\&P500\relax }}{42}{table.4.1}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Resumen de resultados de aplicar el modelo en la data de prueba para los 5 \IeC {\'\i }ndices\relax }}{43}{table.4.2}
-\contentsline {table}{\numberline {4.3}{\ignorespaces Resultados del test de Wald\IeC {\textendash }Wolfowitz (Test de Racha)\relax }}{46}{table.4.3}
-\contentsline {table}{\numberline {4.4}{\ignorespaces VaR y ES para retornos de cada \IeC {\'\i }ndice\relax }}{46}{table.4.4}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando S\&P500\relax }}{45}{table.4.1}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Resumen de resultados de aplicar el modelo en la data de prueba para los 5 \IeC {\'\i }ndices\relax }}{48}{table.4.2}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Resultados de aplicar el modelo con la metodolog\IeC {\'\i }a backtesting en la data de validaci\IeC {\'o}n (2016-2018)\relax }}{51}{table.4.3}
+\contentsline {table}{\numberline {4.4}{\ignorespaces Resultados del test de Wald\IeC {\textendash }Wolfowitz (Test de Racha)\relax }}{52}{table.4.4}
+\contentsline {table}{\numberline {4.5}{\ignorespaces VaR y ES para retornos de cada \IeC {\'\i }ndice\relax }}{53}{table.4.5}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando NASDAQ\relax }}{49}{table.5.1}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando NIKKEI 225\relax }}{51}{table.5.2}
-\contentsline {table}{\numberline {5.3}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando FTSE 100\relax }}{53}{table.5.3}
-\contentsline {table}{\numberline {5.4}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando BOVESPA\relax }}{55}{table.5.4}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando NASDAQ\relax }}{56}{table.5.1}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando NIKKEI 225\relax }}{58}{table.5.2}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando FTSE 100\relax }}{60}{table.5.3}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Resumen del modelo para cada per\IeC {\'\i }odo de entrenamiento utilizando BOVESPA\relax }}{62}{table.5.4}

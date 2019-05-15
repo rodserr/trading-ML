@@ -1,38 +1,59 @@
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
-\chapter*{Lista de Referencias}
-\addcontentsline{toc}{chapter}{Lista de Referencias}
+\chapter*{Referencias}
+\addcontentsline{toc}{chapter}{Referencias}
 
 \begin{itemize}
 
-\item Lu Ning (2016). \textit{A machine Learning Approach to Automated Trading}. USA, Coston College Computer Science.
+\item Abdi H. \& Williams L. (2010) \textit{Principal Component Analysis}. Estados Unidos: John Wiley \& Sons. Recuperado de: http://www.utdallas.edu/~herve/abdi-awPCA2010.pdf
 
-\item Huertas López Alejandro (2015). \textit{Modelos Predictivos para el mercado FOREX}. España, Universidad de Murcia.
+\item Abhijit, G. (2017). \textit{Machine Learning with R}. Singapur: Springer.
 
-\item Shagilla Kadida Ramadhani (2006). \textit{Ab Analysis of Technical Trading Strategies}. Inglaterra, Leeds University Business School.
+\item Araneda, H (2015). \textit{Diseño e Implementación de un Sistema Automatizado Para Operar en el Mercado de Divisas Usando Reglas de Asociación}. (Tesis de Master). Universidad de Chile, Chile.
 
-\item Bach William y Nielsen Kasper (2018). \textit{On Machine Learning Based Cryptocurrency Trading}. Dinamarca, Aalborg University.
+\item Bach, W. \& Nielsen, K. (2018). \textit{On Machine Learning Based Cryptocurrency Trading}. (Tesis de Master). Aalborg University, Dinamarca.
 
-\item Araneda Hugo (2015). \textit{Diseño e Implementación de un Sistema Automatizado Para Operar en el Mercado de Divisas Usando Reglas de Asociación}. Chile, Universidad de Chile.
+\item Balestrini, M. (1997). \textit{Como se Elabora el Proyecto de Investigación}. BL Consultores y Asociados: Venezuela.
 
-\item Fernández Cristián (2008). \textit{Modelos Ocultos de Markov Aplicados al Reconocimiento de PAtrones del Análisis Técnico Búrsatil}. Argentina, Universidad Nacional de Córdoba.
+\item Comité de Supervisión Bancaria de Basilea. (2016) \textit{Requerimientos mínimos de capital por riesgo de mercado} Recuperado de: https://www.bis.org/bcbs/publ/d352\_es.pdf
 
-\item James Gareth, Witten Daniela, Hastie Trevor y Tibshirani Robert (2013). \textit{An Introduction to Statistical Learning}. Springer.
+\item Danielsson, J. (2011). \textit{Financial Risk Forecasting}. Reino Unido: Wiley.
 
-\item Abhijit Ghatak (2017). \textit{Machine Learning with R}. Springer.
+\item Day, T. \& Wang, P. (2002), \textit{Dividends, Nonsynchronous Prices, and the Returns from Trading the Dow Jones Industrial Average} Journal of Empirical Finance, 9, 431-454.
 
-\item Murphy, J.J. (1999). \textit{Análisis Técnico de los Mercados Financieros}. New York Institute of Finance. New York: Gestión 2000.
+\item Fernández, C. (2008). \textit{Modelos Ocultos de Markov Aplicados al Reconocimiento de Patrones del Análisis Técnico Búrsatil}. Universidad Nacional de Córdoba, Argentina.
 
-\item Danielsson, Jon (2011). \textit{Financial Risk Forecasting}. Wiley.
+\item Froot, K., Scharfstein, S. \& Stein, J. (1992), \textit{Herd on the Street: Informational Inefficiencies in a Market with Short-Term Speculation}. Journal of Finance, 47, 1461-1484.
 
-\item Pfaff, Bernhard (2016). \textit{Financial Risk Modelling and
-Portfolio Optimization with R}. Wiley.
+\item González, L. (2002). \textit{Análisis Financiero del Portafolio Mercantil de Inversión de MERINVEST. Período 1998-2000}. (Tesis de Postgrado). Universidad Católica Andrés Bello, Venezuela.
 
-\item González, Lisbeth (2002) \textit(Análisis Financiero del Portafolio Mercantil de Inversión de MERINVEST. Período 1998-2000). Venezuela, Universidad Católica Andrés Bello
+\item Hong, H. \& Stein, J. (1999) \textit{A Unified Theory of Underreaction, Momentum Trading, and Overreaction in Asset Markets}. Journal of Finance, 6, 2143-2147.
 
-\item Balestrini, Miriam (1997) \textit(Como se Elabora el Proyecto de Investigación). BL Consultores y Asociados
+\item Huertas, L. (2015). \textit{Modelos Predictivos para el mercado FOREX}. (Tesis de Master). Universidad de Murcia, España.
 
-\item Rebolledo, Valeria (2018) \textit(Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el Cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos). Venezuela, Universidad Central de Venezuela
+\item Investopedia. (1999-2019). \textit{Diccionario de Términos}. New York, NY. http://www.investopedia.com
+
+\item James, G., Witten D., Hastie, T., \& Tibshirani. R. (2013). \textit{An Introduction to Statistical Learning}. Londres: Springer.
+
+\item Lu, N. (2016). \textit{A machine Learning Approach to Automated Trading}. (Tesis de Postgrado). Boston College Computer Science, Estados Unidos.
+
+\item Mitchell, T. (1997) \textit{Machine Learning}. Estados Unidos: McGraw-Hill
+
+\item Murphy, J. (1999). \textit{Análisis Técnico de los Mercados Financieros}. New York: Gestión 2000.
+
+\item Pfaff, B. (2016). \textit{Financial Risk Modelling and Portfolio Optimization with R}. Reino Unido: Wiley.
+
+\item Rebolledo, V. (2018). \textit{Evaluación de la Efectividad del Método GARCH-EVT-COPULAS para el Cálculo del VaR como Medida de Riesgo en Mercados de Commodities Latinoamericanos}. (Tesis de Pregrado). Universidad Central de Venezuela, Venezuela.
+
+\item Robert, R. (2008) \textit{Wall Street The Markets, Mechanisms and Players}. Estados Unidos: The Economist
+
+\item Seijas, F. (1993). \textit{Investigación por muestreo}. Ediciones Fabreton: Venezuela.
+
+\item Shagilla, K. (2006). \textit{An Analysis of Technical Trading Strategies}. (Tesis de Doctorado). Leeds University Business School, Inglaterra.
+
+\item The Balance. (1999-2019). \textit{Diccionario de Términos}. New York, NY. http://www.thebalance.com
+
+\item Udacity. (Productor). (2018-2019). \textit{Machine Learning for Trading} [WEB]. https://www.udacity.com
 
 \end{itemize}

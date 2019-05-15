@@ -4,51 +4,20 @@
 \chapter*{Conclusiones y Recomendaciones}
 \addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
 
-En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. Se busca demostrar que es posible obtener rendimientos con una estrategia basada en indicadores técnicos utilizados como variables predictoras en un modelo de aprendizaje automático. En los resultados no se contemplan las comisiones acarreadas por la operación de los activo. Se asume también que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez.
+En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. Se busca demostrar que es posible obtener rendimientos positivos con una estrategia basada en indicadores técnicos, utilizados como variables predictoras en un modelo de aprendizaje automático. El modelo arrojo una precisión para todos los índices de entre el 54\% y 63\%, estos valores concuerdan con los resultados de otras investigaciones que utilizan modelos lineales en los mismos activos. 
 
-<<scatter_PV, echo=FALSE>>=
+Ahora bien, los resultados arrojados no generan suficiente confianza como para concluir que es posible pronosticar movimientos del mercado con este tipo de modelo. Particularmente, el enfoque de buscar incrementos porcentuales es sensible a los parámetros de Take Profit y Stop Loss, por lo que, su estandarización a 2\% y 2.5\% respectivamente puede ser una gran limitante del modelo. Si bien se intentó optimizar estos valores, los resultados en los datos de prueba no fueron concluyentes.
 
-list_scatter_pv <- list()
-for(pv in 1:length(list_model))for(np in 1:6){
-  
-  pv_in_train <- summary(list_model[[pv]][[np]])
-  
-  aux_pv <- cbind(coef = pv_in_train$coefficients[-1, 4], 
-                  index = serie[pv], 
-                  train_p = np) %>% 
-    as.data.frame()
-  
-  list_scatter_pv %<>% rlist::list.append(aux_pv)
-}
+Por otro lado, al observar los gráficos de correlación entre los componentes del ACP, en la mayoría de los casos se observan dos grupos que aportan la mayor cantidad de información; uno de los grupos está dominado por las interacciones del MACD, y el segundo por las interacciones de los rezagos. Normalmente estos grupos forman un ángulo de 90° pero poseen el mismo signo en cuanto al eje x -componente con mayor información-. Esto deja ver que aún utilizando un número considerable de indicadores, la información que proporcionan al modelo no es suficiente para obtener una precisión aceptable. 
 
-scatter_pv <- map_dfr(list_scatter_pv, as.data.frame) %>% 
-  mutate(coef = as.numeric(coef))
+Otras de las limitantes fue la cantidad de observaciones a utilizar, se observó que en tres de los cinco índices el p-valor del test Wald - Chi-Cuadrado disminuye mientras más años de entrenamiento se utiliza, concluyendo, que con mayor cantidad de datos las variables son más significativas para el modelo.
 
-@
+En los resultados no se contemplan las comisiones acarreadas por la operación. Se asume también, que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez. Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de inversión, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover altos volúmenes de dinero con una posición menor que la que se necesitaría en el mercado de acciones. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. 
 
-\begin{figure}[H]
-\setkeys{Gin}{height = .7\linewidth}
-\centering
-<<echo=FALSE, results=tex, fig=TRUE>>=
-scatter_pv %>% ggplot(aes(x = coef, y = train_p, col = index)) +
-  geom_point(size = 4) +
-  theme_minimal() +
-  theme(legend.position = "top") +
-  labs(x = 'P-Valor', y = 'Período de Entrenamiento')
-@
-\caption{Gráfico de Disperción de los p-valores vs período de entrenamiento}
-\end{figure}
-
-Lo primero que se debe destacar es que en los primeros períodos de entrenamiento los coeficientes no son significativos según el test Wald-Chi-Cuadrado. Sin embargo al aumentar el tamaño de los datos de entrenamiento la significancia aumenta en la mayoría de los índices, esto se puede ver reflejado en la figura 4.14. Se observa que los p-valores de los coeficientes de los índices FTSE, NASDAQ y S\&P disminuyen al utilizar mayor data de entrenamiento, caso contrario a los coeficientes de los índices NIKKEI y BOVESPA que pareciera aumentar.
-
-Por otro lado al observar los gráficos de correlación entre los componentes, en la mayoría de los casos se observan dos grupos que aportan la mayor cantidad de información a los componentes; uno de los grupos está dominado por las interacciones de MACD, mientras que el otro por las interacciones de los rezagos. Normalmente estos grupos forman un ángulo de 90° pero poseen el mismo signo en cuanto al eje x -componente con mayor información-. Esto deja ver que aún utilizando un número considerable de indicadores, la información que proporcionan al modelo no es suficiente para obtener una precisión aceptable. 
-
-Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de especulación, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover altos volúmenes de dinero con una posición menor que la que se necesitaría en el mercado de acciones. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. 
-
-Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros target, stop y horizonte para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento ó el número de componentes a utilizar como variables predictoras. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como Bosques Aleatorios, SVM ó Redes Neuronales mejoren la predicción. 
+Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros Take Profit, Stop Loss para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento ó el número de componentes a utilizar como variables predictoras. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como Bosques Aleatorios, SVM ó Redes Neuronales mejoren la predicción. 
 
 El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa para obtener protección podría ser invertir el modelo, es decir predecir una disminución del precio, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
 
-Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las configuraciones de los mismos buscando mejorar la predicción del modelo. De cualquier manera esta investigación busca ser un punto de partida para futuras investigaciones.
+Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las configuraciones de los mismos buscando mejorar la predicción del modelo. De cualquier manera este proyecto busca ser un punto de partida para futuras investigaciones.
 
 
