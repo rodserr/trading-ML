@@ -1290,3 +1290,32 @@ Already on 'tesis_work'
 ]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git merge master
 Already up to date.
 ]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add .
+Saved working directory and index state WIP on tesis_work: 377fa5b Final deadline
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git cheack[K[K[Kckput master[1P[1@o
+error: Your local changes to the following files would be overwritten by checkout:
+	.Rproj.user/8B3E69DA/console06/ADBB21EF
+Please commit your changes or stash them before you switch branches.
+Aborting
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git branch
+[?1h=  master[m[m
+* [32mtesis_work[m[m
+[K[?1l>]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git ad[K[Kstatus
+On branch tesis_work
+Your branch is up to date with 'origin/tesis_work'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add .[K[K[K[K[K[K[K[K[Kgit[Kt commit -m 'r[KRproj error'
+On branch tesis_work
+Your branch is up to date with 'origin/tesis_work'.
+
+Changes not staged for commit:
+	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
+
+no changes added to commit
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add , [K[K. [K
