@@ -55,7 +55,7 @@ En la figura 4.2 se refleja la correlación de las variables originales para el 
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 list_serie[[1]] %>% createIndicators(full = TRUE) %>% 
-    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    filter(year(timestamp) %in% seq(2009, 2013, 1)) %>% 
     select(-one_of('timestamp')) %>%  
     na.omit() %>%
     cor() %>% 
@@ -72,7 +72,7 @@ list_serie[[1]] %>% createIndicators(full = TRUE) %>%
 \centering
 <<echo=FALSE, results=tex, fig=TRUE>>=
 list_serie[[1]] %>% createIndicators(full = FALSE) %>% 
-    filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+    filter(year(timestamp) %in% seq(2009, 2013, 1)) %>% 
     select(-one_of('timestamp', 'open', 'high', 'low')) %>%  
     na.omit() %>% 
     cor() %>% 
@@ -165,7 +165,7 @@ descr_plots <- list(.plot_boxplot, .plot_hist, .plot_dens)
 # Box-Plot
 do.call('grid.arrange', descr_plots[[1]])
 @
-\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -179,7 +179,7 @@ Para la variable ADX el primer, segundo y tercer cuartil de los registros 'buy' 
 # Histograms
 do.call('grid.arrange', c(descr_plots[[2]], ncol = 2, nrow = 5))
 @
-\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -193,7 +193,7 @@ La distibucion de la variable RSI es asimétrica hacia la izquierda con la mayor
 # Density
 do.call('grid.arrange', c(descr_plots[[3]], ncol = 2, nrow = 5))
 @
-\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -201,14 +201,14 @@ En la figura 4.6 se observan gráficos de densidad para cada variable diferencia
 
 \subsection{Resultados del ACP}
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny del programa R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}. En dicha plataforma es posible cambiar el índice al cual se quiere hacer referencia al igual que la ventana de entrenamiento, se pueden observar tanto las gráficas de correlación de los componentes como la gráficas de los autovalores y variabilidad explicada.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2013) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny del programa R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}. En dicha plataforma es posible cambiar el índice al cual se quiere hacer referencia al igual que la ventana de entrenamiento, se pueden observar tanto las gráficas de correlación de los componentes como la gráficas de los autovalores y variabilidad explicada.
 
 <<PCA, echo=FALSE>>=
 predictors_var <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% #levels = c('stay', 'buy')))
   select(-one_of('class')) %>% 
   createIndicators() %>% 
-  filter(year(timestamp) %in% seq(2009, 2012, 1)) %>% 
+  filter(year(timestamp) %in% seq(2009, 2013, 1)) %>% 
   getPredictors()
 
 pca <- predictors_var %>% prcomp(scale = FALSE)
@@ -230,7 +230,7 @@ list_pca_eigen <- list(
 
 do.call('grid.arrange', list_pca_eigen)
 @
-\caption{autovalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
+\caption{Autovalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -300,17 +300,17 @@ fviz_pca_var(pca,
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior derecho aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior derecho los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
 
-En los cuadrantes positivos con respecto al eje x predominan variables con una menor contribución a los componentes. En el cuadrante superior derecho se reflejan las interacciones entre los rezagos y los indicadores del MACD mientras que en el inferior, las interacciones entre los mismos rezagos y otras interacciones con el ATR. Igualmente se observa que las interacciones entre las variables que tienen correlación tienen una menor contribución a los componentes como es el caso de close.bb\_up, adx.rsi, close.adx, entre otros.
+En los cuadrantes negativos con respecto al eje x predominan variables con una menor contribución a los componentes. En el cuadrante superior izquierdo se reflejan las interacciones entre los rezagos y los indicadores del MACD mientras que en el inferior, las interacciones entre los mismos rezagos y otras interacciones con el ATR. Igualmente se observa que las interacciones entre las variables que tienen correlación tienen una menor contribución a los componentes como es el caso de close.bb\_up, adx.rsi, close.adx, entre otros.
 
-Se podría resumir que el cuadrante superior izquierdo esta representado por interacciones del MACD con el precio y con otros indicadores de tendencia y momentum como RSI y ADX. El cuadrante inferior izquierdo las interacciones de los indicadores de tendencia y momentum con los rezagos. El cuadrante superior derecho las interacciones entre el MACD con los rezagos y el cuadrante inferior derecho las interacciones entre indicadores correlacionados.
+Se podría resumir que el cuadrante superior derecho esta representado por interacciones del MACD con el precio y con otros indicadores de tendencia y momentum como RSI y ADX. El cuadrante inferior derecho las interacciones de los indicadores de tendencia y momentum con los rezagos. El cuadrante superior izquierdo las interacciones entre el MACD con los rezagos y el cuadrante inferior izquierdo las interacciones entre indicadores correlacionados.
 
 <<Dispersion_Plots, echo=FALSE>>=
 aux_scatterplot <- list_serie[[1]] %>% predict_tp(tp = .tp, sl = .sl, h = .h) %>%
   mutate(class_2 = factor(class)) %>% 
   select(-one_of('class')) %>% 
-  filter(year(timestamp) %in% seq(2009, 2012, 1))
+  filter(year(timestamp) %in% seq(2009, 2013, 1))
 @
 
 \begin{figure}[H]
@@ -324,7 +324,8 @@ fviz_pca_ind(pca,
              select.ind = list(contrib = 900),
              col.ind = aux_scatterplot$class_2)
 @
-\caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
+\caption{Gráfico Dispersión entre los componentes}
+\captionof*{table}{Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -371,7 +372,7 @@ for(i in 1:length(serie)){
   
   data <- stock %>% 
     predict_tp(.tp, .sl, .h) %>% 
-    filter(year(timestamp) %in% seq(2013, 2019, 1)) %>% 
+    filter(year(timestamp) %in% seq(2014, 2018, 1)) %>% 
     na.omit()
   
   data %<>% cbind(prediction)
@@ -404,13 +405,14 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
 \item Región Crítica: $p \leq \alpha$
 \end{itemize}
 
+
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
+\captionof*{table}{Período de entrenamiento 2009 - 2013}
 <<echo=FALSE, results=tex>>=
 summ_11 <- summary(list_model[[1]][[1]])
 row.names(summ_11$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
+                                     'OtrasInter.Neg-Macd.Rezago.Pos',
                                      'Macd.Pos-Rezago.Neg')
 
 xtable(summ_11$coefficients)
@@ -418,11 +420,11 @@ xtable(summ_11$coefficients)
 \end{center}
 
 \begin{center}
-\captionof*{table}{Período de entrenamiento 2009 - 2013}
+\captionof*{table}{Período de entrenamiento 2009 - 2014}
 <<echo=FALSE, results=tex>>=
 summ_12 <- summary(list_model[[1]][[2]])
 row.names(summ_12$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
+                                     'OtrasInter.Neg-Macd.Rezago.Pos',
                                      'Macd.Pos-Rezago.Neg')
 xtable(summ_12$coefficients)
 @
@@ -430,58 +432,60 @@ xtable(summ_12$coefficients)
 
 \newpage
 \begin{center}
-\captionof*{table}{Período de entrenamiento 2009 - 2014}
+\captionof*{table}{Período de entrenamiento 2009 - 2015}
 <<echo=FALSE, results=tex>>=
 summ_13 <- summary(list_model[[1]][[3]])
 row.names(summ_13$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
+                                     'OtrasInter.Neg-Macd.Rezago.Pos',
                                      'Macd.Pos-Rezago.Neg')
 xtable(summ_13$coefficients)
 @
 \end{center}
 
 \begin{center}
-\captionof*{table}{Período de entrenamiento 2009 - 2015}
+\captionof*{table}{Período de entrenamiento 2009 - 2016}
 <<echo=FALSE, results=tex>>=
 summ_14 <- summary(list_model[[1]][[4]])
 row.names(summ_14$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
+                                     'OtrasInter.Neg-Macd.Rezago.Pos',
                                      'Macd.Pos-Rezago.Neg')
 xtable(summ_14$coefficients)
+
 @
 \end{center}
 
 \begin{center}
-\captionof*{table}{Período de entrenamiento 2009 - 2016}
+\captionof*{table}{Período de entrenamiento 2009 - 2017}
 <<echo=FALSE, results=tex>>=
 summ_15 <- summary(list_model[[1]][[5]])
 row.names(summ_15$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
+                                     'OtrasInter.Neg-Macd.Rezago.Pos',
                                      'Macd.Pos-Rezago.Neg')
 xtable(summ_15$coefficients)
 @
 \end{center}
 
-\newpage
-\begin{center}
-\captionof*{table}{Período de entrenamiento 2009 - 2017}
-<<echo=FALSE, results=tex>>=
-summ_16 <- summary(list_model[[1]][[6]])
-row.names(summ_16$coefficients) <- c('(Intercept)',
-                                     'ATR.Pos-Macd.Neg',
-                                     'Precio.Pos-Rezago.Neg')
-xtable(summ_16$coefficients)
-@
-\end{center}
+% \newpage
+% \begin{center}
+% \captionof*{table}{Período de entrenamiento 2009 - 2017}
+% <<echo=FALSE, results=tex>>=
+% summ_16 <- summary(list_model[[1]][[6]])
+% row.names(summ_16$coefficients) <- c('(Intercept)',
+%                                      'ATR.Pos-Macd.Neg',
+%                                      'Precio.Pos-Rezago.Neg')
+% xtable(summ_16$coefficients)
+% @
+% \end{center}
 
-Se observa que recién para el tercer período de entrenamiento se obtiene un p-valor menor a 0.05 lo cual indica que el coeficiente es significativo. A medida que la data de entrenamiento es más grande, los coeficientes son más significativos. Se infiere entonces que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
 
-También se observa que el signo de los coeficientes varía en las distintas datas de entrenamiento, por ejemplo para el período 2009-2014 ambas variables influyen positivamente en la correcta predicción del retorno objetivo. En los períodos 2009-2015 y 2009-2016 la variable ATR.Pos-Macd.Neg influye negativamente en la variable dependiente caso contrario para la variable Macd.Pos-Rezago.Neg, que influye positivamente.
+Se observa que recién para el segundo período de entrenamiento se obtiene un p-valor menor a 0.05 lo cual indica que el coeficiente es significativo. A medida que la data de entrenamiento aumenta, los coeficientes son más significativos. Se infiere entonces que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+
+También se observa que el signo de los coeficientes varía en las distintas datas de entrenamiento, por ejemplo para el período 2009-2014 ambas variables influyen positivamente en la correcta predicción del retorno objetivo. En los períodos 2009-2015 y 2009-2016 la variable OtrasInter.Neg-Macd.Rezago.Pos influye negativamente en la variable dependiente caso contrario para la variable Macd.Pos-Rezago.Neg, que influye positivamente.
 
 <<scatter_PV, echo=FALSE>>=
 
 list_scatter_pv <- list()
-for(pv in 1:length(list_model))for(np in 1:6){
+for(pv in 1:length(list_model))for(np in 1:5){
   
   pv_in_train <- summary(list_model[[pv]][[np]])
   
@@ -519,7 +523,7 @@ En los primeros períodos de entrenamiento los coeficientes no son significativo
 
 <<simulation_result, echo=FALSE>>=
 
-df_fr <- data.frame(nrow = 6)
+df_fr <- data.frame(nrow = 5)
 for(i in 1:length(serie)){
   
   aux_buys <- list_fr[[i]][[2]] %>% 
@@ -561,7 +565,7 @@ xtable(df_fr_show, align = rep('c', 6))
 @
 \end{center}
 
-En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. Las compras verdaderas son aquellas en las que el modelo predijo una compra y el resultado del trade en la simulación es positivo, en cambio las compras en falso son aquellas en las que el modelo predijo una compra y la transacción resulto en perdida en la simulación. La precisión se mide como el número compras verdaderas divididos por el número de transacciones total. El beneficio se calcula como el monto de ganancia o pérdida arrojada por la simulación
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. Las compras verdaderas son aquellas en las que el modelo predijo una compra y el resultado del trade en la simulación es positivo, en cambio las compras en falso son aquellas en las que el modelo predijo una compra y la transacción resulto en perdida en la simulación. La precisión se mide como el número compras verdaderas divididos por el número de transacciones totales. El beneficio se calcula como el monto de ganancia o pérdida arrojada por la simulación
 
 El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido, una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. Además es bastante cercano al 50\% lo que supondría un comportamiento aleatorio del modelo.
  
@@ -575,7 +579,7 @@ for(i in 1:length(serie)){
                      i == 4 ~ 'FTSE_100',
                      i == 5 ~ 'BOVESPA')
   
-  df_serie <- list_serie[[i]] %>% filter(year(timestamp) %in% seq(2013, 2019, 1)) %>% 
+  df_serie <- list_serie[[i]] %>% filter(year(timestamp) %in% seq(2014, 2019, 1)) %>% 
     mutate(ind = index) 
   
   aux_trades <- list_fr[[i]][[2]] %>% select(c('buy_date', 'salida')) 
@@ -606,11 +610,11 @@ df_trades_plot %>% ggplot(aes(x = timestamp, y = ind, color = salida)) +
   scale_x_datetime(breaks = "6 month",
                    date_labels = "%b-%y")
 @
-\caption{Clasificación de los trades}
+\caption{Clasificación de las transacciones}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
+Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de cambiar a una tendencia alcista. Igualmente se aprecia como para el FTSE100 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
 
 <<return_plot, echo=FALSE>>=
 list_return_plot <- list()
@@ -624,7 +628,7 @@ for(i in 1:length(serie)){
   
   aux_return_plot <- list_fr[[i]][[2]] %>% select(c('buy_date', 'profits_ind'))
   
-  aux_firstreturn <- data.frame(timestamp = c(dmy('01/01/2013'), as_date(aux_return_plot$buy_date)),
+  aux_firstreturn <- data.frame(timestamp = c(dmy('01/01/2014'), as_date(aux_return_plot$buy_date)),
                                 cap = c(0, cumsum(aux_return_plot$profits_ind)), #cumprod(aux_return_plot$returns+1)),
                                 index = index) %>% 
     mutate(timestamp = as.POSIXct(timestamp))
@@ -649,13 +653,13 @@ df_return_plot %>%
   scale_y_continuous(breaks = scales::pretty_breaks()) +#, labels = scales::percent) +
   scale_x_datetime(date_breaks = "4 month", date_labels = "%b-%y")
 @
-\caption{Retorno acumulado para cada índice}
+\caption{Retorno acumulado de la estrategia para cada índice}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-En la figura 4.13 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento positivo.
+En la figura 4.14 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento negativo. En general se observa que la tendencia de la curva de capital es similar a la curva del respectivo índice.
 
-\subsection{Backtesting}
+\subsection{Resultados de la simulación Backtesting Tradicional}
 
 <<backCreate_Model, echo=FALSE>>=
 posit_size <- 10000
@@ -677,7 +681,7 @@ for(i in 1:length(serie)){
   
   backdata <- backstock %>% 
     predict_tp(.tp, .sl, .h) %>% 
-    filter(year(timestamp) %in% seq(2016, 2019, 1)) %>% 
+    filter(year(timestamp) %in% seq(2014, 2018, 1)) %>% 
     na.omit()
   
   backdata %<>% cbind(backprediction)
@@ -728,13 +732,13 @@ backdf_fr_show <- backdf_fr %>% setNames(serie) %>%
 @
 
 \begin{center}
-\captionof{table}{Resultados de aplicar el modelo con la metodología backtesting en la data de validación (2016-2018)}
+\captionof{table}{Resultados de aplicar el modelo con la metodología backtesting en la data de prueba (2014-2018)}
 <<echo=FALSE, results=tex>>=
 xtable(backdf_fr_show, align = rep('c', 6))
 @
 \end{center}
 
-En la tabla 4.13 se exponen a manera de comparación los resultados de la simulación utilizando la metodología convencional de backtesting. Se puede observar que la precisión del modelo es muy parecida a los resultados del walkforward, llegando, incluso a ser mayor para los índices BOVESPA y FTSE. Esto también ocurre debido a que la cantidad de trades es menor en la metodología backtesting ya que se utiliza menor data de validación (2016-2018) en comparación a la metodología walkforward (2013-2018). Sin embargo es un buen indicativo de la pobre efectividad del modelo utilizando esta metodología.
+En la tabla 4.3 se exponen a manera de comparación los resultados de la simulación utilizando la metodología convencional de backtesting, en este caso para obtener el mismo período de prueba, se particionaron los datos en entrenamiento entre 2009 y 2013 y prueba entre 2014 y 2018. Se puede observar que la precisión del modelo es muy parecida a los resultados del walkforward, llegando, incluso a ser mayor para 4 de los 5 índices. 
 
 \subsection{Medidas de Riesgo}
 
@@ -818,4 +822,4 @@ xtable(VaR_df)
 @
 \end{center}
   
-Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,297.49 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 7,912.80 USD'
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,455.51 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 8,076.99 USD'

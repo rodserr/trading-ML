@@ -65,8 +65,8 @@ ui <- shinyUI(dashboardPage(
                 selected = 1),
     
     sliderInput('sample', 'Choose Sample',
-                min = 2012, max = 2017,
-                value = 2012)
+                min = 2013, max = 2017,
+                value = 2013)
   ),
   
   # Body----
