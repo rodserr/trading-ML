@@ -1318,4 +1318,10 @@ Changes not staged for commit:
 	[31mmodified:   .Rproj.user/8B3E69DA/console06/ADBB21EF[m
 
 no changes added to commit
-]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add , [K[K. [K
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add , [K[K. [KSaved working directory and index state WIP on tesis_work: be0a272 Rproj error
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ gt[Kit checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+	.Rproj.user/8B3E69DA/console06/ADBB21EF
+Please commit your changes or stash them before you switch branches.
+Aborting
+]0;/home/leonardo/Desktop/Rodrigo/Tesis/trading-ML(base) ]0;leonardo@leonardo: ~/Desktop/Rodrigo/Tesis/trading-ML[01;32mleonardo@leonardo[00m:[01;34m~/Desktop/Rodrigo/Tesis/trading-ML[00m$ git add[K[K[K[K[K[K[Kgir[Kt add .
