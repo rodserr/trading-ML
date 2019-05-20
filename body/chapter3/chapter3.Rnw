@@ -91,7 +91,7 @@ Para contrarrestar esta situación se optó por el método de backtesting Walkfo
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-Otra de las características de la metodología que se modificó fue la elección de los valores de los hiperparámetros -target, stop y horizonte-. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismos parámetros durante todo el período de estudio. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible sesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones den los mejores resultados no asegura que se replique en el siguiente año.
+Otra de las características de la metodología que se modificó fue la elección de los valores de los hiperparámetros -Take Profit, Stop Loss y Horizonte-. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismos parámetros durante todo el período de estudio. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible sesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones den los mejores resultados no asegura que se replique en el siguiente año.
 
 Por otro lado, si se utiliza un stop ó target muy altos, baja el número de observaciones que cumplan con la condición de la variable dependiente, por lo tanto se estaría en presencia de un problema de data desequilibrada que debe tener un tratamiento distinto. En base a esto, se establece el target en 2\% y el stop en 2,5\%. Por otro lado la elección del horizonte de tiempo influye también en el número de observaciones identificadas como 'buy', es de notar que mientras más grande el horizonte mayor número de observaciones 'buy' se tendrá. Sin embargo existe un punto en donde deja de crecer este número, en la práctica se establece en 20. En la figura 3.2 se ilustra el número de observaciones identificadas como 'buy' para distintas combinaciones de hiperparámetros.
 
@@ -165,7 +165,7 @@ list_plotex_pred <- list(
 <<echo=FALSE, results=tex, fig=TRUE>>=
 do.call('grid.arrange', list_plotex_pred)
 @
-\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
+\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, para el índice S\&P500 entre 26/10/2008 - 31/12/2010, para diferentes valores de tp y h}
 \captionof*{table}{tp = Take Profit, sl = Stop Loss, h = Horizonte. }
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}

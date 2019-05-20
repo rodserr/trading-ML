@@ -123,7 +123,7 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = FALSE){
   list_cm <- list()
   list_pred <- list()
   list_model <- list()
-  for(y in c(2013, 2014, 2015, 2016, 2017, 2018)){
+  for(y in c(2014, 2015, 2016, 2017, 2018)){
     
     # Split Data
     train <- data %>% filter(year(timestamp) %in% seq(2009, y-1, 1))
@@ -151,8 +151,8 @@ WFRegression <- function(serie, tp, sl, h, cut = .5, uniqueBUYs = FALSE){
     
     # PCA Model
     
-    .PCA_cntrl <- trainControl(index = sampleFolds,
-                               indexOut = OsampleFolds,
+    .PCA_cntrl <- trainControl(#index = sampleFolds,
+                               #indexOut = OsampleFolds,
                                classProbs = TRUE,
                                savePredictions = TRUE,
                                summaryFunction = twoClassSummary,
@@ -204,9 +204,9 @@ BackRegression <- function(serie, tp, sl, h, cut = .5){
   list_model <- list()
   
     # Split Data
-    train <- data %>% filter(year(timestamp) %in% seq(2009, 2015, 1))
+    train <- data %>% filter(year(timestamp) %in% seq(2009, 2013, 1))
     
-    test <- data %>% filter(year(timestamp) %in% c(2016, 2017, 2018, 2019))
+    test <- data %>% filter(year(timestamp) %in% seq(2014, 2018, 1))
     
     # PCA Model
     .PCA_cntrl <- trainControl(classProbs = TRUE,

@@ -32,7 +32,7 @@ Modelar los retornos de la inversión para pronosticar movimientos en el mercado
 \item Calcular los indicadores técnicos en base a cada índice.
 \item Desarrollar el marco de backtesting para la construcción del modelo.
 \item Simular las compras y ventas en función de la predicción del modelo.
-\item Calcular el Valor a Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación.
+\item Calcular el Valor en Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación.
 \end{itemize}
 
 \section{Justificación}

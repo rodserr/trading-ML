@@ -112,6 +112,8 @@ En la presente investigación se busca utilizar las técnicas de aprendizaje est
 % el incurrir en una posición en largo provocaría una ganancia, asegurando que la posición se capitalice a un porcentaje t del precio inicial, sin antes haber incurrido en una pérdida de s porciento, en un horizonte de tiempo h. Para esto se identifica en un período de la data utilizada, todas las observaciones en la que esto ocurre, y se intenta generar un modelo que entienda las condiciones del activo cuando este patrón sucede.
 
 En el capítulo I se desarrolla el planteamiento del problema, se enumeran los objetivos definidos para la elaboración de la investigación y se argumenta la justificación para su realización. En el capítulo II se presentan los antecedentes que fundamentan la investigación, se desarrollan los conceptos teóricos escenciales para la comprensión de la problemática, y se abordan los aspectos legales que conciernen al trabajo desarrollado. En el capítulo III se aborda el método de investigación, delimitando aspectos como el universo, muestra, tipo de investigación, variables del estudio, etc. Así mismo se desarrolla la estrategia de análisis a seguir. Finalmente en el capítulo IV se exponen los resultados obtenidos tanto del modelo como de la simulación y se realiza el análisis de los mismos.
+
+Esta investigación fue realizada en su totalidad en el lenguaje de programación R, tanto el código base como el Latex (.Rnw) están alojados en el repositorio público \url{https://github.com/rodserr/trading-ML} 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
@@ -146,7 +148,7 @@ Modelar los retornos de la inversión para pronosticar movimientos en el mercado
 \item Calcular los indicadores técnicos en base a cada índice.
 \item Desarrollar el marco de backtesting para la construcción del modelo.
 \item Simular las compras y ventas en función de la predicción del modelo.
-\item Calcular el Valor a Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación.
+\item Calcular el Valor en Riesgo y Pérdida Esperada para cada índice en base a los resultados de la simulación.
 \end{itemize}
 
 \section{Justificación}
@@ -542,7 +544,7 @@ Para contrarrestar esta situación se optó por el método de backtesting Walkfo
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-Otra de las características de la metodología que se modificó fue la elección de los valores de los hiperparámetros -target, stop y horizonte-. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismos parámetros durante todo el período de estudio. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible sesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones den los mejores resultados no asegura que se replique en el siguiente año.
+Otra de las características de la metodología que se modificó fue la elección de los valores de los hiperparámetros -Take Profit, Stop Loss y Horizonte-. Previamente se utilizaba la data de validación para buscar la combinación de parámetros óptima. Ahora bien en la metodología de Walkforward se utilizan los mismos parámetros durante todo el período de estudio. A opinión del investigador al buscar los mejores parámetros se estaría incurriendo en un posible sesgo de sobreoptimización. El hecho de que en un año determinado unas configuraciones den los mejores resultados no asegura que se replique en el siguiente año.
 
 Por otro lado, si se utiliza un stop ó target muy altos, baja el número de observaciones que cumplan con la condición de la variable dependiente, por lo tanto se estaría en presencia de un problema de data desequilibrada que debe tener un tratamiento distinto. En base a esto, se establece el target en 2\% y el stop en 2,5\%. Por otro lado la elección del horizonte de tiempo influye también en el número de observaciones identificadas como 'buy', es de notar que mientras más grande el horizonte mayor número de observaciones 'buy' se tendrá. Sin embargo existe un punto en donde deja de crecer este número, en la práctica se establece en 20. En la figura 3.2 se ilustra el número de observaciones identificadas como 'buy' para distintas combinaciones de hiperparámetros.
 
@@ -551,7 +553,7 @@ Por otro lado, si se utiliza un stop ó target muy altos, baja el número de obs
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-003}
-\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, en el primer conjunto de datos de entrenamiento (26/10/2008 - 31/12/2010) para el índice S\&P500, para diferentes valores de tp y h}
+\caption{Observaciones que presentan ocurrencias con sl = 2.5\%, para el índice S\&P500 entre 26/10/2008 - 31/12/2010, para diferentes valores de tp y h}
 \captionof*{table}{tp = Take Profit, sl = Stop Loss, h = Horizonte. }
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
@@ -704,7 +706,7 @@ A continuación se presentan una serie de gráficos para reflejar lo anteriormen
 \begin{figure}[H]
 \centering
 \includegraphics{main-009}
-\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Gráfico de cajas de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -715,7 +717,7 @@ Para la variable ADX el primer, segundo y tercer cuartil de los registros 'buy' 
 \begin{figure}[H]
 \centering
 \includegraphics{main-010}
-\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Histogramas de frecuencia de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -726,7 +728,7 @@ La distibucion de la variable RSI es asimétrica hacia la izquierda con la mayor
 \begin{figure}[H]
 \centering
 \includegraphics{main-011}
-\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento(01/01/2009 - 31/12/2012)}
+\caption{Gráfico de densidad de indicadores definitivos calculados con los precios del S\&P500 en el primer período de entrenamiento (01/01/2009 - 31/12/2013)}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -734,7 +736,7 @@ En la figura 4.6 se observan gráficos de densidad para cada variable diferencia
 
 \subsection{Resultados del ACP}
 
-A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2012) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny del programa R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}. En dicha plataforma es posible cambiar el índice al cual se quiere hacer referencia al igual que la ventana de entrenamiento, se pueden observar tanto las gráficas de correlación de los componentes como la gráficas de los autovalores y variabilidad explicada.
+A continuación se analizan los resultados de los componentes arrojados por el modelo en el primer período de entrenamiento (2009-2013) utilizando el índice S\&P500, en esta sección se referirá a ésta como 'matriz de datos'. Ahora bien, si se quisiera analizar cada una de las componentes arrojadas en cada muestra de entrenamiento se necesitaría repetir este análisis 30 veces lo cual no es práctico para los fines de la investigación. En este sentido se elaboró una aplicación con el paquete Shiny del programa R, para visualizar de manera interactiva las gráficas que ayudan a entender los componentes. La aplicación puede ser visitada con el siguiente enlace \url{https://rodserr.shinyapps.io/trading-ML/}. En dicha plataforma es posible cambiar el índice al cual se quiere hacer referencia al igual que la ventana de entrenamiento, se pueden observar tanto las gráficas de correlación de los componentes como la gráficas de los autovalores y variabilidad explicada.
 
 
 Los autovalores miden la cantidad de variación retenida por cada componente. Los autovalores son mayores para los primeros componentes, dado que el primer componente busca maximizar la cantidad de variación de la matriz de datos, por lo que cada vez es menor la cantidad de variación retenida por cada componente.
@@ -743,7 +745,7 @@ Los autovalores miden la cantidad de variación retenida por cada componente. Lo
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-013}
-\caption{autovalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
+\caption{Autovalores y Porcentaje de contribución para los 10 componentes más importantes obtenidos por la matríz de datos}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -789,18 +791,19 @@ El gráfico de correlación ó Factor map muestra la relación entre las variabl
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior izquierdo aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior izquierdo los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
+En la figura 4.10 se observa el gráfico de correlación para PC1 y PC2, el color de cada variable viene dado por su contribución, mientras más oscuro menor es su contribución a los componentes. Se puede apreciar que las variables con mayor contribución están agrupadas por dos tipos de indicadores predominantes, en el cuadrante superior derecho aparecen variables constituidas por interacciones con los indicadores del MACD, mientras que en el cuadrante inferior derecho los indicadores predominantes son los rezagos. Se podría resumir que un cuadrante representa la información actual del activo mientras que el otro, la relación entre el precio actual y el precio en períodos anteriores. Por otro lado los grupos forman un ángulo de 90° por lo que no están correlacionados.
 
-En los cuadrantes positivos con respecto al eje x predominan variables con una menor contribución a los componentes. En el cuadrante superior derecho se reflejan las interacciones entre los rezagos y los indicadores del MACD mientras que en el inferior, las interacciones entre los mismos rezagos y otras interacciones con el ATR. Igualmente se observa que las interacciones entre las variables que tienen correlación tienen una menor contribución a los componentes como es el caso de close.bb\_up, adx.rsi, close.adx, entre otros.
+En los cuadrantes negativos con respecto al eje x predominan variables con una menor contribución a los componentes. En el cuadrante superior izquierdo se reflejan las interacciones entre los rezagos y los indicadores del MACD mientras que en el inferior, las interacciones entre los mismos rezagos y otras interacciones con el ATR. Igualmente se observa que las interacciones entre las variables que tienen correlación tienen una menor contribución a los componentes como es el caso de close.bb\_up, adx.rsi, close.adx, entre otros.
 
-Se podría resumir que el cuadrante superior izquierdo esta representado por interacciones del MACD con el precio y con otros indicadores de tendencia y momentum como RSI y ADX. El cuadrante inferior izquierdo las interacciones de los indicadores de tendencia y momentum con los rezagos. El cuadrante superior derecho las interacciones entre el MACD con los rezagos y el cuadrante inferior derecho las interacciones entre indicadores correlacionados.
+Se podría resumir que el cuadrante superior derecho esta representado por interacciones del MACD con el precio y con otros indicadores de tendencia y momentum como RSI y ADX. El cuadrante inferior derecho las interacciones de los indicadores de tendencia y momentum con los rezagos. El cuadrante superior izquierdo las interacciones entre el MACD con los rezagos y el cuadrante inferior izquierdo las interacciones entre indicadores correlacionados.
 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 0.8\textwidth}
 \centering
 \includegraphics{main-018}
-\caption{Gráfico Dispersión entre los componentes. Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
+\caption{Gráfico Dispersión entre los componentes}
+\captionof*{table}{Los puntos rojos representan las observaciones marcadas como 'buys', los triángulos azules los 'stays'}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
@@ -849,28 +852,12 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
 \item Región Crítica: $p \leq \alpha$
 \end{itemize}
 
-\begin{center}
-\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
-% latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
-  \hline
-(Intercept) & -0.36 & 0.06 & -5.56 & 0.00 \\ 
-  ATR.Pos-Macd.Neg & -0.01 & 0.02 & -0.81 & 0.42 \\ 
-  Macd.Pos-Rezago.Neg & -0.01 & 0.02 & -0.71 & 0.48 \\ 
-   \hline
-\end{tabular}
-\end{table}\end{center}
 
 \begin{center}
+\captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando S\&P500}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
+% Thu May 16 17:57:26 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -878,17 +865,16 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
  & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
   \hline
 (Intercept) & -0.41 & 0.06 & -7.04 & 0.00 \\ 
-  ATR.Pos-Macd.Neg & 0.02 & 0.02 & 1.33 & 0.18 \\ 
+  OtrasInter.Neg-Macd.Rezago.Pos & 0.02 & 0.02 & 1.33 & 0.18 \\ 
   Macd.Pos-Rezago.Neg & -0.01 & 0.02 & -0.46 & 0.65 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
+% Thu May 16 17:57:26 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -896,16 +882,17 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
  & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
   \hline
 (Intercept) & -0.28 & 0.05 & -5.29 & 0.00 \\ 
-  ATR.Pos-Macd.Neg & 0.05 & 0.02 & 2.93 & 0.00 \\ 
+  OtrasInter.Neg-Macd.Rezago.Pos & 0.05 & 0.02 & 2.93 & 0.00 \\ 
   Macd.Pos-Rezago.Neg & 0.02 & 0.02 & 1.39 & 0.16 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
+% Thu May 16 17:57:26 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -913,7 +900,7 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
  & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
   \hline
 (Intercept) & -0.17 & 0.05 & -3.51 & 0.00 \\ 
-  ATR.Pos-Macd.Neg & -0.06 & 0.02 & -4.31 & 0.00 \\ 
+  OtrasInter.Neg-Macd.Rezago.Pos & -0.06 & 0.02 & -4.31 & 0.00 \\ 
   Macd.Pos-Rezago.Neg & 0.02 & 0.02 & 1.21 & 0.23 \\ 
    \hline
 \end{tabular}
@@ -922,7 +909,7 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
+% Thu May 16 17:57:26 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -930,17 +917,16 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
  & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
   \hline
 (Intercept) & -0.13 & 0.04 & -2.80 & 0.01 \\ 
-  ATR.Pos-Macd.Neg & -0.06 & 0.01 & -4.53 & 0.00 \\ 
+  OtrasInter.Neg-Macd.Rezago.Pos & -0.06 & 0.01 & -4.53 & 0.00 \\ 
   Macd.Pos-Rezago.Neg & 0.03 & 0.01 & 1.76 & 0.08 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:54 2019
+% Thu May 16 17:57:26 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -948,21 +934,34 @@ $$Z = \frac{\beta_{i}}{SE(\beta_{i})}$$
  & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
   \hline
 (Intercept) & -0.11 & 0.04 & -2.67 & 0.01 \\ 
-  ATR.Pos-Macd.Neg & 0.06 & 0.01 & 4.80 & 0.00 \\ 
-  Precio.Pos-Rezago.Neg & 0.03 & 0.01 & 2.18 & 0.03 \\ 
+  OtrasInter.Neg-Macd.Rezago.Pos & 0.06 & 0.01 & 4.80 & 0.00 \\ 
+  Macd.Pos-Rezago.Neg & 0.03 & 0.01 & 2.18 & 0.03 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
-Se observa que recién para el tercer período de entrenamiento se obtiene un p-valor menor a 0.05 lo cual indica que el coeficiente es significativo. A medida que la data de entrenamiento es más grande, los coeficientes son más significativos. Se infiere entonces que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+% \newpage
+% \begin{center}
+% \captionof*{table}{Período de entrenamiento 2009 - 2017}
+% <<echo=FALSE, results=tex>>=
+% summ_16 <- summary(list_model[[1]][[6]])
+% row.names(summ_16$coefficients) <- c('(Intercept)',
+%                                      'ATR.Pos-Macd.Neg',
+%                                      'Precio.Pos-Rezago.Neg')
+% xtable(summ_16$coefficients)
+% @
+% \end{center}
 
-También se observa que el signo de los coeficientes varía en las distintas datas de entrenamiento, por ejemplo para el período 2009-2014 ambas variables influyen positivamente en la correcta predicción del retorno objetivo. En los períodos 2009-2015 y 2009-2016 la variable ATR.Pos-Macd.Neg influye negativamente en la variable dependiente caso contrario para la variable Macd.Pos-Rezago.Neg, que influye positivamente.
+
+Se observa que recién para el segundo período de entrenamiento se obtiene un p-valor menor a 0.05 lo cual indica que el coeficiente es significativo. A medida que la data de entrenamiento aumenta, los coeficientes son más significativos. Se infiere entonces que mientras más observaciones para entrenar el modelo, mayor será la asociación entre los componentes y la capacidad de predecir el retorno objetivo.
+
+También se observa que el signo de los coeficientes varía en las distintas datas de entrenamiento, por ejemplo para el período 2009-2014 ambas variables influyen positivamente en la correcta predicción del retorno objetivo. En los períodos 2009-2015 y 2009-2016 la variable OtrasInter.Neg-Macd.Rezago.Pos influye negativamente en la variable dependiente caso contrario para la variable Macd.Pos-Rezago.Neg, que influye positivamente.
 
 
 \begin{figure}[H]
 \setkeys{Gin}{height = .5\linewidth, width = .5\linewidth}
 \centering
-\includegraphics{main-027}
+\includegraphics{main-026}
 \caption{Gráfico de Dispersión de los p-valores en cada período de entrenamiento}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
@@ -975,23 +974,23 @@ En los primeros períodos de entrenamiento los coeficientes no son significativo
 \begin{center}
 \captionof{table}{Resumen de resultados de aplicar el modelo en la data de prueba para los 5 índices}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:22:55 2019
+% Thu May 16 17:57:27 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
   \hline
  & S\&P\_500 & NASDAQ & NIKKEI\_225 & FTSE\_100 & BOVESPA \\ 
   \hline
-Compras en Falso & 62 & 72 & 116 & 58 & 141 \\ 
-  Compras Verdaderas & 80 & 122 & 153 & 72 & 170 \\ 
-  N° transacciones & 142 & 194 & 269 & 130 & 311 \\ 
-  Precisión & 56.34\% & 62.89\% & 56.88\% & 55.38\% & 54.66\% \\ 
-  Beneficio & 5939.81 & 9101.82 & 3162.62 & 1869.01 & -1250.00 \\ 
+Compras en Falso & 54 & 64 & 96 & 48 & 118 \\ 
+  Compras Verdaderas & 65 & 103 & 111 & 56 & 142 \\ 
+  N° transacciones & 119 & 167 & 207 & 104 & 260 \\ 
+  Precisión & 54.62\% & 61.68\% & 53.62\% & 53.85\% & 54.62\% \\ 
+  Beneficio & 4372.39 & 6659.26 & -237.38 & 1039.13 & -1100.00 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
-En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. Las compras verdaderas son aquellas en las que el modelo predijo una compra y el resultado del trade en la simulación es positivo, en cambio las compras en falso son aquellas en las que el modelo predijo una compra y la transacción resulto en perdida en la simulación. La precisión se mide como el número compras verdaderas divididos por el número de transacciones total. El beneficio se calcula como el monto de ganancia o pérdida arrojada por la simulación
+En la tabla 4.2 se muestran los resultados de la simulación para cada uno de los índices. Las compras verdaderas son aquellas en las que el modelo predijo una compra y el resultado del trade en la simulación es positivo, en cambio las compras en falso son aquellas en las que el modelo predijo una compra y la transacción resulto en perdida en la simulación. La precisión se mide como el número compras verdaderas divididos por el número de transacciones totales. El beneficio se calcula como el monto de ganancia o pérdida arrojada por la simulación
 
 El número de trades cerrados es mayor en los índices BOVESPA y NIKKEI, lo que puede deberse a que estos mercados tuvieron una mayor volatilidad en el período de estudio. Por otra parte la predicción ronda entre 54\% al 62\%, la relación pérdida/ganancia de los parámetros utilizados es $2.5/2 = 1.25$, es decir que por cada trade negativo se necesita 1.25 trades positivos para mitigar la pérdida. En este sentido, una precisión del 60\% asegura un margen de ganancia, sin embargo, el retorno acumulado obtenido es pobre comparado con inversiones pasivas del mismo índice. Además es bastante cercano al 50\% lo que supondría un comportamiento aleatorio del modelo.
  
@@ -1001,49 +1000,49 @@ En la figura 4.12 se observa los trades realizados por la simulación según el 
 \begin{figure}[H]
 \setkeys{Gin}{height = .7\linewidth, width = .8\textwidth}
 \centering
-\includegraphics{main-031}
-\caption{Clasificación de los trades}
+\includegraphics{main-030}
+\caption{Clasificación de las transacciones}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de tener mayor número de observaciones para entrenar el modelo. Igualmente se aprecia como para el S\&P500 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
+Se observa como en la simulación utilizando el índice BOVESPA, los trades positivos aumentan su frecuencia a partir del segundo semestre del 2016, esto puede deberse al hecho de cambiar a una tendencia alcista. Igualmente se aprecia como para el FTSE100 las operaciones se concentran en los primeros años de prueba, cerrando los demás años prácticamente sin operaciones.
 
 
 \begin{figure}[H]
 \setkeys{Gin}{width = 1\textwidth}
 \centering
-\includegraphics{main-033}
-\caption{Retorno acumulado para cada índice}
+\includegraphics{main-032}
+\caption{Retorno acumulado de la estrategia para cada índice}
 \captionof*{table}{Fuente: Cálculos propios}
 \end{figure}
 
-En la figura 4.13 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento positivo.
+En la figura 4.14 se observa la curva de capital de las operaciones realizadas con cada uno de los índices. EL NASDAQ y S\&P500 son los de mejor desempeño, mostrando ganancias consistentemente durante todo el período de entrenamiento. Por su lado el NIKKEI y FTSE tienen momentos tanto de ganancia como de pérdida, pero manteniendo un rendimiento positivo. Mientras que el BOVESPA pierde consistentemente durante la primera mitad del período y gana en la segunda mitad, pero terminando con un rendimiento negativo. En general se observa que la tendencia de la curva de capital es similar a la curva del respectivo índice.
 
-\subsection{Backtesting}
+\subsection{Resultados de la simulación Backtesting Tradicional}
 
 
 
 
 \begin{center}
-\captionof{table}{Resultados de aplicar el modelo con la metodología backtesting en la data de validación (2016-2018)}
+\captionof{table}{Resultados de aplicar el modelo con la metodología backtesting en la data de prueba (2014-2018)}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{cccccc}
   \hline
  & S\&P\_500 & NASDAQ & NIKKEI\_225 & FTSE\_100 & BOVESPA \\ 
   \hline
-Compras en Falso & 31 & 39 & 60 & 16 & 48 \\ 
-  Compras Verdaderas & 38 & 55 & 61 & 28 & 74 \\ 
-  N° transacciones & 69 & 94 & 121 & 44 & 122 \\ 
-  Precisión & 55.07\% & 58.51\% & 50.41\% & 63.64\% & 60.66\% \\ 
-  Beneficio & 3081.39 & 3156.77 & -1483.38 & 2234.42 & 2800.00 \\ 
+Compras en Falso & 55 & 63 & 92 & 64 & 120 \\ 
+  Compras Verdaderas & 71 & 104 & 111 & 63 & 147 \\ 
+  N° transacciones & 126 & 167 & 203 & 127 & 267 \\ 
+  Precisión & 56.35\% & 62.28\% & 54.68\% & 49.61\% & 55.06\% \\ 
+  Beneficio & 5600.14 & 7039.00 & 762.62 & -222.81 & -600.00 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
 
-En la tabla 4.13 se exponen a manera de comparación los resultados de la simulación utilizando la metodología convencional de backtesting. Se puede observar que la precisión del modelo es muy parecida a los resultados del walkforward, llegando, incluso a ser mayor para los índices BOVESPA y FTSE. Esto también ocurre debido a que la cantidad de trades es menor en la metodología backtesting ya que se utiliza menor data de validación (2016-2018) en comparación a la metodología walkforward (2013-2018). Sin embargo es un buen indicativo de la pobre efectividad del modelo utilizando esta metodología.
+En la tabla 4.3 se exponen a manera de comparación los resultados de la simulación utilizando la metodología convencional de backtesting, en este caso para obtener el mismo período de prueba, se particionaron los datos en entrenamiento entre 2009 y 2013 y prueba entre 2014 y 2018. Se puede observar que la precisión del modelo es muy parecida a los resultados del walkforward, llegando, incluso a ser mayor para 4 de los 5 índices. 
 
 \subsection{Medidas de Riesgo}
 
@@ -1070,18 +1069,18 @@ $$\mu_{R} = \frac{2_{n_{1}n_{2}}}{n_{1}+n_{2}}+1  \qquad  Var(R) = \frac{2_{n_{1
 \begin{center}
 \captionof{table}{Resultados del test de Wald–Wolfowitz (Test de Racha)}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
   \hline
  & statistic & p.value \\ 
   \hline
-S\&P\_500 & -0.28 & 0.78 \\ 
-  NASDAQ & 0.60 & 0.55 \\ 
-  NIKKEI\_225 & 1.27 & 0.20 \\ 
-  FTSE\_100 & 0.37 & 0.71 \\ 
-  BOVESPA & -0.25 & 0.81 \\ 
+S\&P\_500 & -0.53 & 0.60 \\ 
+  NASDAQ & 0.62 & 0.53 \\ 
+  NIKKEI\_225 & 1.23 & 0.22 \\ 
+  FTSE\_100 & 0.35 & 0.73 \\ 
+  BOVESPA & -0.74 & 0.46 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
@@ -1093,42 +1092,43 @@ Frente a p-valores mayores a 0.05, y con un nivel de significación del 5\% no e
 \begin{center}
 \captionof{table}{VaR y ES para retornos de cada índice}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlllll}
   \hline
  & S\&P\_500 & NASDAQ & NIKKEI\_225 & FTSE\_100 & BOVESPA \\ 
   \hline
-VaR & 6,297.49 & 5,622.23 & 6,246.23 & 6,386.23 & 6,451.87 \\ 
-  ES & 7,912.80 & 7,195.66 & 7,859.20 & 8,005.20 & 8,073.22 \\ 
+VaR & 6,455.51 & 5,755.84 & 6,543.94 & 6,524.42 & 6,456.09 \\ 
+  ES & 8,076.99 & 7,339.26 & 8,168.11 & 8,148.04 & 8,077.59 \\ 
    \hline
 \end{tabular}
 \end{table}\end{center}
   
-Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,297.49 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 7,912.80 USD'
+Se puede observar en la tabla 4.4 como el VaR para cada estrategia varía en función de la precisión del modelo, como es de esperar. Para los índices con mayor precisión el VaR es menor y por lo tanto también lo es el ES. En este sentido se puede interpretar el VaR y ES del S\&P500 como: 'Cuando la estrategia toma como activo el índice S\&P500, existe una probabilidad del 5\% de que genere una pérdida igual ó mayor a 6,455.51 USD luego de 300 trades realizados. En caso de que ocurra una pérdida mayor, se espera que el déficit total sea de 8,076.99 USD'
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
 
 \chapter*{Conclusiones y Recomendaciones}
 \addcontentsline{toc}{chapter}{Conclusiones y Recomendaciones}
 
-En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. Se busca demostrar que es posible obtener rendimientos positivos con una estrategia basada en indicadores técnicos, utilizados como variables predictoras en un modelo de aprendizaje automático. El modelo arrojo una precisión para todos los índices de entre el 54\% y 63\%, estos valores concuerdan con los resultados de otras investigaciones que utilizan modelos lineales en los mismos activos. 
+En esta investigación se ha planteado un marco de trabajo que permite el desarrollo y prueba para una estrategia de trading automatizado. Se busca demostrar que es posible obtener rendimientos positivos con una estrategia basada en indicadores técnicos, utilizados como variables predictoras en un modelo de aprendizaje automático. El modelo arrojo una precisión para todos los índices de entre el 54\% y 62\%, estos valores concuerdan con los resultados de otras investigaciones que utilizan modelos lineales en activos similares. 
 
-Ahora bien, los resultados arrojados no generan suficiente confianza como para concluir que es posible pronosticar movimientos del mercado con este tipo de modelo. Particularmente, el enfoque de buscar incrementos porcentuales es sensible a los parámetros de Take Profit y Stop Loss, por lo que, su estandarización a 2\% y 2.5\% respectivamente puede ser una gran limitante del modelo. Si bien se intentó optimizar estos valores, los resultados en los datos de prueba no fueron concluyentes.
+Ahora bien, los resultados arrojados no generan suficiente confianza como para concluir que es posible pronosticar movimientos del mercado con este tipo de modelo. Particularmente, el enfoque de buscar incrementos porcentuales es sensible a los parámetros de Take Profit y Stop Loss, por lo que, su estandarización a 2\% y 2.5\% respectivamente puede ser una gran limitante del modelo. Si bien se intentó optimizar estos valores, los resultados en los datos de prueba no fueron concluyentes y por eso no fueron incluidos.
 
 Por otro lado, al observar los gráficos de correlación entre los componentes del ACP, en la mayoría de los casos se observan dos grupos que aportan la mayor cantidad de información; uno de los grupos está dominado por las interacciones del MACD, y el segundo por las interacciones de los rezagos. Normalmente estos grupos forman un ángulo de 90° pero poseen el mismo signo en cuanto al eje x -componente con mayor información-. Esto deja ver que aún utilizando un número considerable de indicadores, la información que proporcionan al modelo no es suficiente para obtener una precisión aceptable. 
 
-Otras de las limitantes fue la cantidad de observaciones a utilizar, se observó que en tres de los cinco índices el p-valor del test Wald - Chi-Cuadrado disminuye mientras más años de entrenamiento se utiliza, concluyendo, que con mayor cantidad de datos las variables son más significativas para el modelo.
+Otras de las limitantes fue la cantidad de observaciones a utilizar, se observó que en tres de los cinco índices el p-valor del test Wald - Chi-Cuadrado disminuye mientras más años de entrenamiento se utiliza, concluyendo, que con mayor cantidad de datos las variables son más significativas para el modelo. El método de backtesting Walkforward no genera una mejora significativa en la precisión del modelo, esto se confirma al comparar los resultados con la metodología backtesting que solo utiliza una data de entrenamiento (2009-2013) y se simula la estrategia en la data de prueba (2014-2018). La hipótesis que sostiene que utilizar data de entrenamiento variable en el tiempo mejora la precisión no es cierta, según los resultados obtenidos. Posiblemente se deba a que esta metodología sobreoptimiza el modelo y no generaliza las condiciones de compra correctamente.
 
-En los resultados no se contemplan las comisiones acarreadas por la operación. Se asume también, que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez. Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de inversión, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover altos volúmenes de dinero con una posición menor que la que se necesitaría en el mercado de acciones. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el performance de la estrategia. 
+Por otro lado se observó que las curvas de capital son muy similares a las curvas de precio de los activos, por lo que se podría concluir que la estrategia solo funciona en períodos alcista. Esto supone una deficiencia del modelo ya que no logra generalizar las condiciones de compra correctamente en cualquier situación
+
+En los resultados no se contemplan las comisiones acarreadas por la operación. Se asume también, que siempre se logra comprar la cantidad establecida en el precio de cierre de la vela, hecho que no siempre ocurre sobre todo en mercados de alta volatilidad y poca liquidez. Si bien el retorno acumulado durante 6 años de prueba es poco atractivo, se sabe que en la práctica los fondos utilizan los futuros como activos de inversión, estos permiten un apalancamiento en el riesgo, lo cual se traduce en mover altos volúmenes de dinero con una posición menor que la que se necesitaría en el mercado de acciones. De cualquier manera los resultados de la precisión dejan ver la posibilidad de un amplio rango de mejora en el desempeño de la estrategia. 
 
 Este modelo puede ser mejorado de muchas maneras, incluyendo, por ejemplo la optimización de los parámetros Take Profit, Stop Loss para el activo a operar, así como la elección del tamaño de los períodos de entrenamiento ó el número de componentes a utilizar como variables predictoras. Otras de las limitaciones presente es el de utilizar un modelo lineal, si bien se decide utilizar MLG como punto de partida es muy probable que algún modelo que no asuma linealidad como Bosques Aleatorios, SVM ó Redes Neuronales mejoren la predicción. 
 
 El modelo solo considera la prediccion del incremento del precio. Se utiliza la figura del stop loss como reduccion del riesgo. Un alternativa para obtener protección podría ser invertir el modelo, es decir predecir una disminución del precio, de esta manera se podría dejar de lado el stop loss y liquidar la posición cuando el modelo prediga una disminución en los precios.
 
-Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto técnico para su elección y el de las configuraciones de los mismos buscando mejorar la predicción del modelo. De cualquier manera este proyecto busca ser un punto de partida para futuras investigaciones.
-
+Otra posible fuente de optimización podría ser la elección de los indicadores técnicos. Se podría profundizar en el aspecto teórico para su elección y el de las configuraciones de los mismos buscando mejorar la predicción del modelo. En esta investigación se escogieron varios de los indicadores aún cuando presentaban cierta correlacion con otras variables, buscar una transformación de los mismos que proporciones la misma información podría mejorar el desempeño del modelo. De cualquier manera este proyecto busca ser un punto de partida para futuras investigaciones.
 
 % !TeX root = ./main.Rnw
 %\SweaveUTF8
@@ -1139,26 +1139,9 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NASDAQ}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
-% latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
-  \hline
-(Intercept) & -0.3127 & 0.0638 & -4.90 & 0.0000 \\ 
-  PC1 & -0.0021 & 0.0179 & -0.12 & 0.9068 \\ 
-  PC2 & 0.0058 & 0.0201 & 0.29 & 0.7718 \\ 
-   \hline
-\end{tabular}
-\end{table}\end{center}
-
-\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1171,10 +1154,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1188,12 +1172,10 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
-
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1207,10 +1189,12 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1223,10 +1207,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1244,26 +1229,9 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando NIKKEI 225}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
-% latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
-  \hline
-(Intercept) & -0.2532 & 0.0645 & -3.92 & 0.0001 \\ 
-  PC1 & -0.0169 & 0.0173 & -0.97 & 0.3297 \\ 
-  PC2 & -0.0255 & 0.0217 & -1.18 & 0.2393 \\ 
-   \hline
-\end{tabular}
-\end{table}\end{center}
-
-\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1280,7 +1248,7 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1294,12 +1262,10 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
-
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1313,10 +1279,12 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1329,10 +1297,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1350,26 +1319,9 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando FTSE 100}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
-% latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
-  \hline
-(Intercept) & -0.1520 & 0.0633 & -2.40 & 0.0164 \\ 
-  PC1 & -0.0369 & 0.0178 & -2.08 & 0.0379 \\ 
-  PC2 & -0.0072 & 0.0199 & -0.36 & 0.7184 \\ 
-   \hline
-\end{tabular}
-\end{table}\end{center}
-
-\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1382,10 +1334,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1399,12 +1352,10 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
-
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1418,10 +1369,12 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1434,10 +1387,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1455,27 +1409,9 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 
 \begin{center}
 \captionof{table}{Resumen del modelo para cada período de entrenamiento utilizando BOVESPA}
-\captionof*{table}{Período de entrenamiento 2009 - 2012}
-% latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
-  \hline
-(Intercept) & -0.2403 & 0.0641 & -3.75 & 0.0002 \\ 
-  PC1 & -0.0190 & 0.0174 & -1.09 & 0.2750 \\ 
-  PC2 & -0.0089 & 0.0219 & -0.41 & 0.6849 \\ 
-   \hline
-\end{tabular}
-\end{table}\end{center}
-
-
-\begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2013}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1488,10 +1424,12 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2014}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1505,12 +1443,10 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
-\newpage
-
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2015}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1524,10 +1460,12 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
 \end{tabular}
 \end{table}\end{center}
 
+\newpage
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2016}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1540,10 +1478,11 @@ Otra posible fuente de optimización podría ser la elección de los indicadores
    \hline
 \end{tabular}
 \end{table}\end{center}
+
 \begin{center}
 \captionof*{table}{Período de entrenamiento 2009 - 2017}
 % latex table generated in R 3.6.0 by xtable 1.8-3 package
-% Wed May 15 19:23:03 2019
+% Thu May 16 17:57:35 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
